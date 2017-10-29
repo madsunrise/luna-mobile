@@ -4,10 +4,14 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.utrobin.luna.R
 import com.utrobin.luna.model.FeedItem
+import de.hdodenhof.circleimageview.CircleImageView
 import io.reactivex.subjects.PublishSubject
+import java.util.*
 
 
 /**
@@ -30,6 +34,23 @@ class FeedAdapter(val items: List<FeedItem>) : RecyclerView.Adapter<FeedAdapter.
         val item = items[position]
         holder.name.text = item.name
         holder.location.text = item.location
+
+        Glide.with(holder.itemView.context).load("http://hd.wallpaperswide.com/thumbs/megan_fox_new_look-t2.jpg").into(holder.avatar)
+        Glide.with(holder.itemView.context).load(getRandomImageUrl()).into(holder.image)
+    }
+
+
+    private fun getRandomImageUrl(): String {
+        val listUrl = ArrayList<String>()
+        listUrl.add("https://i.pinimg.com/736x/8f/56/77/8f56773001b9590da809282d7bfa0cbe--classy-nails-pretty-nails.jpg")
+        listUrl.add("https://i.pinimg.com/736x/06/cf/58/06cf5862dac2a181b70e81cd7efa9060--on-my-own-simple-nails.jpg")
+        listUrl.add("https://i.pinimg.com/736x/28/81/bc/2881bcfcdfe55bb246b54a9b5ff02741--beautiful-manicure.jpg")
+        listUrl.add("https://i.pinimg.com/originals/f0/57/84/f0578459c9a7d7bb4d5cf59005df9b3b.jpg")
+        listUrl.add("https://i.ytimg.com/vi/5pWV0BpUyRA/maxresdefault.jpg")
+        listUrl.add("https://i.ytimg.com/vi/Hplf6IeWiZg/maxresdefault.jpg")
+        listUrl.add("https://i.pinimg.com/736x/78/15/b2/7815b2778c79899e581430119ec44eac--prom-nail-designs-red-amazing-nails-design.jpg")
+        listUrl.add("https://i.pinimg.com/originals/e8/38/a2/e838a2abfc549a9ac005da8d2aa98bcc.jpg")
+        return listUrl.get(Random().nextInt(listUrl.size))
     }
 
     override fun getItemCount(): Int {
@@ -38,11 +59,9 @@ class FeedAdapter(val items: List<FeedItem>) : RecyclerView.Adapter<FeedAdapter.
 
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var name = view.findViewById<TextView>(R.id.item_name)
-        var location = view.findViewById<TextView>(R.id.item_location)
-
-        init {
-            itemView.setOnClickListener { viewClickSubject.onNext(items[layoutPosition]) }
-        }
+        val name: TextView = view.findViewById(R.id.name)
+        val location: TextView = view.findViewById(R.id.location)
+        val avatar: CircleImageView = view.findViewById(R.id.avatar)
+        val image: ImageView = view.findViewById(R.id.image)
     }
 }

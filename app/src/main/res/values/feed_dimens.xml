@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="card_view_padding_right">16dp</dimen>
+    <dimen name="feed_title_text_size">16sp</dimen>
+    <dimen name="feed_location_text_size">14sp</dimen>
+</resources>
