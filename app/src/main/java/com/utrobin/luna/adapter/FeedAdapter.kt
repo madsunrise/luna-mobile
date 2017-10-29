@@ -1,13 +1,16 @@
 package com.utrobin.luna.adapter
 
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.utrobin.luna.R
+import com.utrobin.luna.model.Achievement
 import com.utrobin.luna.model.FeedItem
 import de.hdodenhof.circleimageview.CircleImageView
 import io.reactivex.subjects.PublishSubject
@@ -32,11 +35,29 @@ class FeedAdapter(val items: List<FeedItem>) : RecyclerView.Adapter<FeedAdapter.
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item = items[position]
+        val context = holder.itemView.context
         holder.name.text = item.name
         holder.location.text = item.location
 
-        Glide.with(holder.itemView.context).load("http://hd.wallpaperswide.com/thumbs/megan_fox_new_look-t2.jpg").into(holder.avatar)
-        Glide.with(holder.itemView.context).load(getRandomImageUrl()).into(holder.image)
+        Glide.with(context).load("http://hd.wallpaperswide.com/thumbs/megan_fox_new_look-t2.jpg").into(holder.avatar)
+        Glide.with(context).load(getRandomImageUrl()).into(holder.image)
+
+        holder.achievementsContainer.removeAllViews()
+        for (achievement in item.achievements) {
+            val drawable = when (achievement) {
+                Achievement.CAREFUL -> ContextCompat.getDrawable(context, R.drawable.share)
+                Achievement.FRIENDLY -> ContextCompat.getDrawable(context, R.drawable.share)
+                Achievement.FAST -> ContextCompat.getDrawable(context, R.drawable.phone)
+            }
+
+            val image = CircleImageView(context)
+            image.setImageDrawable(drawable)
+            val achievementSize = context.resources.getDimension(R.dimen.achievement_size).toInt()
+            val params = LinearLayout.LayoutParams(achievementSize, achievementSize)
+            params.setMargins(0, 0, context.resources.getDimension(R.dimen.achievement_margin_right).toInt(), 0)
+            image.layoutParams = params
+            holder.achievementsContainer.addView(image)
+        }
     }
 
 
@@ -63,5 +84,10 @@ class FeedAdapter(val items: List<FeedItem>) : RecyclerView.Adapter<FeedAdapter.
         val location: TextView = view.findViewById(R.id.location)
         val avatar: CircleImageView = view.findViewById(R.id.avatar)
         val image: ImageView = view.findViewById(R.id.image)
+        val achievementsContainer: LinearLayout = view.findViewById(R.id.achievements_container)
+    }
+
+    companion object {
+        val TAG: String = FeedAdapter::javaClass.javaClass.simpleName
     }
 }
