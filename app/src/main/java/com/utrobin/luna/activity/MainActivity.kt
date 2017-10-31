@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     private fun setUpRecyclerView() {
         recyclerView = findViewById(R.id.feed_recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.setHasFixedSize(true)
+        recyclerView.setItemViewCacheSize(20)
         feedAdapter = FeedAdapter(generateItems())
         recyclerView.adapter = feedAdapter
         feedAdapter.viewClickSubject.subscribe { Toast.makeText(this, it.location, Toast.LENGTH_SHORT).show() }
