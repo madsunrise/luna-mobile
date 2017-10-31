@@ -6,11 +6,14 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.widget.Toast
+import com.utrobin.luna.App
 import com.utrobin.luna.R
 import com.utrobin.luna.adapter.FeedAdapter
 import com.utrobin.luna.model.Achievement
 import com.utrobin.luna.model.FeedItem
+import com.utrobin.luna.network.NetworkService
 import java.util.*
+import javax.inject.Inject
 
 
 class MainActivity : AppCompatActivity() {
@@ -18,10 +21,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var feedAdapter: FeedAdapter
 
+    @Inject
+    lateinit var networkService: NetworkService
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setUpRecyclerView()
+        App.component.injectsMainActivity(this)
     }
 
     private fun setUpRecyclerView() {
