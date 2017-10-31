@@ -1,7 +1,7 @@
 package com.utrobin.luna
 
-import com.utrobin.luna.activity.MainActivity
 import com.utrobin.luna.network.NetworkModule
+import com.utrobin.luna.ui.activity.MainActivity
 import dagger.Component
 
 

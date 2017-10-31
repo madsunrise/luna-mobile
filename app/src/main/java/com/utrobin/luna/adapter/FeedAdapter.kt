@@ -13,29 +13,24 @@ import com.utrobin.luna.R
 import com.utrobin.luna.model.Achievement
 import com.utrobin.luna.model.FeedItem
 import de.hdodenhof.circleimageview.CircleImageView
-import io.reactivex.subjects.PublishSubject
 import java.util.*
-
+import kotlin.collections.ArrayList
 
 /**
- * Created by ivan on 29.10.2017.
+ * Created by ivan on 31.10.2017.
  */
 
+class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter(ArrayList(items)) {
 
-class FeedAdapter(val items: List<FeedItem>) : RecyclerView.Adapter<FeedAdapter.MyViewHolder>() {
-
-    val viewClickSubject: PublishSubject<FeedItem> = PublishSubject.create<FeedItem>()
-
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+    override fun getYourItemViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
         val itemView = LayoutInflater.from(parent.context)
                 .inflate(R.layout.feed_item, parent, false)
-        return MyViewHolder(itemView)
+        return ItemViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+    override fun bindYourViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = items[position]
-        val context = holder.itemView.context
+        val context = (holder as ItemViewHolder).itemView.context
         holder.name.text = item.name
         holder.location.text = item.location
 
@@ -60,6 +55,15 @@ class FeedAdapter(val items: List<FeedItem>) : RecyclerView.Adapter<FeedAdapter.
         }
     }
 
+    inner class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val name: TextView = view.findViewById(R.id.name)
+        val location: TextView = view.findViewById(R.id.location)
+        val avatar: CircleImageView = view.findViewById(R.id.avatar)
+        val image: ImageView = view.findViewById(R.id.image)
+        val achievementsContainer: LinearLayout = view.findViewById(R.id.achievements_container)
+    }
+
+    override fun getYourItemId(position: Int) = items[position].hashCode().toLong()
 
     private fun getRandomImageUrl(): String {
         val listUrl = ArrayList<String>()
@@ -71,23 +75,6 @@ class FeedAdapter(val items: List<FeedItem>) : RecyclerView.Adapter<FeedAdapter.
         listUrl.add("https://i.ytimg.com/vi/Hplf6IeWiZg/maxresdefault.jpg")
         listUrl.add("https://i.pinimg.com/736x/78/15/b2/7815b2778c79899e581430119ec44eac--prom-nail-designs-red-amazing-nails-design.jpg")
         listUrl.add("https://i.pinimg.com/originals/e8/38/a2/e838a2abfc549a9ac005da8d2aa98bcc.jpg")
-        return listUrl.get(Random().nextInt(listUrl.size))
-    }
-
-    override fun getItemCount(): Int {
-        return items.size
-    }
-
-
-    inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val name: TextView = view.findViewById(R.id.name)
-        val location: TextView = view.findViewById(R.id.location)
-        val avatar: CircleImageView = view.findViewById(R.id.avatar)
-        val image: ImageView = view.findViewById(R.id.image)
-        val achievementsContainer: LinearLayout = view.findViewById(R.id.achievements_container)
-    }
-
-    companion object {
-        val TAG: String = FeedAdapter::javaClass.javaClass.simpleName
+        return listUrl[Random().nextInt(listUrl.size)]
     }
 }

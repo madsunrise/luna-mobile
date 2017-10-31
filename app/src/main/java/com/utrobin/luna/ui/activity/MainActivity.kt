@@ -1,4 +1,4 @@
-package com.utrobin.luna.activity
+package com.utrobin.luna.ui.activity
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -9,20 +9,22 @@ import android.widget.Toast
 import com.utrobin.luna.App
 import com.utrobin.luna.R
 import com.utrobin.luna.adapter.FeedAdapter
+import com.utrobin.luna.adapter.FooterLoaderAdapter
 import com.utrobin.luna.model.Achievement
 import com.utrobin.luna.model.FeedItem
-import com.utrobin.luna.network.NetworkService
+import com.utrobin.luna.ui.utils.EndlessRecyclerOnScrollListener
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import java.util.*
-import javax.inject.Inject
+import java.util.concurrent.TimeUnit
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var feedAdapter: FeedAdapter
+    private lateinit var feedAdapter: FooterLoaderAdapter
 
-    @Inject
-    lateinit var networkService: NetworkService
+    private var isDataLoading = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,11 +40,30 @@ class MainActivity : AppCompatActivity() {
         feedAdapter = FeedAdapter(generateItems())
         recyclerView.adapter = feedAdapter
         feedAdapter.viewClickSubject.subscribe { Toast.makeText(this, it.location, Toast.LENGTH_SHORT).show() }
+
+        recyclerView.addOnScrollListener(object : EndlessRecyclerOnScrollListener(
+                adapter = feedAdapter,
+                linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager) {
+            override fun onLoadMore(currentPage: Int) {
+                if (isDataLoading) {
+                    return
+                }
+                isDataLoading = true
+                Observable
+                        .timer(5, TimeUnit.SECONDS)
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe {
+                            feedAdapter.addItems(generateItems())
+                            isDataLoading = false
+                        }
+            }
+        })
     }
 
     private fun generateItems(): List<FeedItem> {
         val items = ArrayList<FeedItem>()
-        for (i in 1..30) {
+        val size = 5 //Random().nextInt(12) + 5
+        for (i in 0 until size) {
             val achievements = ArrayList<Achievement>()
             when (Random().nextInt() % 6) {
                 0 -> achievements.add(Achievement.CAREFUL)
@@ -63,7 +84,8 @@ class MainActivity : AppCompatActivity() {
                     achievements.add(Achievement.CAREFUL)
                     achievements.add(Achievement.FRIENDLY)
                 }
-                else -> { achievements.add(Achievement.CAREFUL)
+                else -> {
+                    achievements.add(Achievement.CAREFUL)
                 }
             }
             Log.d(TAG, "Loop: $i Achievements size = ${achievements.size}")
