@@ -52,9 +52,9 @@ class MainActivity : AppCompatActivity() {
                 Observable
                         .timer(5, TimeUnit.SECONDS)
                         .observeOn(AndroidSchedulers.mainThread())
+                        .doAfterTerminate { isDataLoading = false }
                         .subscribe {
                             feedAdapter.addItems(generateItems())
-                            isDataLoading = false
                         }
             }
         })

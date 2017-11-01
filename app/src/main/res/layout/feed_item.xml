@@ -57,7 +57,7 @@
             android:id="@+id/achievements_container"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@color/achievement_background"
+            android:background="@color/gray_background_1"
             android:orientation="horizontal"
             android:padding="10dp" />
 
