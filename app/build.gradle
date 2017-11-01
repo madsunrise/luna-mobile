@@ -54,4 +54,7 @@ dependencies {
     // Dagger 2
     compile "com.google.dagger:dagger:$daggerVersion"
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+
+    // Yandex maps
+    compile 'ru.yandex:yandexmapkit:2.5.4@aar'
 }

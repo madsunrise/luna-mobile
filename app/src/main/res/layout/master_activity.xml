@@ -54,16 +54,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
+            <ru.yandex.yandexmapkit.MapView
+                android:id="@+id/map"
                 android:layout_width="match_parent"
-                android:layout_height="75dp"
-                android:background="#9fa78e20">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="here will be map" />
-            </LinearLayout>
+                android:layout_height="175dp"
+                android:apiKey="1234567890"
+                android:tag="static">
+            </ru.yandex.yandexmapkit.MapView>
 
             <LinearLayout
                 android:id="@+id/achievements_container"

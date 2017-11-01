@@ -9,11 +9,19 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.utrobin.luna.R
+import com.utrobin.luna.utils.MapControllerWrapper
+import ru.yandex.yandexmapkit.MapView
+import ru.yandex.yandexmapkit.overlay.Overlay
+import ru.yandex.yandexmapkit.overlay.OverlayItem
+import ru.yandex.yandexmapkit.overlay.balloon.BalloonItem
+import ru.yandex.yandexmapkit.utils.GeoPoint
 
 /**
  * Created by ivan on 01.11.2017.
  */
-class MasterActivity: AppCompatActivity() {
+class MasterActivity : AppCompatActivity() {
+    private lateinit var mMapController: MapControllerWrapper
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.master_activity)
@@ -43,5 +51,36 @@ class MasterActivity: AppCompatActivity() {
         findViewById<TextView>(R.id.first_opinion_tv).setText("Vika: Была у Екатерины, хорошо сделала шеллак.")
         findViewById<TextView>(R.id.see_all_opinions_tv).setText("Посмотреть все комментарии (42)")
         findViewById<TextView>(R.id.initial_cost_tv).setText("Начальная стоимость от 400р")
+
+        val mapView = findViewById<MapView>(R.id.map)
+
+        mMapController = MapControllerWrapper(mapView)
+
+
+        mMapController.overlayManager.myLocation.isEnabled = false
+        showObject()
     }
+
+    fun showObject() {
+        // Create a layer of objects for the map
+        val overlay = Overlay(mMapController.mapController)
+
+
+        val icon = ContextCompat.getDrawable(this, R.drawable.ic_place_black_24dp)
+        // Create an object for the layer
+        val yandex = OverlayItem(GeoPoint(55.734029, 37.588499), icon)
+        // Create the balloon model for the object
+        val balloonYandex = BalloonItem(this, yandex.geoPoint)
+        balloonYandex.text = "Yandex"
+        // balloonYandex.setOnBalloonListener(this)
+        // Add the balloon model to the object
+        yandex.balloonItem = balloonYandex
+        // Add the object to the layer
+        overlay.addOverlayItem(yandex)
+
+        // Add the layer to the map
+        mMapController.overlayManager.addOverlay(overlay)
+
+    }
+
 }
