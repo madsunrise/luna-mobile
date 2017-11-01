@@ -6,6 +6,8 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.widget.Toast
+import butterknife.BindView
+import butterknife.ButterKnife
 import com.utrobin.luna.App
 import com.utrobin.luna.R
 import com.utrobin.luna.adapter.FeedAdapter
@@ -21,7 +23,9 @@ import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var recyclerView: RecyclerView
+    @BindView(R.id.feed_recycler_view)
+    lateinit var recyclerView:RecyclerView
+
     private lateinit var feedAdapter: FooterLoaderAdapter
 
     private var isDataLoading = false
@@ -29,12 +33,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        ButterKnife.bind(this)
         setUpRecyclerView()
         App.component.injectsMainActivity(this)
     }
 
     private fun setUpRecyclerView() {
-        recyclerView = findViewById(R.id.feed_recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.setItemViewCacheSize(20)
         feedAdapter = FeedAdapter(generateItems())
