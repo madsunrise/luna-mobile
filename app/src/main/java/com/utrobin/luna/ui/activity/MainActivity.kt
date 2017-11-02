@@ -1,6 +1,8 @@
 package com.utrobin.luna.ui.activity
 
 import android.os.Bundle
+import android.support.design.widget.BottomNavigationView
+import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -14,6 +16,7 @@ import com.utrobin.luna.adapter.FeedAdapter
 import com.utrobin.luna.adapter.FooterLoaderAdapter
 import com.utrobin.luna.model.Achievement
 import com.utrobin.luna.model.FeedItem
+import com.utrobin.luna.ui.fragment.FeedFragment
 import com.utrobin.luna.ui.utils.EndlessRecyclerOnScrollListener
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -24,11 +27,31 @@ import java.util.concurrent.TimeUnit
 class MainActivity : AppCompatActivity() {
 
     @BindView(R.id.feed_recycler_view)
-    lateinit var recyclerView:RecyclerView
+    lateinit var recyclerView: RecyclerView
 
     private lateinit var feedAdapter: FooterLoaderAdapter
-
     private var isDataLoading = false
+
+    @BindView(R.id.bottom_navigation)
+    lateinit var navigation: BottomNavigationView
+
+    private var currentFragment: Fragment? = null
+    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        when (item.itemId)) {
+        R.id.feed -> {
+        changeFragment(FeedFragment(), false)
+        return true
+    }
+        R.id.navigation_dashboard -> {
+        if (currentFragment !is PrepareReceivingFragment) {
+            changeFragment(PrepareReceivingFragment(), false)
+        }
+        return true
+    }
+        R.id.navigation_notifications -> return true
+    }
+        false
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +59,23 @@ class MainActivity : AppCompatActivity() {
         ButterKnife.bind(this)
         setUpRecyclerView()
         App.component.injectsMainActivity(this)
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        savedInstanceState?.let {
+            currentFragment = supportFragmentManager
+                    .getFragment(savedInstanceState, FRAGMENT_TAG);
+        } ?:
+                changeFragment(FeedFragment(), false);
+    }
+
+    private fun changeFragment(fragment: Fragment, addToBackStack: Boolean) {
+        val transaction = supportFragmentManager.beginTransaction();
+        transaction.replace(R.id.container, fragment, FRAGMENT_TAG);
+        if (addToBackStack) {
+            transaction.addToBackStack(null);
+        }
+        transaction.commitAllowingStateLoss();
+        currentFragment = fragment;
     }
 
     private fun setUpRecyclerView() {
@@ -101,6 +141,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        val TAG = MainActivity::javaClass.javaClass.simpleName
+        private val TAG = MainActivity::javaClass.javaClass.simpleName
+        private val FRAGMENT_TAG = TAG + "FRAGMENT_TAG"
     }
 }
