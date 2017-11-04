@@ -4,17 +4,21 @@ import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.util.TypedValue
+import android.view.Gravity
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.utrobin.luna.R
 import com.utrobin.luna.utils.MapControllerWrapper
+import de.hdodenhof.circleimageview.CircleImageView
 import ru.yandex.yandexmapkit.MapView
 import ru.yandex.yandexmapkit.overlay.Overlay
 import ru.yandex.yandexmapkit.overlay.OverlayItem
 import ru.yandex.yandexmapkit.overlay.balloon.BalloonItem
 import ru.yandex.yandexmapkit.utils.GeoPoint
+import java.util.*
 
 /**
  * Created by ivan on 01.11.2017.
@@ -59,6 +63,8 @@ class MasterActivity : AppCompatActivity() {
         mMapController = MapControllerWrapper(mapView)
         mMapController.overlayManager.myLocation.isEnabled = false
         showObject()
+
+        addWorkers()
     }
 
     fun showObject() {
@@ -84,4 +90,91 @@ class MasterActivity : AppCompatActivity() {
 
     }
 
+    private fun addWorkers() {
+        val container = findViewById<LinearLayout>(R.id.workers_container)
+        val spaceBetween = resources.getDimension(R.dimen.master_space_between_workers).toInt();
+
+        val size = resources.getDimension(R.dimen.master_worker_photo_size).toInt()
+        val params = LinearLayout.LayoutParams(size, size)
+        params.setMargins(spaceBetween, 0, spaceBetween, 0)
+
+        val first = CircleImageView(this)
+        first.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.all))
+        first.layoutParams = params
+        first.borderColor = ContextCompat.getColor(this, R.color.black)
+        first.borderWidth = resources.getDimension(R.dimen.master_worker_border_width).toInt()
+
+
+        val padding = resources.getDimension(R.dimen.master_workers_container_padding_vertical).toInt()
+        container.setPadding(0, padding, 0, padding)
+        container.addView(first)
+        for (i in 0..10) {
+            val worker = LinearLayout(this)
+            val wrapperParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+            wrapperParams.setMargins(0, 0, spaceBetween, 0)
+            worker.layoutParams = wrapperParams
+            worker.orientation = LinearLayout.VERTICAL
+
+
+            val workerImage = CircleImageView(this)
+            workerImage.layoutParams = LinearLayout.LayoutParams(size, size)
+
+            workerImage.borderColor = ContextCompat.getColor(this, R.color.black)
+            workerImage.borderWidth = resources.getDimension(R.dimen.master_worker_border_width).toInt()
+            Glide
+                    .with(this)
+                    .load(photoUrls[i % photoUrls.size])
+                    .into(workerImage)
+            worker.addView(workerImage)
+
+            val workerName = TextView(this)
+            workerName.setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.text_size_caption))
+            workerName.text = names[Random().nextInt(names.size)]
+            workerName.setTextColor(ContextCompat.getColor(this, R.color.black))
+            workerName.gravity = Gravity.CENTER
+            worker.addView(workerName)
+
+            container.addView(worker)
+        }
+    }
+
+
+    val photoUrls = arrayOf(
+            "https://photov3zoosk-a.akamaihd.net/00253397573040192041/s320.jpg",
+            "https://photov3zoosk-a.akamaihd.net/00302298528762382963/s320.jpg",
+            "https://i.pinimg.com/736x/77/74/e9/7774e98f623abe1269b4a09bba5e15a8--common-core-sexy-women.jpg",
+            "https://runwaygirl-5389.kxcdn.com/wp-content/uploads/2017/05/IMG_7251-256x256.jpg",
+            "https://pbs.twimg.com/profile_images/2804122722/142d1f48a8e3f2cf47ea46aee887dd88.jpeg",
+            "https://images-na.ssl-images-amazon.com/images/I/71kqo6Lw6ML._SL256_.jpg",
+            "https://i.pinimg.com/originals/d5/56/9b/d5569b8a972bc6bfffd99cd136e669d9.jpg",
+            "https://pbs.twimg.com/profile_images/378800000826166880/5e7abbd9cfc67d93512e40e68867005b.jpeg",
+            "https://pbs.twimg.com/profile_images/2910090330/ac75e470c41b75e3c3915cd6aed573c1.jpeg",
+            "https://pbs.twimg.com/profile_images/3071608751/a316fb017770f0400713bda9e9ee4b39.jpeg"
+    )
+
+    val names = arrayOf(
+            "Ксения",
+            "Екатерина",
+            "Елизавета",
+            "Арина",
+            "Анна",
+            "Алёна",
+            "Елена",
+            "Татьяна",
+//            "Александра"
+            "Светлана",
+            "Яна",
+            "Оксана",
+            "Василиса",
+            "Инна",
+            "Алла",
+            "Алевтина",
+            "Дарья",
+            "Виктория",
+            "Надежда",
+            "Анастасия",
+            "Юлия",
+            "Кристина",
+            "Ольга"
+    )
 }
