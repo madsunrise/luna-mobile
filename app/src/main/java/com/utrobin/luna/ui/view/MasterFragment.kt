@@ -68,15 +68,17 @@ class MasterFragment : Fragment(), MasterContract.View {
 
         view.findViewById<TextView>(R.id.address_tv).setText("Москва, Ленинградский проспект, 39c9")
 
-        val mapView = view.findViewById<MapView>(R.id.map)
-        mMapController = MapControllerWrapper(mapView)
-        mMapController.overlayManager.myLocation.isEnabled = false
-        showObject()
+
+        enableMap(view)
 
         addWorkers(view)
     }
 
-    fun showObject() {
+    fun enableMap(view: View) {
+        val mapView = view.findViewById<MapView>(R.id.map)
+        mMapController = MapControllerWrapper(mapView)
+        mMapController.overlayManager.myLocation.isEnabled = false
+
         // Create a layer of objects for the map
         val overlay = Overlay(mMapController.mapController)
 
