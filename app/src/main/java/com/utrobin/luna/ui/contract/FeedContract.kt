@@ -12,6 +12,7 @@ interface FeedContract {
     interface View : MvpView {
         fun dataLoaded(newItems: List<FeedItem>)
         fun dataLoadingFailed(reason: NetworkError)
+        fun navigateMasterScreen(item: FeedItem)
     }
 
 

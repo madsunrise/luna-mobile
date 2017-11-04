@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit
 class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter {
 
     override fun onItemClicked(item: FeedItem) {
-
+        view?.navigateMasterScreen(item)
     }
 
     override fun loadInitialData() {

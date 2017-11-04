@@ -1,5 +1,6 @@
 package com.utrobin.luna.ui.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -63,7 +64,7 @@ class FeedFragment : Fragment(), FeedContract.View {
         recyclerView.layoutManager = LinearLayoutManager(context)
         feedAdapter = FeedAdapter(ArrayList())
         recyclerView.adapter = feedAdapter
-        feedAdapter.viewClickSubject.subscribe { Toast.makeText(context, it.location, Toast.LENGTH_SHORT).show() }
+        feedAdapter.viewClickSubject.subscribe { presenter.onItemClicked(it) }
 
         presenter.loadInitialData()
 
@@ -78,6 +79,12 @@ class FeedFragment : Fragment(), FeedContract.View {
                 presenter.loadMore(currentPage)
             }
         })
+    }
+
+    override fun navigateMasterScreen(item: FeedItem) {
+        val intent = Intent(context, MasterActivity::class.java)
+        // TODO passing extras
+        context.startActivity(intent)
     }
 
     override fun onDestroy() {
