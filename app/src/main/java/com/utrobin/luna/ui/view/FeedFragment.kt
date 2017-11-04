@@ -1,6 +1,5 @@
 package com.utrobin.luna.ui.view
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -88,9 +87,7 @@ class FeedFragment : Fragment(), FeedContract.View {
     }
 
     override fun navigateMasterScreen(item: FeedItem) {
-        val intent = Intent(context, MasterActivity::class.java)
-        // TODO passing extras
-        context.startActivity(intent)
+        (activity as MainActivity).openMasterScreen(item)
     }
 
     override fun onDestroy() {

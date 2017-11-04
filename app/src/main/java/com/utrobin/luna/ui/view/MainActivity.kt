@@ -3,7 +3,6 @@ package com.utrobin.luna.ui.view
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.FrameLayout
@@ -12,6 +11,7 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import com.utrobin.luna.App
 import com.utrobin.luna.R
+import com.utrobin.luna.model.FeedItem
 
 
 class MainActivity : AppCompatActivity() {
@@ -31,6 +31,11 @@ class MainActivity : AppCompatActivity() {
 
     private var currentFragment: Fragment? = null
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        if (currentFragment is MasterFragment) {
+            supportFragmentManager.popBackStack()
+            currentFragment = feedFragment          // currentFragment may contain wrong value
+            return@OnNavigationItemSelectedListener true
+        }
         when (item.itemId) {
             R.id.feed -> {
                 changeFragment(feedFragment, false)
@@ -67,6 +72,9 @@ class MainActivity : AppCompatActivity() {
         currentFragment = fragment;
     }
 
+    fun openMasterScreen(item: FeedItem) {
+        changeFragment(MasterFragment(), true)
+    }
 
     fun showProgressBar(show: Boolean) {
         if (show) {
