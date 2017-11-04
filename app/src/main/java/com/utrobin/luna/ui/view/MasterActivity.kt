@@ -32,7 +32,7 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
         setContentView(R.layout.master_activity)
         Glide.with(this).load("http://wordprint.ru/attachments/Image/1.png?template=generic").into((findViewById(R.id.toolbar_image)))
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        toolbar.title = "Paradise"
+        toolbar.title = "Jasmine"
         Glide.with(this).load("http://100idey.ru/wp-content/uploads/2017/01/manikur6.jpg").into((findViewById(R.id.image)))
 
         val cloud = ImageView(this)
