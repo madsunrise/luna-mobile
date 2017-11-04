@@ -33,8 +33,7 @@ abstract class EndlessRecyclerOnScrollListener(
             }
         }
         if (!adapter.loading && totalItemCount - visibleItemCount <= firstVisibleItem + visibleThreshold) {
-            currentPage++
-            onLoadMore(currentPage)
+            onLoadMore(currentPage++)
             adapter.loading = true
         }
     }

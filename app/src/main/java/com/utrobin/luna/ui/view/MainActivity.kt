@@ -1,9 +1,12 @@
-package com.utrobin.luna.ui.activity
+package com.utrobin.luna.ui.view
 
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import android.view.View
+import android.widget.FrameLayout
+import android.widget.ProgressBar
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.utrobin.luna.App
@@ -13,6 +16,13 @@ import com.utrobin.luna.ui.fragment.MapFragment
 
 
 class MainActivity : AppCompatActivity() {
+
+    @BindView(R.id.container)
+    lateinit var container: FrameLayout
+
+    @BindView(R.id.progress_bar)
+    lateinit var progressBar: ProgressBar
+
 
     @BindView(R.id.bottom_navigation)
     lateinit var navigation: BottomNavigationView
@@ -42,12 +52,12 @@ class MainActivity : AppCompatActivity() {
 
         savedInstanceState?.let {
             currentFragment = supportFragmentManager.getFragment(savedInstanceState, FRAGMENT_TAG)
-        } ?: changeFragment(FeedFragment(), false);
+        } ?: changeFragment(FeedFragment(), false)
     }
 
     private fun changeFragment(fragment: Fragment, addToBackStack: Boolean) {
         val transaction = supportFragmentManager.beginTransaction();
-        transaction.replace(R.id.container, fragment, FRAGMENT_TAG);
+        transaction.replace(container.id, fragment, FRAGMENT_TAG);
         if (addToBackStack) {
             transaction.addToBackStack(null);
         }
@@ -55,6 +65,14 @@ class MainActivity : AppCompatActivity() {
         currentFragment = fragment;
     }
 
+
+    fun showProgressBar(show: Boolean) {
+        if (show) {
+            progressBar.visibility = View.VISIBLE
+        } else {
+            progressBar.visibility = View.GONE
+        }
+    }
 
 
     companion object {

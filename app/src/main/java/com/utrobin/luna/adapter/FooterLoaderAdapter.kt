@@ -60,10 +60,16 @@ abstract class FooterLoaderAdapter(internal val items: ArrayList<FeedItem>) : Re
         }
     }
 
-    fun addItems(newData: List<FeedItem>) {
+    fun addItems(data: List<FeedItem>) {
         val firstInsertedItemPosition = items.size
-        this.items.addAll(newData)
-        notifyItemRangeInserted(firstInsertedItemPosition, newData.size)
+        this.items.addAll(data)
+        notifyItemRangeInserted(firstInsertedItemPosition, data.size)
+    }
+
+    fun setItems(data: List<FeedItem>) {
+        this.items.clear()
+        this.items.addAll(data)
+        notifyDataSetChanged()
     }
 
     override fun getItemViewType(position: Int): Int {
