@@ -38,11 +38,11 @@ class MainActivity : AppCompatActivity() {
         }
         when (item.itemId) {
             R.id.feed -> {
-                changeFragment(feedFragment, false)
+                showFragment(currentFragment, feedFragment)
                 true
             }
             R.id.map -> {
-                changeFragment(mapFragment, false)
+                showFragment(currentFragment, mapFragment)
                 true
             }
             R.id.account -> true
@@ -59,21 +59,35 @@ class MainActivity : AppCompatActivity() {
 
         savedInstanceState?.let {
             currentFragment = supportFragmentManager.getFragment(savedInstanceState, FRAGMENT_TAG)
-        } ?: changeFragment(feedFragment, false)
+        } ?: showFragment(null, feedFragment)
     }
 
-    private fun changeFragment(fragment: Fragment, addToBackStack: Boolean) {
+
+    private fun showFragment(from: Fragment?, to: Fragment, addToBackStack: Boolean = false) {
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(container.id, fragment, FRAGMENT_TAG);
-        if (addToBackStack) {
-            transaction.addToBackStack(fragment.tag);
+        if (from == null) {
+            if (to.isAdded) {
+                transaction.show(to)
+            } else {
+                transaction.add(R.id.container, to, to.tag)
+            }
+        } else {
+            if (to.isAdded) {
+                transaction.hide(from).show(to)
+            } else {
+                transaction.hide(from).add(R.id.container, to, to.tag)
+            }
         }
-        transaction.commitAllowingStateLoss();
-        currentFragment = fragment;
+        if (addToBackStack) {
+            transaction.addToBackStack(to.tag)
+        }
+        transaction.commitAllowingStateLoss()
+        currentFragment = to
     }
+
 
     fun openMasterScreen(item: FeedItem) {
-        changeFragment(MasterFragment(), true)
+        showFragment(currentFragment, MasterFragment(), true)
     }
 
     fun showProgressBar(show: Boolean) {
