@@ -91,6 +91,7 @@ class MainActivity : AppCompatActivity() {
 
 
     fun openMasterScreen(item: FeedItem) {
+        showProgressBar(true)
         showFragment(currentFragment, MasterFragment(), true)
     }
 

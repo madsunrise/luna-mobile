@@ -32,11 +32,6 @@ class MasterFragment : Fragment(), MasterContract.View {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.master_fragment, container, false)
-        return view
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
         Glide.with(this).load("http://wordprint.ru/attachments/Image/1.png?template=generic").into((view.findViewById(R.id.toolbar_image)))
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
@@ -72,6 +67,14 @@ class MasterFragment : Fragment(), MasterContract.View {
         enableMap(view)
 
         addWorkers(view)
+
+        return view
+    }
+
+
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        (activity as MainActivity).showProgressBar(false)
     }
 
     fun enableMap(view: View) {
