@@ -3,6 +3,7 @@ package com.utrobin.luna.ui.view
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.FrameLayout
@@ -25,15 +26,18 @@ class MainActivity : AppCompatActivity() {
     @BindView(R.id.bottom_navigation)
     lateinit var navigation: BottomNavigationView
 
+    private val feedFragment = FeedFragment()
+    private val mapFragment = MapFragment()
+
     private var currentFragment: Fragment? = null
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.feed -> {
-                changeFragment(FeedFragment(), false)
+                changeFragment(feedFragment, false)
                 true
             }
             R.id.map -> {
-                changeFragment(MapFragment(), false)
+                changeFragment(mapFragment, false)
                 true
             }
             R.id.account -> true
@@ -50,14 +54,14 @@ class MainActivity : AppCompatActivity() {
 
         savedInstanceState?.let {
             currentFragment = supportFragmentManager.getFragment(savedInstanceState, FRAGMENT_TAG)
-        } ?: changeFragment(FeedFragment(), false)
+        } ?: changeFragment(feedFragment, false)
     }
 
     private fun changeFragment(fragment: Fragment, addToBackStack: Boolean) {
-        val transaction = supportFragmentManager.beginTransaction();
+        val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(container.id, fragment, FRAGMENT_TAG);
         if (addToBackStack) {
-            transaction.addToBackStack(null);
+            transaction.addToBackStack(fragment.tag);
         }
         transaction.commitAllowingStateLoss();
         currentFragment = fragment;

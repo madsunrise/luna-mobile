@@ -35,11 +35,11 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter(ArrayList(items))
         holder.location.text = item.location
 
         Glide.with(context).load("http://hd.wallpaperswide.com/thumbs/megan_fox_new_look-t2.jpg").into(holder.avatar)
-        Glide.with(context).load("https://casaydiseno.com/wp-content/uploads/2017/06/esmalte-de-unas-verano.jpg").into(holder.image)
+        Glide.with(context).load("http://www.thainarak.net/uploads/4/8/5/0/48500987/b8804bdd65917509ca47fd51999a3b24_orig.jpg").into(holder.image)
 
         holder.achievementsContainer.removeAllViews()
         for (achievement in item.achievements) {
-            val drawable = ContextCompat.getDrawable(context, icons[Random().nextInt(icons.size)])
+            val drawable = ContextCompat.getDrawable(context, icons[achievement.ordinal])
             val image = CircleImageView(context)
             image.setImageDrawable(drawable)
             val achievementSize = context.resources.getDimension(R.dimen.achievement_size).toInt()

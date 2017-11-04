@@ -53,9 +53,8 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
             val achievements = ArrayList<Achievement>()
             val achivsCount = Random().nextInt(4) + 1
             for (k in 1 .. achivsCount) {
-                achievements.add(Achievement.FAST)
+                achievements.add(Achievement.values()[Random().nextInt(Achievement.values().size)])
             }
-            Log.d(TAG, "Loop: $i Achievements size = ${achievements.size}")
             val item = FeedItem("Салон Jasmine. Мастер Евгения", "Рядом с метро Курская", achievements)
             items.add(item)
         }

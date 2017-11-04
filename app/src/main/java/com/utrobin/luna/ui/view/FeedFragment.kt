@@ -30,6 +30,7 @@ class FeedFragment : Fragment(), FeedContract.View {
     lateinit var recyclerView: RecyclerView
 
     private lateinit var feedAdapter: FooterLoaderAdapter
+    private var adapterInitialized = false
     private var isDataLoading = false
 
     private val presenter = FeedPresenter()
@@ -47,6 +48,9 @@ class FeedFragment : Fragment(), FeedContract.View {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if (!adapterInitialized) {
+            initializeAdapter()
+        }
         setUpRecyclerView()
     }
 
@@ -60,14 +64,16 @@ class FeedFragment : Fragment(), FeedContract.View {
         Toast.makeText(context, R.string.error_has_occured, Toast.LENGTH_SHORT).show()
     }
 
+    private fun initializeAdapter() {
+        feedAdapter = FeedAdapter(ArrayList())
+        feedAdapter.viewClickSubject.subscribe { presenter.onItemClicked(it) }
+        presenter.loadInitialData()
+        adapterInitialized = true
+    }
+
     private fun setUpRecyclerView() {
         recyclerView.layoutManager = LinearLayoutManager(context)
-        feedAdapter = FeedAdapter(ArrayList())
         recyclerView.adapter = feedAdapter
-        feedAdapter.viewClickSubject.subscribe { presenter.onItemClicked(it) }
-
-        presenter.loadInitialData()
-
         recyclerView.addOnScrollListener(object : EndlessRecyclerOnScrollListener(
                 adapter = feedAdapter,
                 linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager) {
