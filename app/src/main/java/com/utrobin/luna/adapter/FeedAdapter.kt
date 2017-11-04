@@ -38,9 +38,9 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter(ArrayList(items))
         holder.achievementsContainer.removeAllViews()
         for (achievement in item.achievements) {
             val drawable = when (achievement) {
-                Achievement.CAREFUL -> ContextCompat.getDrawable(context, R.drawable.share)
-                Achievement.FRIENDLY -> ContextCompat.getDrawable(context, R.drawable.share)
-                Achievement.FAST -> ContextCompat.getDrawable(context, R.drawable.phone)
+                Achievement.CAREFUL -> ContextCompat.getDrawable(context, R.drawable.ic_notifications_black_24dp)
+                Achievement.FRIENDLY -> ContextCompat.getDrawable(context, R.drawable.ic_cloud_black_24dp)
+                Achievement.FAST -> ContextCompat.getDrawable(context, R.drawable.ic_chat_black_24dp)
             }
 
             val image = CircleImageView(context)

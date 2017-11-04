@@ -12,7 +12,7 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.utrobin.luna"
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -54,6 +54,9 @@ dependencies {
     // Dagger 2
     compile "com.google.dagger:dagger:$daggerVersion"
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+
+    // Yandex maps
+    compile 'ru.yandex:yandexmapkit:2.5.4@aar'
 
     // Butterknife
     compile 'com.jakewharton:butterknife:8.8.1'
