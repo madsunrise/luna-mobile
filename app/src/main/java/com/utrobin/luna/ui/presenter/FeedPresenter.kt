@@ -22,7 +22,7 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
 
     override fun loadInitialData() {
         Observable
-                .timer(1, TimeUnit.SECONDS)
+                .timer(1500, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         { view?.dataLoaded(generateItems(7)) },
