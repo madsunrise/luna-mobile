@@ -11,8 +11,6 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import com.utrobin.luna.App
 import com.utrobin.luna.R
-import com.utrobin.luna.ui.fragment.FeedFragment
-import com.utrobin.luna.ui.fragment.MapFragment
 
 
 class MainActivity : AppCompatActivity() {

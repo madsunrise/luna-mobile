@@ -1,4 +1,4 @@
-package com.utrobin.luna.ui.fragment
+package com.utrobin.luna.ui.view
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -14,11 +14,10 @@ import com.utrobin.luna.R
 import com.utrobin.luna.adapter.FeedAdapter
 import com.utrobin.luna.adapter.FooterLoaderAdapter
 import com.utrobin.luna.model.FeedItem
-import com.utrobin.luna.ui.contracts.FeedContract
+import com.utrobin.luna.ui.contract.FeedContract
 import com.utrobin.luna.ui.presenter.FeedPresenter
 import com.utrobin.luna.ui.utils.EndlessRecyclerOnScrollListener
 import com.utrobin.luna.ui.utils.NetworkError
-import com.utrobin.luna.ui.view.MainActivity
 
 /**
  * Created by ivan on 01.11.2017.

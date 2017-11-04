@@ -1,7 +1,7 @@
 package com.utrobin.luna.ui.presenter
 
-import com.utrobin.luna.ui.contracts.MvpPresenter
-import com.utrobin.luna.ui.contracts.MvpView
+import com.utrobin.luna.ui.contract.MvpPresenter
+import com.utrobin.luna.ui.contract.MvpView
 
 
 /**

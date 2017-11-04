@@ -3,7 +3,7 @@ package com.utrobin.luna.ui.presenter
 import android.util.Log
 import com.utrobin.luna.model.Achievement
 import com.utrobin.luna.model.FeedItem
-import com.utrobin.luna.ui.contracts.FeedContract
+import com.utrobin.luna.ui.contract.FeedContract
 import com.utrobin.luna.ui.utils.NetworkError
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -83,7 +83,7 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
     }
 
     override fun destroy() {
-
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
 

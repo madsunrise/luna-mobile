@@ -1,4 +1,4 @@
-package com.utrobin.luna.ui.activity
+package com.utrobin.luna.ui.view
 
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
@@ -11,6 +11,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.utrobin.luna.R
+import com.utrobin.luna.ui.contract.MasterContract
 import com.utrobin.luna.utils.MapControllerWrapper
 import de.hdodenhof.circleimageview.CircleImageView
 import ru.yandex.yandexmapkit.MapView
@@ -23,7 +24,7 @@ import java.util.*
 /**
  * Created by ivan on 01.11.2017.
  */
-class MasterActivity : AppCompatActivity() {
+class MasterActivity : AppCompatActivity(), MasterContract.View {
     private lateinit var mMapController: MapControllerWrapper
 
     override fun onCreate(savedInstanceState: Bundle?) {
