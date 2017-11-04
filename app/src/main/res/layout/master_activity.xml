@@ -32,7 +32,8 @@
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
-                app:layout_collapseMode="parallax" />
+                app:layout_collapseMode="parallax"
+                tools:ignore="contentDescription" />
 
 
             <android.support.v7.widget.Toolbar
@@ -54,13 +55,30 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ru.yandex.yandexmapkit.MapView
-                android:id="@+id/map"
+            <RelativeLayout
+                android:id="@+id/map_container"
                 android:layout_width="match_parent"
-                android:layout_height="175dp"
-                android:apiKey="1234567890"
-                android:tag="static">
-            </ru.yandex.yandexmapkit.MapView>
+                android:layout_height="100dp">
+
+                <ru.yandex.yandexmapkit.MapView
+                    android:id="@+id/map"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:apiKey="1234567890"
+                    android:tag="static" />
+
+                <TextView
+                    android:id="@+id/address_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:textColor="@color/black"
+                    android:background="#96ffffff"
+                    android:paddingLeft="5dp"
+                    android:textSize="@dimen/text_size_body" />
+
+            </RelativeLayout>
 
             <LinearLayout
                 android:id="@+id/achievements_container"
