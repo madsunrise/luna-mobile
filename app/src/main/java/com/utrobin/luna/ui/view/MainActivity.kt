@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
 
     private val feedFragment = FeedFragment()
     private val mapFragment = MapFragment()
+    private val accountFragment = AccountFragment()
 
     private var currentFragment: Fragment? = null
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -45,7 +46,10 @@ class MainActivity : AppCompatActivity() {
                 showFragment(currentFragment, mapFragment)
                 true
             }
-            R.id.account -> true
+            R.id.account -> {
+                showFragment(currentFragment, accountFragment)
+                true
+            }
             else -> false
         }
     }
