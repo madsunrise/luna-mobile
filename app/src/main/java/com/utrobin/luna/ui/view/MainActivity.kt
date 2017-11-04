@@ -68,8 +68,10 @@ class MainActivity : AppCompatActivity() {
 
     fun showProgressBar(show: Boolean) {
         if (show) {
+            container.visibility = View.GONE
             progressBar.visibility = View.VISIBLE
         } else {
+            container.visibility = View.VISIBLE
             progressBar.visibility = View.GONE
         }
     }
