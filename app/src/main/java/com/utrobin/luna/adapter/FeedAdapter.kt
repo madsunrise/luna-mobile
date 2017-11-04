@@ -13,8 +13,6 @@ import com.utrobin.luna.R
 import com.utrobin.luna.model.Achievement
 import com.utrobin.luna.model.FeedItem
 import de.hdodenhof.circleimageview.CircleImageView
-import java.util.*
-import kotlin.collections.ArrayList
 
 /**
  * Created by ivan on 31.10.2017.
@@ -35,7 +33,7 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter(ArrayList(items))
         holder.location.text = item.location
 
         Glide.with(context).load("http://hd.wallpaperswide.com/thumbs/megan_fox_new_look-t2.jpg").into(holder.avatar)
-        Glide.with(context).load(getRandomImageUrl()).into(holder.image)
+        Glide.with(context).load("https://casaydiseno.com/wp-content/uploads/2017/06/esmalte-de-unas-verano.jpg").into(holder.image)
 
         holder.achievementsContainer.removeAllViews()
         for (achievement in item.achievements) {
@@ -65,16 +63,4 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter(ArrayList(items))
 
     override fun getYourItemId(position: Int) = items[position].hashCode().toLong()
 
-    private fun getRandomImageUrl(): String {
-        val listUrl = ArrayList<String>()
-        listUrl.add("https://i.pinimg.com/736x/8f/56/77/8f56773001b9590da809282d7bfa0cbe--classy-nails-pretty-nails.jpg")
-        listUrl.add("https://i.pinimg.com/736x/06/cf/58/06cf5862dac2a181b70e81cd7efa9060--on-my-own-simple-nails.jpg")
-        listUrl.add("https://i.pinimg.com/736x/28/81/bc/2881bcfcdfe55bb246b54a9b5ff02741--beautiful-manicure.jpg")
-        listUrl.add("https://i.pinimg.com/originals/f0/57/84/f0578459c9a7d7bb4d5cf59005df9b3b.jpg")
-        listUrl.add("https://i.ytimg.com/vi/5pWV0BpUyRA/maxresdefault.jpg")
-        listUrl.add("https://i.ytimg.com/vi/Hplf6IeWiZg/maxresdefault.jpg")
-        listUrl.add("https://i.pinimg.com/736x/78/15/b2/7815b2778c79899e581430119ec44eac--prom-nail-designs-red-amazing-nails-design.jpg")
-        listUrl.add("https://i.pinimg.com/originals/e8/38/a2/e838a2abfc549a9ac005da8d2aa98bcc.jpg")
-        return listUrl[Random().nextInt(listUrl.size)]
-    }
 }
