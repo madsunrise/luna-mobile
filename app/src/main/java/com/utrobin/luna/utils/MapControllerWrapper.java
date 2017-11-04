@@ -18,6 +18,8 @@ import ru.yandex.yandexmapkit.utils.ScreenPoint;
 public class MapControllerWrapper {
     private final MapController mc;
 
+    public final static float OPTIMAL_ZOOM = 13f;
+
     public MapControllerWrapper(MapView map) {
         mc = map.getMapController();
     }
@@ -68,6 +70,10 @@ public class MapControllerWrapper {
 
     public void setPositionNoAnimationTo(GeoPoint point, float zoom) {
         mc.setPositionNoAnimationTo(point, zoom);
+    }
+
+    public void setPositionAnimationTo(GeoPoint point) {
+        mc.setPositionAnimationTo(point);
     }
 
     public void setPositionAnimationTo(GeoPoint point, float zoom) {

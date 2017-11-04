@@ -52,11 +52,11 @@ class MasterActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.see_all_opinions_tv).setText("Посмотреть все комментарии (42)")
         findViewById<TextView>(R.id.initial_cost_tv).setText("Начальная стоимость от 400р")
 
+
+        findViewById<TextView>(R.id.address_tv).setText("Москва, Ленинградский проспект, 39c9")
+
         val mapView = findViewById<MapView>(R.id.map)
-
         mMapController = MapControllerWrapper(mapView)
-
-
         mMapController.overlayManager.myLocation.isEnabled = false
         showObject()
     }
@@ -65,18 +65,19 @@ class MasterActivity : AppCompatActivity() {
         // Create a layer of objects for the map
         val overlay = Overlay(mMapController.mapController)
 
-
+        val point = GeoPoint(55.79694821, 37.53778351)
         val icon = ContextCompat.getDrawable(this, R.drawable.ic_place_black_24dp)
         // Create an object for the layer
-        val yandex = OverlayItem(GeoPoint(55.734029, 37.588499), icon)
+        val yandex = OverlayItem(point, icon)
         // Create the balloon model for the object
         val balloonYandex = BalloonItem(this, yandex.geoPoint)
-        balloonYandex.text = "Yandex"
+        balloonYandex.text = "Mail.ru Group"
         // balloonYandex.setOnBalloonListener(this)
         // Add the balloon model to the object
         yandex.balloonItem = balloonYandex
         // Add the object to the layer
         overlay.addOverlayItem(yandex)
+        mMapController.setPositionAnimationTo(point, MapControllerWrapper.OPTIMAL_ZOOM)
 
         // Add the layer to the map
         mMapController.overlayManager.addOverlay(overlay)
