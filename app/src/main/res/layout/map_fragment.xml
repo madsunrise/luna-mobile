@@ -8,7 +8,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
         android:text="Demonstration by using Yandex Map Kit"/>
 
     <ru.yandex.yandexmapkit.MapView xmlns:android="http://schemas.android.com/apk/res/android"
