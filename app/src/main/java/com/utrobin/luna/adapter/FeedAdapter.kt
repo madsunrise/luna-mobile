@@ -10,9 +10,9 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.utrobin.luna.R
-import com.utrobin.luna.model.Achievement
 import com.utrobin.luna.model.FeedItem
 import de.hdodenhof.circleimageview.CircleImageView
+import java.util.*
 
 /**
  * Created by ivan on 31.10.2017.
@@ -37,12 +37,7 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter(ArrayList(items))
 
         holder.achievementsContainer.removeAllViews()
         for (achievement in item.achievements) {
-            val drawable = when (achievement) {
-                Achievement.CAREFUL -> ContextCompat.getDrawable(context, R.drawable.ic_notifications_black_24dp)
-                Achievement.FRIENDLY -> ContextCompat.getDrawable(context, R.drawable.ic_cloud_black_24dp)
-                Achievement.FAST -> ContextCompat.getDrawable(context, R.drawable.ic_chat_black_24dp)
-            }
-
+            val drawable = ContextCompat.getDrawable(context, icons[Random().nextInt(icons.size)])
             val image = CircleImageView(context)
             image.setImageDrawable(drawable)
             val achievementSize = context.resources.getDimension(R.dimen.achievement_size).toInt()
@@ -63,4 +58,12 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter(ArrayList(items))
 
     override fun getYourItemId(position: Int) = items[position].hashCode().toLong()
 
+    private val icons = arrayOf(
+            R.drawable.ic_notifications_black_24dp,
+            R.drawable.ic_cloud_black_24dp,
+            R.drawable.ic_chat_black_24dp,
+            R.drawable.ic_favorite_black_24dp,
+            R.drawable.ic_star_black_24dp,
+            R.drawable.ic_audiotrack_black_24dp
+    )
 }

@@ -61,7 +61,6 @@ class FeedFragment : Fragment(), FeedContract.View {
 
     private fun setUpRecyclerView() {
         recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.setItemViewCacheSize(10)
         feedAdapter = FeedAdapter(ArrayList())
         recyclerView.adapter = feedAdapter
         feedAdapter.viewClickSubject.subscribe { Toast.makeText(context, it.location, Toast.LENGTH_SHORT).show() }

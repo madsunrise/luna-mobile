@@ -25,7 +25,7 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
                 .timer(1, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        { view?.dataLoaded(generateItems(20)) },
+                        { view?.dataLoaded(generateItems(7)) },
                         { ex ->
                             Log.e(TAG, ex.message)
                             view?.dataLoadingFailed(NetworkError.UNKNOWN)
@@ -51,28 +51,9 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
         val items = ArrayList<FeedItem>()
         for (i in 0 until size) {
             val achievements = ArrayList<Achievement>()
-            when (Random().nextInt() % 6) {
-                0 -> achievements.add(Achievement.CAREFUL)
-                1 -> achievements.add(Achievement.FRIENDLY)
-                2 -> achievements.add(Achievement.FAST)
-                3 -> {
-                    achievements.add(Achievement.FAST)
-                    achievements.add(Achievement.FRIENDLY)
-                    achievements.add(Achievement.FAST)
-                }
-                4 -> {
-                    achievements.add(Achievement.CAREFUL)
-                    achievements.add(Achievement.FAST)
-                    achievements.add(Achievement.CAREFUL)
-                }
-                5 -> {
-                    achievements.add(Achievement.FAST)
-                    achievements.add(Achievement.CAREFUL)
-                    achievements.add(Achievement.FRIENDLY)
-                }
-                else -> {
-                    achievements.add(Achievement.CAREFUL)
-                }
+            val achivsCount = Random().nextInt(4) + 1
+            for (k in 1 .. achivsCount) {
+                achievements.add(Achievement.FAST)
             }
             Log.d(TAG, "Loop: $i Achievements size = ${achievements.size}")
             val item = FeedItem("Салон Jasmine. Мастер Евгения", "Рядом с метро Курская", achievements)
