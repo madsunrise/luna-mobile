@@ -42,12 +42,14 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter(ArrayList(items))
             val drawable = ContextCompat.getDrawable(context, icons[achievement.ordinal])
             val image = CircleImageView(context)
             image.setImageDrawable(drawable)
-            val achievementSize = context.resources.getDimension(R.dimen.achievement_size).toInt()
+            val achievementSize = context.resources.getDimension(R.dimen.feed_achievement_size).toInt()
             val params = LinearLayout.LayoutParams(achievementSize, achievementSize)
             params.setMargins(0, 0, context.resources.getDimension(R.dimen.achievement_margin_right).toInt(), 0)
             image.layoutParams = params
             holder.achievementsContainer.addView(image)
         }
+
+        holder.rating.text = "4.8"
     }
 
     inner class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -56,6 +58,7 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter(ArrayList(items))
         val avatar: CircleImageView = view.findViewById(R.id.avatar)
         val image: ImageView = view.findViewById(R.id.image)
         val achievementsContainer: LinearLayout = view.findViewById(R.id.achievements_container)
+        val rating: TextView = view.findViewById(R.id.rating)
     }
 
     override fun getYourItemId(position: Int) = items[position].hashCode().toLong()
