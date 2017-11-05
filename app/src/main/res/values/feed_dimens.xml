@@ -3,6 +3,8 @@
     <dimen name="feed_card_view_padding_right">16dp</dimen>
     <dimen name="feed_title_text_size">16sp</dimen>
     <dimen name="feed_location_text_size">14sp</dimen>
+    <dimen name="feed_achievements_container_height">50dp</dimen>
+    <dimen name="feed_achievements_container_padding">10dp</dimen>
     <dimen name="feed_achievement_size">30dp</dimen>
     <dimen name="feed_achievement_margin_right">20dp</dimen>
     <dimen name="feed_item_bottom_bar_height">48dp</dimen>
