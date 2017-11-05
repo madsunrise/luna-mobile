@@ -30,24 +30,33 @@ class MainActivity : AppCompatActivity() {
     private val mapFragment = MapFragment()
     private val accountFragment = AccountFragment()
 
+    private var previousFragment: Fragment? = null
     private var currentFragment: Fragment? = null
+
+
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        var from = currentFragment
         if (currentFragment is MasterFragment) {
             supportFragmentManager.popBackStack()
-            currentFragment = feedFragment          // currentFragment may contain wrong value
-            return@OnNavigationItemSelectedListener true
+            from = previousFragment
         }
         when (item.itemId) {
             R.id.feed -> {
-                showFragment(currentFragment, feedFragment)
+                if (from != feedFragment) {
+                    showFragment(from, feedFragment)
+                }
                 true
             }
             R.id.map -> {
-                showFragment(currentFragment, mapFragment)
+                if (from != mapFragment) {
+                    showFragment(from, mapFragment)
+                }
                 true
             }
             R.id.account -> {
-                showFragment(currentFragment, accountFragment)
+                if (from != accountFragment) {
+                    showFragment(from, accountFragment)
+                }
                 true
             }
             else -> false
@@ -86,6 +95,7 @@ class MainActivity : AppCompatActivity() {
             transaction.addToBackStack(to.tag)
         }
         transaction.commitAllowingStateLoss()
+        previousFragment = currentFragment
         currentFragment = to
     }
 
