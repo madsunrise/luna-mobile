@@ -44,7 +44,7 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter(ArrayList(items))
             image.setImageDrawable(drawable)
             val achievementSize = context.resources.getDimension(R.dimen.feed_achievement_size).toInt()
             val params = LinearLayout.LayoutParams(achievementSize, achievementSize)
-            params.setMargins(0, 0, context.resources.getDimension(R.dimen.achievement_margin_right).toInt(), 0)
+            params.setMargins(0, 0, context.resources.getDimension(R.dimen.feed_achievement_margin_right).toInt(), 0)
             image.layoutParams = params
             holder.achievementsContainer.addView(image)
         }

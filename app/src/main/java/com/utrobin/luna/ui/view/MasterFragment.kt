@@ -40,9 +40,9 @@ class MasterFragment : Fragment(), MasterContract.View {
 
         val cloud = ImageView(context)
         cloud.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_cloud_black_24dp))
-        val achievementSize = resources.getDimension(R.dimen.achievement_size).toInt()
+        val achievementSize = resources.getDimension(R.dimen.feed_achievement_size).toInt()
         val params = LinearLayout.LayoutParams(achievementSize, achievementSize)
-        params.setMargins(0, 0, resources.getDimension(R.dimen.achievement_margin_right).toInt(), 0)
+        params.setMargins(0, 0, resources.getDimension(R.dimen.feed_achievement_margin_right).toInt(), 0)
         cloud.layoutParams = params
         view.findViewById<LinearLayout>(R.id.achievements_container).addView(cloud)
 
