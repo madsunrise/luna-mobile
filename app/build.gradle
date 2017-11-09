@@ -24,6 +24,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    dataBinding.enabled = true
 }
 
 dependencies {
@@ -58,7 +59,6 @@ dependencies {
     // Yandex maps
     compile 'ru.yandex:yandexmapkit:2.5.4@aar'
 
-    // Butterknife
-    compile 'com.jakewharton:butterknife:8.8.1'
-    kapt 'com.jakewharton:butterknife-compiler:8.8.1'
+    // Data binding
+    kapt "com.android.databinding:compiler:3.1.0-alpha02"
 }

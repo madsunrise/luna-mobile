@@ -1,30 +1,19 @@
 package com.utrobin.luna.ui.view
 
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import android.widget.FrameLayout
-import android.widget.ProgressBar
-import butterknife.BindView
-import butterknife.ButterKnife
 import com.utrobin.luna.App
 import com.utrobin.luna.R
+import com.utrobin.luna.databinding.ActivityMainBinding
 import com.utrobin.luna.model.FeedItem
 
 
 class MainActivity : AppCompatActivity() {
-
-    @BindView(R.id.container)
-    lateinit var container: FrameLayout
-
-    @BindView(R.id.progress_bar)
-    lateinit var progressBar: ProgressBar
-
-
-    @BindView(R.id.bottom_navigation)
-    lateinit var navigation: BottomNavigationView
+    lateinit var binding: ActivityMainBinding
 
     private val feedFragment = FeedFragment()
     private val mapFragment = MapFragment()
@@ -65,10 +54,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        ButterKnife.bind(this)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
         App.component.injectsMainActivity(this)
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        binding.bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         savedInstanceState?.let {
             currentFragment = supportFragmentManager.getFragment(savedInstanceState, FRAGMENT_TAG)
@@ -107,11 +96,11 @@ class MainActivity : AppCompatActivity() {
 
     fun showProgressBar(show: Boolean) {
         if (show) {
-            container.visibility = View.GONE
-            progressBar.visibility = View.VISIBLE
+            binding.container.visibility = View.GONE
+            binding.progressBar.visibility = View.VISIBLE
         } else {
-            container.visibility = View.VISIBLE
-            progressBar.visibility = View.GONE
+            binding.container.visibility = View.VISIBLE
+            binding.progressBar.visibility = View.GONE
         }
     }
 

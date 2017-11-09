@@ -1,5 +1,6 @@
 package com.utrobin.luna.ui.view
 
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
@@ -14,6 +15,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.utrobin.luna.R
+import com.utrobin.luna.databinding.MasterFragmentBinding
 import com.utrobin.luna.ui.contract.MasterContract
 import com.utrobin.luna.utils.MapControllerWrapper
 import de.hdodenhof.circleimageview.CircleImageView
@@ -30,7 +32,11 @@ import java.util.*
 class MasterFragment : Fragment(), MasterContract.View {
     private lateinit var mMapController: MapControllerWrapper
 
+    lateinit var binding: MasterFragmentBinding
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = DataBindingUtil.inflate(inflater, R.layout.master_fragment, container, false);
+
         val view = inflater.inflate(R.layout.master_fragment, container, false)
 
         Glide.with(this).load("http://wordprint.ru/attachments/Image/1.png?template=generic").into((view.findViewById(R.id.toolbar_image)))
@@ -68,7 +74,7 @@ class MasterFragment : Fragment(), MasterContract.View {
 
         addWorkers(view)
 
-        return view
+        return binding.root
     }
 
 
