@@ -35,9 +35,9 @@ class MasterFragment : Fragment(), MasterContract.View {
     lateinit var binding: MasterFragmentBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.master_fragment, container, false);
-
         val view = inflater.inflate(R.layout.master_fragment, container, false)
+
+        binding = DataBindingUtil.inflate(inflater, R.layout.master_fragment, container, false);
 
         Glide.with(this).load("http://wordprint.ru/attachments/Image/1.png?template=generic").into((view.findViewById(R.id.toolbar_image)))
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
@@ -74,7 +74,7 @@ class MasterFragment : Fragment(), MasterContract.View {
 
         addWorkers(view)
 
-        return binding.root
+        return view
     }
 
 
