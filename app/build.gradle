@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'io.fabric'
 
 ext {
     supportVersion = '26.1.0'
@@ -61,4 +62,9 @@ dependencies {
 
     // Data binding
     kapt "com.android.databinding:compiler:3.1.0-alpha02"
+
+    // Crashlytics
+    compile('com.crashlytics.sdk.android:crashlytics:2.7.1@aar') {
+        transitive = true;
+    }
 }
