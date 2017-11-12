@@ -91,6 +91,7 @@ class MainActivity : AppCompatActivity() {
 
     fun openMasterScreen(item: FeedItem) {
         showProgressBar(true)
+        binding.bottomNavigation.visibility = View.GONE
         showFragment(currentFragment, MasterFragment(), true)
     }
 
@@ -104,6 +105,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        binding.bottomNavigation.visibility = View.VISIBLE
+    }
 
     companion object {
         private val TAG = MainActivity::javaClass.javaClass.simpleName
