@@ -52,3 +52,6 @@ freeline_project_description.json
 
 # MacOS Files
 *.DS_Store
+
+app/fabric.properties 
+
