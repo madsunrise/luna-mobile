@@ -3,6 +3,13 @@ sudo: required
 language: android
 jdk: oraclejdk8
 
+notifications:
+  email:
+    recipients:
+      - rudnev.vanya@gmail.com
+    on_success: never
+    on_failure: always
+
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -rf $HOME/.gradle/caches/*/plugin-resolution/
