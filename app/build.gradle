@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.apollographql.android'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
@@ -71,4 +72,7 @@ dependencies {
     // Espresso
     androidTestCompile 'com.android.support.test.espresso:espresso-core:3.0.1'
     androidTestCompile 'com.android.support.test.espresso:espresso-contrib:3.0.1'
+
+    // Apollo RxJava support
+    compile 'com.apollographql.apollo:apollo-rx2-support:0.4.2'
 }
