@@ -8,6 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.apollographql.apollo.rx2.Rx2Apollo
+import com.utrobin.luna.App.Companion.apolloClient
+import com.utrobin.luna.FeedQuery
 import com.utrobin.luna.R
 import com.utrobin.luna.adapter.FeedAdapter
 import com.utrobin.luna.adapter.FooterLoaderAdapter
@@ -17,6 +20,9 @@ import com.utrobin.luna.ui.contract.FeedContract
 import com.utrobin.luna.ui.presenter.FeedPresenter
 import com.utrobin.luna.ui.utils.EndlessRecyclerOnScrollListener
 import com.utrobin.luna.ui.utils.NetworkError
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+
 
 /**
  * Created by ivan on 01.11.2017.
@@ -48,6 +54,7 @@ class FeedFragment : Fragment(), FeedContract.View {
             initializeAdapter()
         }
         setUpRecyclerView()
+
     }
 
     override fun dataLoaded(newItems: List<FeedItem>) {
@@ -96,4 +103,25 @@ class FeedFragment : Fragment(), FeedContract.View {
     companion object {
         private val TAG = FeedFragment::class.java.simpleName
     }
+
+    override fun onResume() {
+        super.onResume()
+        runGraphQL()
+    }
+
+    private fun runGraphQL() {
+        val query = FeedQuery
+                .builder()
+               // .limit(10)
+                .build()
+        val apolloCall = apolloClient.query(query)
+        Rx2Apollo.from(apolloCall)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { response ->
+                    response.data()
+                }
+    }
+
+
 }

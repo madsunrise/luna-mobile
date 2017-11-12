@@ -1,0 +1,36 @@
+query Feed {
+    getFeed(limit: 10) { # Temp decision #$limit) {
+        id
+        name
+        address {
+            id
+            lat
+            lon
+            description
+        }
+        avatar {
+            path
+            tags {
+                id
+                name
+            }
+        }
+        photos {
+            id
+            path
+            tags {
+                id
+                name
+            }
+        }
+        stars
+        signs {
+            id
+            description
+            photo {
+                id
+                path
+            }
+        }
+    }
+}
