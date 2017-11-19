@@ -6,11 +6,11 @@ import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.core.CrashlyticsCore
 import com.google.gson.Gson
 import com.google.gson.JsonElement
+import com.google.gson.JsonParser
 import com.google.gson.annotations.SerializedName
 import io.fabric.sdk.android.Fabric
-import okhttp3.Interceptor
-import okhttp3.OkHttpClient
-import okhttp3.ResponseBody
+import okhttp3.*
+import okio.Buffer
 
 
 /**
@@ -48,9 +48,28 @@ class App : Application() {
     private val TransformRequestInterceptor = Interceptor { chain ->
         val originalRequest = chain.request()
 
-        // TODO move variables
+        val originalJson = JsonParser().parse(originalRequest.bodyToString())
 
-        val originalResponse = chain.proceed(originalRequest)
+        var queryString = originalJson.asJsonObject.get("query").asString
+        val vars = originalJson.asJsonObject.get("variables")
+
+        queryString = '{' + queryString.substringAfter('{')
+        for (variable in vars.asJsonObject.entrySet()) {
+            queryString = queryString.replace("$" + variable.key, " " +variable.value.asString, true)
+        }
+
+        originalJson.asJsonObject.addProperty("query", queryString)
+        originalJson.asJsonObject.remove("variables")
+        val requestString = gson.toJson(originalJson)
+
+        val newRequest = Request
+                .Builder()
+                .url(originalRequest.url())
+                .post(RequestBody.create(originalRequest.body()?.contentType(), requestString))
+                .build()
+
+
+        val originalResponse = chain.proceed(newRequest)
 
         if (originalResponse.code() != 200) {
             return@Interceptor originalResponse // just forwarding
@@ -59,12 +78,12 @@ class App : Application() {
         originalResponse.body()?.let { body ->
             val json = originalResponse.body()?.string()
 
-            if (Gson().fromJson<ResponseCode>(json, ResponseCode::class.java).code != 200) {
+            if (gson.fromJson<ResponseCode>(json, ResponseCode::class.java).code != 200) {
                 return@Interceptor originalResponse  // just forwarding
             }
 
-            val model = Gson().fromJson<TransformedResponse>(json, TransformedResponse::class.java)
-            val newJson = Gson().toJson(model)
+            val model = gson.fromJson<TransformedResponse>(json, TransformedResponse::class.java)
+            val newJson = gson.toJson(model)
 
             val contentType = body.contentType()
             val newBody = ResponseBody.create(contentType, newJson)
@@ -82,6 +101,18 @@ class App : Application() {
         lateinit var data: JsonElement
     }
 
+    inner class Variables {
+        @SerializedName("variables")
+        lateinit var variables: List<String>
+    }
+
+    private fun Request.bodyToString(): String {
+            val copy = this.newBuilder().build()
+            val buffer = Buffer()
+            copy.body()?.writeTo(buffer)
+            return buffer.readUtf8()
+    }
+
 
     companion object {
         lateinit var component: AppComponent
@@ -92,6 +123,6 @@ class App : Application() {
 
         private const val BASE_URL = "https://utrobin.com/api/graphql"
 
-        private val TAG = App::class.java.simpleName
+        private val gson = Gson()
     }
 }

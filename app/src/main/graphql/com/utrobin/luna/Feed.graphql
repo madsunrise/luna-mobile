@@ -1,5 +1,5 @@
-query Feed {
-    getFeed(limit: 10) { # Temp decision #$limit) {
+query Feed($limit: Int!) {
+    getFeed(limit: $limit) {
         id
         name
         address {
