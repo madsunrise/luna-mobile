@@ -5,7 +5,8 @@ package com.utrobin.luna.model
  */
 
 data class FeedItem(val name: String,
-                    val location: String,
+                    val avatar: String,
+                    val address: String,
                     val achievements: List<Achievement> = ArrayList(),
                     val photos: List<String> = ArrayList())
 

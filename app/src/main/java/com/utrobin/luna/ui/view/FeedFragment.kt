@@ -18,6 +18,7 @@ import com.utrobin.luna.ui.presenter.FeedPresenter
 import com.utrobin.luna.ui.utils.EndlessRecyclerOnScrollListener
 import com.utrobin.luna.ui.utils.NetworkError
 
+
 /**
  * Created by ivan on 01.11.2017.
  */
@@ -48,6 +49,7 @@ class FeedFragment : Fragment(), FeedContract.View {
             initializeAdapter()
         }
         setUpRecyclerView()
+
     }
 
     override fun dataLoaded(newItems: List<FeedItem>) {
@@ -95,5 +97,9 @@ class FeedFragment : Fragment(), FeedContract.View {
 
     companion object {
         private val TAG = FeedFragment::class.java.simpleName
+    }
+
+    override fun onResume() {
+        super.onResume()
     }
 }

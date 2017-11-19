@@ -32,10 +32,20 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter(ArrayList(items))
         holder.itemView.setOnClickListener { viewClickSubject.onNext(item) }
 
         holder.name.text = item.name
-        holder.location.text = item.location
+        holder.location.text = item.address
 
-        Glide.with(context).load("http://hd.wallpaperswide.com/thumbs/megan_fox_new_look-t2.jpg").into(holder.avatar)
-        Glide.with(context).load("http://www.thainarak.net/uploads/4/8/5/0/48500987/b8804bdd65917509ca47fd51999a3b24_orig.jpg").into(holder.image)
+        if (item.photos.isNotEmpty()) {
+            Glide.with(context).load(item.photos[0]).into(holder.image)
+        }
+        else {
+            holder.image.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.no_image))
+        }
+
+        item.avatar.takeIf { it.isNotBlank() }
+                ?.let { Glide.with(context).load(item.avatar).into(holder.avatar) }
+        ?:     holder.avatar.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.noavatar))
+
+
 
         holder.achievementsContainer.removeAllViews()
         for (achievement in item.achievements) {

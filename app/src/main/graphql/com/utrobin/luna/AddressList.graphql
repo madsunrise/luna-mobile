@@ -1,0 +1,7 @@
+query AddressList {
+    addressList {
+        id
+        lat
+        lon
+    }
+}

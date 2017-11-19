@@ -1,14 +1,14 @@
 package com.utrobin.luna.ui.presenter
 
 import android.util.Log
-import com.utrobin.luna.model.Achievement
+import com.apollographql.apollo.rx2.Rx2Apollo
+import com.utrobin.luna.App
+import com.utrobin.luna.FeedQuery
 import com.utrobin.luna.model.FeedItem
 import com.utrobin.luna.ui.contract.FeedContract
-import com.utrobin.luna.ui.utils.NetworkError
-import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import java.util.*
-import java.util.concurrent.TimeUnit
 
 /**
  * Created by ivan on 04.11.2017.
@@ -21,46 +21,45 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
     }
 
     override fun loadInitialData() {
-        Observable
-                .timer(1500, TimeUnit.MILLISECONDS)
+        val query = FeedQuery
+                .builder()
+                .limit(10)
+                .build()
+
+        val apolloCall = App.apolloClient.query(query)
+        Rx2Apollo.from(apolloCall)
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        { view?.dataLoaded(generateItems(7)) },
-                        { ex ->
-                            Log.e(TAG, ex.message)
-                            view?.dataLoadingFailed(NetworkError.UNKNOWN)
-                        }
+                        { it.data()?.feed?.let { parse(it) } },
+                        { Log.e(TAG, "Exc", it) }
                 )
+    }
+
+
+    private fun parse(list: List<FeedQuery.GetFeed>) {
+        val data = ArrayList<FeedItem>()
+        list
+                .forEach {
+                    val name = it.name() ?: "no name"
+                    val avatar = it.avatar()?.path() ?: "no avatar"
+                    val address = it.address()?.description() ?: "no address"
+                    val photos = ArrayList<String>()
+                    it.photos()?.forEach {
+                        it.path()?.let { photos.add(it) }
+                    }
+
+                    val item = FeedItem(name, avatar, address, ArrayList(), photos)
+                    data.add(item)
+                }
+        view?.dataLoaded(data)
     }
 
     override fun loadMore(page: Int) {
-        Observable
-                .timer(1, TimeUnit.SECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        { view?.dataLoaded(generateItems()) },
-                        { ex ->
-                            Log.e(TAG, ex.message)
-                            view?.dataLoadingFailed(NetworkError.UNKNOWN)
-                        }
-                )
+        loadInitialData()
     }
 
 
-    private fun generateItems(size: Int = 5): List<FeedItem> {
-        val items = ArrayList<FeedItem>()
-        for (i in 0 until size) {
-            val achievements = ArrayList<Achievement>()
-            val achivsCount = Random().nextInt(4) + 1
-            for (k in 1 .. achivsCount) {
-                achievements.add(Achievement.values()[Random().nextInt(Achievement.values().size)])
-            }
-            val item = FeedItem("Салон Jasmine. Мастер Евгения", "Рядом с метро Курская", achievements)
-            items.add(item)
-        }
-
-        return items
-    }
 
     override fun destroy() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
