@@ -95,10 +95,6 @@ class FeedFragment : Fragment(), FeedContract.View {
         presenter.detachView()
     }
 
-    companion object {
-        private val TAG = FeedFragment::class.java.simpleName
-    }
-
     override fun onResume() {
         super.onResume()
     }

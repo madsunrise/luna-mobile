@@ -1,11 +1,11 @@
 package com.utrobin.luna.ui.presenter
 
-import android.util.Log
 import com.apollographql.apollo.rx2.Rx2Apollo
 import com.utrobin.luna.App
 import com.utrobin.luna.FeedQuery
 import com.utrobin.luna.model.FeedItem
 import com.utrobin.luna.ui.contract.FeedContract
+import com.utrobin.luna.utils.LogUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.util.*
@@ -32,7 +32,7 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         { it.data()?.feed?.let { parse(it) } },
-                        { Log.e(TAG, "Exc", it) }
+                        { LogUtils.logException(FeedPresenter::class.java, it) }
                 )
     }
 

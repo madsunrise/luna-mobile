@@ -111,7 +111,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        private val TAG = MainActivity::javaClass.javaClass.simpleName
-        private val FRAGMENT_TAG = TAG + "FRAGMENT_TAG"
+        private val FRAGMENT_TAG = "FRAGMENT_TAG"
     }
 }
