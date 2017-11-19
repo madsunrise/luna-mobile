@@ -49,17 +49,22 @@ class FeedFragment : Fragment(), FeedContract.View {
             initializeAdapter()
         }
         setUpRecyclerView()
-
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            (activity as MainActivity).showProgressBar(true)
+            presenter.loadInitialData()
+        }
     }
 
     override fun dataLoaded(newItems: List<FeedItem>) {
         (activity as MainActivity).showProgressBar(false)
         isDataLoading = false
         feedAdapter.addItems(newItems)
+        binding.swipeRefreshLayout.isRefreshing = false
     }
 
     override fun dataLoadingFailed(reason: NetworkError) {
         Toast.makeText(context, R.string.error_has_occured, Toast.LENGTH_SHORT).show()
+        binding.swipeRefreshLayout.isRefreshing = false
     }
 
     private fun initializeAdapter() {

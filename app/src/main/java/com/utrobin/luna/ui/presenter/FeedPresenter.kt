@@ -5,6 +5,7 @@ import com.utrobin.luna.App
 import com.utrobin.luna.FeedQuery
 import com.utrobin.luna.model.FeedItem
 import com.utrobin.luna.ui.contract.FeedContract
+import com.utrobin.luna.ui.utils.NetworkError
 import com.utrobin.luna.utils.LogUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -32,7 +33,10 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         { it.data()?.feed?.let { parse(it) } },
-                        { LogUtils.logException(FeedPresenter::class.java, it) }
+                        {
+                            LogUtils.logException(FeedPresenter::class.java, it)
+                            view?.dataLoadingFailed(NetworkError.UNKNOWN)
+                        }
                 )
     }
 
@@ -62,10 +66,5 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
 
     override fun destroy() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-
-    companion object {
-        private val TAG = FeedPresenter::class.java.simpleName
     }
 }
