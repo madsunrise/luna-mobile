@@ -8,7 +8,7 @@ import com.utrobin.luna.ui.contract.FeedContract
 import com.utrobin.luna.utils.LogUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * Created by ivan on 04.11.2017.
@@ -39,27 +39,25 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
 
     private fun parse(list: List<FeedQuery.GetFeed>) {
         val data = ArrayList<FeedItem>()
-        list
-                .forEach {
-                    val name = it.name() ?: "no name"
-                    val avatar = it.avatar()?.path() ?: "no avatar"
-                    val address = it.address()?.description() ?: "no address"
-                    val photos = ArrayList<String>()
-                    val stars = it.stars() ?: 0.0
-                    it.photos()?.forEach {
-                        it.path()?.let { photos.add(it) }
-                    }
+        list.forEach {
+            val name = it.name() ?: "no name"
+            val avatar = it.avatar()?.path() ?: "no avatar"
+            val address = it.address()?.description() ?: "no address"
+            val photos = ArrayList<String>()
+            val stars = it.stars() ?: 0.0
+            it.photos()?.forEach {
+                it.path()?.let { photos.add(it) }
+            }
 
-                    val item = FeedItem(name, avatar, address, ArrayList(), photos, stars)
-                    data.add(item)
-                }
+            val item = FeedItem(name, avatar, address, ArrayList(), photos, stars)
+            data.add(item)
+        }
         view?.dataLoaded(data)
     }
 
     override fun loadMore(page: Int) {
         loadInitialData()
     }
-
 
 
     override fun destroy() {
