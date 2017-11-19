@@ -59,7 +59,7 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter(ArrayList(items))
             holder.achievementsContainer.addView(image)
         }
 
-        holder.rating.text = "4.8"
+        holder.rating.text = item.stars.toString()
     }
 
     inner class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {

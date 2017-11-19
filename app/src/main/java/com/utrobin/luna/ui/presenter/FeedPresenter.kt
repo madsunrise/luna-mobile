@@ -45,11 +45,12 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
                     val avatar = it.avatar()?.path() ?: "no avatar"
                     val address = it.address()?.description() ?: "no address"
                     val photos = ArrayList<String>()
+                    val stars = it.stars() ?: 0.0
                     it.photos()?.forEach {
                         it.path()?.let { photos.add(it) }
                     }
 
-                    val item = FeedItem(name, avatar, address, ArrayList(), photos)
+                    val item = FeedItem(name, avatar, address, ArrayList(), photos, stars)
                     data.add(item)
                 }
         view?.dataLoaded(data)
