@@ -822,7 +822,7 @@
               "deprecationReason": "",
               "description": "feed",
               "isDeprecated": false,
-              "name": "getFeed",
+              "name": "feed",
               "type": {
                 "kind": "LIST",
                 "name": null,

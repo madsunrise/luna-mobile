@@ -1,5 +1,5 @@
 query Feed($limit: Int!) {
-    getFeed(limit: $limit) {
+    feed(limit: $limit) {
         id
         name
         address {

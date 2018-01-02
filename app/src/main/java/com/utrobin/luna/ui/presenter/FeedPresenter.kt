@@ -33,7 +33,7 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        { it.data()?.feed?.let { parseFeed(it) } ?: view?.dataLoadingFailed(NetworkError.UNKNOWN) },
+                        { it.data()?.feed()?.let { parseFeed(it) } ?: view?.dataLoadingFailed(NetworkError.UNKNOWN) },
                         {
                             LogUtils.logException(FeedPresenter::class.java, it)
                             view?.dataLoadingFailed(NetworkError.UNKNOWN)
@@ -42,7 +42,7 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
     }
 
 
-    private fun parseFeed(list: List<FeedQuery.GetFeed>) {
+    private fun parseFeed(list: List<FeedQuery.Feed>) {
         val data = ArrayList<FeedItem>()
         list.forEach {
             val name = it.name() ?: throw NullPointerException("No name provided!")
