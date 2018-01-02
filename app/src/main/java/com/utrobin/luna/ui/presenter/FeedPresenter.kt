@@ -3,7 +3,9 @@ package com.utrobin.luna.ui.presenter
 import com.apollographql.apollo.rx2.Rx2Apollo
 import com.utrobin.luna.App
 import com.utrobin.luna.FeedQuery
+import com.utrobin.luna.model.Address
 import com.utrobin.luna.model.FeedItem
+import com.utrobin.luna.model.Photo
 import com.utrobin.luna.ui.contract.FeedContract
 import com.utrobin.luna.ui.utils.NetworkError
 import com.utrobin.luna.utils.LogUtils
@@ -31,7 +33,7 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        { it.data()?.feed?.let { parse(it) } },
+                        { it.data()?.feed?.let { parseFeed(it) } ?: view?.dataLoadingFailed(NetworkError.UNKNOWN) },
                         {
                             LogUtils.logException(FeedPresenter::class.java, it)
                             view?.dataLoadingFailed(NetworkError.UNKNOWN)
@@ -40,19 +42,19 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
     }
 
 
-    private fun parse(list: List<FeedQuery.GetFeed>) {
+    private fun parseFeed(list: List<FeedQuery.GetFeed>) {
         val data = ArrayList<FeedItem>()
         list.forEach {
-            val name = it.name() ?: "no name"
-            val avatar = it.avatar()?.path() ?: "no avatar"
-            val address = it.address()?.description() ?: "no address"
-            val photos = ArrayList<String>()
-            val stars = it.stars() ?: 0.0
+            val name = it.name() ?: throw NullPointerException("No name provided!")
+            val avatar = Photo(it.avatar() ?: throw NullPointerException("No avatar provided!"))
+            val address = Address(it.address() ?: throw NullPointerException("No name provided!"))
+            val stars = it.stars() ?: throw NullPointerException("No stars provided!")
+            val photos = ArrayList<Photo>()
             it.photos()?.forEach {
-                it.path()?.let { photos.add(it) }
+                photos.add(Photo(it))
             }
 
-            val item = FeedItem(name, avatar, address, ArrayList(), photos, stars)
+            val item = FeedItem(name, avatar, address, stars, ArrayList(), photos)
             data.add(item)
         }
         view?.dataLoaded(data)

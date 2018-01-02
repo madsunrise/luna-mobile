@@ -32,31 +32,30 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter(ArrayList(items))
         holder.itemView.setOnClickListener { viewClickSubject.onNext(item) }
 
         holder.name.text = "${item.name} #$position"
-        holder.location.text = item.address
+        holder.location.text = item.address.description
 
         if (item.photos.isNotEmpty()) {
-            Glide.with(context).load(item.photos[0]).into(holder.image)
+            Glide.with(context).load(item.photos[0].path).into(holder.image)
         }
         else {
             holder.image.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.no_image))
         }
 
-        item.avatar.takeIf { it.isNotBlank() }
-                ?.let { Glide.with(context).load(item.avatar).into(holder.avatar) }
+        item.avatar.path.takeIf { it.isNotBlank() }
+                ?.let { Glide.with(context).load(it).into(holder.avatar) }
         ?:     holder.avatar.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.noavatar))
 
 
 
         holder.achievementsContainer.removeAllViews()
-        for (achievement in item.achievements) {
-            val drawable = ContextCompat.getDrawable(context, icons[achievement.ordinal])
+        for (sign in item.signs) {
             val image = CircleImageView(context)
-            image.setImageDrawable(drawable)
             val achievementSize = context.resources.getDimension(R.dimen.feed_achievement_size).toInt()
             val params = LinearLayout.LayoutParams(achievementSize, achievementSize)
             params.setMargins(0, 0, context.resources.getDimension(R.dimen.feed_achievement_margin_right).toInt(), 0)
             image.layoutParams = params
             holder.achievementsContainer.addView(image)
+            Glide.with(context).load(sign.photo.path).into(image)
         }
 
         holder.rating.text = item.stars.toString()
@@ -72,13 +71,4 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter(ArrayList(items))
     }
 
     override fun getYourItemId(position: Int) = items[position].hashCode().toLong()
-
-    private val icons = arrayOf(
-            R.drawable.ic_notifications_black_24dp,
-            R.drawable.ic_cloud_black_24dp,
-            R.drawable.ic_chat_black_24dp,
-            R.drawable.ic_favorite_black_24dp,
-            R.drawable.ic_star_black_24dp,
-            R.drawable.ic_audiotrack_black_24dp
-    )
 }

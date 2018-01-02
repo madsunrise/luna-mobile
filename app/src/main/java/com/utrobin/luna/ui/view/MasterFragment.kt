@@ -46,7 +46,7 @@ class MasterFragment : Fragment(), MasterContract.View {
         Glide.with(this).load("http://100idey.ru/wp-content/uploads/2017/01/manikur6.jpg").into((view.findViewById(R.id.image)))
 
         val cloud = ImageView(context)
-        cloud.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_cloud_black_24dp))
+        //cloud.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_cloud_black_24dp))
         val achievementSize = resources.getDimension(R.dimen.feed_achievement_size).toInt()
         val params = LinearLayout.LayoutParams(achievementSize, achievementSize)
         params.setMargins(0, 0, resources.getDimension(R.dimen.feed_achievement_margin_right).toInt(), 0)
@@ -54,12 +54,12 @@ class MasterFragment : Fragment(), MasterContract.View {
         view.findViewById<LinearLayout>(R.id.achievements_container).addView(cloud)
 
         val chat = ImageView(context)
-        chat.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_chat_black_24dp))
+        //chat.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_chat_black_24dp))
         chat.layoutParams = params
         view.findViewById<LinearLayout>(R.id.achievements_container).addView(chat)
 
         val notification = ImageView(context)
-        notification.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_notifications_black_24dp))
+        // notification.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_notifications_black_24dp))
         notification.layoutParams = params
         view.findViewById<LinearLayout>(R.id.achievements_container).addView(notification)
 
