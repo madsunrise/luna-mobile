@@ -37,7 +37,7 @@ class MasterFragment : Fragment(), MasterContract.View {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.master_fragment, container, false)
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.master_fragment, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.master_fragment, container, false)!!
 
         Glide.with(this).load("http://wordprint.ru/attachments/Image/1.png?template=generic").into((view.findViewById(R.id.toolbar_image)))
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
@@ -45,7 +45,7 @@ class MasterFragment : Fragment(), MasterContract.View {
         Glide.with(this).load("http://100idey.ru/wp-content/uploads/2017/01/manikur6.jpg").into((view.findViewById(R.id.image)))
 
         val cloud = ImageView(context)
-        cloud.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_cloud_black_24dp))
+        cloud.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_cloud_black_24dp))
         val achievementSize = resources.getDimension(R.dimen.feed_achievement_size).toInt()
         val params = LinearLayout.LayoutParams(achievementSize, achievementSize)
         params.setMargins(0, 0, resources.getDimension(R.dimen.feed_achievement_margin_right).toInt(), 0)
@@ -53,12 +53,12 @@ class MasterFragment : Fragment(), MasterContract.View {
         view.findViewById<LinearLayout>(R.id.achievements_container).addView(cloud)
 
         val chat = ImageView(context)
-        chat.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_chat_black_24dp))
+        chat.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_chat_black_24dp))
         chat.layoutParams = params
         view.findViewById<LinearLayout>(R.id.achievements_container).addView(chat)
 
         val notification = ImageView(context)
-        notification.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_notifications_black_24dp))
+        notification.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_notifications_black_24dp))
         notification.layoutParams = params
         view.findViewById<LinearLayout>(R.id.achievements_container).addView(notification)
 
@@ -78,7 +78,7 @@ class MasterFragment : Fragment(), MasterContract.View {
     }
 
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as MainActivity).showProgressBar(false)
     }
@@ -92,7 +92,7 @@ class MasterFragment : Fragment(), MasterContract.View {
         val overlay = Overlay(mMapController.mapController)
 
         val point = GeoPoint(55.79694821, 37.53778351)
-        val icon = ContextCompat.getDrawable(context, R.drawable.ic_place_black_24dp)
+        val icon = ContextCompat.getDrawable(context!!, R.drawable.ic_place_black_24dp)
         // Create an object for the layer
         val yandex = OverlayItem(point, icon)
         // Create the balloon model for the object
@@ -119,9 +119,9 @@ class MasterFragment : Fragment(), MasterContract.View {
         params.setMargins(spaceBetween, 0, spaceBetween, 0)
 
         val first = CircleImageView(context)
-        first.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.all))
+        first.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.all))
         first.layoutParams = params
-        first.borderColor = ContextCompat.getColor(context, R.color.black)
+        first.borderColor = ContextCompat.getColor(context!!, R.color.black)
         first.borderWidth = resources.getDimension(R.dimen.master_worker_border_width).toInt()
 
 
@@ -139,7 +139,7 @@ class MasterFragment : Fragment(), MasterContract.View {
             val workerImage = CircleImageView(context)
             workerImage.layoutParams = LinearLayout.LayoutParams(size, size)
 
-            workerImage.borderColor = ContextCompat.getColor(context, R.color.black)
+            workerImage.borderColor = ContextCompat.getColor(context!!, R.color.black)
             workerImage.borderWidth = resources.getDimension(R.dimen.master_worker_border_width).toInt()
             Glide
                     .with(context)
@@ -150,7 +150,7 @@ class MasterFragment : Fragment(), MasterContract.View {
             val workerName = TextView(context)
             workerName.setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.text_size_caption))
             workerName.text = names[Random().nextInt(names.size)]
-            workerName.setTextColor(ContextCompat.getColor(context, R.color.black))
+            workerName.setTextColor(ContextCompat.getColor(context!!, R.color.black))
             workerName.gravity = Gravity.CENTER
             worker.addView(workerName)
 

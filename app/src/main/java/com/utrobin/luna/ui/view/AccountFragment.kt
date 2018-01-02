@@ -17,7 +17,7 @@ class AccountFragment : Fragment() {
     lateinit var binding: AccountFragmentBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.account_fragment, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.account_fragment, container, false)!!
         return binding.root
     }
 }

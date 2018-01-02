@@ -22,11 +22,11 @@ class MapFragment : Fragment() {
     private lateinit var mapController: MapControllerWrapper
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.map_fragment, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.map_fragment, container, false)!!
         return binding.root
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         mapController = MapControllerWrapper(binding.map)

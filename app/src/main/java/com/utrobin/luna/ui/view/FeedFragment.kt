@@ -39,11 +39,11 @@ class FeedFragment : Fragment(), FeedContract.View {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.feed_fragment, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.feed_fragment, container, false)!!
         return binding.root
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (!adapterInitialized) {
             initializeAdapter()
