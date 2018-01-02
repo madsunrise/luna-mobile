@@ -23,28 +23,28 @@ class MainActivity : AppCompatActivity() {
     private var currentFragment: Fragment? = null
 
 
-    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        var from = currentFragment
+    private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener {
         if (currentFragment is MasterFragment) {
             supportFragmentManager.popBackStack()
-            from = previousFragment
+            currentFragment = previousFragment
+            previousFragment = null
         }
-        when (item.itemId) {
+        when (it.itemId) {
             R.id.feed -> {
-                if (from != feedFragment) {
-                    showFragment(from, feedFragment)
+                if (currentFragment != feedFragment) {
+                    showFragment(feedFragment)
                 }
                 true
             }
             R.id.map -> {
-                if (from != mapFragment) {
-                    showFragment(from, mapFragment)
+                if (currentFragment != mapFragment) {
+                    showFragment(mapFragment)
                 }
                 true
             }
             R.id.account -> {
-                if (from != accountFragment) {
-                    showFragment(from, accountFragment)
+                if (currentFragment != accountFragment) {
+                    showFragment(accountFragment)
                 }
                 true
             }
@@ -57,17 +57,17 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         App.component.injectsMainActivity(this)
-        binding.bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        binding.bottomNavigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
 
         savedInstanceState?.let {
             currentFragment = supportFragmentManager.getFragment(savedInstanceState, FRAGMENT_TAG)
-        } ?: showFragment(null, feedFragment)
+        } ?: showFragment(feedFragment)
     }
 
 
-    private fun showFragment(from: Fragment?, to: Fragment, addToBackStack: Boolean = false) {
+    private fun showFragment(to: Fragment, addToBackStack: Boolean = false) {
         val transaction = supportFragmentManager.beginTransaction()
-        if (from == null) {
+        if (currentFragment == null) {
             if (to.isAdded) {
                 transaction.show(to)
             } else {
@@ -75,24 +75,37 @@ class MainActivity : AppCompatActivity() {
             }
         } else {
             if (to.isAdded) {
-                transaction.hide(from).show(to)
+                transaction.hide(currentFragment).show(to)
             } else {
-                transaction.hide(from).add(R.id.container, to, to.tag)
+                transaction.hide(currentFragment).add(R.id.container, to, to.tag)
             }
         }
         if (addToBackStack) {
             transaction.addToBackStack(to.tag)
         }
-        transaction.commitAllowingStateLoss()
+        transaction.commit()
         previousFragment = currentFragment
         currentFragment = to
     }
 
+    override fun onBackPressed() {
+        when (currentFragment) {
+            is MasterFragment -> {
+                supportFragmentManager.popBackStack()
+                currentFragment = previousFragment
+                previousFragment = null
+            }
+            !is FeedFragment -> {
+                binding.bottomNavigation.selectedItemId = R.id.feed
+                showFragment(feedFragment)
+            }
+            else -> super.onBackPressed()
+        }
+    }
 
     fun openMasterScreen(item: FeedItem) {
         showProgressBar(true)
-        binding.bottomNavigation.visibility = View.GONE
-        showFragment(currentFragment, MasterFragment(), true)
+        showFragment(MasterFragment(), true)
     }
 
     fun showProgressBar(show: Boolean) {
@@ -105,10 +118,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        binding.bottomNavigation.visibility = View.VISIBLE
-    }
 
     companion object {
         private val FRAGMENT_TAG = "FRAGMENT_TAG"
