@@ -1,5 +1,7 @@
 package com.utrobin.luna.adapter
 
+import android.graphics.drawable.PictureDrawable
+import android.net.Uri
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -9,8 +11,11 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.utrobin.luna.R
 import com.utrobin.luna.model.FeedItem
+import com.utrobin.luna.utils.svg.GlideApp
+import com.utrobin.luna.utils.svg.SvgSoftwareLayerSetter
 import de.hdodenhof.circleimageview.CircleImageView
 import java.util.*
 
@@ -36,26 +41,29 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter(ArrayList(items))
 
         if (item.photos.isNotEmpty()) {
             Glide.with(context).load(item.photos[0].path).into(holder.image)
-        }
-        else {
+        } else {
             holder.image.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.no_image))
         }
 
         item.avatar.path.takeIf { it.isNotBlank() }
                 ?.let { Glide.with(context).load(it).into(holder.avatar) }
-        ?:     holder.avatar.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.noavatar))
+                ?: holder.avatar.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.noavatar))
 
+        val requestBuilder = GlideApp.with(context)
+                .`as`(PictureDrawable::class.java)
+                .transition(withCrossFade())
+                .listener(SvgSoftwareLayerSetter())
 
-
-        holder.achievementsContainer.removeAllViews()
+        holder.signsContainer.removeAllViews()
         for (sign in item.signs) {
-            val image = CircleImageView(context)
-            val achievementSize = context.resources.getDimension(R.dimen.feed_achievement_size).toInt()
-            val params = LinearLayout.LayoutParams(achievementSize, achievementSize)
-            params.setMargins(0, 0, context.resources.getDimension(R.dimen.feed_achievement_margin_right).toInt(), 0)
+            val image = ImageView(context)
+            val signSize = context.resources.getDimension(R.dimen.feed_signs_size).toInt()
+            val params = LinearLayout.LayoutParams(signSize, signSize)
+            params.setMargins(0, 0, context.resources.getDimension(R.dimen.feed_signs_margin_right).toInt(), 0)
             image.layoutParams = params
-            holder.achievementsContainer.addView(image)
-            Glide.with(context).load(sign.photo.path).into(image)
+            holder.signsContainer.addView(image)
+
+            requestBuilder?.load(Uri.parse(sign.photo.path))?.into(image);
         }
 
         holder.rating.text = item.stars.toString()
@@ -66,7 +74,7 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter(ArrayList(items))
         val location: TextView = view.findViewById(R.id.location)
         val avatar: CircleImageView = view.findViewById(R.id.avatar)
         val image: ImageView = view.findViewById(R.id.image)
-        val achievementsContainer: LinearLayout = view.findViewById(R.id.achievements_container)
+        val signsContainer: LinearLayout = view.findViewById(R.id.signs_container)
         val rating: TextView = view.findViewById(R.id.rating)
     }
 

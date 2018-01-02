@@ -13,6 +13,8 @@ data class Photo(val path: String, val tags: ArrayList<Tag> = ArrayList()) {
         }
     }
 
+    constructor(photo: FeedQuery.Photo1) : this(photo.path()!!)
+
     constructor(photo: FeedQuery.Avatar) : this(photo.path()!!) {
         photo.tags()?.forEach {
             tags.add(Tag(it))

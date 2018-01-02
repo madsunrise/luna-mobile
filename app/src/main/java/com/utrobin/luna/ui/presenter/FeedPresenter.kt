@@ -6,6 +6,7 @@ import com.utrobin.luna.FeedQuery
 import com.utrobin.luna.model.Address
 import com.utrobin.luna.model.FeedItem
 import com.utrobin.luna.model.Photo
+import com.utrobin.luna.model.Sign
 import com.utrobin.luna.ui.contract.FeedContract
 import com.utrobin.luna.ui.utils.NetworkError
 import com.utrobin.luna.utils.LogUtils
@@ -42,19 +43,25 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
     }
 
 
-    private fun parseFeed(list: List<FeedQuery.Feed>) {
+    private fun parseFeed(queryList: List<FeedQuery.Feed>) {
         val data = ArrayList<FeedItem>()
-        list.forEach {
-            val name = it.name() ?: throw NullPointerException("No name provided!")
-            val avatar = Photo(it.avatar() ?: throw NullPointerException("No avatar provided!"))
-            val address = Address(it.address() ?: throw NullPointerException("No name provided!"))
-            val stars = it.stars() ?: throw NullPointerException("No stars provided!")
+        for (queryItem in queryList) {
+            val name = queryItem.name() ?: continue
+            val avatar = Photo(queryItem.avatar() ?: continue)
+            val address = Address(queryItem.address() ?: continue)
+            val stars = queryItem.stars() ?: continue
+
             val photos = ArrayList<Photo>()
-            it.photos()?.forEach {
+            queryItem.photos()?.forEach {
                 photos.add(Photo(it))
             }
 
-            val item = FeedItem(name, avatar, address, stars, ArrayList(), photos)
+            val signs = ArrayList<Sign>()
+            queryItem.signs()?.forEach {
+                signs.add(Sign(it))
+            }
+
+            val item = FeedItem(name, avatar, address, stars, signs, photos)
             data.add(item)
         }
         view?.dataLoaded(data)

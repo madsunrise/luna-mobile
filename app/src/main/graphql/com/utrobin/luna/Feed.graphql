@@ -26,6 +26,7 @@ query Feed($limit: Int!) {
         stars
         signs {
             id
+            name
             description
             photo {
                 id

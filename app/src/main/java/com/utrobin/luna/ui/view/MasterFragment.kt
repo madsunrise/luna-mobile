@@ -47,21 +47,21 @@ class MasterFragment : Fragment(), MasterContract.View {
 
         val cloud = ImageView(context)
         //cloud.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_cloud_black_24dp))
-        val achievementSize = resources.getDimension(R.dimen.feed_achievement_size).toInt()
-        val params = LinearLayout.LayoutParams(achievementSize, achievementSize)
-        params.setMargins(0, 0, resources.getDimension(R.dimen.feed_achievement_margin_right).toInt(), 0)
+        val signSize = resources.getDimension(R.dimen.feed_signs_size).toInt()
+        val params = LinearLayout.LayoutParams(signSize, signSize)
+        params.setMargins(0, 0, resources.getDimension(R.dimen.feed_signs_margin_right).toInt(), 0)
         cloud.layoutParams = params
-        view.findViewById<LinearLayout>(R.id.achievements_container).addView(cloud)
+        view.findViewById<LinearLayout>(R.id.signs_container).addView(cloud)
 
         val chat = ImageView(context)
         //chat.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_chat_black_24dp))
         chat.layoutParams = params
-        view.findViewById<LinearLayout>(R.id.achievements_container).addView(chat)
+        view.findViewById<LinearLayout>(R.id.signs_container).addView(chat)
 
         val notification = ImageView(context)
         // notification.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_notifications_black_24dp))
         notification.layoutParams = params
-        view.findViewById<LinearLayout>(R.id.achievements_container).addView(notification)
+        view.findViewById<LinearLayout>(R.id.signs_container).addView(notification)
 
         view.findViewById<TextView>(R.id.first_opinion_tv).setText("Vika: Была у Екатерины, хорошо сделала шеллак.")
         view.findViewById<TextView>(R.id.see_all_opinions_tv).setText("Посмотреть все комментарии (42)")
