@@ -15,9 +15,9 @@ import com.utrobin.luna.model.FeedItem
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
 
-    private val feedFragment = FeedFragment()
-    private val mapFragment = MapFragment()
-    private val accountFragment = AccountFragment()
+    private val feedFragment = FeedFragment.getInstance()
+    private val mapFragment = MapFragment.getInstance()
+    private val accountFragment = AccountFragment.getInstance()
 
     private var previousFragment: Fragment? = null
     private var currentFragment: Fragment? = null
@@ -105,7 +105,7 @@ class MainActivity : AppCompatActivity() {
 
     fun openMasterScreen(item: FeedItem) {
         showProgressBar(true)
-        showFragment(MasterFragment(), true)
+        showFragment(MasterFragment.getInstance(item), true)
     }
 
     fun showProgressBar(show: Boolean) {

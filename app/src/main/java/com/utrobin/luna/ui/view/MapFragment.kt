@@ -33,4 +33,8 @@ class MapFragment : Fragment() {
         mapController.overlayManager.myLocation.isEnabled = true
 
     }
+
+    companion object {
+        fun getInstance() = MapFragment()
+    }
 }

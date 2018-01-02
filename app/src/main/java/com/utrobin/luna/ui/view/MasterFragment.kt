@@ -16,6 +16,7 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.utrobin.luna.R
 import com.utrobin.luna.databinding.MasterFragmentBinding
+import com.utrobin.luna.model.FeedItem
 import com.utrobin.luna.ui.contract.MasterContract
 import com.utrobin.luna.utils.MapControllerWrapper
 import de.hdodenhof.circleimageview.CircleImageView
@@ -197,4 +198,8 @@ class MasterFragment : Fragment(), MasterContract.View {
             "Кристина",
             "Ольга"
     )
+
+    companion object {
+        fun getInstance(item: FeedItem) = MasterFragment()
+    }
 }

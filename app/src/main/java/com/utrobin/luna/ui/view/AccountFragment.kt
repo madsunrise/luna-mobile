@@ -20,4 +20,8 @@ class AccountFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.account_fragment, container, false)!!
         return binding.root
     }
+
+    companion object {
+        fun getInstance() = AccountFragment()
+    }
 }

@@ -99,4 +99,8 @@ class FeedFragment : Fragment(), FeedContract.View {
         super.onDestroy()
         presenter.detachView()
     }
+
+    companion object {
+        fun getInstance() = FeedFragment()
+    }
 }
