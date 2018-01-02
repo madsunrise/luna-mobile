@@ -99,8 +99,4 @@ class FeedFragment : Fragment(), FeedContract.View {
         super.onDestroy()
         presenter.detachView()
     }
-
-    override fun onResume() {
-        super.onResume()
-    }
 }

@@ -31,7 +31,7 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter(ArrayList(items))
         val context = (holder as ItemViewHolder).itemView.context
         holder.itemView.setOnClickListener { viewClickSubject.onNext(item) }
 
-        holder.name.text = item.name
+        holder.name.text = "${item.name} #$position"
         holder.location.text = item.address
 
         if (item.photos.isNotEmpty()) {

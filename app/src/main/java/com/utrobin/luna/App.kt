@@ -29,7 +29,7 @@ class App : Application() {
     private fun configureApolloClient() {
         val okHttpClient = OkHttpClient
                 .Builder()
-                .addInterceptor(TransformRequestInterceptor)
+                .addInterceptor(apolloRequestInterceptor)
                 .build()
         apolloClient = ApolloClient.builder()
                 .serverUrl(BASE_URL)
@@ -45,7 +45,7 @@ class App : Application() {
     }
 
 
-    private val TransformRequestInterceptor = Interceptor { chain ->
+    private val apolloRequestInterceptor = Interceptor { chain ->
         val originalRequest = chain.request()
 
         val originalJson = JsonParser().parse(originalRequest.bodyToString())
@@ -55,7 +55,7 @@ class App : Application() {
 
         queryString = '{' + queryString.substringAfter('{')
         for (variable in vars.asJsonObject.entrySet()) {
-            queryString = queryString.replace("$" + variable.key, " " +variable.value.asString, true)
+            queryString = queryString.replace("$" + variable.key, " " + variable.value.asString, true)
         }
 
         originalJson.asJsonObject.addProperty("query", queryString)
@@ -71,7 +71,7 @@ class App : Application() {
 
         val originalResponse = chain.proceed(newRequest)
 
-        if (originalResponse.code() != 200) {
+        if (!originalResponse.isSuccessful) {
             return@Interceptor originalResponse // just forwarding
         }
 
@@ -107,10 +107,10 @@ class App : Application() {
     }
 
     private fun Request.bodyToString(): String {
-            val copy = this.newBuilder().build()
-            val buffer = Buffer()
-            copy.body()?.writeTo(buffer)
-            return buffer.readUtf8()
+        val copy = this.newBuilder().build()
+        val buffer = Buffer()
+        copy.body()?.writeTo(buffer)
+        return buffer.readUtf8()
     }
 
 

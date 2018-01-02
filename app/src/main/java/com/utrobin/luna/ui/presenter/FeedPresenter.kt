@@ -9,7 +9,6 @@ import com.utrobin.luna.ui.utils.NetworkError
 import com.utrobin.luna.utils.LogUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlin.collections.ArrayList
 
 /**
  * Created by ivan on 04.11.2017.
