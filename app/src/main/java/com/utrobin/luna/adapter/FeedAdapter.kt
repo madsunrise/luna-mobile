@@ -3,6 +3,7 @@ package com.utrobin.luna.adapter
 import android.graphics.drawable.PictureDrawable
 import android.net.Uri
 import android.support.v4.content.ContextCompat
+import android.support.v4.view.ViewPager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -39,16 +40,12 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter(ArrayList(items))
         holder.name.text = "${item.name} #$position"
         holder.location.text = item.address.description
 
-        if (item.photos.isNotEmpty()) {
-            Glide.with(context).load(item.photos[0].path).into(holder.image)
-        } else {
-            holder.image.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.no_image))
-        }
-
+        // Avatar
         item.avatar.path.takeIf { it.isNotBlank() }
                 ?.let { Glide.with(context).load(it).into(holder.avatar) }
                 ?: holder.avatar.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.noavatar))
 
+        // Signs
         val requestBuilder = GlideApp.with(context)
                 .`as`(PictureDrawable::class.java)
                 .transition(withCrossFade())
@@ -66,6 +63,9 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter(ArrayList(items))
             requestBuilder?.load(Uri.parse(sign.photo.path))?.into(image);
         }
 
+        // Photos slider
+        holder.viewPager.adapter = ViewPagerAdapter(context, item.photos)
+
         holder.rating.text = item.stars.toString()
     }
 
@@ -73,7 +73,7 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter(ArrayList(items))
         val name: TextView = view.findViewById(R.id.name)
         val location: TextView = view.findViewById(R.id.location)
         val avatar: CircleImageView = view.findViewById(R.id.avatar)
-        val image: ImageView = view.findViewById(R.id.image)
+        val viewPager: ViewPager = view.findViewById(R.id.pager)
         val signsContainer: LinearLayout = view.findViewById(R.id.signs_container)
         val rating: TextView = view.findViewById(R.id.rating)
     }

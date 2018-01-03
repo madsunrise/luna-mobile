@@ -51,6 +51,7 @@
             </LinearLayout>
         </LinearLayout>
 
+        <!-- Signs -->
         <LinearLayout
             android:id="@+id/signs_container"
             android:layout_width="match_parent"
@@ -59,13 +60,14 @@
             android:orientation="horizontal"
             android:padding="@dimen/feed_signs_container_padding" />
 
-        <ImageView
-            android:id="@+id/image"
+
+        <!-- Photos -->
+        <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/pager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxHeight="120dp"
-            android:scaleType="fitCenter"
-            tools:ignore="contentDescription" />
+            android:layout_height="@dimen/feed_image_slider_height">
+        </android.support.v4.view.ViewPager>
+
 
         <!-- Buttons -->
         <RelativeLayout
