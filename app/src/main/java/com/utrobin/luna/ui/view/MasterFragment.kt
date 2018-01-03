@@ -6,11 +6,9 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
+import android.support.v7.app.AppCompatActivity
 import android.util.TypedValue
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -45,7 +43,11 @@ class MasterFragment : Fragment(), MasterContract.View {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.master_fragment, container, false)!!
+
         binding.toolbar.title = feedItem.name
+        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true);
+        (activity as AppCompatActivity).supportActionBar?.setDisplayShowHomeEnabled(true);
 
         setupMap()
         setupWorkers()

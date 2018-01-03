@@ -6,6 +6,7 @@ import android.support.annotation.VisibleForTesting
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import android.view.MenuItem
 import android.view.View
 import com.utrobin.luna.R
 import com.utrobin.luna.databinding.ActivityMainBinding
@@ -114,6 +115,18 @@ class MainActivity : AppCompatActivity() {
         } else {
             binding.container.visibility = View.VISIBLE
             binding.progressBar.visibility = View.GONE
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {  // Returning from masterScreen
+                supportFragmentManager.popBackStack()
+                currentFragment = previousFragment
+                previousFragment = null
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
