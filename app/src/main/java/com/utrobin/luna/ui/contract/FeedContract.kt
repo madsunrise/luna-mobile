@@ -1,7 +1,7 @@
 package com.utrobin.luna.ui.contract
 
 import com.utrobin.luna.model.FeedItem
-import com.utrobin.luna.ui.utils.NetworkError
+import com.utrobin.luna.network.NetworkError
 
 /**
  * Created by ivan on 04.11.2017.

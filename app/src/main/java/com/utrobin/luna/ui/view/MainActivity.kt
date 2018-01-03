@@ -6,7 +6,6 @@ import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import com.utrobin.luna.App
 import com.utrobin.luna.R
 import com.utrobin.luna.databinding.ActivityMainBinding
 import com.utrobin.luna.model.FeedItem
@@ -56,7 +55,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)!!
 
-        App.component.injectsMainActivity(this)
         binding.bottomNavigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
 
         savedInstanceState?.let {

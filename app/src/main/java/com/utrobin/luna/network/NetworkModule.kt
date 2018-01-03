@@ -9,8 +9,13 @@ import dagger.Provides
 
 @Module
 class NetworkModule {
+
     @Provides
-    internal fun provideNetworkService(): NetworkService {
-        return NetworkService()
+    fun provideGraphQLService(): GraphQLService {
+        return GraphQLService()
+    }
+
+    companion object {
+        const val BASE_URL = "https://utrobin.com/api/"
     }
 }

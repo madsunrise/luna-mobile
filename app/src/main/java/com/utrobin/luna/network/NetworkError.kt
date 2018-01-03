@@ -1,4 +1,4 @@
-package com.utrobin.luna.ui.utils
+package com.utrobin.luna.network
 
 /**
  * Created by ivan on 04.11.2017.

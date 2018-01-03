@@ -7,17 +7,26 @@ import com.utrobin.luna.model.Address
 import com.utrobin.luna.model.FeedItem
 import com.utrobin.luna.model.Photo
 import com.utrobin.luna.model.Sign
+import com.utrobin.luna.network.GraphQLService
+import com.utrobin.luna.network.NetworkError
 import com.utrobin.luna.ui.contract.FeedContract
-import com.utrobin.luna.ui.utils.NetworkError
 import com.utrobin.luna.utils.LogUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
 /**
  * Created by ivan on 04.11.2017.
  */
 
 class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter {
+
+    @Inject
+    lateinit var graphQLService: GraphQLService
+
+    init {
+        App.component.injectsFeedPresenter(this)
+    }
 
     override fun onItemClicked(item: FeedItem) {
         view?.navigateMasterScreen(item)
@@ -29,7 +38,7 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
                 .limit(10)
                 .build()
 
-        val apolloCall = App.apolloClient.query(query)
+        val apolloCall = graphQLService.apolloClient.query(query)
         Rx2Apollo.from(apolloCall)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

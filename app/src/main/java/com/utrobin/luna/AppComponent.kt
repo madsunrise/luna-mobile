@@ -1,7 +1,7 @@
 package com.utrobin.luna
 
 import com.utrobin.luna.network.NetworkModule
-import com.utrobin.luna.ui.view.MainActivity
+import com.utrobin.luna.ui.presenter.FeedPresenter
 import dagger.Component
 
 
@@ -9,7 +9,7 @@ import dagger.Component
  * Created by ivan on 31.10.2017.
  */
 
-@Component(modules = arrayOf(NetworkModule::class))
+@Component(modules = [NetworkModule::class])
 interface AppComponent {
-    fun injectsMainActivity(mainActivity: MainActivity)
+    fun injectsFeedPresenter(presenter: FeedPresenter)
 }
