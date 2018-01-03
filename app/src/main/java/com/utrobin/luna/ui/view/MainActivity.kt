@@ -2,6 +2,7 @@ package com.utrobin.luna.ui.view
 
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.annotation.VisibleForTesting
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
@@ -116,6 +117,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @VisibleForTesting
+    fun getFeedItems() = feedFragment.getFeedItems()
 
     companion object {
         private val FRAGMENT_TAG = "FRAGMENT_TAG"

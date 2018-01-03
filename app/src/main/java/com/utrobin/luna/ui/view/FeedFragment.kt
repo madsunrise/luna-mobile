@@ -2,6 +2,7 @@ package com.utrobin.luna.ui.view
 
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.annotation.VisibleForTesting
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -99,6 +100,9 @@ class FeedFragment : Fragment(), FeedContract.View {
         super.onDestroy()
         presenter.detachView()
     }
+
+    @VisibleForTesting
+    fun getFeedItems() = feedAdapter.items
 
     companion object {
         fun getInstance() = FeedFragment()
