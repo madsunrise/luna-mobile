@@ -16,6 +16,7 @@
 
         <!-- header -->
         <LinearLayout
+            android:id="@+id/header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -68,10 +69,11 @@
             android:layout_height="@dimen/feed_image_slider_height" />
 
 
-        <!-- Buttons -->
+        <!-- Footer -->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/feed_item_bottom_bar_height"
+            android:layout_marginTop="@dimen/feed_item_bottom_bar_margin_top"
             android:paddingLeft="@dimen/feed_item_bottom_bar_horizontal_padding"
             android:paddingRight="@dimen/feed_item_bottom_bar_horizontal_padding">
 
@@ -83,10 +85,10 @@
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:gravity="center_vertical"
-                android:drawablePadding="4dp"
+                android:drawablePadding="5dp"
                 android:drawableStart="@drawable/ic_star_black_24dp"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size_body" />
+                android:textSize="@dimen/text_size_subheading" />
 
 
             <!-- Image slider dots -->

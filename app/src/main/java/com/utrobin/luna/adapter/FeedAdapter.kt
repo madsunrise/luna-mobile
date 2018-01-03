@@ -36,7 +36,7 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter(ArrayList(items))
     override fun bindYourViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = items[position]
         val context = (holder as ItemViewHolder).itemView.context
-        holder.itemView.setOnClickListener { viewClickSubject.onNext(item) }
+        holder.header.setOnClickListener { viewClickSubject.onNext(item) }
 
         holder.name.text = "${item.name} #$position"
         holder.location.text = item.address.description
@@ -108,6 +108,7 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter(ArrayList(items))
     }
 
     inner class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val header: View = view.findViewById(R.id.header)
         val name: TextView = view.findViewById(R.id.name)
         val location: TextView = view.findViewById(R.id.location)
         val avatar: CircleImageView = view.findViewById(R.id.avatar)
