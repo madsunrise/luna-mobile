@@ -1,10 +1,11 @@
 package com.utrobin.luna.ui.view
 
 import android.databinding.DataBindingUtil
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
-import android.support.v7.widget.Toolbar
+import android.support.v4.view.ViewPager
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -15,12 +16,14 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.utrobin.luna.R
+import com.utrobin.luna.adapter.ViewPagerAdapter
+import com.utrobin.luna.adapter.ViewPagerAdapter.Companion.addBottomDots
 import com.utrobin.luna.databinding.MasterFragmentBinding
 import com.utrobin.luna.model.FeedItem
 import com.utrobin.luna.ui.contract.MasterContract
 import com.utrobin.luna.utils.MapControllerWrapper
+import com.utrobin.luna.utils.svg.SvgModule
 import de.hdodenhof.circleimageview.CircleImageView
-import ru.yandex.yandexmapkit.MapView
 import ru.yandex.yandexmapkit.overlay.Overlay
 import ru.yandex.yandexmapkit.overlay.OverlayItem
 import ru.yandex.yandexmapkit.overlay.balloon.BalloonItem
@@ -31,88 +34,60 @@ import java.util.*
  * Created by ivan on 01.11.2017.
  */
 class MasterFragment : Fragment(), MasterContract.View {
-    private lateinit var mMapController: MapControllerWrapper
+    private lateinit var feedItem: FeedItem
 
     lateinit var binding: MasterFragmentBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.master_fragment, container, false)
-
-        binding = DataBindingUtil.inflate(inflater, R.layout.master_fragment, container, false)!!
-
-        Glide.with(this).load("http://wordprint.ru/attachments/Image/1.png?template=generic").into((view.findViewById(R.id.toolbar_image)))
-        val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
-        toolbar.title = "Jasmine"
-        Glide.with(this).load("http://100idey.ru/wp-content/uploads/2017/01/manikur6.jpg").into((view.findViewById(R.id.image)))
-
-        val cloud = ImageView(context)
-        //cloud.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_cloud_black_24dp))
-        val signSize = resources.getDimension(R.dimen.feed_signs_size).toInt()
-        val params = LinearLayout.LayoutParams(signSize, signSize)
-        params.setMargins(0, 0, resources.getDimension(R.dimen.feed_signs_margin_right).toInt(), 0)
-        cloud.layoutParams = params
-        view.findViewById<LinearLayout>(R.id.signs_container).addView(cloud)
-
-        val chat = ImageView(context)
-        //chat.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_chat_black_24dp))
-        chat.layoutParams = params
-        view.findViewById<LinearLayout>(R.id.signs_container).addView(chat)
-
-        val notification = ImageView(context)
-        // notification.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_notifications_black_24dp))
-        notification.layoutParams = params
-        view.findViewById<LinearLayout>(R.id.signs_container).addView(notification)
-
-        view.findViewById<TextView>(R.id.first_opinion_tv).setText("Vika: Была у Екатерины, хорошо сделала шеллак.")
-        view.findViewById<TextView>(R.id.see_all_opinions_tv).setText("Посмотреть все комментарии (42)")
-        view.findViewById<TextView>(R.id.initial_cost_tv).setText("Начальная стоимость от 400р")
-
-
-        view.findViewById<TextView>(R.id.address_tv).setText("Москва, Ленинградский проспект, 39c9")
-
-
-        enableMap(view)
-
-        addWorkers(view)
-
-        return view
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        feedItem = arguments?.getParcelable(FEED_ITEM_KEY) ?: throw NullPointerException("No arguments provided!")
     }
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = DataBindingUtil.inflate(inflater, R.layout.master_fragment, container, false)!!
+        binding.toolbar.title = feedItem.name
+
+        setupMap()
+        setupWorkers()
+        setupSigns()
+        setupOther()
+        setupViewPager()
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as MainActivity).showProgressBar(false)
     }
 
-    fun enableMap(view: View) {
-        val mapView = view.findViewById<MapView>(R.id.map)
-        mMapController = MapControllerWrapper(mapView)
-        mMapController.overlayManager.myLocation.isEnabled = false
+
+    private fun setupMap() {
+        val mapController = MapControllerWrapper(binding.map)
+        mapController.overlayManager.myLocation.isEnabled = false
+
 
         // Create a layer of objects for the map
-        val overlay = Overlay(mMapController.mapController)
+        val overlay = Overlay(mapController.mapController)
 
-        val point = GeoPoint(55.79694821, 37.53778351)
+        val point = GeoPoint(feedItem.address.lat, feedItem.address.lon)
         val icon = ContextCompat.getDrawable(context!!, R.drawable.ic_place_black_24dp)
         // Create an object for the layer
-        val yandex = OverlayItem(point, icon)
+        val item = OverlayItem(point, icon)
         // Create the balloon model for the object
-        val balloonYandex = BalloonItem(context, yandex.geoPoint)
-        balloonYandex.text = "Mail.ru Group"
-        // balloonYandex.setOnBalloonListener(context)
+        val baloon = BalloonItem(context, item.geoPoint)
+        baloon.text = feedItem.name
+        // baloon.setOnBalloonListener(context)
         // Add the balloon model to the object
-        yandex.balloonItem = balloonYandex
+        item.balloonItem = baloon
         // Add the object to the layer
-        overlay.addOverlayItem(yandex)
-        mMapController.setPositionAnimationTo(point, MapControllerWrapper.OPTIMAL_ZOOM)
+        overlay.addOverlayItem(item)
+        mapController.setPositionAnimationTo(point, MapControllerWrapper.OPTIMAL_ZOOM)
 
         // Add the layer to the map
-        mMapController.overlayManager.addOverlay(overlay)
-
+        mapController.overlayManager.addOverlay(overlay)
     }
 
-    private fun addWorkers(view: View) {
-        val container = view.findViewById<LinearLayout>(R.id.workers_container)
+    private fun setupWorkers() {
         val spaceBetween = resources.getDimension(R.dimen.master_space_between_workers).toInt();
 
         val size = resources.getDimension(R.dimen.master_worker_photo_size).toInt()
@@ -127,8 +102,8 @@ class MasterFragment : Fragment(), MasterContract.View {
 
 
         val padding = resources.getDimension(R.dimen.master_workers_container_padding_vertical).toInt()
-        container.setPadding(0, padding, 0, padding)
-        container.addView(first)
+        binding.workersContainer.setPadding(0, padding, 0, padding)
+        binding.workersContainer.addView(first)
         for (i in 0..10) {
             val worker = LinearLayout(context)
             val wrapperParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
@@ -155,8 +130,41 @@ class MasterFragment : Fragment(), MasterContract.View {
             workerName.gravity = Gravity.CENTER
             worker.addView(workerName)
 
-            container.addView(worker)
+            binding.workersContainer.addView(worker)
         }
+    }
+
+    private fun setupSigns() {
+        val requestBuilder = SvgModule.getGlideSvgRequestBuilder(context!!)
+        for (sign in feedItem.signs) {
+            val image = ImageView(context)
+            val signSize = context!!.resources.getDimension(R.dimen.feed_signs_size).toInt()
+            val params = LinearLayout.LayoutParams(signSize, signSize)
+            params.setMargins(0, 0, context!!.resources.getDimension(R.dimen.master_space_between_signs).toInt(), 0)
+            image.layoutParams = params
+            binding.signsContainer.addView(image)
+            requestBuilder?.load(Uri.parse(sign.photo.path))?.into(image);
+        }
+    }
+
+    private fun setupOther() {
+        binding.firstOpinionTv.text = "Vika: Была у Екатерины, хорошо сделала шеллак."
+        binding.seeAllOpinionsTv.text = "Посмотреть все комментарии (42)"
+        binding.initialCostTv.text = "Начальная стоимость от 400р"
+        binding.addressTv.text = feedItem.address.description
+    }
+
+    private fun setupViewPager() {
+        binding.pager.adapter = ViewPagerAdapter(context!!, feedItem.photos)
+        val totalPages = feedItem.photos.size
+        addBottomDots(binding.dotsContainer, 0, totalPages)
+        binding.pager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrollStateChanged(state: Int) {}
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
+            override fun onPageSelected(pagePosition: Int) {
+                addBottomDots(binding.dotsContainer, pagePosition, totalPages)
+            }
+        })
     }
 
 
@@ -200,6 +208,14 @@ class MasterFragment : Fragment(), MasterContract.View {
     )
 
     companion object {
-        fun getInstance(item: FeedItem) = MasterFragment()
+        fun getInstance(item: FeedItem): MasterFragment {
+            val bundle = Bundle()
+            bundle.putParcelable(FEED_ITEM_KEY, item)
+            val fragment = MasterFragment()
+            fragment.arguments = bundle
+            return fragment
+        }
+
+        private const val FEED_ITEM_KEY = "FEED_ITEM_KEY"
     }
 }
