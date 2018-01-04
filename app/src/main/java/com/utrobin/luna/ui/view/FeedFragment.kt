@@ -50,9 +50,12 @@ class FeedFragment : Fragment(), FeedContract.View {
             initializeAdapter()
         }
         setUpRecyclerView()
-        binding.swipeRefreshLayout.setOnRefreshListener {
-            (activity as MainActivity).showProgressBar(true)
-            presenter.loadInitialData()
+        binding.mainContainerSwipeToRefresh.setOnRefreshListener {
+            requestDataUpdate()
+        }
+
+        binding.repeatBtn.setOnClickListener {
+            requestDataUpdate()
         }
     }
 
@@ -60,12 +63,14 @@ class FeedFragment : Fragment(), FeedContract.View {
         (activity as MainActivity).showProgressBar(false)
         isDataLoading = false
         feedAdapter.addItems(newItems)
-        binding.swipeRefreshLayout.isRefreshing = false
+        binding.mainContainerSwipeToRefresh.isRefreshing = false
     }
 
     override fun dataLoadingFailed(reason: NetworkError) {
-        Toast.makeText(context, R.string.error_has_occured, Toast.LENGTH_SHORT).show()
-        binding.swipeRefreshLayout.isRefreshing = false
+        (activity as MainActivity).showProgressBar(false)
+        binding.errorContainer.visibility = View.VISIBLE
+        binding.mainContainerSwipeToRefresh.visibility = View.GONE
+        binding.mainContainerSwipeToRefresh.isRefreshing = false
     }
 
     private fun initializeAdapter() {
@@ -73,6 +78,11 @@ class FeedFragment : Fragment(), FeedContract.View {
         feedAdapter.viewClickSubject.subscribe { presenter.onItemClicked(it) }
         presenter.loadInitialData()
         adapterInitialized = true
+    }
+
+    private fun requestDataUpdate() {
+        (activity as MainActivity).showProgressBar(true)
+        presenter.loadInitialData()
     }
 
     private fun setUpRecyclerView() {

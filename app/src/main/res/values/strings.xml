@@ -4,4 +4,6 @@
     <string name="map">Map</string>
     <string name="account">Account</string>
     <string name="error_has_occured">Произошла ошибка</string>
+    <string name="repeat">Повторить</string>
+    <string name="error_has_occured_while_data_loading">Произошла ошибка при загрузке данных</string>
 </resources>
