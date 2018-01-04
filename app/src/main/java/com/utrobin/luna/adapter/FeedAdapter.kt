@@ -16,12 +16,14 @@ import com.utrobin.luna.adapter.ViewPagerAdapter.Companion.addBottomDots
 import com.utrobin.luna.model.FeedItem
 import com.utrobin.luna.utils.svg.SvgModule
 import de.hdodenhof.circleimageview.CircleImageView
+import io.reactivex.subjects.PublishSubject
 
 /**
  * Created by ivan on 31.10.2017.
  */
 
 class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter(ArrayList(items)) {
+    val bookmarkClickSubject: PublishSubject<FeedItem> = PublishSubject.create<FeedItem>()
 
     override fun getYourItemViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
         val itemView = LayoutInflater.from(parent.context)
@@ -32,7 +34,9 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter(ArrayList(items))
     override fun bindYourViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = items[position]
         val context = (holder as ItemViewHolder).itemView.context
+
         holder.header.setOnClickListener { viewClickSubject.onNext(item) }
+        holder.bookmark.setOnClickListener { bookmarkClickSubject.onNext(item) }
 
         holder.name.text = "${item.name} #$position"
         holder.location.text = item.address.description
@@ -85,6 +89,7 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter(ArrayList(items))
         val dotsContainer: LinearLayout = view.findViewById(R.id.dots_container)
         val signsContainer: LinearLayout = view.findViewById(R.id.signs_container)
         val rating: TextView = view.findViewById(R.id.rating)
+        val bookmark: ImageView = view.findViewById(R.id.bookmark)
     }
 
     override fun getYourItemId(position: Int) = items[position].hashCode().toLong()

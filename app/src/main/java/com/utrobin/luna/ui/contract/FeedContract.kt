@@ -20,5 +20,6 @@ interface FeedContract {
         fun onItemClicked(item: FeedItem)
         fun loadInitialData()
         fun loadMore(page: Int)
+        fun onBookmarkClicked(item: FeedItem)
     }
 }

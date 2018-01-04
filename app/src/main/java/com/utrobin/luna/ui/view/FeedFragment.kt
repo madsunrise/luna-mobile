@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.utrobin.luna.R
 import com.utrobin.luna.adapter.FeedAdapter
-import com.utrobin.luna.adapter.FooterLoaderAdapter
 import com.utrobin.luna.databinding.FeedFragmentBinding
 import com.utrobin.luna.model.FeedItem
 import com.utrobin.luna.network.NetworkError
@@ -26,7 +25,7 @@ import com.utrobin.luna.ui.utils.EndlessRecyclerOnScrollListener
 
 class FeedFragment : Fragment(), FeedContract.View {
 
-    private lateinit var feedAdapter: FooterLoaderAdapter
+    private lateinit var feedAdapter: FeedAdapter
     private var adapterInitialized = false
     private var isDataLoading = false
 
@@ -76,6 +75,10 @@ class FeedFragment : Fragment(), FeedContract.View {
     private fun initializeAdapter() {
         feedAdapter = FeedAdapter(ArrayList())
         feedAdapter.viewClickSubject.subscribe { presenter.onItemClicked(it) }
+        feedAdapter.bookmarkClickSubject.subscribe {
+            Toast.makeText(context, "Bookmark clicked for ${it.name}", Toast.LENGTH_SHORT).show()
+            presenter.onBookmarkClicked(it)
+        }
         presenter.loadInitialData()
         adapterInitialized = true
     }
