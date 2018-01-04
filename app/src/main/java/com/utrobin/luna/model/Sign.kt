@@ -8,13 +8,13 @@ import com.utrobin.luna.FeedQuery
  * Created by ivan on 02.01.2018.
  */
 
-data class Sign(val name: String, val description: String, val photo: Photo) : Parcelable {
-    constructor(sign: FeedQuery.Sign) : this(sign.name()!!, sign.description()!!, Photo(sign.photo()!!))
+data class Sign(val name: String, val description: String, val icon: String) : Parcelable {
+    constructor(sign: FeedQuery.Sign) : this(sign.name()!!, sign.description()!!, sign.icon()!!)
 
     override fun writeToParcel(parcel: Parcel, i: Int) {
         parcel.writeString(name)
         parcel.writeString(description)
-        parcel.writeParcelable(photo, 0)
+        parcel.writeString(icon)
     }
 
     override fun describeContents() = 0
@@ -22,7 +22,7 @@ data class Sign(val name: String, val description: String, val photo: Photo) : P
     constructor(parcel: Parcel) : this(
             parcel.readString(),
             parcel.readString(),
-            parcel.readParcelable<Photo>(Photo::class.java.classLoader)
+            parcel.readString()
     )
 
     companion object {

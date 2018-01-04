@@ -240,10 +240,10 @@
               "deprecationReason": "",
               "description": "",
               "isDeprecated": false,
-              "name": "photo",
+              "name": "icon",
               "type": {
-                "kind": "OBJECT",
-                "name": "PhotoObject",
+                "kind": "SCALAR",
+                "name": "String",
                 "ofType": null
               }
             }

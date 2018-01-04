@@ -28,10 +28,7 @@ query Feed($limit: Int!) {
             id
             name
             description
-            photo {
-                id
-                path
-            }
+            icon
         }
     }
 }

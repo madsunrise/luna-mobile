@@ -145,7 +145,7 @@ class MasterFragment : Fragment(), MasterContract.View {
             params.setMargins(0, 0, context!!.resources.getDimension(R.dimen.master_space_between_signs).toInt(), 0)
             image.layoutParams = params
             binding.signsContainer.addView(image)
-            requestBuilder?.load(Uri.parse(sign.photo.path))?.into(image);
+            requestBuilder?.load(Uri.parse(sign.icon))?.into(image);
         }
     }
 
