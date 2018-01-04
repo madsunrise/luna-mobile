@@ -13,7 +13,7 @@ import okio.Buffer
  * Created by ivan on 31.10.2017.
  */
 
-class GraphQLService() {
+class GraphQLService {
     val apolloClient: ApolloClient
 
     private val apolloRequestInterceptor = Interceptor { chain ->
@@ -39,37 +39,7 @@ class GraphQLService() {
                 .post(RequestBody.create(originalRequest.body()?.contentType(), requestString))
                 .build()
 
-
-        val originalResponse = chain.proceed(newRequest)
-
-        if (!originalResponse.isSuccessful) {
-            return@Interceptor originalResponse // just forwarding
-        }
-
-        originalResponse.body()?.let { body ->
-            val json = originalResponse.body()?.string()
-
-            if (gson.fromJson<ResponseCode>(json, ResponseCode::class.java).code != 200) {
-                return@Interceptor originalResponse  // just forwarding
-            }
-
-            val model = gson.fromJson<TransformedResponse>(json, TransformedResponse::class.java)
-            val newJson = gson.toJson(model)
-
-            val contentType = body.contentType()
-            val newBody = ResponseBody.create(contentType, newJson)
-            originalResponse.newBuilder().body(newBody).build()
-        } ?: throw NotImplementedError()
-    }
-
-    inner class ResponseCode {
-        @SerializedName("code")
-        var code: Int = 0
-    }
-
-    inner class TransformedResponse {
-        @SerializedName(value = "data", alternate = arrayOf("body"))
-        lateinit var data: JsonElement
+        return@Interceptor chain.proceed(newRequest)
     }
 
     inner class Variables {
