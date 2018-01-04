@@ -45,15 +45,19 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter(ArrayList(items))
         // Signs
         val requestBuilder = SvgModule.getGlideSvgRequestBuilder(context)
         holder.signsContainer.removeAllViews()
-        for (sign in item.signs) {
-            val image = ImageView(context)
-            val signSize = context.resources.getDimension(R.dimen.feed_signs_size).toInt()
-            val params = LinearLayout.LayoutParams(signSize, signSize)
-            params.setMargins(0, 0, context.resources.getDimension(R.dimen.feed_space_between_signs).toInt(), 0)
-            image.layoutParams = params
-            holder.signsContainer.addView(image)
+        if (item.signs.isEmpty()) {
+            holder.signsContainer.visibility = View.GONE
+        } else {
+            for (sign in item.signs) {
+                val image = ImageView(context)
+                val signSize = context.resources.getDimension(R.dimen.feed_signs_size).toInt()
+                val params = LinearLayout.LayoutParams(signSize, signSize)
+                params.setMargins(0, 0, context.resources.getDimension(R.dimen.feed_space_between_signs).toInt(), 0)
+                image.layoutParams = params
+                holder.signsContainer.addView(image)
 
-            requestBuilder?.load(Uri.parse(sign.photo.path))?.into(image);
+                requestBuilder?.load(Uri.parse(sign.icon))?.into(image);
+            }
         }
 
         // Photos slider
