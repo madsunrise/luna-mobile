@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -85,7 +86,7 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter(ArrayList(items))
         holder.rating.text = item.stars.toString()
     }
 
-    private fun setBookmarkDrawable(item: FeedItem, image: ImageView) {
+    private fun setBookmarkDrawable(item: FeedItem, image: ImageButton) {
         if (item.isFavorite) {
             image.setImageDrawable(ContextCompat.getDrawable(image.context, R.drawable.ic_bookmark_black_24dp))
         } else {
@@ -103,7 +104,7 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter(ArrayList(items))
         val dotsContainer: LinearLayout = view.findViewById(R.id.dots_container)
         val signsContainer: LinearLayout = view.findViewById(R.id.signs_container)
         val rating: TextView = view.findViewById(R.id.rating)
-        val bookmark: ImageView = view.findViewById(R.id.bookmark)
+        val bookmark: ImageButton = view.findViewById(R.id.bookmark)
     }
 
     override fun getYourItemId(position: Int) = items[position].hashCode().toLong()

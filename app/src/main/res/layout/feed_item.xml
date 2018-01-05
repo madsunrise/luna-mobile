@@ -85,9 +85,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:gravity="center_vertical"
                 android:drawablePadding="5dp"
                 android:drawableStart="@drawable/ic_star_black_24dp"
+                android:gravity="center_vertical"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_subheading" />
 
@@ -97,21 +97,22 @@
                 android:id="@+id/dots_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="5dp"
+                android:gravity="center"
                 android:orientation="horizontal" />
 
 
             <!-- Bookmark -->
-            <ImageView
+
+            <ImageButton
                 android:id="@+id/bookmark"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
                 android:layout_centerInParent="true"
-                android:clickable="true"
-                android:focusable="true"
-                android:layout_gravity="center_vertical"
+                android:background="?android:selectableItemBackground"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp"
                 android:src="@drawable/ic_bookmark_border_black_24dp"
                 tools:ignore="contentDescription" />
         </RelativeLayout>
