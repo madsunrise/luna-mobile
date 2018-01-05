@@ -22,7 +22,7 @@
         </android.support.v7.widget.Toolbar>
 
 
-        <android.support.v4.widget.NestedScrollView
+        <com.emilsjolander.components.StickyScrollViewItems.StickyScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
@@ -118,9 +118,10 @@
                     android:layout_height="wrap_content"
                     android:background="@color/gray_background_5"
                     android:paddingBottom="@dimen/master_initial_cost_vertical_padding"
-                    android:paddingLeft="@dimen/master_initial_cost_horizontal_padding"
-                    android:paddingRight="@dimen/master_initial_cost_horizontal_padding"
-                    android:paddingTop="@dimen/master_initial_cost_vertical_padding">
+                    android:paddingLeft="@dimen/master_side_elements_padding"
+                    android:paddingRight="@dimen/master_side_elements_padding"
+                    android:paddingTop="@dimen/master_initial_cost_vertical_padding"
+                    android:tag="sticky">
 
                     <TextView
                         android:id="@+id/initial_cost_tv"
@@ -141,8 +142,6 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginStart="10dp"
                         android:text="Виды маникюра"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_body" />
@@ -184,9 +183,9 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="100dp" />
+                    android:layout_height="700dp" />
 
             </LinearLayout>
-        </android.support.v4.widget.NestedScrollView>
+        </com.emilsjolander.components.StickyScrollViewItems.StickyScrollView>
     </LinearLayout>
 </layout>

@@ -84,6 +84,9 @@ dependencies {
     implementation 'com.caverock:androidsvg:1.2.1'
 
     // LeakCanary
-    debugCompile "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
-    releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+
+    // Sticky ScrollView
+    implementation 'se.emilsjolander:StickyScrollViewItems:1.1.0'
 }
