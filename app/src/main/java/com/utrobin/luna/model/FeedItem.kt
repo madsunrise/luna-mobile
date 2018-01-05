@@ -12,7 +12,8 @@ data class FeedItem(val name: String,
                     val address: Address,
                     val stars: Double,
                     val signs: List<Sign> = ArrayList(),
-                    val photos: List<Photo> = ArrayList()
+                    val photos: List<Photo> = ArrayList(),
+                    var isFavorite: Boolean = false
 ) : Parcelable {
 
     override fun writeToParcel(parcel: Parcel, i: Int) {

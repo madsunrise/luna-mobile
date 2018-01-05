@@ -3,12 +3,12 @@ package com.utrobin.luna.ui.view
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.annotation.VisibleForTesting
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.utrobin.luna.R
 import com.utrobin.luna.adapter.FeedAdapter
 import com.utrobin.luna.databinding.FeedFragmentBinding
@@ -58,10 +58,15 @@ class FeedFragment : Fragment(), FeedContract.View {
         }
     }
 
-    override fun dataLoaded(newItems: List<FeedItem>) {
+    override fun dataLoaded(newItems: List<FeedItem>, append: Boolean) {
         (activity as MainActivity).showProgressBar(false)
         isDataLoading = false
-        feedAdapter.addItems(newItems)
+        if (append) {
+            feedAdapter.addItems(newItems)
+        } else {
+            feedAdapter.setItems(newItems)  // Full list update
+            onScrollListener.resetVariables()
+        }
         binding.mainContainerSwipeToRefresh.isRefreshing = false
     }
 
@@ -76,7 +81,6 @@ class FeedFragment : Fragment(), FeedContract.View {
         feedAdapter = FeedAdapter(ArrayList())
         feedAdapter.viewClickSubject.subscribe { presenter.onItemClicked(it) }
         feedAdapter.bookmarkClickSubject.subscribe {
-            Toast.makeText(context, "Bookmark clicked for ${it.name}", Toast.LENGTH_SHORT).show()
             presenter.onBookmarkClicked(it)
         }
         presenter.loadInitialData()
@@ -92,27 +96,35 @@ class FeedFragment : Fragment(), FeedContract.View {
         val recyclerView = binding.feedRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = feedAdapter
-        recyclerView.addOnScrollListener(object : EndlessRecyclerOnScrollListener(
+        onScrollListener = object : EndlessRecyclerOnScrollListener(
                 adapter = feedAdapter,
                 linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager) {
-            override fun onLoadMore(currentPage: Int) {
+            override fun onLoadMore(currentPage: Int): Boolean {
                 if (isDataLoading) {
-                    return
+                    return false
                 }
                 isDataLoading = true
                 presenter.loadMore(currentPage)
+                return true
             }
-        })
+        }
+        recyclerView.addOnScrollListener(onScrollListener)
     }
 
     override fun navigateMasterScreen(item: FeedItem) {
         (activity as MainActivity).openMasterScreen(item)
     }
 
+    override fun showSnackBar(text: Int, length: Int) {
+        Snackbar.make(binding.mainContainerSwipeToRefresh, text, length).show()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         presenter.detachView()
     }
+
+    private lateinit var onScrollListener: EndlessRecyclerOnScrollListener
 
     @VisibleForTesting
     fun getFeedItems() = feedAdapter.items

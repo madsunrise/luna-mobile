@@ -17,7 +17,15 @@ abstract class EndlessRecyclerOnScrollListener(
     private var firstVisibleItem: Int = 0
     private var visibleItemCount: Int = 0
     private var totalItemCount: Int = 0
-    private var currentPage = 1
+    private var currentPage = 2    // Первая страница загрузилась при запуске
+
+    fun resetVariables() {
+        previousTotal = 0
+        firstVisibleItem = 0
+        visibleItemCount = 0
+        totalItemCount = 0
+        currentPage = 2
+    }
 
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
         super.onScrolled(recyclerView, dx, dy)
@@ -33,10 +41,16 @@ abstract class EndlessRecyclerOnScrollListener(
             }
         }
         if (!adapter.loading && totalItemCount - visibleItemCount <= firstVisibleItem + visibleThreshold) {
-            onLoadMore(currentPage++)
+            if (onLoadMore(currentPage)) {
+                currentPage++
+            }
             adapter.loading = true
         }
     }
 
-    abstract fun onLoadMore(currentPage: Int)
+    /**
+     * @currentPage - страница, которую надо загрузить
+     * @return true если загрузка началась и false, если нет (например, загрузка и так идет)
+     */
+    abstract fun onLoadMore(currentPage: Int): Boolean
 }

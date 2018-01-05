@@ -3,6 +3,7 @@ package com.utrobin.luna.ui.presenter
 import com.apollographql.apollo.rx2.Rx2Apollo
 import com.utrobin.luna.App
 import com.utrobin.luna.FeedQuery
+import com.utrobin.luna.R
 import com.utrobin.luna.model.Address
 import com.utrobin.luna.model.FeedItem
 import com.utrobin.luna.model.Photo
@@ -33,6 +34,10 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
     }
 
     override fun loadInitialData() {
+        loadMore(1)
+    }
+
+    override fun loadMore(page: Int) {
         val query = FeedQuery
                 .builder()
                 .limit(10)
@@ -43,7 +48,12 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        { it.data()?.feed()?.let { parseFeed(it) } ?: view?.dataLoadingFailed(NetworkError.UNKNOWN) },
+                        {
+                            it.data()?.feed()?.let {
+                                val parsed = parseFeed(it)
+                                view?.dataLoaded(newItems = parsed, append = page != 1)
+                            } ?: view?.dataLoadingFailed(NetworkError.UNKNOWN)
+                        },
                         {
                             LogUtils.logException(FeedPresenter::class.java, it)
                             view?.dataLoadingFailed(NetworkError.UNKNOWN)
@@ -52,7 +62,7 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
     }
 
 
-    private fun parseFeed(queryList: List<FeedQuery.Feed>) {
+    private fun parseFeed(queryList: List<FeedQuery.Feed>): List<FeedItem> {
         val data = ArrayList<FeedItem>()
         for (queryItem in queryList) {
             val name = queryItem.name() ?: continue
@@ -73,16 +83,16 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
             val item = FeedItem(name, avatar, address, stars, signs, photos)
             data.add(item)
         }
-        view?.dataLoaded(data)
-    }
-
-    override fun loadMore(page: Int) {
-        loadInitialData()
+        return data
     }
 
 
     override fun onBookmarkClicked(item: FeedItem) {
-
+        if (item.isFavorite) {
+            view?.showSnackBar(R.string.added_to_favorites)
+        } else {
+            view?.showSnackBar(R.string.removed_from_favorites)
+        }
     }
 
     override fun destroy() {

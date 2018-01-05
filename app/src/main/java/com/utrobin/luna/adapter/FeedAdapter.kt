@@ -36,9 +36,15 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter(ArrayList(items))
         val context = (holder as ItemViewHolder).itemView.context
 
         holder.header.setOnClickListener { viewClickSubject.onNext(item) }
-        holder.bookmark.setOnClickListener { bookmarkClickSubject.onNext(item) }
 
-        holder.name.text = "${item.name} #$position"
+        setBookmarkDrawable(item, holder.bookmark)
+        holder.bookmark.setOnClickListener {
+            item.isFavorite = !item.isFavorite
+            setBookmarkDrawable(item, holder.bookmark)
+            bookmarkClickSubject.onNext(item)
+        }
+
+        holder.name.text = item.name
         holder.location.text = item.address.description
 
         // Avatar
@@ -77,6 +83,14 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter(ArrayList(items))
         })
 
         holder.rating.text = item.stars.toString()
+    }
+
+    private fun setBookmarkDrawable(item: FeedItem, image: ImageView) {
+        if (item.isFavorite) {
+            image.setImageDrawable(ContextCompat.getDrawable(image.context, R.drawable.ic_bookmark_black_24dp))
+        } else {
+            image.setImageDrawable(ContextCompat.getDrawable(image.context, R.drawable.ic_bookmark_border_black_24dp))
+        }
     }
 
 
