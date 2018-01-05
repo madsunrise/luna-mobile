@@ -83,19 +83,10 @@
                     android:orientation="horizontal"
                     android:padding="10dp" />
 
-                <!-- Photos -->
-                <android.support.v4.view.ViewPager
-                    android:id="@+id/pager"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/master_image_slider_height" />
+                <include
+                    android:id="@+id/included"
+                    layout="@layout/image_slider_with_footer" />
 
-                <!-- Image slider dots -->
-                <LinearLayout
-                    android:id="@+id/dots_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:gravity="center"
-                    android:orientation="horizontal" />
 
                 <!-- opinions -->
                 <LinearLayout

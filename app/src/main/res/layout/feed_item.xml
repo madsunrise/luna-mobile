@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -63,59 +62,6 @@
             android:padding="@dimen/feed_signs_container_padding" />
 
 
-        <!-- Photos -->
-        <android.support.v4.view.ViewPager
-            android:id="@+id/pager"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/feed_image_slider_height" />
-
-
-        <!-- Footer -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/feed_item_bottom_bar_height"
-            android:layout_marginTop="@dimen/feed_item_bottom_bar_margin_top"
-            android:paddingLeft="@dimen/feed_item_bottom_bar_horizontal_padding"
-            android:paddingRight="@dimen/feed_item_bottom_bar_horizontal_padding">
-
-            <!-- Stars -->
-            <TextView
-                android:id="@+id/rating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:drawablePadding="5dp"
-                android:drawableStart="@drawable/ic_star_black_24dp"
-                android:gravity="center_vertical"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_subheading" />
-
-
-            <!-- Image slider dots -->
-            <LinearLayout
-                android:id="@+id/dots_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:gravity="center"
-                android:orientation="horizontal" />
-
-
-            <!-- Bookmark -->
-
-            <ImageButton
-                android:id="@+id/bookmark"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentEnd="true"
-                android:layout_centerInParent="true"
-                android:background="?android:selectableItemBackground"
-                android:paddingEnd="10dp"
-                android:paddingStart="10dp"
-                android:src="@drawable/ic_bookmark_border_black_24dp"
-                tools:ignore="contentDescription" />
-        </RelativeLayout>
-
+        <include layout="@layout/image_slider_with_footer" />
     </LinearLayout>
 </android.support.v7.widget.CardView>

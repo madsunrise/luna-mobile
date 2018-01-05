@@ -160,14 +160,14 @@ class MasterFragment : Fragment(), MasterContract.View {
     }
 
     private fun setupViewPager() {
-        binding.pager.adapter = ViewPagerAdapter(context!!, feedItem.photos)
+        binding.included?.pager?.adapter = ViewPagerAdapter(context!!, feedItem.photos)
         val totalPages = feedItem.photos.size
-        addBottomDots(binding.dotsContainer, 0, totalPages)
-        binding.pager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+        addBottomDots(binding.included!!.dotsContainer, 0, totalPages)
+        binding.included?.pager?.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {}
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
             override fun onPageSelected(pagePosition: Int) {
-                addBottomDots(binding.dotsContainer, pagePosition, totalPages)
+                addBottomDots(binding.included!!.dotsContainer, pagePosition, totalPages)
             }
         })
     }
