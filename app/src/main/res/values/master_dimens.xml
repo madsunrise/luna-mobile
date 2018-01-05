@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="master_side_elements_padding">10dp</dimen>
     <dimen name="master_map_height">100dp</dimen>
     <dimen name="master_workers_container_padding_vertical">10dp</dimen>
     <dimen name="master_worker_border_width">1dp</dimen>
@@ -10,6 +11,5 @@
     <dimen name="master_main_image_height">120dp</dimen>
     <dimen name="master_schedule_height">200dp</dimen>
     <dimen name="master_initial_cost_vertical_padding">10dp</dimen>
-    <dimen name="master_initial_cost_horizontal_padding">10dp</dimen>
     <dimen name="master_image_slider_height">240dp</dimen>
 </resources>

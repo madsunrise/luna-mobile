@@ -83,7 +83,7 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter(ArrayList(items))
             }
         })
 
-        holder.rating.text = item.stars.toString()
+        holder.stars.text = item.stars.toString()
     }
 
     private fun setBookmarkDrawable(item: FeedItem, image: ImageButton) {
@@ -103,7 +103,7 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter(ArrayList(items))
         val viewPager: ViewPager = view.findViewById(R.id.pager)
         val dotsContainer: LinearLayout = view.findViewById(R.id.dots_container)
         val signsContainer: LinearLayout = view.findViewById(R.id.signs_container)
-        val rating: TextView = view.findViewById(R.id.rating)
+        val stars: TextView = view.findViewById(R.id.stars)
         val bookmark: ImageButton = view.findViewById(R.id.bookmark)
     }
 
