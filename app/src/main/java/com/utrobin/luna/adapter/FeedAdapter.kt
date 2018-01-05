@@ -54,11 +54,12 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter(ArrayList(items))
                 ?: holder.avatar.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.no_avatar))
 
         // Signs
-        val requestBuilder = SvgModule.getGlideSvgRequestBuilder(context)
         holder.signsContainer.removeAllViews()
         if (item.signs.isEmpty()) {
             holder.signsContainer.visibility = View.GONE
         } else {
+            holder.signsContainer.visibility = View.VISIBLE
+            val requestBuilder = SvgModule.getGlideSvgRequestBuilder(context)
             for (sign in item.signs) {
                 val image = ImageView(context)
                 val signSize = context.resources.getDimension(R.dimen.feed_signs_size).toInt()
