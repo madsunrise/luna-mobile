@@ -16,6 +16,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.utrobin.luna.R
 import com.utrobin.luna.adapter.ViewPagerAdapter
 import com.utrobin.luna.adapter.ViewPagerAdapter.Companion.addBottomDots
@@ -24,7 +25,6 @@ import com.utrobin.luna.model.FeedItem
 import com.utrobin.luna.ui.contract.MasterContract
 import com.utrobin.luna.utils.MapControllerWrapper
 import com.utrobin.luna.utils.svg.SvgModule
-import de.hdodenhof.circleimageview.CircleImageView
 import ru.yandex.yandexmapkit.overlay.Overlay
 import ru.yandex.yandexmapkit.overlay.OverlayItem
 import ru.yandex.yandexmapkit.overlay.balloon.BalloonItem
@@ -99,16 +99,19 @@ class MasterFragment : Fragment(), MasterContract.View {
         val params = LinearLayout.LayoutParams(size, size)
         params.setMargins(spaceBetween, 0, spaceBetween, 0)
 
-        val first = CircleImageView(context)
-        first.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.all))
-        first.layoutParams = params
-        first.borderColor = ContextCompat.getColor(context!!, R.color.black)
-        first.borderWidth = resources.getDimension(R.dimen.master_worker_border_width).toInt()
+        val allWorkers = ImageView(context)
+        allWorkers.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.all))
+        allWorkers.layoutParams = params
 
+        Glide
+                .with(context)
+                .load(R.drawable.all)
+                .apply(RequestOptions.circleCropTransform())
+                .into(allWorkers)
 
         val padding = resources.getDimension(R.dimen.master_workers_container_padding_vertical).toInt()
         binding.workersContainer.setPadding(0, padding, 0, padding)
-        binding.workersContainer.addView(first)
+        binding.workersContainer.addView(allWorkers)
         for (i in 0..10) {
             val worker = LinearLayout(context)
             val wrapperParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
@@ -117,14 +120,13 @@ class MasterFragment : Fragment(), MasterContract.View {
             worker.orientation = LinearLayout.VERTICAL
 
 
-            val workerImage = CircleImageView(context)
+            val workerImage = ImageView(context)
             workerImage.layoutParams = LinearLayout.LayoutParams(size, size)
 
-            workerImage.borderColor = ContextCompat.getColor(context!!, R.color.black)
-            workerImage.borderWidth = resources.getDimension(R.dimen.master_worker_border_width).toInt()
             Glide
                     .with(context)
                     .load(photoUrls[i % photoUrls.size])
+                    .apply(RequestOptions.circleCropTransform())
                     .into(workerImage)
             worker.addView(workerImage)
 

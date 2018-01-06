@@ -12,11 +12,11 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.utrobin.luna.R
 import com.utrobin.luna.adapter.ViewPagerAdapter.Companion.addBottomDots
 import com.utrobin.luna.model.FeedItem
 import com.utrobin.luna.utils.svg.SvgModule
-import de.hdodenhof.circleimageview.CircleImageView
 import io.reactivex.subjects.PublishSubject
 
 /**
@@ -50,7 +50,7 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter(ArrayList(items))
 
         // Avatar
         item.avatar.path.takeIf { it.isNotBlank() }
-                ?.let { Glide.with(context).load(it).into(holder.avatar) }
+                ?.let { Glide.with(context).load(it).apply(RequestOptions.circleCropTransform()).into(holder.avatar) }
                 ?: holder.avatar.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.no_avatar))
 
         // Signs
@@ -99,7 +99,7 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter(ArrayList(items))
         val header: View = view.findViewById(R.id.header)
         val name: TextView = view.findViewById(R.id.name)
         val location: TextView = view.findViewById(R.id.location)
-        val avatar: CircleImageView = view.findViewById(R.id.avatar)
+        val avatar: ImageView = view.findViewById(R.id.avatar)
         val viewPager: ViewPager = view.findViewById(R.id.pager)
         val dotsContainer: LinearLayout = view.findViewById(R.id.dots_container)
         val signsContainer: LinearLayout = view.findViewById(R.id.signs_container)
