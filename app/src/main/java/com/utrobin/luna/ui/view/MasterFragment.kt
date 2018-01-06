@@ -21,7 +21,7 @@ import com.utrobin.luna.R
 import com.utrobin.luna.adapter.ViewPagerAdapter
 import com.utrobin.luna.adapter.ViewPagerAdapter.Companion.addBottomDots
 import com.utrobin.luna.databinding.MasterFragmentBinding
-import com.utrobin.luna.model.FeedItem
+import com.utrobin.luna.model.Master
 import com.utrobin.luna.ui.contract.MasterContract
 import com.utrobin.luna.utils.MapControllerWrapper
 import com.utrobin.luna.utils.svg.SvgModule
@@ -35,19 +35,19 @@ import java.util.*
  * Created by ivan on 01.11.2017.
  */
 class MasterFragment : Fragment(), MasterContract.View {
-    private lateinit var feedItem: FeedItem
+    private lateinit var master: Master
 
     lateinit var binding: MasterFragmentBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        feedItem = arguments?.getParcelable(FEED_ITEM_KEY) ?: throw NullPointerException("No arguments provided!")
+        master = arguments?.getParcelable(FEED_ITEM_KEY) ?: throw NullPointerException("No arguments provided!")
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.master_fragment, container, false)!!
 
-        binding.toolbar.title = feedItem.name
+        binding.toolbar.title = master.name
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true);
         (activity as AppCompatActivity).supportActionBar?.setDisplayShowHomeEnabled(true);
@@ -74,13 +74,13 @@ class MasterFragment : Fragment(), MasterContract.View {
         // Create a layer of objects for the map
         val overlay = Overlay(mapController.mapController)
 
-        val point = GeoPoint(feedItem.address.lat, feedItem.address.lon)
+        val point = GeoPoint(master.address.lat, master.address.lon)
         val icon = ContextCompat.getDrawable(context!!, R.drawable.ic_place_black_24dp)
         // Create an object for the layer
         val item = OverlayItem(point, icon)
         // Create the balloon model for the object
         val baloon = BalloonItem(context, item.geoPoint)
-        baloon.text = feedItem.name
+        baloon.text = master.name
         // baloon.setOnBalloonListener(context)
         // Add the balloon model to the object
         item.balloonItem = baloon
@@ -143,7 +143,7 @@ class MasterFragment : Fragment(), MasterContract.View {
 
     private fun setupSigns() {
         val requestBuilder = SvgModule.getGlideSvgRequestBuilder(context!!)
-        for (sign in feedItem.signs) {
+        for (sign in master.signs) {
             val image = ImageView(context)
             val signSize = context!!.resources.getDimension(R.dimen.feed_signs_size).toInt()
             val params = LinearLayout.LayoutParams(signSize, signSize)
@@ -158,12 +158,12 @@ class MasterFragment : Fragment(), MasterContract.View {
         binding.firstOpinionTv.text = "Vika: Была у Екатерины, хорошо сделала шеллак."
         binding.seeAllOpinionsTv.text = "Посмотреть все комментарии (42)"
         binding.initialCostTv.text = "Начальная стоимость от 400р"
-        binding.addressTv.text = feedItem.address.description
+        binding.addressTv.text = master.address.description
     }
 
     private fun setupViewPager() {
-        binding.included?.pager?.adapter = ViewPagerAdapter(context!!, feedItem.photos)
-        val totalPages = feedItem.photos.size
+        binding.included?.pager?.adapter = ViewPagerAdapter(context!!, master.photos)
+        val totalPages = master.photos.size
         addBottomDots(binding.included!!.dotsContainer, 0, totalPages)
         binding.included?.pager?.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {}
@@ -215,7 +215,7 @@ class MasterFragment : Fragment(), MasterContract.View {
     )
 
     companion object {
-        fun getInstance(item: FeedItem): MasterFragment {
+        fun getInstance(item: Master): MasterFragment {
             val bundle = Bundle()
             bundle.putParcelable(FEED_ITEM_KEY, item)
             val fragment = MasterFragment()

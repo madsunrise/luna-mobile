@@ -7,13 +7,13 @@ import android.os.Parcelable
  * Created by ivan on 29.10.2017.
  */
 
-data class FeedItem(val name: String,
-                    val avatar: Photo,
-                    val address: Address,
-                    val stars: Double,
-                    val signs: List<Sign> = ArrayList(),
-                    val photos: List<Photo> = ArrayList(),
-                    var isFavorite: Boolean = false
+data class Master(val name: String,
+                  val avatar: Photo,
+                  val address: Address,
+                  val stars: Double,
+                  val signs: List<Sign> = ArrayList(),
+                  val photos: List<Photo> = ArrayList(),
+                  var isFavorite: Boolean = false
 ) : Parcelable {
 
     override fun writeToParcel(parcel: Parcel, i: Int) {
@@ -38,12 +38,12 @@ data class FeedItem(val name: String,
     }
 
     companion object {
-        val CREATOR = object : Parcelable.Creator<FeedItem> {
-            override fun createFromParcel(`in`: Parcel): FeedItem {
-                return FeedItem(`in`)
+        val CREATOR = object : Parcelable.Creator<Master> {
+            override fun createFromParcel(`in`: Parcel): Master {
+                return Master(`in`)
             }
 
-            override fun newArray(size: Int): Array<FeedItem?> {
+            override fun newArray(size: Int): Array<Master?> {
                 return arrayOfNulls(size)
             }
         }

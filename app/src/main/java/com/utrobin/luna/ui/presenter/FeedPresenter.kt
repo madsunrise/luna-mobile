@@ -5,7 +5,7 @@ import com.utrobin.luna.App
 import com.utrobin.luna.FeedQuery
 import com.utrobin.luna.R
 import com.utrobin.luna.model.Address
-import com.utrobin.luna.model.FeedItem
+import com.utrobin.luna.model.Master
 import com.utrobin.luna.model.Photo
 import com.utrobin.luna.model.Sign
 import com.utrobin.luna.network.GraphQLService
@@ -29,7 +29,7 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
         App.component.injectsFeedPresenter(this)
     }
 
-    override fun onItemClicked(item: FeedItem) {
+    override fun onItemClicked(item: Master) {
         view?.navigateMasterScreen(item)
     }
 
@@ -62,8 +62,8 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
     }
 
 
-    private fun parseFeed(queryList: List<FeedQuery.Feed>): List<FeedItem> {
-        val data = ArrayList<FeedItem>()
+    private fun parseFeed(queryList: List<FeedQuery.Feed>): List<Master> {
+        val data = ArrayList<Master>()
         for (queryItem in queryList) {
             val name = queryItem.name() ?: continue
             val avatar = Photo(queryItem.avatar() ?: continue)
@@ -80,14 +80,14 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
                 signs.add(Sign(it))
             }
 
-            val item = FeedItem(name, avatar, address, stars, signs, photos)
+            val item = Master(name, avatar, address, stars, signs, photos)
             data.add(item)
         }
         return data
     }
 
 
-    override fun onBookmarkClicked(item: FeedItem) {
+    override fun onBookmarkClicked(item: Master) {
         if (item.isFavorite) {
             view?.showSnackBar(R.string.added_to_favorites)
         } else {
