@@ -30,7 +30,18 @@ data class Master(val name: String,
                     add(ServiceOption("Лечебные ванночки", 20000))
                     add(ServiceOption("Массаж рук", 10000))
                 })
+        val pedicure = Service(Service.Companion.ServiceType.PEDICURE,
+                ArrayList<ServiceOption>().apply {
+                    add(ServiceOption("Обрезной / классический", 0))
+                    add(ServiceOption("Комбинированный", 20000))
+                    add(ServiceOption("SPA-педикюр", 35000))
+                },
+                ArrayList<ServiceOption>().apply {
+                    add(ServiceOption("Массаж ног", 25000))
+                    add(ServiceOption("Скраб для ног", 20000))
+                })
         services.add(manicure)
+        services.add(pedicure)
     }
 
     override fun writeToParcel(parcel: Parcel, i: Int) {

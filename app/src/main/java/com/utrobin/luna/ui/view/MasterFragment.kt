@@ -176,14 +176,31 @@ class MasterFragment : Fragment(), MasterContract.View {
     private fun setupServices() {
         totalPrice = 0L // Для инициализации TextView
 
+        binding.servicesContainer.addView(getDivider())
         master.services.forEachIndexed { _, service ->
+
+            val serviceContainer = LinearLayout(context)
+            serviceContainer.layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            serviceContainer.orientation = LinearLayout.VERTICAL
+            serviceContainer.visibility = View.GONE
+
+            val serviceEnablingSwitch = constructSwitch(service.type.value, CompoundButton.OnCheckedChangeListener { _, checked ->
+                serviceContainer.visibility = if (checked) View.VISIBLE else View.GONE
+            })
+
+
+            binding.servicesContainer.addView(serviceEnablingSwitch)
+            binding.servicesContainer.addView(getDivider())
+            binding.servicesContainer.addView(serviceContainer)
+
+
+            // Конструирование содержания услуги внутри serviceContainer
+
             val radioGroup = RadioGroup(context)
             radioGroup.orientation = RadioGroup.VERTICAL
-
-            val name = TextView(context)
-            name.text = service.type.value
-            name.setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.text_size_subheading))
-            radioGroup.addView(name)
 
             service.mainOptions.forEachIndexed { optionIndex, option ->
                 val radio = RadioButton(context)
@@ -201,51 +218,55 @@ class MasterFragment : Fragment(), MasterContract.View {
                 totalPrice += service.mainOptions[radioId].price
             }
 
-            binding.serviceGroupsContainer.addView(radioGroup)
-            binding.servicesContainer.addView(getDivider())
+            serviceContainer.addView(radioGroup)
+            serviceContainer.addView(getDivider())
 
 
-            val coverSwitch = SwitchCompat(context)
-            coverSwitch.text = getString(R.string.without_cover)
-            coverSwitch.setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.text_size_body))
-            val paddingVertical = resources.getDimension(R.dimen.master_switch_padding_vertical).toInt()
-            val paddingHorizontal = resources.getDimension(R.dimen.master_side_elements_padding).toInt()
-            coverSwitch.setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical)
-            coverSwitch.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-            coverSwitch.setOnCheckedChangeListener { _, checked ->
-                if (checked) {
-                    coverSwitch.text = getString(R.string.with_cover)
-                } else {
-                    coverSwitch.text = getString(R.string.without_cover)
-                }
-            }
-            binding.servicesContainer.addView(coverSwitch)
-            binding.servicesContainer.addView(getDivider())
+            val coverSwitch = constructSwitch(
+                    getString(R.string.without_cover),
+                    CompoundButton.OnCheckedChangeListener { view, checked ->
+                        if (checked) {
+                            view.text = getString(R.string.with_cover)
+                        } else {
+                            view.text = getString(R.string.without_cover)
+                        }
+                    }
+            )
+
+            serviceContainer.addView(coverSwitch)
+            serviceContainer.addView(getDivider())
 
 
             for (additional in service.additionalOptions) {
-                val switch = SwitchCompat(context)
-                switch.text = String.format(getString(R.string.service_option_with_price, additional.name, additional.price / 100))
-                switch.setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.text_size_body))
+                val switch = constructSwitch(
+                        String.format(getString(R.string.service_option_with_price, additional.name, additional.price / 100)),
+                        CompoundButton.OnCheckedChangeListener { _, checked ->
+                            if (checked) {
+                                totalPrice += additional.price
+                            } else {
+                                totalPrice -= additional.price
+                            }
+                        }
+                )
 
-                switch.setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical)
-
-                switch.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-
-                switch.setOnCheckedChangeListener { _, checked ->
-                    if (checked) {
-                        totalPrice += additional.price
-                    } else {
-                        totalPrice -= additional.price
-                    }
-                }
-
-                binding.servicesContainer.addView(switch)
-                binding.servicesContainer.addView(getDivider())
+                serviceContainer.addView(switch)
+                serviceContainer.addView(getDivider())
             }
         }
     }
 
+
+    private fun constructSwitch(text: String, listener: CompoundButton.OnCheckedChangeListener? = null): SwitchCompat {
+        val switch = SwitchCompat(context)
+        switch.text = text
+        switch.setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.text_size_body))
+        val paddingVertical = resources.getDimension(R.dimen.master_switch_padding_vertical).toInt()
+        val paddingHorizontal = resources.getDimension(R.dimen.master_side_elements_padding).toInt()
+        switch.setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical)
+        switch.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        switch.setOnCheckedChangeListener(listener)
+        return switch
+    }
 
     private fun getDivider(): View {
         val divider = View(context)

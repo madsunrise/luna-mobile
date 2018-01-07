@@ -131,31 +131,16 @@
                         android:textSize="@dimen/text_size_subheading" />
                 </LinearLayout>
 
-
-                <LinearLayout
-                    android:id="@+id/service_groups_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingBottom="@dimen/master_elements_vertical_padding"
-                    android:paddingEnd="@dimen/master_side_elements_padding"
-                    android:paddingStart="@dimen/master_side_elements_padding"
-                    android:paddingTop="@dimen/master_elements_vertical_padding">
-
-
-                </LinearLayout>
-
                 <LinearLayout
                     android:id="@+id/services_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:animateLayoutChanges="true"
                     android:orientation="vertical"
                     android:paddingBottom="@dimen/master_elements_vertical_padding"
                     android:paddingEnd="@dimen/master_side_elements_padding"
                     android:paddingStart="@dimen/master_side_elements_padding"
                     android:paddingTop="@dimen/master_elements_vertical_padding">
-
-
                 </LinearLayout>
 
 
