@@ -22,6 +22,7 @@ import com.utrobin.luna.adapter.ViewPagerAdapter.Companion.addBottomDots
 import com.utrobin.luna.databinding.MasterFragmentBinding
 import com.utrobin.luna.model.Master
 import com.utrobin.luna.ui.contract.MasterContract
+import com.utrobin.luna.ui.presenter.MasterPresenter
 import com.utrobin.luna.utils.MapControllerWrapper
 import com.utrobin.luna.utils.svg.SvgModule
 import ru.yandex.yandexmapkit.overlay.Overlay
@@ -38,6 +39,8 @@ class MasterFragment : Fragment(), MasterContract.View {
     private lateinit var master: Master
     lateinit var binding: MasterFragmentBinding
 
+    private val presenter = MasterPresenter()
+
     private var totalPrice by Delegates.observable(0L) { _, _, new ->
         binding.totalPrice.text = String.format(getString(R.string.total_price_x_rubles), new / 100)
     }
@@ -45,6 +48,7 @@ class MasterFragment : Fragment(), MasterContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         master = arguments?.getParcelable(FEED_ITEM_KEY) ?: throw NullPointerException("No arguments provided!")
+        presenter.attachView(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -170,6 +174,7 @@ class MasterFragment : Fragment(), MasterContract.View {
                 addBottomDots(binding.included!!.dotsContainer, pagePosition, totalPages)
             }
         })
+        binding.included?.bookmark?.setOnClickListener { presenter.onBookmarkClicked() }
     }
 
 
@@ -324,6 +329,11 @@ class MasterFragment : Fragment(), MasterContract.View {
             "Кристина",
             "Ольга"
     )
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.detachView()
+    }
 
     companion object {
         fun getInstance(item: Master): MasterFragment {

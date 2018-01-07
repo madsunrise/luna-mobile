@@ -11,6 +11,6 @@ interface MasterContract {
     }
 
     interface Presenter : MvpPresenter<View> {
-
+        fun onBookmarkClicked()
     }
 }
