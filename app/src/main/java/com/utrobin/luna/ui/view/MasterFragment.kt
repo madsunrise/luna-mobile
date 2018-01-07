@@ -176,8 +176,8 @@ class MasterFragment : Fragment(), MasterContract.View {
     private fun setupServices() {
         totalPrice = 0L // Для инициализации TextView
 
-        binding.servicesContainer.addView(getDivider())
-        master.services.forEachIndexed { _, service ->
+        binding.servicesContainer.addView(getDivider(ContextCompat.getColor(context!!, R.color.dark_divider_color)))
+        master.services.forEach { service ->
 
             val serviceContainer = LinearLayout(context)
             serviceContainer.layoutParams = LinearLayout.LayoutParams(
@@ -193,8 +193,8 @@ class MasterFragment : Fragment(), MasterContract.View {
 
 
             binding.servicesContainer.addView(serviceEnablingSwitch)
-            binding.servicesContainer.addView(getDivider())
             binding.servicesContainer.addView(serviceContainer)
+            binding.servicesContainer.addView(getDivider(ContextCompat.getColor(context!!, R.color.dark_divider_color)))
 
 
             // Конструирование содержания услуги внутри serviceContainer
@@ -237,20 +237,21 @@ class MasterFragment : Fragment(), MasterContract.View {
             serviceContainer.addView(getDivider())
 
 
-            for (additional in service.additionalOptions) {
+            service.additionalOptions.forEachIndexed { index, option ->
                 val switch = constructSwitch(
-                        String.format(getString(R.string.service_option_with_price, additional.name, additional.price / 100)),
+                        String.format(getString(R.string.service_option_with_price, option.name, option.price / 100)),
                         CompoundButton.OnCheckedChangeListener { _, checked ->
                             if (checked) {
-                                totalPrice += additional.price
+                                totalPrice += option.price
                             } else {
-                                totalPrice -= additional.price
+                                totalPrice -= option.price
                             }
                         }
                 )
-
                 serviceContainer.addView(switch)
-                serviceContainer.addView(getDivider())
+                if (index != service.additionalOptions.size - 1) {
+                    serviceContainer.addView(getDivider())
+                }
             }
         }
     }
@@ -268,13 +269,13 @@ class MasterFragment : Fragment(), MasterContract.View {
         return switch
     }
 
-    private fun getDivider(): View {
+    private fun getDivider(color: Int = ContextCompat.getColor(context!!, R.color.divider_color)): View {
         val divider = View(context)
         divider.layoutParams = ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 resources.getDimension(R.dimen.master_divider_height).toInt()
         )
-        divider.setBackgroundColor(ContextCompat.getColor(context!!, R.color.divider_color))
+        divider.setBackgroundColor(color)
         return divider
     }
 

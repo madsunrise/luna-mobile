@@ -12,7 +12,10 @@
     <color name="gray_background_4">#e0e0e0</color>
     <color name="gray_background_5">#bdbdbd</color>
     <color name="gray_background_6">#9e9e9e</color>
+    <color name="gray_background_7">#757575</color>
+    <color name="gray_background_8">#616161</color>
     <color name="divider_color">@color/gray_background_4</color>
+    <color name="dark_divider_color">@color/gray_background_8</color>
 
     <!-- view pager dots -->
     <color name="view_pager_active_dot">@color/black</color>
