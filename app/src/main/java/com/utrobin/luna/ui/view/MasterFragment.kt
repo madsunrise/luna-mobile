@@ -7,14 +7,13 @@ import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.SwitchCompat
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.utrobin.luna.R
@@ -30,14 +29,18 @@ import ru.yandex.yandexmapkit.overlay.OverlayItem
 import ru.yandex.yandexmapkit.overlay.balloon.BalloonItem
 import ru.yandex.yandexmapkit.utils.GeoPoint
 import java.util.*
+import kotlin.properties.Delegates
 
 /**
  * Created by ivan on 01.11.2017.
  */
 class MasterFragment : Fragment(), MasterContract.View {
     private lateinit var master: Master
-
     lateinit var binding: MasterFragmentBinding
+
+    private var totalPrice by Delegates.observable(0L) { _, _, new ->
+        binding.totalPrice.text = String.format(getString(R.string.total_price_x_rubles), new / 100)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,8 +58,9 @@ class MasterFragment : Fragment(), MasterContract.View {
         setupMap()
         setupWorkers()
         setupSigns()
-        setupOther()
         setupViewPager()
+        setupServices()
+        setupOther()
         return binding.root
     }
 
@@ -154,12 +158,6 @@ class MasterFragment : Fragment(), MasterContract.View {
         }
     }
 
-    private fun setupOther() {
-        binding.firstOpinionTv.text = "Vika: Была у Екатерины, хорошо сделала шеллак."
-        binding.seeAllOpinionsTv.text = "Посмотреть все комментарии (42)"
-        binding.initialCostTv.text = "Начальная стоимость от 400р"
-        binding.addressTv.text = master.address.description
-    }
 
     private fun setupViewPager() {
         binding.included?.pager?.adapter = ViewPagerAdapter(context!!, master.photos)
@@ -172,6 +170,80 @@ class MasterFragment : Fragment(), MasterContract.View {
                 addBottomDots(binding.included!!.dotsContainer, pagePosition, totalPages)
             }
         })
+    }
+
+
+    private fun setupServices() {
+        totalPrice = 0L // Для инициализации TextView
+
+        master.services.forEachIndexed { _, service ->
+            val radioGroup = RadioGroup(context)
+            radioGroup.orientation = RadioGroup.VERTICAL
+
+            val name = TextView(context)
+            name.text = service.type.value
+            name.setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.text_size_subheading))
+            radioGroup.addView(name)
+
+            service.mainOptions.forEachIndexed { optionIndex, option ->
+                val radio = RadioButton(context)
+                radio.id = optionIndex
+                radio.text = String.format(getString(R.string.service_option_with_price, option.name, option.price / 100))
+                radioGroup.addView(radio)
+            }
+
+            var selectedRadio: Int? = null
+            radioGroup.setOnCheckedChangeListener { _, radioId ->
+                selectedRadio?.let {
+                    totalPrice -= service.mainOptions[it].price
+                }
+                selectedRadio = radioId
+                totalPrice += service.mainOptions[radioId].price
+            }
+
+            binding.serviceGroupsContainer.addView(radioGroup)
+            binding.servicesContainer.addView(getDivider())
+
+            for (additional in service.additionalOptions) {
+                val switch = SwitchCompat(context)
+                switch.text = String.format(getString(R.string.service_option_with_price, additional.name, additional.price / 100))
+                switch.setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.text_size_body))
+
+                val paddingVertical = resources.getDimension(R.dimen.master_switch_padding_vertical).toInt()
+                val paddingHorizontal = resources.getDimension(R.dimen.master_side_elements_padding).toInt()
+                switch.setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical)
+
+                switch.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+
+                switch.setOnCheckedChangeListener { _, checked ->
+                    if (checked) {
+                        totalPrice += additional.price
+                    } else {
+                        totalPrice -= additional.price
+                    }
+                }
+
+                binding.servicesContainer.addView(switch)
+                binding.servicesContainer.addView(getDivider())
+            }
+        }
+    }
+
+
+    private fun getDivider(): View {
+        val divider = View(context)
+        divider.layoutParams = ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                resources.getDimension(R.dimen.master_divider_height).toInt()
+        )
+        divider.setBackgroundColor(ContextCompat.getColor(context!!, R.color.divider_color))
+        return divider
+    }
+
+    private fun setupOther() {
+        binding.firstOpinionTv.text = "Vika: Была у Екатерины, хорошо сделала шеллак."
+        binding.seeAllOpinionsTv.text = "Посмотреть все комментарии (42)"
+        binding.addressTv.text = master.address.description
     }
 
 

@@ -13,8 +13,25 @@ data class Master(val name: String,
                   val stars: Double,
                   val signs: List<Sign> = ArrayList(),
                   val photos: List<Photo> = ArrayList(),
-                  var isFavorite: Boolean = false
+                  var isFavorite: Boolean = false,
+                  val services: ArrayList<Service> = ArrayList()
 ) : Parcelable {
+
+    init {
+        val manicure = Service(Service.Companion.ServiceType.MANICURE,
+                ArrayList<ServiceOption>().apply {
+                    add(ServiceOption("Обрезной / классический", 0))
+                    add(ServiceOption("Аппаратный", 20000))
+                    add(ServiceOption("Комбинированный", 15000))
+                    add(ServiceOption("Европейский", 15000))
+                },
+                ArrayList<ServiceOption>().apply {
+                    add(ServiceOption("Шеллак", 40000))
+                    add(ServiceOption("Лечебные ванночки", 20000))
+                    add(ServiceOption("Массаж рук", 10000))
+                })
+        services.add(manicure)
+    }
 
     override fun writeToParcel(parcel: Parcel, i: Int) {
         parcel.writeString(name)
