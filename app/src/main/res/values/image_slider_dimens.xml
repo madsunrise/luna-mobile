@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="image_slider_bottom_bar_height">48dp</dimen>
+    <dimen name="image_slider_bottom_bar_margin_top">10dp</dimen>
+    <dimen name="image_slider_bottom_bar_horizontal_padding">20dp</dimen>
+    <dimen name="image_slider_height">240dp</dimen>
+</resources>

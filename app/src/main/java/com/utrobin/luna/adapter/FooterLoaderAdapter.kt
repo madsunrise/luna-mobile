@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import com.utrobin.luna.R
-import com.utrobin.luna.model.FeedItem
+import com.utrobin.luna.model.Master
 import io.reactivex.subjects.PublishSubject
 
 
@@ -15,9 +15,9 @@ import io.reactivex.subjects.PublishSubject
  */
 
 
-abstract class FooterLoaderAdapter(internal val items: ArrayList<FeedItem>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+abstract class FooterLoaderAdapter(internal val items: ArrayList<Master>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    val viewClickSubject: PublishSubject<FeedItem> = PublishSubject.create<FeedItem>()
+    val viewClickSubject: PublishSubject<Master> = PublishSubject.create<Master>()
     var loading: Boolean = false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -60,13 +60,13 @@ abstract class FooterLoaderAdapter(internal val items: ArrayList<FeedItem>) : Re
         }
     }
 
-    fun addItems(data: List<FeedItem>) {
+    fun addItems(data: List<Master>) {
         val firstInsertedItemPosition = items.size
         this.items.addAll(data)
         notifyItemRangeInserted(firstInsertedItemPosition, data.size)
     }
 
-    fun setItems(data: List<FeedItem>) {
+    fun setItems(data: List<Master>) {
         this.items.clear()
         this.items.addAll(data)
         notifyDataSetChanged()

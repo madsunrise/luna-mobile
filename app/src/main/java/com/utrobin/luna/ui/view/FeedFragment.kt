@@ -12,7 +12,7 @@ import android.view.ViewGroup
 import com.utrobin.luna.R
 import com.utrobin.luna.adapter.FeedAdapter
 import com.utrobin.luna.databinding.FeedFragmentBinding
-import com.utrobin.luna.model.FeedItem
+import com.utrobin.luna.model.Master
 import com.utrobin.luna.network.NetworkError
 import com.utrobin.luna.ui.contract.FeedContract
 import com.utrobin.luna.ui.presenter.FeedPresenter
@@ -58,7 +58,7 @@ class FeedFragment : Fragment(), FeedContract.View {
         }
     }
 
-    override fun dataLoaded(newItems: List<FeedItem>, append: Boolean) {
+    override fun dataLoaded(newItems: List<Master>, append: Boolean) {
         (activity as MainActivity).showProgressBar(false)
         isDataLoading = false
         if (append) {
@@ -111,7 +111,7 @@ class FeedFragment : Fragment(), FeedContract.View {
         recyclerView.addOnScrollListener(onScrollListener)
     }
 
-    override fun navigateMasterScreen(item: FeedItem) {
+    override fun navigateMasterScreen(item: Master) {
         (activity as MainActivity).openMasterScreen(item)
     }
 

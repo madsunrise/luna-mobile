@@ -2,11 +2,13 @@ package com.utrobin.luna.network
 
 import com.apollographql.apollo.ApolloClient
 import com.google.gson.Gson
-import com.google.gson.JsonElement
 import com.google.gson.JsonParser
 import com.google.gson.annotations.SerializedName
 import com.utrobin.luna.network.NetworkModule.Companion.BASE_URL
-import okhttp3.*
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody
 import okio.Buffer
 
 /**

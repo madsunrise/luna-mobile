@@ -22,7 +22,7 @@
         </android.support.v7.widget.Toolbar>
 
 
-        <android.support.v4.widget.NestedScrollView
+        <com.emilsjolander.components.StickyScrollViewItems.StickyScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
@@ -83,19 +83,10 @@
                     android:orientation="horizontal"
                     android:padding="10dp" />
 
-                <!-- Photos -->
-                <android.support.v4.view.ViewPager
-                    android:id="@+id/pager"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/master_image_slider_height" />
+                <include
+                    android:id="@+id/included"
+                    layout="@layout/image_slider_with_footer" />
 
-                <!-- Image slider dots -->
-                <LinearLayout
-                    android:id="@+id/dots_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:gravity="center"
-                    android:orientation="horizontal" />
 
                 <!-- opinions -->
                 <LinearLayout
@@ -121,81 +112,43 @@
                 </LinearLayout>
 
 
-                <!-- initial cost block -->
+                <!-- Total price block -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/gray_background_5"
-                    android:paddingBottom="@dimen/master_initial_cost_vertical_padding"
-                    android:paddingLeft="@dimen/master_initial_cost_horizontal_padding"
-                    android:paddingRight="@dimen/master_initial_cost_horizontal_padding"
-                    android:paddingTop="@dimen/master_initial_cost_vertical_padding">
+                    android:background="@color/gray_background_3"
+                    android:paddingBottom="@dimen/master_elements_vertical_padding"
+                    android:paddingLeft="@dimen/master_side_elements_padding"
+                    android:paddingRight="@dimen/master_side_elements_padding"
+                    android:paddingTop="@dimen/master_elements_vertical_padding"
+                    android:tag="sticky">
 
                     <TextView
-                        android:id="@+id/initial_cost_tv"
+                        android:id="@+id/total_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_body" />
+                        android:textSize="@dimen/text_size_subheading" />
                 </LinearLayout>
 
-                <!-- radio -->
                 <LinearLayout
+                    android:id="@+id/services_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/gray_background_2"
+                    android:animateLayoutChanges="true"
                     android:orientation="vertical"
-                    android:paddingTop="10dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginStart="10dp"
-                        android:text="Виды маникюра"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_body" />
-
-                    <RadioGroup
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp">
-
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Обрезной / классический . +0 р"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/text_size_body" />
-
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Аппаратный . +200 р"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/text_size_body" />
-
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Комбинированный . +0 р"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/text_size_body" />
-
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Европейский . +0 р"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/text_size_body" />
-                    </RadioGroup>
+                    android:paddingBottom="@dimen/master_elements_vertical_padding"
+                    android:paddingEnd="@dimen/master_side_elements_padding"
+                    android:paddingStart="@dimen/master_side_elements_padding"
+                    android:paddingTop="@dimen/master_elements_vertical_padding">
                 </LinearLayout>
+
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="100dp" />
+                    android:layout_height="500dp" />
 
             </LinearLayout>
-        </android.support.v4.widget.NestedScrollView>
+        </com.emilsjolander.components.StickyScrollViewItems.StickyScrollView>
     </LinearLayout>
 </layout>

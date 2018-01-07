@@ -11,7 +11,7 @@ import android.support.test.runner.AndroidJUnit4;
 import android.view.View;
 import android.widget.TextView;
 
-import com.utrobin.luna.model.FeedItem;
+import com.utrobin.luna.model.Master;
 import com.utrobin.luna.ui.view.MainActivity;
 
 import org.hamcrest.Matcher;
@@ -47,7 +47,7 @@ public class EspressoTest {
         Espresso.onView(ViewMatchers.withId(R.id.feed_recycler_view))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
 
-        List<FeedItem> feedItems = activityRule.getActivity().getFeedItems();
+        List<Master> masters = activityRule.getActivity().getFeedItems();
 
         // проходимся по списку
         for (int i = 0; i < 50; ++i) {
@@ -57,7 +57,7 @@ public class EspressoTest {
                     RecyclerViewActions.actionOnItemAtPosition(i, clickChildViewWithId(R.id.header)));
 
             onView(allOf(instanceOf(TextView.class), withParent(withId(R.id.toolbar))))
-                    .check(matches(withText(feedItems.get(i).getName())));
+                    .check(matches(withText(masters.get(i).getName())));
 
             Espresso.pressBack();
         }

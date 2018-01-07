@@ -8,4 +8,9 @@
     <string name="error_has_occured_while_data_loading">Произошла ошибка при загрузке данных</string>
     <string name="added_to_favorites">Добавлено в избранное</string>
     <string name="removed_from_favorites">Убрано из избранного</string>
+    <string name="total_price_x_rubles">Итоговая стоимость: %1$d₽</string>
+    <string name="types_of_manicure">Виды маникюра</string>
+    <string name="with_cover">С покрытием</string>
+    <string name="without_cover">Без покрытия</string>
+    <string name="service_option_with_price">%1$s . +%2$d₽</string>
 </resources>

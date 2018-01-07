@@ -12,19 +12,19 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.utrobin.luna.R
 import com.utrobin.luna.adapter.ViewPagerAdapter.Companion.addBottomDots
-import com.utrobin.luna.model.FeedItem
+import com.utrobin.luna.model.Master
 import com.utrobin.luna.utils.svg.SvgModule
-import de.hdodenhof.circleimageview.CircleImageView
 import io.reactivex.subjects.PublishSubject
 
 /**
  * Created by ivan on 31.10.2017.
  */
 
-class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter(ArrayList(items)) {
-    val bookmarkClickSubject: PublishSubject<FeedItem> = PublishSubject.create<FeedItem>()
+class FeedAdapter(items: List<Master>) : FooterLoaderAdapter(ArrayList(items)) {
+    val bookmarkClickSubject: PublishSubject<Master> = PublishSubject.create<Master>()
 
     override fun getYourItemViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
         val itemView = LayoutInflater.from(parent.context)
@@ -50,7 +50,7 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter(ArrayList(items))
 
         // Avatar
         item.avatar.path.takeIf { it.isNotBlank() }
-                ?.let { Glide.with(context).load(it).into(holder.avatar) }
+                ?.let { Glide.with(context).load(it).apply(RequestOptions.circleCropTransform()).into(holder.avatar) }
                 ?: holder.avatar.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.no_avatar))
 
         // Signs
@@ -84,10 +84,10 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter(ArrayList(items))
             }
         })
 
-        holder.rating.text = item.stars.toString()
+        holder.stars.text = item.stars.toString()
     }
 
-    private fun setBookmarkDrawable(item: FeedItem, image: ImageButton) {
+    private fun setBookmarkDrawable(item: Master, image: ImageButton) {
         if (item.isFavorite) {
             image.setImageDrawable(ContextCompat.getDrawable(image.context, R.drawable.ic_bookmark_black_24dp))
         } else {
@@ -100,11 +100,11 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter(ArrayList(items))
         val header: View = view.findViewById(R.id.header)
         val name: TextView = view.findViewById(R.id.name)
         val location: TextView = view.findViewById(R.id.location)
-        val avatar: CircleImageView = view.findViewById(R.id.avatar)
+        val avatar: ImageView = view.findViewById(R.id.avatar)
         val viewPager: ViewPager = view.findViewById(R.id.pager)
         val dotsContainer: LinearLayout = view.findViewById(R.id.dots_container)
         val signsContainer: LinearLayout = view.findViewById(R.id.signs_container)
-        val rating: TextView = view.findViewById(R.id.rating)
+        val stars: TextView = view.findViewById(R.id.stars)
         val bookmark: ImageButton = view.findViewById(R.id.bookmark)
     }
 

@@ -8,6 +8,10 @@ import com.utrobin.luna.ui.contract.MasterContract
 
 class MasterPresenter : BasePresenter<MasterContract.View>(), MasterContract.Presenter {
 
+    override fun onBookmarkClicked() {
+
+    }
+
     override fun destroy() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
