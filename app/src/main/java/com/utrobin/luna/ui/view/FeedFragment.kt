@@ -12,7 +12,7 @@ import android.view.ViewGroup
 import com.utrobin.luna.R
 import com.utrobin.luna.adapter.FeedAdapter
 import com.utrobin.luna.databinding.FeedFragmentBinding
-import com.utrobin.luna.model.Master
+import com.utrobin.luna.model.FeedItem
 import com.utrobin.luna.network.NetworkError
 import com.utrobin.luna.ui.contract.FeedContract
 import com.utrobin.luna.ui.presenter.FeedPresenter
@@ -58,7 +58,7 @@ class FeedFragment : Fragment(), FeedContract.View {
         }
     }
 
-    override fun dataLoaded(newItems: List<Master>, append: Boolean) {
+    override fun dataLoaded(newItems: List<FeedItem>, append: Boolean) {
         (activity as MainActivity).showProgressBar(false)
         isDataLoading = false
         if (append) {
@@ -96,7 +96,7 @@ class FeedFragment : Fragment(), FeedContract.View {
         val recyclerView = binding.feedRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = feedAdapter
-        onScrollListener = object : EndlessRecyclerOnScrollListener(
+        onScrollListener = object : EndlessRecyclerOnScrollListener<FeedItem>(
                 adapter = feedAdapter,
                 linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager) {
             override fun onLoadMore(currentPage: Int): Boolean {
@@ -111,8 +111,8 @@ class FeedFragment : Fragment(), FeedContract.View {
         recyclerView.addOnScrollListener(onScrollListener)
     }
 
-    override fun navigateMasterScreen(item: Master) {
-        (activity as MainActivity).openMasterScreen(item)
+    override fun navigateMasterScreen(item: FeedItem) {
+        (activity as MainActivity).openMasterScreen(item.userId)
     }
 
     override fun showSnackBar(text: Int, length: Int) {
@@ -124,7 +124,7 @@ class FeedFragment : Fragment(), FeedContract.View {
         presenter.detachView()
     }
 
-    private lateinit var onScrollListener: EndlessRecyclerOnScrollListener
+    private lateinit var onScrollListener: EndlessRecyclerOnScrollListener<FeedItem>
 
     @VisibleForTesting
     fun getFeedItems() = feedAdapter.items

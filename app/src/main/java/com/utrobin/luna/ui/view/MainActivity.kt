@@ -10,7 +10,6 @@ import android.view.MenuItem
 import android.view.View
 import com.utrobin.luna.R
 import com.utrobin.luna.databinding.ActivityMainBinding
-import com.utrobin.luna.model.Master
 
 
 class MainActivity : AppCompatActivity() {
@@ -103,9 +102,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun openMasterScreen(item: Master) {
+    fun openMasterScreen(id: Long) {
         showProgressBar(true)
-        showFragment(MasterFragment.getInstance(item), true)
+        showFragment(MasterFragment.getInstance(id), true)
     }
 
     fun showProgressBar(show: Boolean) {

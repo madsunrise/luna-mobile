@@ -47,7 +47,8 @@ class MasterFragment : Fragment(), MasterContract.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        master = arguments?.getParcelable(FEED_ITEM_KEY) ?: throw NullPointerException("No arguments provided!")
+        val userId = arguments?.getLong(USER_ID_EXTRA) ?: throw NullPointerException("No arguments provided!")
+        // TODO Master loading
         presenter.attachView(this)
     }
 
@@ -336,14 +337,14 @@ class MasterFragment : Fragment(), MasterContract.View {
     }
 
     companion object {
-        fun getInstance(item: Master): MasterFragment {
+        fun getInstance(userId: Long): MasterFragment {
             val bundle = Bundle()
-            bundle.putParcelable(FEED_ITEM_KEY, item)
+            bundle.putLong(USER_ID_EXTRA, userId)
             val fragment = MasterFragment()
             fragment.arguments = bundle
             return fragment
         }
 
-        private const val FEED_ITEM_KEY = "FEED_ITEM_KEY"
+        private const val USER_ID_EXTRA = "USER_ID_EXTRA"
     }
 }
