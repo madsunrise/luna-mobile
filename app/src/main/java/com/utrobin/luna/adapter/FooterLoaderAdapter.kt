@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import com.utrobin.luna.R
-import com.utrobin.luna.model.Master
 import io.reactivex.subjects.PublishSubject
 
 
@@ -15,9 +14,9 @@ import io.reactivex.subjects.PublishSubject
  */
 
 
-abstract class FooterLoaderAdapter(internal val items: ArrayList<Master>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+abstract class FooterLoaderAdapter<T>(internal val items: ArrayList<T>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    val viewClickSubject: PublishSubject<Master> = PublishSubject.create<Master>()
+    val viewClickSubject: PublishSubject<T> = PublishSubject.create<T>()
     var loading: Boolean = false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -39,11 +38,11 @@ abstract class FooterLoaderAdapter(internal val items: ArrayList<Master>) : Recy
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is LoaderViewHolder) {
-            if (loading) {
-                holder.progressBar.visibility = View.VISIBLE
-            } else {
-                holder.progressBar.visibility = View.GONE
-            }
+            holder.progressBar.visibility =
+                    if (loading)
+                        View.VISIBLE
+                    else
+                        View.GONE
             return
         }
 
@@ -60,13 +59,13 @@ abstract class FooterLoaderAdapter(internal val items: ArrayList<Master>) : Recy
         }
     }
 
-    fun addItems(data: List<Master>) {
+    fun addItems(data: List<T>) {
         val firstInsertedItemPosition = items.size
         this.items.addAll(data)
         notifyItemRangeInserted(firstInsertedItemPosition, data.size)
     }
 
-    fun setItems(data: List<Master>) {
+    fun setItems(data: List<T>) {
         this.items.clear()
         this.items.addAll(data)
         notifyDataSetChanged()
@@ -79,7 +78,7 @@ abstract class FooterLoaderAdapter(internal val items: ArrayList<Master>) : Recy
         return VIEW_TYPE_ITEM;
     }
 
-    inner class LoaderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class LoaderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val progressBar: ProgressBar = view.findViewById(R.id.progress_bar)
     }
 

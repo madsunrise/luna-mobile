@@ -2,14 +2,12 @@ package com.utrobin.luna.model
 
 import android.os.Parcel
 import android.os.Parcelable
-import com.utrobin.luna.FeedQuery
 
 /**
  * Created by ivan on 02.01.2018.
  */
 
 data class Address(val description: String, val lat: Double, val lon: Double) : Parcelable {
-    constructor(address: FeedQuery.Address) : this(address.description()!!, address.lat()!!, address.lon()!!)
 
     override fun writeToParcel(parcel: Parcel, i: Int) {
         parcel.writeString(description)

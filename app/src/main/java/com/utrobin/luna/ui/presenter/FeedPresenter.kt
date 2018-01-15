@@ -4,8 +4,7 @@ import com.apollographql.apollo.rx2.Rx2Apollo
 import com.utrobin.luna.App
 import com.utrobin.luna.FeedQuery
 import com.utrobin.luna.R
-import com.utrobin.luna.model.Address
-import com.utrobin.luna.model.Master
+import com.utrobin.luna.model.FeedItem
 import com.utrobin.luna.model.Photo
 import com.utrobin.luna.model.Sign
 import com.utrobin.luna.network.GraphQLService
@@ -29,7 +28,7 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
         App.component.injectsFeedPresenter(this)
     }
 
-    override fun onItemClicked(item: Master) {
+    override fun onItemClicked(item: FeedItem) {
         view?.navigateMasterScreen(item)
     }
 
@@ -61,12 +60,12 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
     }
 
 
-    private fun parseFeed(queryList: List<FeedQuery.Feed>): List<Master> {
-        val data = ArrayList<Master>()
+    private fun parseFeed(queryList: List<FeedQuery.Feed>): List<FeedItem> {
+        val data = ArrayList<FeedItem>()
         for (queryItem in queryList) {
+            val userId = queryItem.id()?.toLong() ?: continue
             val name = queryItem.name() ?: continue
             val avatar = Photo(queryItem.avatar() ?: continue)
-            val address = Address(queryItem.address() ?: continue)
             val stars = queryItem.stars() ?: continue
 
             val photos = ArrayList<Photo>()
@@ -79,14 +78,22 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
                 signs.add(Sign(it))
             }
 
-            val item = Master(name, avatar, address, stars, signs, photos)
-            data.add(item)
+            data.add(
+                    FeedItem(
+                            userId = userId,
+                            name = name,
+                            avatar = avatar,
+                            stars = stars,
+                            signs = signs,
+                            photos = photos
+                    )
+            )
         }
         return data
     }
 
 
-    override fun onBookmarkClicked(item: Master) {
+    override fun onBookmarkClicked(item: FeedItem) {
         if (item.isFavorite) {
             view?.showSnackBar(R.string.added_to_favorites)
         } else {

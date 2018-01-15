@@ -15,7 +15,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.utrobin.luna.R
 import com.utrobin.luna.adapter.ViewPagerAdapter.Companion.addBottomDots
-import com.utrobin.luna.model.Master
+import com.utrobin.luna.model.FeedItem
 import com.utrobin.luna.utils.svg.SvgModule
 import io.reactivex.subjects.PublishSubject
 
@@ -23,8 +23,8 @@ import io.reactivex.subjects.PublishSubject
  * Created by ivan on 31.10.2017.
  */
 
-class FeedAdapter(items: List<Master>) : FooterLoaderAdapter(ArrayList(items)) {
-    val bookmarkClickSubject: PublishSubject<Master> = PublishSubject.create<Master>()
+class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter<FeedItem>(ArrayList(items)) {
+    val bookmarkClickSubject: PublishSubject<FeedItem> = PublishSubject.create<FeedItem>()
 
     override fun getYourItemViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
         val itemView = LayoutInflater.from(parent.context)
@@ -46,7 +46,7 @@ class FeedAdapter(items: List<Master>) : FooterLoaderAdapter(ArrayList(items)) {
         }
 
         holder.name.text = item.name
-        holder.location.text = item.address.description
+        holder.location.text = "Метро Белорусская"  // Will be replaced in future
 
         // Avatar
         item.avatar.path.takeIf { it.isNotBlank() }
@@ -87,7 +87,7 @@ class FeedAdapter(items: List<Master>) : FooterLoaderAdapter(ArrayList(items)) {
         holder.stars.text = item.stars.toString()
     }
 
-    private fun setBookmarkDrawable(item: Master, image: ImageButton) {
+    private fun setBookmarkDrawable(item: FeedItem, image: ImageButton) {
         if (item.isFavorite) {
             image.setImageDrawable(ContextCompat.getDrawable(image.context, R.drawable.ic_bookmark_black_24dp))
         } else {

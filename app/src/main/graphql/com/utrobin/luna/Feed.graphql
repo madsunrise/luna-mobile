@@ -2,12 +2,6 @@ query Feed($limit: Int!) {
     feed(limit: $limit) {
         id
         name
-        address {
-            id
-            lat
-            lon
-            description
-        }
         avatar {
             path
             tags {
