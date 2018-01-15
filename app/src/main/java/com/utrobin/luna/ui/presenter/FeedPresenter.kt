@@ -46,13 +46,12 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
         val apolloCall = graphQLService.apolloClient.query(query)
         Rx2Apollo.from(apolloCall)
                 .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.computation())
+                .map { parseFeed(it.data()!!.feed()!!) }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         {
-                            it.data()?.feed()?.let {
-                                val parsed = parseFeed(it)
-                                view?.dataLoaded(newItems = parsed, append = page != 1)
-                            } ?: view?.dataLoadingFailed(NetworkError.UNKNOWN)
+                            view?.dataLoaded(newItems = it, append = page != 1)
                         },
                         {
                             LogUtils.logException(FeedPresenter::class.java, it)
