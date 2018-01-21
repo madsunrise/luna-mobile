@@ -17,7 +17,7 @@ import com.utrobin.luna.network.NetworkError
 import com.utrobin.luna.ui.contract.FeedContract
 import com.utrobin.luna.ui.presenter.FeedPresenter
 import com.utrobin.luna.ui.utils.EndlessRecyclerOnScrollListener
-
+import kotlinx.android.synthetic.main.error_container.view.*
 
 /**
  * Created by ivan on 01.11.2017.
@@ -45,6 +45,7 @@ class FeedFragment : Fragment(), FeedContract.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setState(State.LOADING)
         if (!adapterInitialized) {
             initializeAdapter()
         }
@@ -53,13 +54,14 @@ class FeedFragment : Fragment(), FeedContract.View {
             requestDataUpdate()
         }
 
-        binding.repeatBtn.setOnClickListener {
+        binding.errorContainer!!.repeat_btn.setOnClickListener {
             requestDataUpdate()
         }
     }
 
     override fun dataLoaded(newItems: List<FeedItem>, append: Boolean) {
-        (activity as MainActivity).showProgressBar(false)
+        setState(State.CONTENT)
+        binding.mainContainerSwipeToRefresh.isRefreshing = false
         isDataLoading = false
         if (append) {
             feedAdapter.addItems(newItems)
@@ -67,14 +69,10 @@ class FeedFragment : Fragment(), FeedContract.View {
             feedAdapter.setItems(newItems)  // Full list update
             onScrollListener.resetVariables()
         }
-        binding.mainContainerSwipeToRefresh.isRefreshing = false
     }
 
     override fun dataLoadingFailed(reason: NetworkError) {
-        (activity as MainActivity).showProgressBar(false)
-        binding.errorContainer.visibility = View.VISIBLE
-        binding.mainContainerSwipeToRefresh.visibility = View.GONE
-        binding.mainContainerSwipeToRefresh.isRefreshing = false
+        setState(State.ERROR)
     }
 
     private fun initializeAdapter() {
@@ -83,12 +81,12 @@ class FeedFragment : Fragment(), FeedContract.View {
         feedAdapter.bookmarkClickSubject.subscribe {
             presenter.onBookmarkClicked(it)
         }
-        presenter.loadInitialData()
+        requestDataUpdate()
         adapterInitialized = true
     }
 
     private fun requestDataUpdate() {
-        (activity as MainActivity).showProgressBar(true)
+        setState(State.LOADING)
         presenter.loadInitialData()
     }
 
@@ -124,6 +122,32 @@ class FeedFragment : Fragment(), FeedContract.View {
         presenter.detachView()
     }
 
+    private fun setState(state: State) {
+        when (state) {
+            State.CONTENT -> {
+                with(binding) {
+                    mainContainerSwipeToRefresh.visibility = View.VISIBLE
+                    errorContainer!!.visibility = View.GONE
+                    progressContainer!!.visibility = View.GONE
+                }
+            }
+            State.ERROR -> {
+                with(binding) {
+                    mainContainerSwipeToRefresh.visibility = View.GONE
+                    errorContainer!!.visibility = View.VISIBLE
+                    progressContainer!!.visibility = View.GONE
+                }
+            }
+            State.LOADING -> {
+                with(binding) {
+                    mainContainerSwipeToRefresh.visibility = View.GONE
+                    errorContainer!!.visibility = View.GONE
+                    progressContainer!!.visibility = View.VISIBLE
+                }
+            }
+        }
+    }
+
     private lateinit var onScrollListener: EndlessRecyclerOnScrollListener<FeedItem>
 
     @VisibleForTesting
@@ -131,5 +155,9 @@ class FeedFragment : Fragment(), FeedContract.View {
 
     companion object {
         fun getInstance() = FeedFragment()
+    }
+
+    private enum class State {
+        CONTENT, ERROR, LOADING
     }
 }

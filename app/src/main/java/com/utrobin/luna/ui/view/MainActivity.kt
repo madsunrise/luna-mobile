@@ -7,7 +7,6 @@ import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
-import android.view.View
 import com.utrobin.luna.R
 import com.utrobin.luna.databinding.ActivityMainBinding
 
@@ -103,18 +102,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun openMasterScreen(id: Long) {
-        showProgressBar(true)
         showFragment(MasterFragment.getInstance(id), true)
-    }
-
-    fun showProgressBar(show: Boolean) {
-        if (show) {
-            binding.container.visibility = View.GONE
-            binding.progressBar.visibility = View.VISIBLE
-        } else {
-            binding.container.visibility = View.VISIBLE
-            binding.progressBar.visibility = View.GONE
-        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

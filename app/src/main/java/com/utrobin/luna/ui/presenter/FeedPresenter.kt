@@ -13,6 +13,7 @@ import com.utrobin.luna.ui.contract.FeedContract
 import com.utrobin.luna.utils.LogUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import java.util.*
 import javax.inject.Inject
 
 /**
@@ -25,7 +26,7 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
     lateinit var graphQLService: GraphQLService
 
     init {
-        App.component.injectsFeedPresenter(this)
+        App.component.injectFeedPresenter(this)
     }
 
     override fun onItemClicked(item: FeedItem) {

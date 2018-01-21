@@ -2,6 +2,7 @@ package com.utrobin.luna
 
 import com.utrobin.luna.network.NetworkModule
 import com.utrobin.luna.ui.presenter.FeedPresenter
+import com.utrobin.luna.ui.presenter.MasterPresenter
 import dagger.Component
 
 
@@ -11,5 +12,6 @@ import dagger.Component
 
 @Component(modules = [NetworkModule::class])
 interface AppComponent {
-    fun injectsFeedPresenter(presenter: FeedPresenter)
+    fun injectFeedPresenter(presenter: FeedPresenter)
+    fun injectMasterPresenter(presenter: MasterPresenter)
 }

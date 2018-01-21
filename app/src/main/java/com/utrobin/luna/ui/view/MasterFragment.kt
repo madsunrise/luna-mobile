@@ -21,10 +21,12 @@ import com.utrobin.luna.adapter.ViewPagerAdapter
 import com.utrobin.luna.adapter.ViewPagerAdapter.Companion.addBottomDots
 import com.utrobin.luna.databinding.MasterFragmentBinding
 import com.utrobin.luna.model.Master
+import com.utrobin.luna.network.NetworkError
 import com.utrobin.luna.ui.contract.MasterContract
 import com.utrobin.luna.ui.presenter.MasterPresenter
 import com.utrobin.luna.utils.MapControllerWrapper
 import com.utrobin.luna.utils.svg.SvgModule
+import kotlinx.android.synthetic.main.error_container.view.*
 import ru.yandex.yandexmapkit.overlay.Overlay
 import ru.yandex.yandexmapkit.overlay.OverlayItem
 import ru.yandex.yandexmapkit.overlay.balloon.BalloonItem
@@ -47,33 +49,46 @@ class MasterFragment : Fragment(), MasterContract.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val userId = arguments?.getLong(USER_ID_EXTRA) ?: throw NullPointerException("No arguments provided!")
-        // TODO Master loading
         presenter.attachView(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.master_fragment, container, false)!!
-
-        binding.toolbar.title = master.name
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
-        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true);
-        (activity as AppCompatActivity).supportActionBar?.setDisplayShowHomeEnabled(true);
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayShowHomeEnabled(true)
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.toolbar.title = ""
+        setState(State.LOADING)
+        val userId = arguments?.getLong(USER_ID_EXTRA)
+                ?: throw NullPointerException("No arguments provided!")
+        presenter.loadData(userId)
+        binding.errorContainer!!.repeat_btn.setOnClickListener {
+            setState(State.LOADING)
+            presenter.loadData(userId)
+        }
+    }
+
+
+    override fun dataLoaded(master: Master) {
+        setState(State.CONTENT)
+        this.master = master
+        binding.toolbar.title = master.name
         setupMap()
         setupWorkers()
         setupSigns()
         setupViewPager()
         setupServices()
         setupOther()
-        return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        (activity as MainActivity).showProgressBar(false)
+    override fun dataLoadingFailed(reason: NetworkError) {
+        setState(State.ERROR)
     }
-
 
     private fun setupMap() {
         val mapController = MapControllerWrapper(binding.map)
@@ -165,23 +180,24 @@ class MasterFragment : Fragment(), MasterContract.View {
 
 
     private fun setupViewPager() {
-        binding.included?.pager?.adapter = ViewPagerAdapter(context!!, master.photos)
+        binding.includedImageSlider!!.pager.adapter = ViewPagerAdapter(context!!, master.photos)
         val totalPages = master.photos.size
-        addBottomDots(binding.included!!.dotsContainer, 0, totalPages)
-        binding.included?.pager?.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+        addBottomDots(binding.includedImageSlider!!.dotsContainer, 0, totalPages)
+        binding.includedImageSlider?.pager?.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {}
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
             override fun onPageSelected(pagePosition: Int) {
-                addBottomDots(binding.included!!.dotsContainer, pagePosition, totalPages)
+                addBottomDots(binding.includedImageSlider!!.dotsContainer, pagePosition, totalPages)
             }
         })
-        binding.included?.bookmark?.setOnClickListener { presenter.onBookmarkClicked() }
+        binding.includedImageSlider?.bookmark?.setOnClickListener { presenter.onBookmarkClicked() }
     }
 
 
     private fun setupServices() {
         totalPrice = 0L // Для инициализации TextView
 
+        binding.servicesContainer.removeAllViews()
         binding.servicesContainer.addView(getDivider(ContextCompat.getColor(context!!, R.color.dark_divider_color)))
         master.services.forEach { service ->
 
@@ -336,6 +352,33 @@ class MasterFragment : Fragment(), MasterContract.View {
         presenter.detachView()
     }
 
+    private fun setState(state: State) {
+        when (state) {
+            State.CONTENT -> {
+                with(binding) {
+                    mainContainer.visibility = View.VISIBLE
+                    errorContainer!!.visibility = View.GONE
+                    progressContainer!!.visibility = View.GONE
+                }
+            }
+            State.ERROR -> {
+                with(binding) {
+                    mainContainer.visibility = View.GONE
+                    errorContainer!!.visibility = View.VISIBLE
+                    progressContainer!!.visibility = View.GONE
+                }
+            }
+            State.LOADING -> {
+                with(binding) {
+                    mainContainer.visibility = View.GONE
+                    errorContainer!!.visibility = View.GONE
+                    progressContainer!!.visibility = View.VISIBLE
+                }
+            }
+        }
+    }
+
+
     companion object {
         fun getInstance(userId: Long): MasterFragment {
             val bundle = Bundle()
@@ -346,5 +389,9 @@ class MasterFragment : Fragment(), MasterContract.View {
         }
 
         private const val USER_ID_EXTRA = "USER_ID_EXTRA"
+    }
+
+    private enum class State {
+        CONTENT, ERROR, LOADING
     }
 }

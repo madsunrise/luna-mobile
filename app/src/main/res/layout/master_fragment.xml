@@ -21,8 +21,17 @@
 
         </android.support.v7.widget.Toolbar>
 
+        <include
+            android:id="@+id/error_container"
+            layout="@layout/error_container" />
+
+        <include
+            android:id="@+id/progress_container"
+            layout="@layout/progress_container" />
+
 
         <com.emilsjolander.components.StickyScrollViewItems.StickyScrollView
+            android:id="@+id/main_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
@@ -84,7 +93,7 @@
                     android:padding="10dp" />
 
                 <include
-                    android:id="@+id/included"
+                    android:id="@+id/included_image_slider"
                     layout="@layout/image_slider_with_footer" />
 
 
@@ -140,8 +149,7 @@
                     android:paddingBottom="@dimen/master_elements_vertical_padding"
                     android:paddingEnd="@dimen/master_side_elements_padding"
                     android:paddingStart="@dimen/master_side_elements_padding"
-                    android:paddingTop="@dimen/master_elements_vertical_padding">
-                </LinearLayout>
+                    android:paddingTop="@dimen/master_elements_vertical_padding"></LinearLayout>
 
 
                 <View
