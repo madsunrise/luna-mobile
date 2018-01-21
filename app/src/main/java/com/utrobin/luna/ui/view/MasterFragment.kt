@@ -174,7 +174,7 @@ class MasterFragment : Fragment(), MasterContract.View {
             params.setMargins(0, 0, context!!.resources.getDimension(R.dimen.master_space_between_signs).toInt(), 0)
             image.layoutParams = params
             binding.signsContainer.addView(image)
-            requestBuilder?.load(Uri.parse(sign.icon))?.into(image);
+            requestBuilder.load(Uri.parse(sign.icon)).into(image);
         }
     }
 
@@ -191,6 +191,7 @@ class MasterFragment : Fragment(), MasterContract.View {
             }
         })
         binding.includedImageSlider?.bookmark?.setOnClickListener { presenter.onBookmarkClicked() }
+        binding.includedImageSlider!!.stars.text = master.stars.toString()
     }
 
 
