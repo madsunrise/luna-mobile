@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
 
     private val feedFragment = FeedFragment.getInstance()
     private val mapFragment = MapFragment.getInstance()
-    private val accountFragment = AccountFragment.getInstance()
+    private val accountFragment = AuthFragment.getInstance()
 
     private var previousFragment: Fragment? = null
     private var currentFragment: Fragment? = null
