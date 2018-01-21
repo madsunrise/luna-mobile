@@ -1,0 +1,34 @@
+query User($id: Int!) {
+    user(id: $id) {
+        id
+        name
+        address {
+            id
+            lat
+            lon
+            description
+        }
+        avatar {
+            path
+            tags {
+                id
+                name
+            }
+        }
+        photos {
+            id
+            path
+            tags {
+                id
+                name
+            }
+        }
+        stars
+        signs {
+            id
+            name
+            description
+            icon
+        }
+    }
+}
