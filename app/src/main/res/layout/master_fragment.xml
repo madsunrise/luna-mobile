@@ -63,8 +63,7 @@
                         android:background="#c8ffffff"
                         android:paddingEnd="5dp"
                         android:paddingStart="5dp"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_body" />
+                        style="@style/TextAppearance.AppCompat.Body1" />
                 </RelativeLayout>
 
                 <!-- workers -->
@@ -109,15 +108,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="7dp"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_body" />
+                        style="@style/TextAppearance.AppCompat.Body1" />
 
                     <TextView
                         android:id="@+id/see_all_opinions_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/gray_text"
-                        android:textSize="@dimen/text_size_body" />
+                        android:textColor="?android:textColorSecondary"
+                        style="@style/TextAppearance.AppCompat.Body1" />
                 </LinearLayout>
 
 
@@ -136,8 +134,7 @@
                         android:id="@+id/total_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_subheading" />
+                        style="@style/TextAppearance.AppCompat.Subhead" />
                 </LinearLayout>
 
                 <LinearLayout

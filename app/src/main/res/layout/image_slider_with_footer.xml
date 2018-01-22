@@ -32,8 +32,7 @@
                 android:drawablePadding="5dp"
                 android:drawableStart="@drawable/ic_star_black_24dp"
                 android:gravity="center_vertical"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_subheading" />
+                style="@style/TextAppearance.AppCompat.Subhead" />
 
 
             <!-- Image slider dots -->

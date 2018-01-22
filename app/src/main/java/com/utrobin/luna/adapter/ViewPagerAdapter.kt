@@ -62,7 +62,7 @@ internal class ViewPagerAdapter(context: Context, private val photos: List<Photo
                         } else {
                             Html.fromHtml("&#8226;")
                         }
-                textView.setTextSize(COMPLEX_UNIT_SP, dotsContainer.context.resources.getDimension(R.dimen.text_size_pager_dots))
+                textView.setTextSize(COMPLEX_UNIT_SP, dotsContainer.context.resources.getDimension(R.dimen.image_slider_dots_size))
 
                 val color = if (i != currentPage) {
                     ContextCompat.getColor(dotsContainer.context, R.color.view_pager_inactive_dot)

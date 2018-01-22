@@ -155,7 +155,7 @@ class MasterFragment : Fragment(), MasterContract.View {
             worker.addView(workerImage)
 
             val workerName = TextView(context)
-            workerName.setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.text_size_caption))
+            workerName.setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.master_worker_name_text_size))
             workerName.text = names[Random().nextInt(names.size)]
             workerName.setTextColor(ContextCompat.getColor(context!!, R.color.black))
             workerName.gravity = Gravity.CENTER
@@ -283,7 +283,7 @@ class MasterFragment : Fragment(), MasterContract.View {
     private fun constructSwitch(text: String, listener: CompoundButton.OnCheckedChangeListener? = null): SwitchCompat {
         val switch = SwitchCompat(context)
         switch.text = text
-        switch.setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.text_size_body))
+        switch.setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.abc_text_size_body_2_material))
         val paddingVertical = resources.getDimension(R.dimen.master_switch_padding_vertical).toInt()
         val paddingHorizontal = resources.getDimension(R.dimen.master_side_elements_padding).toInt()
         switch.setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical)

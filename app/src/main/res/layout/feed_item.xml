@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -23,11 +24,27 @@
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
-            <!-- avatar -->
-            <ImageView
-                android:id="@+id/avatar"
-                android:layout_width="@dimen/feed_item_avatar_size"
-                android:layout_height="@dimen/feed_item_avatar_size" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- avatar -->
+                <ImageView
+                    android:id="@+id/avatar"
+                    android:layout_width="@dimen/feed_item_avatar_size"
+                    android:layout_height="@dimen/feed_item_avatar_size"
+                    tools:ignore="contentDescription" />
+
+                <TextView
+                    style="@style/TextAppearance.AppCompat.Body2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Мастер"
+                    android:textColor="?android:textColorHint" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -37,16 +54,24 @@
 
                 <TextView
                     android:id="@+id/name"
+                    style="@style/TextAppearance.AppCompat.Title"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/feed_title_text_size" />
+                    android:layout_height="wrap_content" />
 
                 <TextView
-                    android:id="@+id/location"
+                    android:id="@+id/address"
+                    style="@style/TextAppearance.AppCompat.Subhead"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/gray_text"
-                    android:textSize="@dimen/feed_location_text_size" />
+                    android:textColor="?android:textColorSecondary" />
+
+                <TextView
+                    android:id="@+id/metro"
+                    style="@style/TextAppearance.AppCompat.Body2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textColor="?android:textColorHint" />
             </LinearLayout>
         </LinearLayout>
 

@@ -46,7 +46,8 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter<FeedItem>(ArrayLi
         }
 
         holder.name.text = item.name
-        holder.location.text = "Метро Белорусская"  // Will be replaced in future
+        holder.address.text = "Ул. Мантулинская, д.2"  // Will be replaced in future
+        holder.metro.text = "Улица 1905 года"
 
         // Avatar
         item.avatar.path.takeIf { it.isNotBlank() }
@@ -99,7 +100,8 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter<FeedItem>(ArrayLi
     inner class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val header: View = view.findViewById(R.id.header)
         val name: TextView = view.findViewById(R.id.name)
-        val location: TextView = view.findViewById(R.id.location)
+        val address: TextView = view.findViewById(R.id.address)
+        val metro: TextView = view.findViewById(R.id.metro)
         val avatar: ImageView = view.findViewById(R.id.avatar)
         val viewPager: ViewPager = view.findViewById(R.id.pager)
         val dotsContainer: LinearLayout = view.findViewById(R.id.dots_container)
