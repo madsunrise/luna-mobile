@@ -69,6 +69,8 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter<FeedItem>(ArrayLi
             }
         }
 
+        holder.initialCost.text = "от 2500 Р"
+
         // Photos slider
         holder.viewPager.adapter = ViewPagerAdapter(context, item.photos)
         val totalPages = item.photos.size
@@ -102,6 +104,7 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter<FeedItem>(ArrayLi
         val viewPager: ViewPager = view.findViewById(R.id.pager)
         val dotsContainer: LinearLayout = view.findViewById(R.id.dots_container)
         val signsContainer: LinearLayout = view.findViewById(R.id.signs_container)
+        val initialCost: TextView = view.findViewById(R.id.initial_cost)
         val stars: TextView = view.findViewById(R.id.stars)
         val bookmark: ImageButton = view.findViewById(R.id.bookmark)
     }
