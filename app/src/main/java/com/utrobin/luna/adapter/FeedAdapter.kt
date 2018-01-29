@@ -56,10 +56,7 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter<FeedItem>(ArrayLi
 
         // Signs
         holder.signsContainer.removeAllViews()
-        if (item.signs.isEmpty()) {
-            holder.signsContainer.visibility = View.GONE
-        } else {
-            holder.signsContainer.visibility = View.VISIBLE
+        if (item.signs.isNotEmpty()) {
             val requestBuilder = SvgModule.getGlideSvgRequestBuilder(context)
             for (sign in item.signs) {
                 val image = ImageView(context)
@@ -68,8 +65,7 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter<FeedItem>(ArrayLi
                 params.setMargins(0, 0, context.resources.getDimension(R.dimen.feed_space_between_signs).toInt(), 0)
                 image.layoutParams = params
                 holder.signsContainer.addView(image)
-
-                requestBuilder?.load(Uri.parse(sign.icon))?.into(image);
+                requestBuilder.load(Uri.parse(sign.icon)).into(image);
             }
         }
 

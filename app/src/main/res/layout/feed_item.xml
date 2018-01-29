@@ -75,16 +75,6 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Signs -->
-        <LinearLayout
-            android:id="@+id/signs_container"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/feed_signs_container_height"
-            android:background="@color/gray_background_1"
-            android:orientation="horizontal"
-            android:padding="@dimen/feed_signs_container_padding" />
-
-
         <include layout="@layout/image_slider_with_footer" />
     </LinearLayout>
 </android.support.v7.widget.CardView>
