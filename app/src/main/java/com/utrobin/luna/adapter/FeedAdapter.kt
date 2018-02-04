@@ -7,10 +7,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.utrobin.luna.R
@@ -37,6 +34,10 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter<FeedItem>(ArrayLi
         val context = (holder as ItemViewHolder).itemView.context
 
         holder.header.setOnClickListener { viewClickSubject.onNext(item) }
+
+        holder.moreOptions.setOnClickListener {
+            Toast.makeText(context, "Options!", Toast.LENGTH_SHORT).show()
+        }
 
         setBookmarkDrawable(item, holder.bookmark)
         holder.bookmark.setOnClickListener {
@@ -101,6 +102,7 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter<FeedItem>(ArrayLi
         val address: TextView = view.findViewById(R.id.address)
         val metro: TextView = view.findViewById(R.id.metro)
         val avatar: ImageView = view.findViewById(R.id.avatar)
+        val moreOptions: View = view.findViewById(R.id.more_options)
         val viewPager: ViewPager = view.findViewById(R.id.pager)
         val dotsContainer: LinearLayout = view.findViewById(R.id.dots_container)
         val signsContainer: LinearLayout = view.findViewById(R.id.signs_container)

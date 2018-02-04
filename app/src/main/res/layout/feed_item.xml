@@ -73,6 +73,16 @@
                     android:layout_marginTop="5dp"
                     android:textColor="?android:textColorHint" />
             </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/more_options"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="?android:selectableItemBackground"
+                android:padding="10dp"
+                android:src="@drawable/ic_more_vert_black_24dp"
+                tools:ignore="contentDescription" />
         </LinearLayout>
 
         <include layout="@layout/image_slider_with_footer" />
