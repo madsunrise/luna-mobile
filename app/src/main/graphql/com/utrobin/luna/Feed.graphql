@@ -1,5 +1,5 @@
-query Feed($limit: Int!) {
-    feed(limit: $limit) {
+query Feed($limit: Int!, $offset: Int!) {
+    feed(limit: $limit, offset: $offset) {
         id
         name
         avatar {

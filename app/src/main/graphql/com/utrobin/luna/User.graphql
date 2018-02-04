@@ -1,5 +1,5 @@
-query User($id: Int!) {
-    user(id: $id) {
+query Master($id: ID!) {
+    master(id: $id) {
         id
         name
         address {
