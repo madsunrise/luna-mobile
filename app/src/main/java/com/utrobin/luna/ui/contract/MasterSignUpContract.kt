@@ -1,9 +1,10 @@
 package com.utrobin.luna.ui.contract
 
 /**
- * Created by ivan on 21.01.2018.
+ * Created by ivan on 08.02.2018.
  */
-interface AuthContract {
+
+interface MasterSignUpContract {
     interface View : MvpView {
 
     }

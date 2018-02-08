@@ -16,4 +16,10 @@
     <string name="login">Логин</string>
     <string name="password">Пароль</string>
     <string name="log_in">Войти</string>
+    <string name="i_am_user">Я - пользователь</string>
+    <string name="i_am_master">Я - мастер</string>
+    <string name="sign_up">Зарегистрироваться</string>
+    <string name="repeat_password">Повторите пароль</string>
+    <string name="your_name">Ваше имя</string>
+    <string name="email">E-mail</string>
 </resources>

@@ -7,18 +7,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.utrobin.luna.R
-import com.utrobin.luna.databinding.AuthFragmentBinding
-import com.utrobin.luna.ui.contract.AuthContract
-import com.utrobin.luna.ui.presenter.AuthPresenter
+import com.utrobin.luna.databinding.MasterSignUpFragmentBinding
+import com.utrobin.luna.ui.contract.MasterSignUpContract
+import com.utrobin.luna.ui.presenter.MasterSignUpPresenter
 
 /**
- * Created by ivan on 05.11.2017.
+ * Created by ivan on 08.02.2018.
  */
 
-class AuthFragment : Fragment(), AuthContract.View {
-    lateinit var binding: AuthFragmentBinding
 
-    private val presenter = AuthPresenter()
+class MasterSignUpFragment : Fragment(), MasterSignUpContract.View {
+    lateinit var binding: MasterSignUpFragmentBinding
+
+    private val presenter = MasterSignUpPresenter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +27,7 @@ class AuthFragment : Fragment(), AuthContract.View {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.auth_fragment, container, false)!!
+        binding = DataBindingUtil.inflate(inflater, R.layout.master_sign_up_fragment, container, false)
         return binding.root
     }
 
@@ -36,6 +37,6 @@ class AuthFragment : Fragment(), AuthContract.View {
     }
 
     companion object {
-        fun getInstance() = AuthFragment()
+        fun getInstance() = MasterSignUpFragment()
     }
 }
