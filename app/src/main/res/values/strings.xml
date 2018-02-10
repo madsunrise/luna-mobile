@@ -22,4 +22,6 @@
     <string name="repeat_password">Повторите пароль</string>
     <string name="your_name">Ваше имя</string>
     <string name="email">E-mail</string>
+    <string name="wrong_format">Неверный формат</string>
+    <string name="passwords_dont_match">Пароли не совпадают</string>
 </resources>
