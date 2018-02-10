@@ -24,4 +24,6 @@
     <string name="email">E-mail</string>
     <string name="wrong_format">Неверный формат</string>
     <string name="passwords_dont_match">Пароли не совпадают</string>
+    <string name="sign_up_successful">Регистрация успешна!</string>
+    <string name="sign_up_failed">Произошла ошибка</string>
 </resources>

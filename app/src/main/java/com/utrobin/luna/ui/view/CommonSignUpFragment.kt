@@ -36,7 +36,7 @@ class CommonSignUpFragment : Fragment(), CommonSignUpContact.View {
         activity
                 ?.supportFragmentManager
                 ?.beginTransaction()
-                ?.replace(R.id.container, UserSignUpFragment.getInstance())
+                ?.replace(R.id.container, ClientSignUpFragment.getInstance())
                 ?.addToBackStack(null)
                 ?.commitAllowingStateLoss()
     }

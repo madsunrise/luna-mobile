@@ -1,15 +1,21 @@
 package com.utrobin.luna.ui.contract
 
+import com.utrobin.luna.network.NetworkError
+
 /**
  * Created by ivan on 08.02.2018.
  */
 
-interface UserSignUpContract {
+interface ClientSignUpContract {
     interface View : MvpView {
         fun validateFields(): Boolean
         fun showProgressBar(show: Boolean)
-        fun showErrorMsg(msg: String)
-        fun showSuccessfulMessage()
+        fun getUsername(): String
+        fun getName(): String
+        fun getEmail(): String
+        fun getPassword(): String
+        fun signUpFinished()
+        fun signUpFailed(reason: NetworkError)
     }
 
     interface Presenter : MvpPresenter<View> {

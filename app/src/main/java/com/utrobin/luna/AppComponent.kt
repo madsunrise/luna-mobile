@@ -15,5 +15,5 @@ interface AppComponent {
     fun injectMasterPresenter(presenter: MasterPresenter)
     fun injectCommonSignUpPresenter(presenter: CommonSignUpPresenter)
     fun injectMasterSignUpPresenter(presenter: MasterSignUpPresenter)
-    fun injectUserSignUpPresenter(presenter: UserSignUpPresenter)
+    fun injectUserSignUpPresenter(presenter: ClientSignUpPresenter)
 }

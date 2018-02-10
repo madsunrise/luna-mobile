@@ -2,10 +2,10 @@ package com.utrobin.luna.ui.presenter
 
 import com.apollographql.apollo.rx2.Rx2Apollo
 import com.utrobin.luna.App
-import com.utrobin.luna.CreateMasterMutation
+import com.utrobin.luna.CreateClientMutation
 import com.utrobin.luna.network.GraphQLService
 import com.utrobin.luna.network.NetworkError
-import com.utrobin.luna.ui.contract.MasterSignUpContract
+import com.utrobin.luna.ui.contract.ClientSignUpContract
 import com.utrobin.luna.utils.LogUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -15,13 +15,13 @@ import javax.inject.Inject
  * Created by ivan on 08.02.2018.
  */
 
-class MasterSignUpPresenter : BasePresenter<MasterSignUpContract.View>(), MasterSignUpContract.Presenter {
+class ClientSignUpPresenter : BasePresenter<ClientSignUpContract.View>(), ClientSignUpContract.Presenter {
 
     @Inject
     lateinit var graphQLService: GraphQLService
 
     init {
-        App.component.injectMasterSignUpPresenter(this)
+        App.component.injectUserSignUpPresenter(this)
     }
 
     override fun onSignUpButtonClicked() {
@@ -29,14 +29,13 @@ class MasterSignUpPresenter : BasePresenter<MasterSignUpContract.View>(), Master
             return
         }
 
-        val mutation = CreateMasterMutation
+        val mutation = CreateClientMutation
                 .builder()
                 .username(view?.getUsername()!!)
                 .name(view?.getName()!!)
                 .email(view?.getEmail()!!)
                 .password(view?.getPassword()!!)
-                .photo_id("10")
-                .address_id("2")
+                .photo_id("11")
                 .build()
 
 
