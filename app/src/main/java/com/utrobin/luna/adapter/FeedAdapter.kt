@@ -47,8 +47,7 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter<FeedItem>(ArrayLi
         }
 
         holder.name.text = item.name
-        holder.address.text = "Ул. Мантулинская, д.2"  // Will be replaced in future
-        holder.metro.text = "Улица 1905 года"
+        holder.address.text = item.address
 
         // Avatar
         item.avatar.path.takeIf { it.isNotBlank() }
@@ -100,7 +99,6 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter<FeedItem>(ArrayLi
         val header: View = view.findViewById(R.id.header)
         val name: TextView = view.findViewById(R.id.name)
         val address: TextView = view.findViewById(R.id.address)
-        val metro: TextView = view.findViewById(R.id.metro)
         val avatar: ImageView = view.findViewById(R.id.avatar)
         val moreOptions: View = view.findViewById(R.id.more_options)
         val viewPager: ViewPager = view.findViewById(R.id.pager)

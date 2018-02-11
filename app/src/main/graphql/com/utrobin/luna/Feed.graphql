@@ -2,6 +2,9 @@ query Feed($limit: Int!, $offset: Int!) {
     feed(limit: $limit, offset: $offset) {
         id
         name
+        address {
+            description
+        }
         avatar {
             path
             tags {

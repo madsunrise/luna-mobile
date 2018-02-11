@@ -38,11 +38,10 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
     }
 
     override fun loadMore(page: Int) {
-        val limit = 10
         val query = FeedQuery
                 .builder()
-                .limit(limit)
-                .offset((page - 1) * limit)
+                .limit(RECORDS_LIMIT)
+                .offset((page - 1) * RECORDS_LIMIT)
                 .build()
 
         val apolloCall = graphQLService.apolloClient.query(query)
@@ -81,10 +80,13 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
                 signs.add(Sign(it))
             }
 
+            val address = queryItem.address().description()
+
             data.add(
                     FeedItem(
                             userId = userId,
                             name = name,
+                            address = address,
                             avatar = avatar,
                             stars = stars,
                             signs = signs,
@@ -106,5 +108,9 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
 
     override fun destroy() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    companion object {
+        private const val RECORDS_LIMIT = 10
     }
 }

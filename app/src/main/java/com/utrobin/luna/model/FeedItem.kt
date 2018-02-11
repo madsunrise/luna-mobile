@@ -10,5 +10,6 @@ data class FeedItem(val userId: Long,
                     val stars: Double,
                     val signs: List<Sign>,
                     val photos: List<Photo>,
+                    val address: String,
                     var isFavorite: Boolean = false
 )
