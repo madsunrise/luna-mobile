@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
 
     private val feedFragment = FeedFragment.getInstance()
     private val mapFragment = MapFragment.getInstance()
-    private val accountFragment = AuthFragment.getInstance()
+    private val accountFragment = CommonSignUpFragment.getInstance()
 
     private var previousFragment: Fragment? = null
     private var currentFragment: Fragment? = null
@@ -84,21 +84,6 @@ class MainActivity : AppCompatActivity() {
         transaction.commit()
         previousFragment = currentFragment
         currentFragment = to
-    }
-
-    override fun onBackPressed() {
-        when (currentFragment) {
-            is MasterFragment -> {
-                supportFragmentManager.popBackStack()
-                currentFragment = previousFragment
-                previousFragment = null
-            }
-            !is FeedFragment -> {
-                binding.bottomNavigation.selectedItemId = R.id.feed
-                showFragment(feedFragment)
-            }
-            else -> super.onBackPressed()
-        }
     }
 
     fun openMasterScreen(id: Long) {

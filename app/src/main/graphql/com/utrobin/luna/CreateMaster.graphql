@@ -1,0 +1,18 @@
+mutation CreateMaster(
+        $username: String!,
+        $email: String!,
+        $password: String!,
+        $name: String!,
+        $photo_id: ID!,
+        $address_id: ID!
+    ) { createMaster(
+        username: $username,
+        email: $email,
+        password: $password,
+        name: $name,
+        photo_id: $photo_id,
+        address_id: $address_id
+    ) {
+        id
+    }
+}

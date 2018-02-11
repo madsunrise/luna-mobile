@@ -1,9 +1,7 @@
 package com.utrobin.luna
 
 import com.utrobin.luna.network.NetworkModule
-import com.utrobin.luna.ui.presenter.AuthPresenter
-import com.utrobin.luna.ui.presenter.FeedPresenter
-import com.utrobin.luna.ui.presenter.MasterPresenter
+import com.utrobin.luna.ui.presenter.*
 import dagger.Component
 
 
@@ -15,5 +13,7 @@ import dagger.Component
 interface AppComponent {
     fun injectFeedPresenter(presenter: FeedPresenter)
     fun injectMasterPresenter(presenter: MasterPresenter)
-    fun injectAuthPresenter(presenter: AuthPresenter)
+    fun injectCommonSignUpPresenter(presenter: CommonSignUpPresenter)
+    fun injectMasterSignUpPresenter(presenter: MasterSignUpPresenter)
+    fun injectUserSignUpPresenter(presenter: ClientSignUpPresenter)
 }
