@@ -38,16 +38,18 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
     }
 
     override fun loadMore(page: Int) {
+        val limit = 10
         val query = FeedQuery
                 .builder()
-                .limit(10)
+                .limit(limit)
+                .offset((page - 1) * limit)
                 .build()
 
         val apolloCall = graphQLService.apolloClient.query(query)
         Rx2Apollo.from(apolloCall)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.computation())
-                .map { parseFeed(it.data()!!.feed()!!) }
+                .map { parseFeed(it.data()!!.feed()) }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         {
@@ -64,18 +66,18 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
     private fun parseFeed(queryList: List<FeedQuery.Feed>): List<FeedItem> {
         val data = ArrayList<FeedItem>()
         for (queryItem in queryList) {
-            val userId = queryItem.id()?.toLong() ?: continue
-            val name = queryItem.name() ?: continue
-            val avatar = Photo(queryItem.avatar() ?: continue)
-            val stars = queryItem.stars() ?: continue
+            val userId = queryItem.id().toLong()
+            val name = queryItem.name()
+            val avatar = Photo(queryItem.avatar())
+            val stars = queryItem.stars()
 
             val photos = ArrayList<Photo>()
-            queryItem.photos()?.forEach {
+            queryItem.photos().forEach {
                 photos.add(Photo(it))
             }
 
             val signs = ArrayList<Sign>()
-            queryItem.signs()?.forEach {
+            queryItem.signs().forEach {
                 signs.add(Sign(it))
             }
 
