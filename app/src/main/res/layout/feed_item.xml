@@ -15,75 +15,56 @@
         android:orientation="vertical">
 
         <!-- header -->
-        <LinearLayout
+        <android.support.constraint.ConstraintLayout
             android:id="@+id/header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+            android:layout_marginTop="10dp">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <!-- avatar -->
-                <ImageView
-                    android:id="@+id/avatar"
-                    android:layout_width="@dimen/feed_item_avatar_size"
-                    android:layout_height="@dimen/feed_item_avatar_size"
-                    tools:ignore="contentDescription" />
-
-                <TextView
-                    style="@style/TextAppearance.AppCompat.Body2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="Мастер"
-                    android:textColor="?android:textColorHint" />
-
-            </LinearLayout>
+            <!-- avatar -->
+            <ImageView
+                android:id="@+id/avatar"
+                android:layout_width="@dimen/feed_item_avatar_size"
+                android:layout_height="@dimen/feed_item_avatar_size"
+                android:layout_marginStart="8dp"
+                card_view:layout_constraintLeft_toLeftOf="parent"
+                tools:ignore="contentDescription" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                card_view:layout_constraintLeft_toRightOf="@id/avatar">
 
                 <TextView
                     android:id="@+id/name"
-                    style="@style/TextAppearance.AppCompat.Title"
+                    style="@style/TextAppearance.AppCompat.Subhead"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <TextView
                     android:id="@+id/address"
-                    style="@style/TextAppearance.AppCompat.Subhead"
+                    style="@style/TextAppearance.AppCompat.Body1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="?android:textColorSecondary" />
 
-                <TextView
-                    android:id="@+id/metro"
-                    style="@style/TextAppearance.AppCompat.Body2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:textColor="?android:textColorHint" />
             </LinearLayout>
 
             <ImageButton
                 android:id="@+id/more_options"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
                 android:background="?android:selectableItemBackground"
-                android:padding="10dp"
+                android:padding="@dimen/feed_image_button_padding"
                 android:src="@drawable/ic_more_vert_black_24dp"
+                card_view:layout_constraintRight_toRightOf="parent"
                 tools:ignore="contentDescription" />
-        </LinearLayout>
+
+        </android.support.constraint.ConstraintLayout>
 
         <include layout="@layout/image_slider_with_footer" />
     </LinearLayout>
