@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="ratings_count">
+        <item quantity="one">%s | %d оценка</item>
+        <item quantity="few">%s | %d оценки</item>
+        <item quantity="many">%s | %d оценок</item>
+        <item quantity="other">%s | %d оценок</item>
+    </plurals>
+</resources>
