@@ -76,10 +76,16 @@ class ClientSignUpFragment : Fragment(), ClientSignUpContract.View {
 
     override fun signUpFinished() {
         Toast.makeText(context, R.string.sign_up_successful, Toast.LENGTH_SHORT).show()
+        activity
+                ?.supportFragmentManager
+                ?.popBackStack()
     }
 
     override fun signUpFailed(reason: NetworkError) {
         Toast.makeText(context, R.string.sign_up_failed, Toast.LENGTH_SHORT).show()
+        activity
+                ?.supportFragmentManager
+                ?.popBackStack()
     }
 
     override fun onDestroy() {
