@@ -3,7 +3,6 @@ package com.utrobin.luna.ui.presenter
 import com.apollographql.apollo.rx2.Rx2Apollo
 import com.utrobin.luna.App
 import com.utrobin.luna.FeedQuery
-import com.utrobin.luna.R
 import com.utrobin.luna.model.FeedItem
 import com.utrobin.luna.model.Photo
 import com.utrobin.luna.model.Sign
@@ -97,14 +96,6 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
         return data
     }
 
-
-    override fun onBookmarkClicked(item: FeedItem) {
-        if (item.isFavorite) {
-            view?.showSnackBar(R.string.added_to_favorites)
-        } else {
-            view?.showSnackBar(R.string.removed_from_favorites)
-        }
-    }
 
     override fun destroy() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.

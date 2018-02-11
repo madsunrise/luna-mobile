@@ -190,7 +190,7 @@ class MasterFragment : Fragment(), MasterContract.View {
                 addBottomDots(binding.includedImageSlider!!.dotsContainer, pagePosition, totalPages)
             }
         })
-        binding.includedImageSlider?.bookmark?.setOnClickListener { presenter.onBookmarkClicked() }
+
         binding.includedImageSlider!!.stars.text = master.stars.toString()
     }
 

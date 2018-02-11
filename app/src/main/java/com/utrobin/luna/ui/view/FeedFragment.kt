@@ -3,7 +3,6 @@ package com.utrobin.luna.ui.view
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.annotation.VisibleForTesting
-import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -78,9 +77,6 @@ class FeedFragment : Fragment(), FeedContract.View {
     private fun initializeAdapter() {
         feedAdapter = FeedAdapter(ArrayList())
         feedAdapter.viewClickSubject.subscribe { presenter.onItemClicked(it) }
-        feedAdapter.bookmarkClickSubject.subscribe {
-            presenter.onBookmarkClicked(it)
-        }
         requestDataUpdate()
         adapterInitialized = true
     }
@@ -111,10 +107,6 @@ class FeedFragment : Fragment(), FeedContract.View {
 
     override fun navigateMasterScreen(item: FeedItem) {
         (activity as MainActivity).openMasterScreen(item.userId)
-    }
-
-    override fun showSnackBar(text: Int, length: Int) {
-        Snackbar.make(binding.mainContainerSwipeToRefresh, text, length).show()
     }
 
     override fun onDestroy() {

@@ -7,21 +7,22 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.utrobin.luna.R
 import com.utrobin.luna.adapter.ViewPagerAdapter.Companion.addBottomDots
 import com.utrobin.luna.model.FeedItem
 import com.utrobin.luna.utils.svg.SvgModule
-import io.reactivex.subjects.PublishSubject
 
 /**
  * Created by ivan on 31.10.2017.
  */
 
 class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter<FeedItem>(ArrayList(items)) {
-    val bookmarkClickSubject: PublishSubject<FeedItem> = PublishSubject.create<FeedItem>()
 
     override fun getYourItemViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
         val itemView = LayoutInflater.from(parent.context)
@@ -37,13 +38,6 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter<FeedItem>(ArrayLi
 
         holder.moreOptions.setOnClickListener {
             Toast.makeText(context, "Options!", Toast.LENGTH_SHORT).show()
-        }
-
-        setBookmarkDrawable(item, holder.bookmark)
-        holder.bookmark.setOnClickListener {
-            item.isFavorite = !item.isFavorite
-            setBookmarkDrawable(item, holder.bookmark)
-            bookmarkClickSubject.onNext(item)
         }
 
         holder.name.text = item.name
@@ -83,17 +77,9 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter<FeedItem>(ArrayLi
             }
         })
 
-        holder.stars.text = item.stars.toString()
+        holder.stars.text = item.stars.toString() + " | 21 оценка"
+        holder.comments.text = "12"
     }
-
-    private fun setBookmarkDrawable(item: FeedItem, image: ImageButton) {
-        if (item.isFavorite) {
-            image.setImageDrawable(ContextCompat.getDrawable(image.context, R.drawable.ic_bookmark_black_24dp))
-        } else {
-            image.setImageDrawable(ContextCompat.getDrawable(image.context, R.drawable.ic_bookmark_border_black_24dp))
-        }
-    }
-
 
     inner class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val header: View = view.findViewById(R.id.header)
@@ -106,7 +92,7 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter<FeedItem>(ArrayLi
         val signsContainer: LinearLayout = view.findViewById(R.id.signs_container)
         val initialCost: TextView = view.findViewById(R.id.initial_cost)
         val stars: TextView = view.findViewById(R.id.stars)
-        val bookmark: ImageButton = view.findViewById(R.id.bookmark)
+        val comments: TextView = view.findViewById(R.id.comments)
     }
 
     override fun getYourItemId(position: Int) = items[position].hashCode().toLong()
