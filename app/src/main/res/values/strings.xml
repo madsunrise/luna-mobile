@@ -26,4 +26,13 @@
     <string name="passwords_dont_match">Пароли не совпадают</string>
     <string name="sign_up_successful">Регистрация успешна!</string>
     <string name="sign_up_failed">Произошла ошибка</string>
+
+    <plurals name="ratings_count">
+        <item quantity="zero">%s | %d оценок</item>
+        <item quantity="one">%s | %d оценка</item>
+        <item quantity="two">%s | %d оценки</item>
+        <item quantity="few">%s | %d оценки</item>
+        <item quantity="many">%s | %d оценок</item>
+        <item quantity="other">%s | %d оценок</item>
+    </plurals>
 </resources>

@@ -77,7 +77,8 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter<FeedItem>(ArrayLi
             }
         })
 
-        holder.stars.text = item.stars.toString() + " | 21 оценка"
+        val ratingsCount = 21
+        holder.stars.text = context.resources.getQuantityString(R.plurals.ratings_count, ratingsCount, item.stars.toString(), ratingsCount)
         holder.comments.text = "12"
     }
 
