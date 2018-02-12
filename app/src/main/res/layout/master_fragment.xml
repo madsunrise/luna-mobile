@@ -30,7 +30,7 @@
             layout="@layout/progress_container" />
 
 
-        <com.emilsjolander.components.StickyScrollViewItems.StickyScrollView
+        <ScrollView
             android:id="@+id/main_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -41,119 +41,19 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <!-- map -->
                 <RelativeLayout
-                    android:id="@+id/map_container"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/master_map_height">
+                    android:layout_height="@dimen/image_slider_height">
 
-                    <ru.yandex.yandexmapkit.MapView
-                        android:id="@+id/map"
+                    <!-- Photos -->
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/pager"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:apiKey="1234567890"
-                        android:tag="static" />
+                        android:layout_height="match_parent" />
 
-                    <TextView
-                        android:id="@+id/address_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentEnd="true"
-                        android:background="#c8ffffff"
-                        android:paddingEnd="5dp"
-                        android:paddingStart="5dp"
-                        style="@style/TextAppearance.AppCompat.Body1" />
                 </RelativeLayout>
 
-                <!-- workers -->
-                <HorizontalScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white">
-
-                    <LinearLayout
-                        android:id="@+id/workers_container"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-
-                    </LinearLayout>
-                </HorizontalScrollView>
-
-
-                <!-- signs -->
-                <LinearLayout
-                    android:id="@+id/signs_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/master_signs_container_height"
-                    android:background="@color/gray_background_1"
-                    android:orientation="horizontal"
-                    android:padding="10dp" />
-
-                <include
-                    android:id="@+id/included_image_slider"
-                    layout="@layout/image_slider_with_footer" />
-
-
-                <!-- opinions -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="10dp">
-
-                    <TextView
-                        android:id="@+id/first_opinion_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="7dp"
-                        style="@style/TextAppearance.AppCompat.Body1" />
-
-                    <TextView
-                        android:id="@+id/see_all_opinions_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="?android:textColorSecondary"
-                        style="@style/TextAppearance.AppCompat.Body1" />
-                </LinearLayout>
-
-
-                <!-- Total price block -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/gray_background_3"
-                    android:paddingBottom="@dimen/master_elements_vertical_padding"
-                    android:paddingLeft="@dimen/master_side_elements_padding"
-                    android:paddingRight="@dimen/master_side_elements_padding"
-                    android:paddingTop="@dimen/master_elements_vertical_padding"
-                    android:tag="sticky">
-
-                    <TextView
-                        android:id="@+id/total_price"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        style="@style/TextAppearance.AppCompat.Subhead" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/services_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:animateLayoutChanges="true"
-                    android:orientation="vertical"
-                    android:paddingBottom="@dimen/master_elements_vertical_padding"
-                    android:paddingEnd="@dimen/master_side_elements_padding"
-                    android:paddingStart="@dimen/master_side_elements_padding"
-                    android:paddingTop="@dimen/master_elements_vertical_padding"></LinearLayout>
-
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="500dp" />
-
             </LinearLayout>
-        </com.emilsjolander.components.StickyScrollViewItems.StickyScrollView>
+        </ScrollView>
     </LinearLayout>
 </layout>

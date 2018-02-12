@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.utrobin.luna.R
 import com.utrobin.luna.databinding.ActivityMainBinding
+import com.utrobin.luna.model.FeedItem
+import com.utrobin.luna.model.Master
 
 
 class MainActivity : AppCompatActivity() {
@@ -86,8 +88,8 @@ class MainActivity : AppCompatActivity() {
         currentFragment = to
     }
 
-    fun openMasterScreen(id: Long) {
-        showFragment(MasterFragment.getInstance(id), true)
+    fun openMasterScreen(item: FeedItem) {
+        showFragment(MasterFragment.getInstance(Master(item)), true)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

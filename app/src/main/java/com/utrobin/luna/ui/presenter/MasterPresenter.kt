@@ -70,21 +70,12 @@ class MasterPresenter : BasePresenter<MasterContract.View>(), MasterContract.Pre
             signs.add(Sign(it.name(), it.description(), it.icon()))
         }
 
-        val photos = ArrayList<Photo>()
-        data.photos().forEach {
-            val photoTags = ArrayList<Tag>()
-            it.tags().forEach {
-                photoTags.add(Tag(it.name()))
-            }
-            photos.add(Photo(it.path(), photoTags))
-        }
-
         return Master(
+                id = -1,    // -_-
                 name = name,
                 avatar = avatar,
                 address = address,
-                stars = stars,
-                photos = photos
+                stars = stars
         )
     }
 

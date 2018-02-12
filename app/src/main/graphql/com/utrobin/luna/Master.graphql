@@ -15,14 +15,6 @@ query Master($id: ID!) {
                 name
             }
         }
-        photos {
-            id
-            path
-            tags {
-                id
-                name
-            }
-        }
         stars
         signs {
             id

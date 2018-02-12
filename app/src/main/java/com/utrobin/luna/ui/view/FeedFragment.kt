@@ -106,7 +106,7 @@ class FeedFragment : Fragment(), FeedContract.View {
     }
 
     override fun navigateMasterScreen(item: FeedItem) {
-        (activity as MainActivity).openMasterScreen(item.userId)
+        (activity as MainActivity).openMasterScreen(item)
     }
 
     override fun onDestroy() {
