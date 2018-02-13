@@ -1,26 +1,5 @@
 query Master($id: ID!) {
     master(id: $id) {
-        id
-        name
-        address {
-            id
-            lat
-            lon
-            description
-        }
-        avatar {
-            path
-            tags {
-                id
-                name
-            }
-        }
-        stars
-        signs {
-            id
-            name
-            description
-            icon
-        }
+        id   # Здесь services по идее нужны
     }
 }

@@ -15,14 +15,14 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.utrobin.luna.R
 import com.utrobin.luna.adapter.ViewPagerAdapter.Companion.addBottomDots
-import com.utrobin.luna.model.FeedItem
+import com.utrobin.luna.model.MasterBase
 import com.utrobin.luna.utils.svg.SvgModule
 
 /**
  * Created by ivan on 31.10.2017.
  */
 
-class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter<FeedItem>(ArrayList(items)) {
+class FeedAdapter(items: List<MasterBase>) : FooterLoaderAdapter<MasterBase>(ArrayList(items)) {
 
     override fun getYourItemViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
         val itemView = LayoutInflater.from(parent.context)
@@ -34,14 +34,14 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter<FeedItem>(ArrayLi
         val item = items[position]
         val context = (holder as ItemViewHolder).itemView.context
 
-        holder.header.setOnClickListener { viewClickSubject.onNext(item) }
+        holder.itemView.setOnClickListener { viewClickSubject.onNext(item) }
 
         holder.moreOptions.setOnClickListener {
             Toast.makeText(context, "Options!", Toast.LENGTH_SHORT).show()
         }
 
         holder.name.text = item.name
-        holder.address.text = item.address
+        holder.address.text = item.address.description
 
         // Avatar
         item.avatar.path.takeIf { it.isNotBlank() }

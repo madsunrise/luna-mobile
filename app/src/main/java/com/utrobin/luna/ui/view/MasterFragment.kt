@@ -10,7 +10,8 @@ import android.view.ViewGroup
 import com.utrobin.luna.R
 import com.utrobin.luna.adapter.ViewPagerAdapter
 import com.utrobin.luna.databinding.MasterFragmentBinding
-import com.utrobin.luna.model.Master
+import com.utrobin.luna.model.MasterBase
+import com.utrobin.luna.model.MasterExtended
 import com.utrobin.luna.network.NetworkError
 import com.utrobin.luna.ui.contract.MasterContract
 import com.utrobin.luna.ui.presenter.MasterPresenter
@@ -20,7 +21,7 @@ import kotlinx.android.synthetic.main.error_container.view.*
  * Created by ivan on 01.11.2017.
  */
 class MasterFragment : Fragment(), MasterContract.View {
-    private lateinit var master: Master
+    private lateinit var master: MasterExtended
 
     lateinit var binding: MasterFragmentBinding
 
@@ -42,23 +43,26 @@ class MasterFragment : Fragment(), MasterContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setState(State.LOADING)
-        this.master = arguments?.getParcelable(MASTER_BASE)
+
+        val base = arguments?.getParcelable<MasterBase>(MASTER_BASE)
                 ?: throw NullPointerException("No arguments provided!")
 
-        binding.toolbar.title = master.name
-        presenter.loadData(master.id)
+        master = MasterExtended(base = base)
+
+        binding.toolbar.title = master.base.name
+        presenter.loadData(master.base.id)
         binding.errorContainer!!.repeat_btn.setOnClickListener {
             setState(State.LOADING)
-            presenter.loadData(master.id)
+            presenter.loadData(master.base.id)
         }
 
-        binding.pager.adapter = ViewPagerAdapter(context!!, master.photos)
+        binding.pager.adapter = ViewPagerAdapter(context!!, master.base.photos)
     }
 
-    override fun dataLoaded(master: Master) {
+    override fun dataLoaded(masterBase: MasterBase) {
         setState(State.CONTENT)
         // TODO something!
-        //this.master = master
+        //this.masterBase = masterBase
     }
 
     override fun dataLoadingFailed(reason: NetworkError) {
@@ -99,9 +103,9 @@ class MasterFragment : Fragment(), MasterContract.View {
 
 
     companion object {
-        fun getInstance(master: Master): MasterFragment {
+        fun getInstance(masterBase: MasterBase): MasterFragment {
             val bundle = Bundle()
-            bundle.putParcelable(MASTER_BASE, master)
+            bundle.putParcelable(MASTER_BASE, masterBase)
             val fragment = MasterFragment()
             fragment.arguments = bundle
             return fragment

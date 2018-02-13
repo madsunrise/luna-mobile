@@ -1,6 +1,6 @@
 package com.utrobin.luna.ui.contract
 
-import com.utrobin.luna.model.Master
+import com.utrobin.luna.model.MasterBase
 import com.utrobin.luna.network.NetworkError
 
 /**
@@ -10,7 +10,7 @@ import com.utrobin.luna.network.NetworkError
 interface MasterContract {
 
     interface View : MvpView {
-        fun dataLoaded(master: Master)
+        fun dataLoaded(masterBase: MasterBase)
         fun dataLoadingFailed(reason: NetworkError)
     }
 

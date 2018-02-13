@@ -7,15 +7,14 @@ import android.os.Parcelable
  * Created by ivan on 29.10.2017.
  */
 
-data class Master(
+data class MasterBase(
         val id: Long,
         val name: String,
         val avatar: Photo,
-        val address: Address?,
+        val address: Address,
         val stars: Double,
         val signs: List<Sign> = ArrayList(),
-        val photos: List<Photo> = ArrayList(),
-        val services: ArrayList<Service> = ArrayList()
+        val photos: List<Photo> = ArrayList()
 ) : Parcelable {
 
     override fun writeToParcel(parcel: Parcel, i: Int) {
@@ -26,7 +25,6 @@ data class Master(
         parcel.writeDouble(stars)
         parcel.writeTypedList(signs)
         parcel.writeTypedList(photos)
-        parcel.writeTypedList(services)
     }
 
     override fun describeContents() = 0
@@ -40,27 +38,15 @@ data class Master(
     ) {
         parcel.readTypedList(signs, Sign.CREATOR)
         parcel.readTypedList(photos, Photo.CREATOR)
-        parcel.readTypedList(services, Service.CREATOR)
     }
 
-    // Полная дичь
-    constructor(item: FeedItem) : this(
-            id = item.userId,
-            name = item.name,
-            avatar = item.avatar,
-            photos = item.photos,
-            stars = item.stars,
-            signs = item.signs,
-            address = null
-    )
-
     companion object {
-        val CREATOR = object : Parcelable.Creator<Master> {
-            override fun createFromParcel(`in`: Parcel): Master {
-                return Master(`in`)
+        val CREATOR = object : Parcelable.Creator<MasterBase> {
+            override fun createFromParcel(`in`: Parcel): MasterBase {
+                return MasterBase(`in`)
             }
 
-            override fun newArray(size: Int): Array<Master?> {
+            override fun newArray(size: Int): Array<MasterBase?> {
                 return arrayOfNulls(size)
             }
         }

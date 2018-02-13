@@ -1,6 +1,6 @@
 package com.utrobin.luna.ui.contract
 
-import com.utrobin.luna.model.FeedItem
+import com.utrobin.luna.model.MasterBase
 import com.utrobin.luna.network.NetworkError
 
 /**
@@ -10,14 +10,14 @@ import com.utrobin.luna.network.NetworkError
 interface FeedContract {
 
     interface View : MvpView {
-        fun dataLoaded(newItems: List<FeedItem>, append: Boolean)
+        fun dataLoaded(newItems: List<MasterBase>, append: Boolean)
         fun dataLoadingFailed(reason: NetworkError)
-        fun navigateMasterScreen(item: FeedItem)
+        fun navigateMasterScreen(item: MasterBase)
     }
 
 
     interface Presenter : MvpPresenter<View> {
-        fun onItemClicked(item: FeedItem)
+        fun onItemClicked(item: MasterBase)
         fun loadInitialData()
         fun loadMore(page: Int)
     }

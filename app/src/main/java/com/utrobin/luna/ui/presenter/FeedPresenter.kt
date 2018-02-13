@@ -3,7 +3,8 @@ package com.utrobin.luna.ui.presenter
 import com.apollographql.apollo.rx2.Rx2Apollo
 import com.utrobin.luna.App
 import com.utrobin.luna.FeedQuery
-import com.utrobin.luna.model.FeedItem
+import com.utrobin.luna.model.Address
+import com.utrobin.luna.model.MasterBase
 import com.utrobin.luna.model.Photo
 import com.utrobin.luna.model.Sign
 import com.utrobin.luna.network.GraphQLService
@@ -28,7 +29,7 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
         App.component.injectFeedPresenter(this)
     }
 
-    override fun onItemClicked(item: FeedItem) {
+    override fun onItemClicked(item: MasterBase) {
         view?.navigateMasterScreen(item)
     }
 
@@ -61,10 +62,10 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
     }
 
 
-    private fun parseFeed(queryList: List<FeedQuery.Feed>): List<FeedItem> {
-        val data = ArrayList<FeedItem>()
+    private fun parseFeed(queryList: List<FeedQuery.Feed>): List<MasterBase> {
+        val data = ArrayList<MasterBase>()
         for (queryItem in queryList) {
-            val userId = queryItem.id().toLong()
+            val id = queryItem.id().toLong()
             val name = queryItem.name()
             val avatar = Photo(queryItem.avatar())
             val stars = queryItem.stars()
@@ -79,11 +80,15 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
                 signs.add(Sign(it))
             }
 
-            val address = queryItem.address().description()
+            val address = Address(
+                    queryItem.address().description(),
+                    queryItem.address().lat(),
+                    queryItem.address().lon()
+            )
 
             data.add(
-                    FeedItem(
-                            userId = userId,
+                    MasterBase(
+                            id = id,
                             name = name,
                             address = address,
                             avatar = avatar,

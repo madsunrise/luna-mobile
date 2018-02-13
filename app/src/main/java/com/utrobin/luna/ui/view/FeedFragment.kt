@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import com.utrobin.luna.R
 import com.utrobin.luna.adapter.FeedAdapter
 import com.utrobin.luna.databinding.FeedFragmentBinding
-import com.utrobin.luna.model.FeedItem
+import com.utrobin.luna.model.MasterBase
 import com.utrobin.luna.network.NetworkError
 import com.utrobin.luna.ui.contract.FeedContract
 import com.utrobin.luna.ui.presenter.FeedPresenter
@@ -58,7 +58,7 @@ class FeedFragment : Fragment(), FeedContract.View {
         }
     }
 
-    override fun dataLoaded(newItems: List<FeedItem>, append: Boolean) {
+    override fun dataLoaded(newItems: List<MasterBase>, append: Boolean) {
         setState(State.CONTENT)
         binding.mainContainerSwipeToRefresh.isRefreshing = false
         isDataLoading = false
@@ -90,7 +90,7 @@ class FeedFragment : Fragment(), FeedContract.View {
         val recyclerView = binding.feedRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = feedAdapter
-        onScrollListener = object : EndlessRecyclerOnScrollListener<FeedItem>(
+        onScrollListener = object : EndlessRecyclerOnScrollListener<MasterBase>(
                 adapter = feedAdapter,
                 linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager) {
             override fun onLoadMore(currentPage: Int): Boolean {
@@ -105,7 +105,7 @@ class FeedFragment : Fragment(), FeedContract.View {
         recyclerView.addOnScrollListener(onScrollListener)
     }
 
-    override fun navigateMasterScreen(item: FeedItem) {
+    override fun navigateMasterScreen(item: MasterBase) {
         (activity as MainActivity).openMasterScreen(item)
     }
 
@@ -140,7 +140,7 @@ class FeedFragment : Fragment(), FeedContract.View {
         }
     }
 
-    private lateinit var onScrollListener: EndlessRecyclerOnScrollListener<FeedItem>
+    private lateinit var onScrollListener: EndlessRecyclerOnScrollListener<MasterBase>
 
     @VisibleForTesting
     fun getFeedItems() = feedAdapter.items
