@@ -41,12 +41,7 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        supportPostponeEnterTransition()
         val base = intent.extras.getParcelable<MasterBase>(MASTER_BASE)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            binding.pager.transitionName = intent.extras.getString(TRANSITION_NAME)
-        }
-        supportStartPostponedEnterTransition();
 
         binding.toolbar.title = base.name
         setState(State.LOADING)
@@ -59,6 +54,13 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
 
         binding.pager.adapter = ViewPagerAdapter(this, base.photos)
 
+
+        supportPostponeEnterTransition()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            binding.pager.transitionName = intent.extras.getString(TRANSITION_NAME)
+            binding.pager.currentItem = intent.extras.getInt(CURRENT_PHOTO)
+        }
+        supportStartPostponedEnterTransition();
     }
 
     override fun dataLoaded(master: MasterExtended) {
@@ -156,10 +158,10 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
         return super.onOptionsItemSelected(item)
     }
 
-
     companion object {
         const val MASTER_BASE = "MASTER_BASE_EXTRA"
         const val TRANSITION_NAME = "TRANSITION_NAME_EXTRA"
+        const val CURRENT_PHOTO = "CURRENT_PHOTO_EXTRA"
     }
 
     private enum class State {

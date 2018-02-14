@@ -23,7 +23,7 @@ import com.utrobin.luna.utils.svg.SvgModule
  * Created by ivan on 31.10.2017.
  */
 
-class FeedAdapter(items: List<MasterBase>) : FooterLoaderAdapter<MasterBase>(ArrayList(items)) {
+class FeedAdapter(items: List<MasterBase>) : FooterLoaderAdapter<MasterBase, ViewPager>(ArrayList(items)) {
 
     override fun getYourItemViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
         val itemView = LayoutInflater.from(parent.context)

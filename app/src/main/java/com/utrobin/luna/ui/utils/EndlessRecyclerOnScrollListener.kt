@@ -8,8 +8,8 @@ import com.utrobin.luna.adapter.FooterLoaderAdapter
  * Created by ivan on 31.10.2017.
  */
 
-abstract class EndlessRecyclerOnScrollListener<T>(
-        private val adapter: FooterLoaderAdapter<T>,
+abstract class EndlessRecyclerOnScrollListener<T, V>(
+        private val adapter: FooterLoaderAdapter<T, V>,
         private val linearLayoutManager: LinearLayoutManager) : RecyclerView.OnScrollListener() {
 
     private var previousTotal = 0

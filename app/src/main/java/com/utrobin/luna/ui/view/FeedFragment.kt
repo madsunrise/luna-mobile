@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.annotation.VisibleForTesting
 import android.support.v4.app.Fragment
+import android.support.v4.view.ViewPager
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -92,7 +93,7 @@ class FeedFragment : Fragment(), FeedContract.View {
         val recyclerView = binding.feedRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = feedAdapter
-        onScrollListener = object : EndlessRecyclerOnScrollListener<MasterBase>(
+        onScrollListener = object : EndlessRecyclerOnScrollListener<MasterBase, ViewPager>(
                 adapter = feedAdapter,
                 linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager) {
             override fun onLoadMore(currentPage: Int): Boolean {
@@ -139,7 +140,7 @@ class FeedFragment : Fragment(), FeedContract.View {
         }
     }
 
-    private lateinit var onScrollListener: EndlessRecyclerOnScrollListener<MasterBase>
+    private lateinit var onScrollListener: EndlessRecyclerOnScrollListener<MasterBase, ViewPager>
 
     @VisibleForTesting
     fun getFeedItems() = feedAdapter.items

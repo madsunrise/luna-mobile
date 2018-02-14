@@ -8,9 +8,9 @@ import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewCompat
+import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
-import android.view.View
 import com.utrobin.luna.R
 import com.utrobin.luna.databinding.ActivityMainBinding
 import com.utrobin.luna.model.MasterBase
@@ -86,11 +86,12 @@ class MainActivity : AppCompatActivity() {
         currentFragment = to
     }
 
-    fun openMasterScreen(item: MasterBase, sharedView: View) {
+    fun openMasterScreen(item: MasterBase, sharedView: ViewPager) {
         val intent = Intent(this, MasterActivity::class.java)
         intent.apply {
             putExtra(MasterActivity.MASTER_BASE, item)
             putExtra(MasterActivity.TRANSITION_NAME, ViewCompat.getTransitionName(sharedView))
+            putExtra(MasterActivity.CURRENT_PHOTO, sharedView.currentItem)
         }
 
         val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
@@ -118,6 +119,6 @@ class MainActivity : AppCompatActivity() {
     fun getFeedItems() = feedFragment.getFeedItems()
 
     companion object {
-        private val FRAGMENT_TAG = "FRAGMENT_TAG"
+        private const val FRAGMENT_TAG = "FRAGMENT_TAG"
     }
 }

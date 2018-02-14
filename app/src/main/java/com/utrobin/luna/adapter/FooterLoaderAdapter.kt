@@ -14,9 +14,9 @@ import io.reactivex.subjects.PublishSubject
  */
 
 
-abstract class FooterLoaderAdapter<T>(internal val items: ArrayList<T>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+abstract class FooterLoaderAdapter<T, V>(internal val items: ArrayList<T>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    val viewClickSubject: PublishSubject<Pair<T, View>> = PublishSubject.create<Pair<T, View>>()
+    val viewClickSubject: PublishSubject<Pair<T, V>> = PublishSubject.create<Pair<T, V>>()
     var loading: Boolean = false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
