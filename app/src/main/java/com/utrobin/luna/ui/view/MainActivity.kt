@@ -1,9 +1,11 @@
 package com.utrobin.luna.ui.view
 
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.annotation.VisibleForTesting
 import android.support.design.widget.BottomNavigationView
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewCompat
 import android.support.v7.app.AppCompatActivity
@@ -26,11 +28,6 @@ class MainActivity : AppCompatActivity() {
 
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener {
-        if (currentFragment is MasterFragment) {
-            supportFragmentManager.popBackStack()
-            currentFragment = previousFragment
-            previousFragment = null
-        }
         when (it.itemId) {
             R.id.feed -> {
                 if (currentFragment != feedFragment) {
@@ -90,13 +87,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun openMasterScreen(item: MasterBase, sharedView: View) {
-        val transitionName = ViewCompat.getTransitionName(sharedView)
-        supportFragmentManager
-                .beginTransaction()
-                .addSharedElement(sharedView, transitionName)
-                .addToBackStack(null)
-                .replace(R.id.container, MasterFragment.getInstance(item, transitionName))
-                .commit()
+        val intent = Intent(this, MasterActivity::class.java)
+        intent.apply {
+            putExtra(MasterActivity.MASTER_BASE, item)
+            putExtra(MasterActivity.TRANSITION_NAME, ViewCompat.getTransitionName(sharedView))
+        }
+
+        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                this,
+                sharedView,
+                ViewCompat.getTransitionName(sharedView)
+        )
+
+        startActivity(intent, options.toBundle())
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
