@@ -2,6 +2,7 @@ package com.utrobin.luna.adapter
 
 import android.net.Uri
 import android.support.v4.content.ContextCompat
+import android.support.v4.view.ViewCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -34,7 +35,8 @@ class FeedAdapter(items: List<MasterBase>) : FooterLoaderAdapter<MasterBase>(Arr
         val item = items[position]
         val context = (holder as ItemViewHolder).itemView.context
 
-        holder.header.setOnClickListener { viewClickSubject.onNext(item) }
+        ViewCompat.setTransitionName(holder.viewPager, getTransitionName(item))
+        holder.header.setOnClickListener { viewClickSubject.onNext(Pair(item, holder.viewPager)) }
 
         holder.moreOptions.setOnClickListener {
             Toast.makeText(context, "Options!", Toast.LENGTH_SHORT).show()
@@ -97,4 +99,8 @@ class FeedAdapter(items: List<MasterBase>) : FooterLoaderAdapter<MasterBase>(Arr
     }
 
     override fun getYourItemId(position: Int) = items[position].hashCode().toLong()
+
+    companion object {
+        fun getTransitionName(item: MasterBase) = item.name + item.id
+    }
 }

@@ -29,9 +29,6 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
         App.component.injectFeedPresenter(this)
     }
 
-    override fun onItemClicked(item: MasterBase) {
-        view?.navigateMasterScreen(item)
-    }
 
     override fun loadInitialData() {
         loadMore(1)

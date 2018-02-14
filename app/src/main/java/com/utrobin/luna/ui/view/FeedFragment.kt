@@ -76,7 +76,9 @@ class FeedFragment : Fragment(), FeedContract.View {
 
     private fun initializeAdapter() {
         feedAdapter = FeedAdapter(ArrayList())
-        feedAdapter.viewClickSubject.subscribe { presenter.onItemClicked(it) }
+        feedAdapter.viewClickSubject.subscribe {
+            (activity as MainActivity).openMasterScreen(it.first, it.second)
+        }
         requestDataUpdate()
         adapterInitialized = true
     }
@@ -105,9 +107,6 @@ class FeedFragment : Fragment(), FeedContract.View {
         recyclerView.addOnScrollListener(onScrollListener)
     }
 
-    override fun navigateMasterScreen(item: MasterBase) {
-        (activity as MainActivity).openMasterScreen(item)
-    }
 
     override fun onDestroy() {
         super.onDestroy()

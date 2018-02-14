@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.support.annotation.VisibleForTesting
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
+import android.support.v4.view.ViewCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import android.view.View
 import com.utrobin.luna.R
 import com.utrobin.luna.databinding.ActivityMainBinding
 import com.utrobin.luna.model.MasterBase
@@ -87,8 +89,14 @@ class MainActivity : AppCompatActivity() {
         currentFragment = to
     }
 
-    fun openMasterScreen(item: MasterBase) {
-        showFragment(MasterFragment.getInstance(item), true)
+    fun openMasterScreen(item: MasterBase, sharedView: View) {
+        val transitionName = ViewCompat.getTransitionName(sharedView)
+        supportFragmentManager
+                .beginTransaction()
+                .addSharedElement(sharedView, transitionName)
+                .addToBackStack(null)
+                .replace(R.id.container, MasterFragment.getInstance(item, transitionName))
+                .commit()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

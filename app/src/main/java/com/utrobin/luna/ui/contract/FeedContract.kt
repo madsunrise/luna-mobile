@@ -12,12 +12,10 @@ interface FeedContract {
     interface View : MvpView {
         fun dataLoaded(newItems: List<MasterBase>, append: Boolean)
         fun dataLoadingFailed(reason: NetworkError)
-        fun navigateMasterScreen(item: MasterBase)
     }
 
 
     interface Presenter : MvpPresenter<View> {
-        fun onItemClicked(item: MasterBase)
         fun loadInitialData()
         fun loadMore(page: Int)
     }

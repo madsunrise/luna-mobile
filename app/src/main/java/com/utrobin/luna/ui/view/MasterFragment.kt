@@ -1,7 +1,9 @@
 package com.utrobin.luna.ui.view
 
 import android.databinding.DataBindingUtil
+import android.os.Build
 import android.os.Bundle
+import android.support.transition.TransitionInflater
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
@@ -34,6 +36,10 @@ class MasterFragment : Fragment(), MasterContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         presenter.attachView(this)
+        postponeEnterTransition();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move);
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -59,6 +65,13 @@ class MasterFragment : Fragment(), MasterContract.View {
         }
 
         binding.pager.adapter = ViewPagerAdapter(context!!, base.photos)
+
+
+        // Animation
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            binding.pager.transitionName = arguments!!.getString(TRANSITION_NAME)
+        }
+        startPostponedEnterTransition();
     }
 
     override fun dataLoaded(master: MasterExtended) {
@@ -148,15 +161,17 @@ class MasterFragment : Fragment(), MasterContract.View {
 
 
     companion object {
-        fun getInstance(masterBase: MasterBase): MasterFragment {
+        fun getInstance(masterBase: MasterBase, transitionName: String): MasterFragment {
             val bundle = Bundle()
             bundle.putParcelable(MASTER_BASE, masterBase)
+            bundle.putString(TRANSITION_NAME, transitionName)
             val fragment = MasterFragment()
             fragment.arguments = bundle
             return fragment
         }
 
         private const val MASTER_BASE = "MASTER_BASE_EXTRA"
+        private const val TRANSITION_NAME = "TRANSITION_NAME"
     }
 
     private enum class State {
