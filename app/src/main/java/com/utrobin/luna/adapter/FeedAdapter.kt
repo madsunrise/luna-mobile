@@ -35,12 +35,15 @@ class FeedAdapter(items: List<MasterBase>) : FooterLoaderAdapter<MasterBase, Vie
         val item = items[position]
         val context = (holder as ItemViewHolder).itemView.context
 
-        ViewCompat.setTransitionName(holder.viewPager, getTransitionName(item))
-        holder.header.setOnClickListener { viewClickSubject.onNext(Pair(item, holder.viewPager)) }
+        val adapter = ViewPagerAdapter(context, item.photos)
+        adapter.imageClickSubject.subscribe { viewClickSubject.onNext(Pair(item, holder.viewPager)) } // A bit strange decision
+        holder.itemView.setOnClickListener { viewClickSubject.onNext(Pair(item, holder.viewPager)) }
 
         holder.moreOptions.setOnClickListener {
             Toast.makeText(context, "Options!", Toast.LENGTH_SHORT).show()
         }
+
+        ViewCompat.setTransitionName(holder.viewPager, getTransitionName(item))
 
         holder.name.text = item.name
         holder.address.text = item.address.description
@@ -68,7 +71,7 @@ class FeedAdapter(items: List<MasterBase>) : FooterLoaderAdapter<MasterBase, Vie
         holder.initialCost.text = "от 2500 Р"
 
         // Photos slider
-        holder.viewPager.adapter = ViewPagerAdapter(context, item.photos)
+        holder.viewPager.adapter = adapter
         val totalPages = item.photos.size
         addBottomDots(holder.dotsContainer, 0, totalPages)
         holder.viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {

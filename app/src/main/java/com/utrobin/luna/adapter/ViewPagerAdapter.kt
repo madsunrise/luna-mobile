@@ -14,6 +14,7 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.utrobin.luna.R
 import com.utrobin.luna.model.Photo
+import io.reactivex.subjects.PublishSubject
 import java.util.*
 
 /**
@@ -24,6 +25,7 @@ internal class ViewPagerAdapter(context: Context, private val photos: List<Photo
     private val layoutInflater =
             context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
+    val imageClickSubject: PublishSubject<Boolean> = PublishSubject.create<Boolean>()
 
     override fun getCount(): Int {
         return photos.size
@@ -39,6 +41,8 @@ internal class ViewPagerAdapter(context: Context, private val photos: List<Photo
         val imageView = itemView.findViewById<ImageView>(R.id.image)
         Glide.with(imageView).load(photos[position].path).into(imageView)
         container.addView(itemView)
+
+        imageView.setOnClickListener { imageClickSubject.onNext(true) }
 
         return itemView
     }
