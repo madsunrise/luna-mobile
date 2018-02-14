@@ -42,8 +42,8 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
         val base = intent.extras.getParcelable<MasterBase>(MASTER_BASE)
+        title = base.name
 
-        binding.toolbar.title = base.name
         setState(State.LOADING)
 
         presenter.loadData(base)
