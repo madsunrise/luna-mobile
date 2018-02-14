@@ -34,7 +34,7 @@ class FeedAdapter(items: List<MasterBase>) : FooterLoaderAdapter<MasterBase>(Arr
         val item = items[position]
         val context = (holder as ItemViewHolder).itemView.context
 
-        holder.itemView.setOnClickListener { viewClickSubject.onNext(item) }
+        holder.header.setOnClickListener { viewClickSubject.onNext(item) }
 
         holder.moreOptions.setOnClickListener {
             Toast.makeText(context, "Options!", Toast.LENGTH_SHORT).show()
