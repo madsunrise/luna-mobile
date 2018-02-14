@@ -41,6 +41,7 @@ data class MasterBase(
     }
 
     companion object {
+        @JvmField
         val CREATOR = object : Parcelable.Creator<MasterBase> {
             override fun createFromParcel(`in`: Parcel): MasterBase {
                 return MasterBase(`in`)

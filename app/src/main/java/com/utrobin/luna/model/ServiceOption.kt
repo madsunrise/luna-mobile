@@ -24,6 +24,7 @@ data class ServiceOption(val name: String, val price: Long) : Parcelable {
     )
 
     companion object {
+        @JvmField
         val CREATOR = object : Parcelable.Creator<ServiceOption> {
             override fun createFromParcel(`in`: Parcel): ServiceOption {
                 return ServiceOption(`in`)

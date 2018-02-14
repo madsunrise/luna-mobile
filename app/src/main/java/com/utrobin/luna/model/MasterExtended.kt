@@ -28,6 +28,7 @@ data class MasterExtended(
 
 
     companion object {
+        @JvmField
         val CREATOR = object : Parcelable.Creator<MasterExtended> {
             override fun createFromParcel(`in`: Parcel): MasterExtended {
                 return MasterExtended(`in`)

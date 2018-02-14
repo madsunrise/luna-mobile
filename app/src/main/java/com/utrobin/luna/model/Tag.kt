@@ -21,6 +21,7 @@ data class Tag(val name: String) : Parcelable {
     constructor(parcel: Parcel) : this(parcel.readString())
 
     companion object {
+        @JvmField
         val CREATOR = object : Parcelable.Creator<Tag> {
             override fun createFromParcel(`in`: Parcel): Tag {
                 return Tag(`in`)
