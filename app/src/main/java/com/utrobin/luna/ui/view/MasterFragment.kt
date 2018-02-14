@@ -3,10 +3,14 @@ package com.utrobin.luna.ui.view
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+import android.widget.ImageView
+import android.widget.LinearLayout
 import com.utrobin.luna.R
 import com.utrobin.luna.adapter.ViewPagerAdapter
 import com.utrobin.luna.databinding.MasterFragmentBinding
@@ -47,26 +51,67 @@ class MasterFragment : Fragment(), MasterContract.View {
         val base = arguments?.getParcelable<MasterBase>(MASTER_BASE)
                 ?: throw NullPointerException("No arguments provided!")
 
-        master = MasterExtended(base = base)
-
-        binding.toolbar.title = master.base.name
-        presenter.loadData(master.base.id)
+        binding.toolbar.title = base.name
+        presenter.loadData(base)
         binding.errorContainer!!.repeat_btn.setOnClickListener {
             setState(State.LOADING)
-            presenter.loadData(master.base.id)
+            presenter.loadData(base)
         }
 
-        binding.pager.adapter = ViewPagerAdapter(context!!, master.base.photos)
+        binding.pager.adapter = ViewPagerAdapter(context!!, base.photos)
     }
 
-    override fun dataLoaded(masterBase: MasterBase) {
+    override fun dataLoaded(master: MasterExtended) {
         setState(State.CONTENT)
-        // TODO something!
-        //this.masterBase = masterBase
+        this.master = master
+
+        fillViews()
     }
 
     override fun dataLoadingFailed(reason: NetworkError) {
         setState(State.ERROR)
+    }
+
+    private fun fillViews() {
+        binding.title.text = master.base.name
+
+        val reviewsCount = 124
+        binding.rating.text = context!!.resources.getQuantityString(R.plurals.ratings_count,
+                reviewsCount, master.base.stars.toString(), reviewsCount)
+        drawStars()
+
+        binding.description.text = "Мы легко впишемся в ваш график, а все наши услуги" +
+                " не займут у вас много времени."
+    }
+
+    private fun drawStars() {
+        val fullStarsCount = master.base.stars.toInt()
+        val halfStarPresented = master.base.stars - fullStarsCount >= 0.5
+
+        val params = LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
+        params.setMargins(0, 0, context!!.resources.getDimension(R.dimen.master_space_between_stars).toInt(), 0)
+
+        for (i in 0 until fullStarsCount) {
+            val fullStar = ImageView(context!!)
+            fullStar.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_star_black_24dp))
+            fullStar.layoutParams = params
+            binding.starsContainer.addView(fullStar)
+        }
+
+        if (halfStarPresented) {
+            val halfStar = ImageView(context!!)
+            halfStar.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_star_half_black_24dp))
+            halfStar.layoutParams = params
+            binding.starsContainer.addView(halfStar)
+        }
+
+
+        for (i in 4 downTo binding.starsContainer.childCount) {
+            val emptyStar = ImageView(context!!)
+            emptyStar.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_star_border_black_24dp))
+            emptyStar.layoutParams = params
+            binding.starsContainer.addView(emptyStar)
+        }
     }
 
 

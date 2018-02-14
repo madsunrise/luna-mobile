@@ -15,4 +15,5 @@
     <dimen name="master_image_slider_height">240dp</dimen>
     <dimen name="master_switch_padding_vertical">15dp</dimen>
     <dimen name="master_divider_height">1dp</dimen>
+    <dimen name="master_space_between_stars">8dp</dimen>
 </resources>

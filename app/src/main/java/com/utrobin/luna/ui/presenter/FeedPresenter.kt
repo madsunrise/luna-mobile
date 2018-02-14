@@ -68,7 +68,7 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
             val id = queryItem.id().toLong()
             val name = queryItem.name()
             val avatar = Photo(queryItem.avatar())
-            val stars = queryItem.stars()
+            val stars = queryItem.stars() / 10
 
             val photos = ArrayList<Photo>()
             queryItem.photos().forEach {
