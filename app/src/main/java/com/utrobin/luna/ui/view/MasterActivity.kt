@@ -84,6 +84,8 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
 
         binding.description.text = "Мы легко впишемся в ваш график, а все наши услуги" +
                 " не займут у вас много времени."
+
+        binding.addressDescription.text = master.base.address.description
     }
 
     private fun drawStars() {
@@ -151,7 +153,7 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                finish()
+                onBackPressed()
                 return true
             }
         }
