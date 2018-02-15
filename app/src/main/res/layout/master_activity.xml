@@ -45,7 +45,7 @@
                 <!-- Photos -->
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/image_slider_height">
+                    android:layout_height="@dimen/master_image_slider_height">
 
                     <android.support.v4.view.ViewPager
                         android:id="@+id/pager"
@@ -57,90 +57,106 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingEnd="@dimen/activity_horizontal_margin"
-                    android:paddingStart="@dimen/activity_horizontal_margin">
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    tools:ignore="RtlSymmetry">
 
-                    <View style="@style/Divider" />
-
-                    <!-- Main info block -->
+                    <!-- block with right padding -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:paddingEnd="@dimen/activity_horizontal_margin">
 
-                        <TextView
-                            android:id="@+id/title"
-                            style="@style/TextAppearance.AppCompat.Title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-
-                        <!-- rating -->
+                        <!-- Main info block -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <LinearLayout
-                                android:id="@+id/stars_container"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal" />
+                            android:layout_marginTop="@dimen/master_title_margin_top"
+                            android:orientation="vertical">
 
                             <TextView
-                                android:id="@+id/rating"
-                                style="@style/TextAppearance.AppCompat.Subhead"
+                                android:id="@+id/title"
+                                style="@style/TextAppearance.AppCompat.Title"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp" />
+                                android:textStyle="bold" />
+
+                            <!-- rating -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/master_rating_margin_top"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:id="@+id/stars_container"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal" />
+
+                                <TextView
+                                    android:id="@+id/rating"
+                                    style="@style/TextAppearance.AppCompat.Caption"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/master_space_between_stars_and_text"
+                                    android:fontFamily="sans-serif-medium" />
+                            </LinearLayout>
+
+                            <!-- description -->
+                            <TextView
+                                android:id="@+id/master_description"
+                                style="@style/TextAppearance.AppCompat.Caption"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/master_description_margin_top" />
+
                         </LinearLayout>
 
-                        <!-- description -->
-                        <TextView
-                            android:id="@+id/master_description"
-                            style="@style/TextAppearance.AppCompat.Body2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp" />
+                        <View
+                            style="@style/Divider"
+                            android:layout_marginBottom="@dimen/master_space_between_divider_and_metro"
+                            android:layout_marginTop="@dimen/master_space_between_description_and_divider" />
 
+                        <!-- Address block -->
+                        <android.support.constraint.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/address_metro"
+                                style="@style/TextAppearance.AppCompat.Caption"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-medium"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/address_description"
+                                style="@style/TextAppearance.AppCompat.Caption"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/master_address_description_margin_top"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/address_metro" />
+
+                            <ImageView
+                                android:layout_width="@dimen/master_icon_map_size"
+                                android:layout_height="@dimen/master_icon_map_size"
+                                android:src="@drawable/map"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintRight_toRightOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:ignore="contentDescription" />
+                        </android.support.constraint.ConstraintLayout>
+
+                        <View
+                            style="@style/Divider"
+                            android:layout_marginBottom="@dimen/master_space_between_divider_and_reviews"
+                            android:layout_marginTop="@dimen/master_space_between_address_and_divider" />
                     </LinearLayout>
-
-                    <View style="@style/Divider" />
-
-                    <!-- Address block -->
-                    <android.support.constraint.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:id="@+id/address_metro"
-                            style="@style/TextAppearance.AppCompat.Body2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/address_description"
-                            style="@style/TextAppearance.AppCompat.Body1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintTop_toTopOf="@id/address_metro" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_place_black_24dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:ignore="contentDescription" />
-                    </android.support.constraint.ConstraintLayout>
-
-                    <View style="@style/Divider" />
 
                     <!-- Signs and reviews -->
                     <LinearLayout
@@ -163,57 +179,72 @@
 
                         <TextView
                             android:id="@+id/see_all_n_reviews"
-                            style="@style/TextAppearance.AppCompat.Body1"
+                            style="@style/TextAppearance.AppCompat.Caption"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="25dp"
+                            android:layout_marginTop="@dimen/master_see_all_reviews_margin_top"
                             android:textColor="@color/colorAccent" />
                     </LinearLayout>
 
-                    <View style="@style/Divider" />
-
-                    <!-- Filters -->
+                    <!-- block with right padding -->
                     <LinearLayout
                         android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:layout_height="wrap_content">
-                        
-                        <TextView
-                            android:layout_width="wrap_content"
-                            style="@style/TextAppearance.AppCompat.Subhead"
-                            android:text="@string/visit_options"
-                            android:layout_height="wrap_content" />
+                        android:paddingEnd="@dimen/activity_horizontal_margin">
+
+                        <View
+                            style="@style/Divider"
+                            android:layout_marginBottom="@dimen/master_space_between_divider_and_visit_options"
+                            android:layout_marginTop="@dimen/master_space_between_see_all_reviews_and_divider" />
+
+                        <!-- Filters -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            android:orientation="horizontal">
+                            android:orientation="vertical">
 
-                            <Button
-                                style="@style/Base.Widget.AppCompat.Button.Colored"
-                                android:layout_width="0dp"
+                            <TextView
+                                style="@style/TextAppearance.AppCompat.Body2"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="20 янв, 19:15" />
+                                android:text="@string/visit_options" />
 
-                            <Button
-                                style="@style/Base.Widget.AppCompat.Button.Colored"
-                                android:layout_width="0dp"
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Пресненский" />
+                                android:layout_marginTop="@dimen/master_filter_buttons_margin_top"
+                                android:orientation="horizontal">
 
-                            <Button
-                                style="@style/Base.Widget.AppCompat.Button.Colored"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="3 услуги" />
+                                <Button
+                                    style="@style/Base.Widget.AppCompat.Button.Colored"
+                                    android:layout_width="0dp"
+                                    android:layout_height="@dimen/master_filter_buttons_height"
+                                    android:layout_weight="1"
+                                    android:text="20 янв, 19:15" />
+
+                                <Button
+                                    style="@style/Base.Widget.AppCompat.Button.Colored"
+                                    android:layout_width="0dp"
+                                    android:layout_height="@dimen/master_filter_buttons_height"
+                                    android:layout_weight="1"
+                                    android:text="Пресненский" />
+
+                                <Button
+                                    style="@style/Base.Widget.AppCompat.Button.Colored"
+                                    android:layout_width="0dp"
+                                    android:layout_height="@dimen/master_filter_buttons_height"
+                                    android:layout_weight="1"
+                                    android:text="3 услуги" />
+                            </LinearLayout>
                         </LinearLayout>
+
+                        <View
+                            style="@style/Divider"
+                            android:layout_marginBottom="@dimen/master_space_divider_and_suitable_masters"
+                            android:layout_marginTop="@dimen/master_space_between_filter_buttons_and_divider" />
+
                     </LinearLayout>
-
-                    <View style="@style/Divider" />
-
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
