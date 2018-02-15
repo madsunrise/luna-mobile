@@ -12,6 +12,8 @@ import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.utrobin.luna.R
 import com.utrobin.luna.adapter.ViewPagerAdapter
 import com.utrobin.luna.databinding.MasterActivityBinding
@@ -91,6 +93,7 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
         binding.addressDescription.text = master.base.address.description
 
         fillReviews()
+        fillSuitableMasters()
     }
 
     private fun drawStars() {
@@ -140,7 +143,7 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
                     .from(this)
                     .inflate(R.layout.master_review, binding.reviewsContainer, false)
 
-            if (i != reviewsCount -1) {
+            if (i != reviewsCount - 1) {
                 review.layoutParams = params    // Don't apply it to last element
             }
 
@@ -152,6 +155,66 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
                     " чистое оборудование и еще много-много всего, длинный-длинный текст"
 
         }
+    }
+
+    private fun fillSuitableMasters() {
+        val mastersCount = 3
+        binding.nMastersSuitableForYou.text = resources.getQuantityString(
+                R.plurals.n_masters_suitable_for_you, mastersCount, mastersCount)
+
+
+        // Avatar
+//        item.avatar.path.takeIf { it.isNotBlank() }
+//                ?.let { Glide.with(this).load(it).apply(RequestOptions.circleCropTransform()).into(master1.findViewById<ImageView>(R.id.avatar)) }
+//                ?: master1.findViewById<ImageView>(R.id.avatar).setImageDrawable(ContextCompat.getDrawable(context, R.drawable.no_avatar))
+
+        val master1 = LayoutInflater
+                .from(this)
+                .inflate(R.layout.suitable_master, binding.suitableMastersContainer, false)
+        Glide.with(this)
+                .load("http://www.garmoniazhizni.com/wp-content/uploads/2015/04/odinokaya-prichiny.jpg")
+                .apply(RequestOptions.circleCropTransform())
+                .into(master1.findViewById<ImageView>(R.id.avatar))
+        master1.findViewById<TextView>(R.id.name).text = "Алия Агиповна"
+        master1.findViewById<TextView>(R.id.role).text = "Мастер-стилист"
+        master1.findViewById<TextView>(R.id.price).text = "2500 \u20BD"
+        var ratingsCount = 124
+        var rating = 4.7 //item.stars.toString()
+        master1.findViewById<TextView>(R.id.rating).text = resources.getQuantityString(R.plurals.ratings_count, ratingsCount, rating, ratingsCount)
+        binding.suitableMastersContainer.addView(master1)
+
+
+        val master2 = LayoutInflater
+                .from(this)
+                .inflate(R.layout.suitable_master, binding.suitableMastersContainer, false)
+        Glide.with(this)
+                .load("https://wallpaperlayer.com/img/2015/9/miranda-kerr-8591-8917-hd-wallpapers.jpg")
+                .apply(RequestOptions.circleCropTransform())
+                .into(master2.findViewById<ImageView>(R.id.avatar))
+        master2.findViewById<TextView>(R.id.name).text = "Агафья Карамыслова"
+        master2.findViewById<TextView>(R.id.role).text = "Ведущий стилист"
+        master2.findViewById<TextView>(R.id.price).text = "2800 \u20BD"
+        ratingsCount = 155
+        rating = 4.8 //item.stars.toString()
+        master2.findViewById<TextView>(R.id.rating).text = resources.getQuantityString(R.plurals.ratings_count, ratingsCount, rating, ratingsCount)
+        binding.suitableMastersContainer.addView(master2)
+
+
+        val master3 = LayoutInflater
+                .from(this)
+                .inflate(R.layout.suitable_master, binding.suitableMastersContainer, false)
+        Glide.with(this)
+                .load("http://download.loveradio.ru/pub/380448.jpg")
+                .apply(RequestOptions.circleCropTransform())
+                .into(master3.findViewById<ImageView>(R.id.avatar))
+        master3.findViewById<TextView>(R.id.name).text = "Пенсильвана Воздушная"
+        master3.findViewById<TextView>(R.id.role).text = "Арт-директор"
+        master3.findViewById<TextView>(R.id.price).text = "3500 \u20BD"
+        ratingsCount = 107
+        rating = 4.5 //item.stars.toString()
+        master3.findViewById<TextView>(R.id.rating).text = resources.getQuantityString(R.plurals.ratings_count, ratingsCount, rating, ratingsCount)
+        binding.suitableMastersContainer.addView(master3)
+
     }
 
 

@@ -243,8 +243,22 @@
                             style="@style/Divider"
                             android:layout_marginBottom="@dimen/master_space_divider_and_suitable_masters"
                             android:layout_marginTop="@dimen/master_space_between_filter_buttons_and_divider" />
-
                     </LinearLayout>
+
+                    <!-- Suitable masters -->
+                    <LinearLayout
+                        android:id="@+id/suitable_masters_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/n_masters_suitable_for_you"
+                            style="@style/TextAppearance.AppCompat.Body2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>

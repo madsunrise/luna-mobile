@@ -29,4 +29,13 @@
     <dimen name="master_filter_buttons_height">40dp</dimen>
     <dimen name="master_space_between_filter_buttons_and_divider">20dp</dimen>
     <dimen name="master_space_divider_and_suitable_masters">20dp</dimen>
+    <dimen name="master_suitable_master_parent_padding_start">16dp</dimen>
+    <dimen name="master_suitable_master_parent_padding_top">12dp</dimen>
+    <dimen name="master_suitable_master_parent_padding_end">16dp</dimen>
+    <dimen name="master_suitable_master_parent_padding_bottom">12dp</dimen>
+    <dimen name="master_suitable_master_avatar_size">40dp</dimen>
+    <dimen name="master_suitable_master_name_margin_start">12dp</dimen>
+    <dimen name="master_suitable_master_space_between_name_and_role">2dp</dimen>
+    <dimen name="master_suitable_master_rating_margin_top">8dp</dimen>
+    <dimen name="master_suitable_master_drawable_star_padding">4dp</dimen>
 </resources>

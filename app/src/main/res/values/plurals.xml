@@ -6,4 +6,11 @@
         <item quantity="many">%s | %d оценок</item>
         <item quantity="other">%s | %d оценок</item>
     </plurals>
+
+    <plurals name="n_masters_suitable_for_you">
+        <item quantity="one">Вам подходит %d мастер</item>
+        <item quantity="few">Вам подходит %d мастера</item>
+        <item quantity="many">Вам подходит %d мастеров</item>
+        <item quantity="other">Вам подходит %d мастеров</item>
+    </plurals>
 </resources>
