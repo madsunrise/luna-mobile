@@ -5,11 +5,13 @@ import android.os.Build
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import com.utrobin.luna.R
 import com.utrobin.luna.adapter.ViewPagerAdapter
 import com.utrobin.luna.databinding.MasterActivityBinding
@@ -87,6 +89,8 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
 
         binding.addressMetro.text = "Улица 1905 года"
         binding.addressDescription.text = master.base.address.description
+
+        fillReviews()
     }
 
     private fun drawStars() {
@@ -116,6 +120,37 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
             emptyStar.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_star_border_black_24dp))
             emptyStar.layoutParams = params
             binding.starsContainer.addView(emptyStar)
+        }
+    }
+
+
+    private fun fillReviews() {
+        binding.seeAllNReviews.text = "Посмотреть все 34 отзыва"
+
+        val params = LinearLayout.LayoutParams(
+                resources.getDimension(R.dimen.master_review_width).toInt(),
+                resources.getDimension(R.dimen.master_review_height).toInt()
+        )
+        params.setMargins(0, 0, resources.getDimension(R.dimen.master_space_between_reviews).toInt(), 0)
+
+        val reviewsCount = 4
+
+        for (i in 0 until reviewsCount) {
+            val review = LayoutInflater
+                    .from(this)
+                    .inflate(R.layout.master_review, binding.reviewsContainer, false)
+
+            if (i != reviewsCount -1) {
+                review.layoutParams = params    // Don't apply it to last element
+            }
+
+            binding.reviewsContainer.addView(review)
+
+            review.findViewById<TextView>(R.id.review_title).text = "Псевдопродольная Алефтина"
+            review.findViewById<TextView>(R.id.review_date).text = "2 дн. назад. Мастер Пенсильвана В."
+            review.findViewById<TextView>(R.id.review_text).text = "Аккуратный и опрятный мастер, приятный персонал," +
+                    " чистое оборудование и еще много-много всего, длинный-длинный текст"
+
         }
     }
 

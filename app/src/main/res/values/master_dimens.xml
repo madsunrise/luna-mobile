@@ -15,5 +15,8 @@
     <dimen name="master_image_slider_height">240dp</dimen>
     <dimen name="master_switch_padding_vertical">15dp</dimen>
     <dimen name="master_divider_height">1dp</dimen>
-    <dimen name="master_space_between_stars">8dp</dimen>
+    <dimen name="master_space_between_stars">2dp</dimen>
+    <dimen name="master_review_height">122dp</dimen>
+    <dimen name="master_review_width">280dp</dimen>
+    <dimen name="master_space_between_reviews">15dp</dimen>
 </resources>
