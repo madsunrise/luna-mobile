@@ -82,9 +82,10 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
                 reviewsCount, master.base.stars.toString(), reviewsCount)
         drawStars()
 
-        binding.description.text = "Мы легко впишемся в ваш график, а все наши услуги" +
+        binding.masterDescription.text = "Мы легко впишемся в ваш график, а все наши услуги" +
                 " не займут у вас много времени."
 
+        binding.addressMetro.text = "Улица 1905 года"
         binding.addressDescription.text = master.base.address.description
     }
 
