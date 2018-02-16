@@ -26,7 +26,6 @@
     <dimen name="master_space_between_see_all_reviews_and_divider">20dp</dimen>
     <dimen name="master_space_between_divider_and_visit_options">36dp</dimen>
     <dimen name="master_filter_buttons_margin_top">16dp</dimen>
-    <dimen name="master_filter_buttons_height">40dp</dimen>
     <dimen name="master_space_between_filter_buttons_and_divider">20dp</dimen>
     <dimen name="master_space_divider_and_suitable_masters">20dp</dimen>
     <dimen name="master_suitable_master_parent_padding_start">16dp</dimen>
@@ -38,4 +37,10 @@
     <dimen name="master_suitable_master_space_between_name_and_role">2dp</dimen>
     <dimen name="master_suitable_master_rating_margin_top">8dp</dimen>
     <dimen name="master_suitable_master_drawable_star_padding">4dp</dimen>
+    <dimen name="master_make_an_appointment_price_margin_start">16dp</dimen>
+    <dimen name="master_make_an_appointment_price_margin_top">19dp</dimen>
+    <dimen name="master_make_an_appointment_master_description_margin_top">2dp</dimen>
+    <dimen name="master_make_an_appointment_master_description_margin_bottom">19dp</dimen>
+    <dimen name="master_make_an_appointment_duration_margin_start">35dp</dimen>
+    <dimen name="master_make_an_appointment_button_margin_end">16dp</dimen>
 </resources>

@@ -94,6 +94,10 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
 
         fillReviews()
         fillSuitableMasters()
+
+        binding.appointmentPrice.text = "2500 \u20BD"
+        binding.appointmentDuration.text = "1ч 20м"
+        binding.appointmentMasterDescription.text = "Алия Агиповна, мастер-стилист"
     }
 
     private fun drawStars() {

@@ -219,21 +219,21 @@
                                 <Button
                                     style="@style/Base.Widget.AppCompat.Button.Colored"
                                     android:layout_width="0dp"
-                                    android:layout_height="@dimen/master_filter_buttons_height"
+                                    android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:text="20 янв, 19:15" />
 
                                 <Button
                                     style="@style/Base.Widget.AppCompat.Button.Colored"
                                     android:layout_width="0dp"
-                                    android:layout_height="@dimen/master_filter_buttons_height"
+                                    android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:text="Пресненский" />
 
                                 <Button
                                     style="@style/Base.Widget.AppCompat.Button.Colored"
                                     android:layout_width="0dp"
-                                    android:layout_height="@dimen/master_filter_buttons_height"
+                                    android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:text="3 услуги" />
                             </LinearLayout>
@@ -260,6 +260,65 @@
                     </LinearLayout>
 
                 </LinearLayout>
+
+                <!-- Make an appointment block -->
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <View
+                        android:id="@+id/appointment_divider"
+                        style="@style/Divider"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/appointment_price"
+                        style="@style/TextAppearance.AppCompat.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/master_make_an_appointment_price_margin_start"
+                        android:layout_marginTop="@dimen/master_make_an_appointment_price_margin_top"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/appointment_divider" />
+
+
+                    <TextView
+                        android:id="@+id/appointment_duration"
+                        style="@style/TextAppearance.AppCompat.Caption"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/master_make_an_appointment_duration_margin_start"
+                        app:layout_constraintLeft_toRightOf="@id/appointment_price"
+                        app:layout_constraintTop_toTopOf="@id/appointment_price" />
+
+                    <TextView
+                        android:id="@+id/appointment_master_description"
+                        style="@style/TextAppearance.AppCompat.Caption"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/master_make_an_appointment_master_description_margin_top"
+                        app:layout_constraintLeft_toLeftOf="@id/appointment_price"
+                        app:layout_constraintTop_toBottomOf="@id/appointment_price" />
+
+                    <!-- Yes, it's strange -->
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/master_make_an_appointment_master_description_margin_bottom"
+                        app:layout_constraintTop_toBottomOf="@id/appointment_master_description" />
+
+                    <Button
+                        android:id="@+id/make_an_appointment_btn"
+                        style="@style/Base.Widget.AppCompat.Button.Colored"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/master_make_an_appointment_button_margin_end"
+                        android:text="@string/make_an_appointment"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </android.support.constraint.ConstraintLayout>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
