@@ -31,7 +31,7 @@
 
     <TextView
         android:id="@+id/role"
-        style="@style/TextAppearance.AppCompat.Caption"
+        style="@style/TextAppearance.AppCompat.Body1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/master_suitable_master_space_between_name_and_role"
@@ -50,6 +50,8 @@
         style="@style/TextAppearance.AppCompat.Caption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/master_suitable_master_about_margin_top"
+        android:fontFamily="sans-serif-medium"
         android:text="@string/about_master"
         android:textColor="@color/colorAccent"
         app:layout_constraintRight_toRightOf="@id/price"
@@ -57,11 +59,10 @@
 
     <!-- Stars -->
     <TextView
-        android:id="@+id/rating"
-        style="@style/TextAppearance.AppCompat.Caption"
+        android:id="@+id/rating_main_part"
+        style="@style/TextAppearance.AppCompat.Body2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:layout_marginTop="@dimen/master_suitable_master_rating_margin_top"
         android:drawablePadding="@dimen/master_suitable_master_drawable_star_padding"
         android:drawableStart="@drawable/ic_star_border_black_24dp"
@@ -69,4 +70,12 @@
         app:layout_constraintLeft_toLeftOf="@id/name"
         app:layout_constraintTop_toBottomOf="@id/role" />
 
+    <TextView
+        android:id="@+id/rating_secondary_part"
+        style="@style/TextAppearance.AppCompat.Body1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/rating_main_part"
+        app:layout_constraintLeft_toRightOf="@id/rating_main_part"
+        app:layout_constraintTop_toTopOf="@id/rating_main_part" />
 </android.support.constraint.ConstraintLayout>

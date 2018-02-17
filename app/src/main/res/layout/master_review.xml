@@ -10,7 +10,7 @@
     android:paddingTop="@dimen/master_review_padding_top">
 
     <TextView
-        android:id="@+id/review_title"
+        android:id="@+id/review_author"
         style="@style/TextAppearance.AppCompat.Body2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -20,13 +20,16 @@
         style="@style/TextAppearance.AppCompat.Caption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/master_review_date_margin_top" />
+        android:layout_marginTop="@dimen/master_review_date_margin_top"
+        android:fontFamily="sans-serif-medium" />
 
     <TextView
         android:id="@+id/review_text"
-        style="@style/TextAppearance.AppCompat.Caption"
+        style="@style/TextAppearance.AppCompat.Body1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/master_review_text_margin_top" />
+        android:layout_marginTop="@dimen/master_review_text_margin_top"
+        android:ellipsize="end"
+        android:maxLines="2" />
 
 </LinearLayout>

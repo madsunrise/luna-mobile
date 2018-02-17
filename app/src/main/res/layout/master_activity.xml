@@ -22,15 +22,6 @@
 
         </android.support.v7.widget.Toolbar>
 
-        <include
-            android:id="@+id/error_container"
-            layout="@layout/error_container" />
-
-        <include
-            android:id="@+id/progress_container"
-            layout="@layout/progress_container" />
-
-
         <ScrollView
             android:id="@+id/main_container"
             android:layout_width="match_parent"
@@ -96,18 +87,23 @@
                                     android:orientation="horizontal" />
 
                                 <TextView
-                                    android:id="@+id/rating"
-                                    style="@style/TextAppearance.AppCompat.Caption"
+                                    android:id="@+id/rating_main_part"
+                                    style="@style/TextAppearance.AppCompat.Body2"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginStart="@dimen/master_space_between_stars_and_text"
-                                    android:fontFamily="sans-serif-medium" />
+                                    android:layout_marginStart="@dimen/master_space_between_stars_and_text" />
+
+                                <TextView
+                                    android:id="@+id/rating_secondary_part"
+                                    style="@style/TextAppearance.AppCompat.Body1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
                             </LinearLayout>
 
                             <!-- description -->
                             <TextView
                                 android:id="@+id/master_description"
-                                style="@style/TextAppearance.AppCompat.Caption"
+                                style="@style/TextAppearance.AppCompat.Body1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/master_description_margin_top" />
@@ -126,16 +122,15 @@
 
                             <TextView
                                 android:id="@+id/address_metro"
-                                style="@style/TextAppearance.AppCompat.Caption"
+                                style="@style/TextAppearance.AppCompat.Body2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="sans-serif-medium"
                                 app:layout_constraintLeft_toLeftOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
                                 android:id="@+id/address_description"
-                                style="@style/TextAppearance.AppCompat.Caption"
+                                style="@style/TextAppearance.AppCompat.Body1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/master_address_description_margin_top"
@@ -154,7 +149,7 @@
 
                         <View
                             style="@style/Divider"
-                            android:layout_marginBottom="@dimen/master_space_between_divider_and_reviews"
+                            android:layout_marginBottom="@dimen/master_space_between_divider_and_signs"
                             android:layout_marginTop="@dimen/master_space_between_address_and_divider" />
                     </LinearLayout>
 
@@ -169,17 +164,29 @@
                             android:layout_height="wrap_content">
 
                             <LinearLayout
-                                android:id="@+id/reviews_container"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:id="@+id/signs_container"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal" />
+
+                                <LinearLayout
+                                    android:id="@+id/reviews_container"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/master_space_between_signs_and_reviews"
+                                    android:orientation="horizontal" />
 
                             </LinearLayout>
                         </HorizontalScrollView>
 
                         <TextView
                             android:id="@+id/see_all_n_reviews"
-                            style="@style/TextAppearance.AppCompat.Caption"
+                            style="@style/TextAppearance.AppCompat.Body1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/master_see_all_reviews_margin_top"
@@ -205,9 +212,10 @@
                             android:orientation="vertical">
 
                             <TextView
-                                style="@style/TextAppearance.AppCompat.Body2"
+                                style="@style/TextAppearance.AppCompat.Subhead"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-medium"
                                 android:text="@string/visit_options" />
 
                             <LinearLayout
@@ -217,25 +225,37 @@
                                 android:orientation="horizontal">
 
                                 <Button
+                                    android:id="@+id/button_when"
                                     style="@style/Base.Widget.AppCompat.Button.Colored"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="20 янв, 19:15" />
+                                    android:fontFamily="sans-serif-medium"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                                    android:textColor="@color/white" />
 
                                 <Button
+                                    android:id="@+id/button_where"
                                     style="@style/Base.Widget.AppCompat.Button.Colored"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Пресненский" />
+                                    android:fontFamily="sans-serif-medium"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                                    android:textColor="@color/white" />
 
+                                <!-- TODO Support compatibility -->
                                 <Button
+                                    android:id="@+id/button_what"
                                     style="@style/Base.Widget.AppCompat.Button.Colored"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="3 услуги" />
+                                    android:drawableEnd="@drawable/favorite_copy_3"
+                                    android:drawableTint="@color/white"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                                    android:textColor="@color/white" />
                             </LinearLayout>
                         </LinearLayout>
 
@@ -254,17 +274,19 @@
 
                         <TextView
                             android:id="@+id/n_masters_suitable_for_you"
-                            style="@style/TextAppearance.AppCompat.Body2"
+                            style="@style/TextAppearance.AppCompat.Subhead"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/master_suitable_master_title_margin_bottom"
+                            android:fontFamily="sans-serif-medium" />
                     </LinearLayout>
-
                 </LinearLayout>
 
                 <!-- Make an appointment block -->
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/master_space_between_suitable_masters_and_appointment">
 
                     <View
                         android:id="@+id/appointment_divider"
@@ -289,12 +311,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/master_make_an_appointment_duration_margin_start"
+                        android:drawablePadding="@dimen/master_make_an_appointment_duration_drawable_padding"
+                        android:drawableStart="@drawable/ic_time"
+                        android:fontFamily="sans-serif-medium"
                         app:layout_constraintLeft_toRightOf="@id/appointment_price"
                         app:layout_constraintTop_toTopOf="@id/appointment_price" />
 
                     <TextView
                         android:id="@+id/appointment_master_description"
-                        style="@style/TextAppearance.AppCompat.Caption"
+                        style="@style/TextAppearance.AppCompat.Body1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/master_make_an_appointment_master_description_margin_top"
@@ -313,11 +338,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/master_make_an_appointment_button_margin_end"
+                        android:paddingBottom="@dimen/master_make_an_appointment_button_vertical_padding"
+                        android:paddingEnd="@dimen/master_make_an_appointment_button_horizontal_padding"
+                        android:paddingStart="@dimen/master_make_an_appointment_button_horizontal_padding"
+                        android:paddingTop="@dimen/master_make_an_appointment_button_vertical_padding"
                         android:text="@string/make_an_appointment"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
-
                 </android.support.constraint.ConstraintLayout>
             </LinearLayout>
         </ScrollView>
