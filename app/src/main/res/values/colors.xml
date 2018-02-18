@@ -8,6 +8,9 @@
     <color name="background_color">#F2F2F2</color> <!-- Closest material #f5f5f5 -->
     <color name="support_color">#DAE0E6</color>
     <color name="divider_color">@color/support_color</color>
+    
+    <color name="textColorPrimary">#212121</color>
+    <color name="textColorSecondary">#6A6A6A</color>
 
     <!-- view pager dots -->
     <color name="view_pager_active_dot">@color/black</color>

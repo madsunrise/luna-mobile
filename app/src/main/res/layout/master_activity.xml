@@ -67,7 +67,7 @@
 
                             <TextView
                                 android:id="@+id/title"
-                                style="@style/TextAppearance.AppCompat.Title"
+                                style="@style/Title"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textStyle="bold" />
@@ -88,14 +88,14 @@
 
                                 <TextView
                                     android:id="@+id/rating_main_part"
-                                    style="@style/TextAppearance.AppCompat.Body2"
+                                    style="@style/Body2"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="@dimen/master_space_between_stars_and_text" />
 
                                 <TextView
                                     android:id="@+id/rating_secondary_part"
-                                    style="@style/TextAppearance.AppCompat.Body1"
+                                    style="@style/Body1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content" />
                             </LinearLayout>
@@ -103,7 +103,7 @@
                             <!-- description -->
                             <TextView
                                 android:id="@+id/master_description"
-                                style="@style/TextAppearance.AppCompat.Body1"
+                                style="@style/Body1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/master_description_margin_top" />
@@ -122,7 +122,7 @@
 
                             <TextView
                                 android:id="@+id/address_metro"
-                                style="@style/TextAppearance.AppCompat.Body2"
+                                style="@style/Body2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 app:layout_constraintLeft_toLeftOf="parent"
@@ -130,7 +130,7 @@
 
                             <TextView
                                 android:id="@+id/address_description"
-                                style="@style/TextAppearance.AppCompat.Body1"
+                                style="@style/Body1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/master_address_description_margin_top"
@@ -186,7 +186,7 @@
 
                         <TextView
                             android:id="@+id/see_all_n_reviews"
-                            style="@style/TextAppearance.AppCompat.Body1"
+                            style="@style/Body1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/master_see_all_reviews_margin_top"
@@ -212,7 +212,7 @@
                             android:orientation="vertical">
 
                             <TextView
-                                style="@style/TextAppearance.AppCompat.Subhead"
+                                style="@style/Subhead"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="sans-serif-medium"
@@ -231,7 +231,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:fontFamily="sans-serif-medium"
-                                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                                    android:textAppearance="@style/Caption"
                                     android:textColor="@color/white" />
 
                                 <Button
@@ -241,7 +241,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:fontFamily="sans-serif-medium"
-                                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                                    android:textAppearance="@style/Caption"
                                     android:textColor="@color/white" />
 
                                 <!-- TODO Support compatibility -->
@@ -254,7 +254,7 @@
                                     android:drawableEnd="@drawable/favorite_copy_3"
                                     android:drawableTint="@color/white"
                                     android:fontFamily="sans-serif-medium"
-                                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                                    android:textAppearance="@style/Caption"
                                     android:textColor="@color/white" />
                             </LinearLayout>
                         </LinearLayout>
@@ -275,7 +275,7 @@
 
                     <TextView
                         android:id="@+id/n_masters_suitable_for_you"
-                        style="@style/TextAppearance.AppCompat.Subhead"
+                        style="@style/Subhead"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/master_suitable_master_title_margin_bottom"
@@ -297,7 +297,7 @@
 
                     <TextView
                         android:id="@+id/appointment_price"
-                        style="@style/TextAppearance.AppCompat.Body2"
+                        style="@style/Body2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/master_make_an_appointment_price_margin_start"
@@ -308,7 +308,7 @@
 
                     <TextView
                         android:id="@+id/appointment_duration"
-                        style="@style/TextAppearance.AppCompat.Caption"
+                        style="@style/Caption"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/master_make_an_appointment_duration_margin_start"
@@ -320,7 +320,7 @@
 
                     <TextView
                         android:id="@+id/appointment_master_description"
-                        style="@style/TextAppearance.AppCompat.Body1"
+                        style="@style/Body1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/master_make_an_appointment_master_description_margin_top"

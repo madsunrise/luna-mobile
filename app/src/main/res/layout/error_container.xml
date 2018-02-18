@@ -17,7 +17,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="10dp"
             android:text="@string/error_has_occured_while_data_loading"
-            style="@style/TextAppearance.AppCompat.Subhead" />
+            style="@style/Subhead" />
 
         <Button
             android:id="@+id/repeat_btn"

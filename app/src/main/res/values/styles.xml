@@ -1,5 +1,4 @@
 <resources>
-
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
@@ -16,4 +15,28 @@
         <item name="android:background">?android:attr/listDivider</item>
     </style>
 
+
+    <style name="Headline" parent="TextAppearance.AppCompat.Headline">
+        <item name="android:textColor">@color/textColorPrimary</item>
+    </style>
+
+    <style name="Title" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textColor">@color/textColorPrimary</item>
+    </style>
+
+    <style name="Subhead" parent="TextAppearance.AppCompat.Subhead">
+        <item name="android:textColor">@color/textColorPrimary</item>
+    </style>
+
+    <style name="Body2" parent="TextAppearance.AppCompat.Body2">
+        <item name="android:textColor">@color/textColorPrimary</item>
+    </style>
+
+    <style name="Body1" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:textColor">@color/textColorPrimary</item>
+    </style>
+
+    <style name="Caption" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:textColor">@color/textColorPrimary</item>
+    </style>
 </resources>
