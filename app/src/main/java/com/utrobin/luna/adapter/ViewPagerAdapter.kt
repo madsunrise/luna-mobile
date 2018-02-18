@@ -22,7 +22,10 @@ import java.util.*
  * Created by ivan on 03.01.2018.
  */
 
-internal class ViewPagerAdapter(context: Context, private val photos: List<Photo>) : PagerAdapter() {
+internal class ViewPagerAdapter(
+        context: Context,
+        private val photos: List<Photo>,
+        private val showGradient: Boolean = false) : PagerAdapter() {
     private val layoutInflater =
             context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
@@ -44,6 +47,10 @@ internal class ViewPagerAdapter(context: Context, private val photos: List<Photo
         container.addView(itemView)
 
         imageView.setOnClickListener { imageClickSubject.onNext(true) }
+
+        if (showGradient) {
+            itemView.findViewById<View>(R.id.gradient).visibility = View.VISIBLE
+        }
 
         return itemView
     }
