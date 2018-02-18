@@ -188,6 +188,21 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
         binding.signsContainer.addView(sign3)
 
 
+        val sign4 = LayoutInflater
+                .from(this)
+                .inflate(R.layout.master_sign, binding.signsContainer, false)
+        sign4.layoutParams = params
+
+        sign4.findViewById<TextView>(R.id.main_part).setCompoundDrawablesWithIntrinsicBounds(
+                ContextCompat.getDrawable(this, R.drawable.ic_neatly),
+                null,
+                null,
+                null)
+        sign4.findViewById<TextView>(R.id.main_part).text = "Красивые девушки"
+        sign4.findViewById<TextView>(R.id.secondary_part).text = " | 107"
+        if (System.currentTimeMillis() % 2 == 0L) {
+            binding.signsContainer.addView(sign4)
+        }
     }
 
     private fun fillReviews() {

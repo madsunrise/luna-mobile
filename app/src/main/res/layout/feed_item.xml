@@ -4,10 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    card_view:cardElevation="5dp"
-    card_view:cardPreventCornerOverlap="false"
-    card_view:cardUseCompatPadding="true">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -99,10 +96,9 @@
                     style="@style/Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginStart="10dp"
-                    android:textColor="@color/white" />
+                    android:layout_marginTop="15dp"
+                    android:layout_marginStart="20dp"
+                    android:textColor="#e6ffffff" />
 
             </RelativeLayout>
 
@@ -151,5 +147,10 @@
                     tools:ignore="contentDescription" />
             </RelativeLayout>
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Divider" />
     </LinearLayout>
 </android.support.v7.widget.CardView>

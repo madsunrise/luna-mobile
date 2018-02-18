@@ -160,28 +160,27 @@
                         android:orientation="vertical">
 
                         <HorizontalScrollView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
                             <LinearLayout
+                                android:id="@+id/signs_container"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical">
+                                android:layout_marginBottom="@dimen/master_signs_container_margin_bottom"
+                                android:orientation="horizontal" />
+                        </HorizontalScrollView>
 
-                                <LinearLayout
-                                    android:id="@+id/signs_container"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal" />
+                        <HorizontalScrollView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/master_space_between_signs_and_reviews">
 
-                                <LinearLayout
-                                    android:id="@+id/reviews_container"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="@dimen/master_space_between_signs_and_reviews"
-                                    android:orientation="horizontal" />
-
-                            </LinearLayout>
+                            <LinearLayout
+                                android:id="@+id/reviews_container"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal" />
                         </HorizontalScrollView>
 
                         <TextView
@@ -279,8 +278,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/master_suitable_master_title_margin_bottom"
-                        android:fontFamily="sans-serif-medium"
-                        android:layout_marginStart="@dimen/activity_horizontal_margin" />
+                        android:layout_marginStart="@dimen/activity_horizontal_margin"
+                        android:fontFamily="sans-serif-medium" />
                 </LinearLayout>
 
                 <!-- Make an appointment block -->

@@ -8,6 +8,7 @@ import android.util.TypedValue.COMPLEX_UNIT_SP
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -48,7 +49,7 @@ internal class ViewPagerAdapter(context: Context, private val photos: List<Photo
     }
 
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
-        container.removeView(`object` as LinearLayout)
+        container.removeView(`object` as FrameLayout)
     }
 
     companion object {

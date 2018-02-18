@@ -68,7 +68,7 @@ class FeedAdapter(items: List<MasterBase>) : FooterLoaderAdapter<MasterBase, Vie
             }
         }
 
-        holder.initialCost.text = "от 2500 Р"
+        holder.initialCost.text = "1800 - 3500 \u20BD"
 
         // Photos slider
         holder.viewPager.adapter = adapter

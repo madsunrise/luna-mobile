@@ -14,7 +14,8 @@
     <dimen name="master_space_between_divider_and_signs">21dp</dimen>
     <dimen name="master_signs_drawable_padding">8dp</dimen>
     <dimen name="master_space_between_signs">16dp</dimen>
-    <dimen name="master_space_between_signs_and_reviews">21dp</dimen>
+    <dimen name="master_signs_container_margin_bottom">10dp</dimen>
+    <dimen name="master_space_between_signs_and_reviews">10dp</dimen>
     <dimen name="master_review_height">122dp</dimen>
     <dimen name="master_review_width">280dp</dimen>
     <dimen name="master_review_radius">8dp</dimen>
