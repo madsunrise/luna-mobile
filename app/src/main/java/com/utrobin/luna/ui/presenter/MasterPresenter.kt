@@ -3,7 +3,8 @@ package com.utrobin.luna.ui.presenter
 import com.apollographql.apollo.rx2.Rx2Apollo
 import com.utrobin.luna.App
 import com.utrobin.luna.MasterQuery
-import com.utrobin.luna.model.*
+import com.utrobin.luna.model.MasterBase
+import com.utrobin.luna.model.MasterExtended
 import com.utrobin.luna.network.GraphQLService
 import com.utrobin.luna.network.NetworkError
 import com.utrobin.luna.ui.contract.MasterContract
@@ -25,10 +26,10 @@ class MasterPresenter : BasePresenter<MasterContract.View>(), MasterContract.Pre
         App.component.injectMasterPresenter(this)
     }
 
-    override fun loadData(userId: Long) {
+    override fun loadData(master: MasterBase) {
         val query = MasterQuery
                 .builder()
-                .id(userId.toString())
+                .id(master.id.toString())
                 .build()
 
         val apolloCall = graphQLService.apolloClient.query(query)
@@ -36,7 +37,7 @@ class MasterPresenter : BasePresenter<MasterContract.View>(), MasterContract.Pre
         Rx2Apollo.from(apolloCall)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.computation())
-                .map { parseDate(it.data()!!.master()!!) }
+                .map { parseData(master, it.data()!!) }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         {
@@ -49,47 +50,10 @@ class MasterPresenter : BasePresenter<MasterContract.View>(), MasterContract.Pre
                 )
     }
 
-    private fun parseDate(data: MasterQuery.Master): Master {
-        val name = data.name()
-
-        val tags = ArrayList<Tag>()
-        data.avatar().tags().forEach {
-            tags.add(Tag(it.name()))
-        }
-        val avatar = Photo(data.avatar().path(), tags)
-
-        val addressDesc = data.address().description()
-        val lat = data.address().lat()
-        val lon = data.address().lon()
-        val address = Address(addressDesc, lat, lon)
-
-        val stars = data.stars()
-
-        val signs = ArrayList<Sign>()
-        data.signs().forEach {
-            signs.add(Sign(it.name(), it.description(), it.icon()))
-        }
-
-        val photos = ArrayList<Photo>()
-        data.photos().forEach {
-            val photoTags = ArrayList<Tag>()
-            it.tags().forEach {
-                photoTags.add(Tag(it.name()))
-            }
-            photos.add(Photo(it.path(), photoTags))
-        }
-
-        return Master(
-                name = name,
-                avatar = avatar,
-                address = address,
-                stars = stars,
-                photos = photos
+    private fun parseData(base: MasterBase, data: MasterQuery.Data): MasterExtended {
+        return MasterExtended(
+                base = base
         )
-    }
-
-    override fun onBookmarkClicked() {
-
     }
 
     override fun destroy() {

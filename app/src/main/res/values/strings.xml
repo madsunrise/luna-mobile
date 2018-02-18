@@ -26,4 +26,7 @@
     <string name="passwords_dont_match">Пароли не совпадают</string>
     <string name="sign_up_successful">Регистрация успешна!</string>
     <string name="sign_up_failed">Произошла ошибка</string>
+    <string name="visit_options">Параметры посещения</string>
+    <string name="about_master">О мастере</string>
+    <string name="make_an_appointment">Записаться</string>
 </resources>

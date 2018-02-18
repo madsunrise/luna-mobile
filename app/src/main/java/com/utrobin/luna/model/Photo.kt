@@ -35,6 +35,7 @@ data class Photo(val path: String, val tags: ArrayList<Tag> = ArrayList()) : Par
     }
 
     companion object {
+        @JvmField
         val CREATOR = object : Parcelable.Creator<Photo> {
             override fun createFromParcel(`in`: Parcel): Photo {
                 return Photo(`in`)

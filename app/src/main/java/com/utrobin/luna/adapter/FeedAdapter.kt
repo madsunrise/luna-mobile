@@ -2,6 +2,7 @@ package com.utrobin.luna.adapter
 
 import android.net.Uri
 import android.support.v4.content.ContextCompat
+import android.support.v4.view.ViewCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -15,14 +16,14 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.utrobin.luna.R
 import com.utrobin.luna.adapter.ViewPagerAdapter.Companion.addBottomDots
-import com.utrobin.luna.model.FeedItem
+import com.utrobin.luna.model.MasterBase
 import com.utrobin.luna.utils.svg.SvgModule
 
 /**
  * Created by ivan on 31.10.2017.
  */
 
-class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter<FeedItem>(ArrayList(items)) {
+class FeedAdapter(items: List<MasterBase>) : FooterLoaderAdapter<MasterBase, ViewPager>(ArrayList(items)) {
 
     override fun getYourItemViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
         val itemView = LayoutInflater.from(parent.context)
@@ -34,14 +35,18 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter<FeedItem>(ArrayLi
         val item = items[position]
         val context = (holder as ItemViewHolder).itemView.context
 
-        holder.header.setOnClickListener { viewClickSubject.onNext(item) }
+        val adapter = ViewPagerAdapter(context, item.photos)
+        adapter.imageClickSubject.subscribe { viewClickSubject.onNext(Pair(item, holder.viewPager)) } // A bit strange decision
+        holder.itemView.setOnClickListener { viewClickSubject.onNext(Pair(item, holder.viewPager)) }
 
         holder.moreOptions.setOnClickListener {
             Toast.makeText(context, "Options!", Toast.LENGTH_SHORT).show()
         }
 
+        ViewCompat.setTransitionName(holder.viewPager, getTransitionName(item))
+
         holder.name.text = item.name
-        holder.address.text = item.address
+        holder.address.text = item.address.description
 
         // Avatar
         item.avatar.path.takeIf { it.isNotBlank() }
@@ -66,7 +71,7 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter<FeedItem>(ArrayLi
         holder.initialCost.text = "от 2500 Р"
 
         // Photos slider
-        holder.viewPager.adapter = ViewPagerAdapter(context, item.photos)
+        holder.viewPager.adapter = adapter
         val totalPages = item.photos.size
         addBottomDots(holder.dotsContainer, 0, totalPages)
         holder.viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
@@ -97,4 +102,8 @@ class FeedAdapter(items: List<FeedItem>) : FooterLoaderAdapter<FeedItem>(ArrayLi
     }
 
     override fun getYourItemId(position: Int) = items[position].hashCode().toLong()
+
+    companion object {
+        fun getTransitionName(item: MasterBase) = item.name + item.id
+    }
 }

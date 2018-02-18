@@ -3,6 +3,8 @@ query Feed($limit: Int!, $offset: Int!) {
         id
         name
         address {
+            lat
+            lon
             description
         }
         avatar {

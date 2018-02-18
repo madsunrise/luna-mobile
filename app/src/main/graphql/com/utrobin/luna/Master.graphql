@@ -1,0 +1,5 @@
+query Master($id: ID!) {
+    master(id: $id) {
+        id   # Здесь services по идее нужны
+    }
+}

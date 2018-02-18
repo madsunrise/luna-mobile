@@ -24,6 +24,7 @@ data class Address(val description: String, val lat: Double, val lon: Double) : 
     )
 
     companion object {
+        @JvmField
         val CREATOR = object : Parcelable.Creator<Address> {
             override fun createFromParcel(`in`: Parcel): Address {
                 return Address(`in`)

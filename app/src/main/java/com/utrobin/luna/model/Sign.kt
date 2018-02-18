@@ -26,6 +26,7 @@ data class Sign(val name: String, val description: String, val icon: String) : P
     )
 
     companion object {
+        @JvmField
         val CREATOR = object : Parcelable.Creator<Sign> {
             override fun createFromParcel(`in`: Parcel): Sign {
                 return Sign(`in`)

@@ -29,6 +29,7 @@ data class Service(
     }
 
     companion object {
+        @JvmField
         val CREATOR = object : Parcelable.Creator<Service> {
             override fun createFromParcel(`in`: Parcel): Service {
                 return Service(`in`)

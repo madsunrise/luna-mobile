@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.annotation.VisibleForTesting
 import android.support.v4.app.Fragment
+import android.support.v4.view.ViewPager
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,7 @@ import android.view.ViewGroup
 import com.utrobin.luna.R
 import com.utrobin.luna.adapter.FeedAdapter
 import com.utrobin.luna.databinding.FeedFragmentBinding
-import com.utrobin.luna.model.FeedItem
+import com.utrobin.luna.model.MasterBase
 import com.utrobin.luna.network.NetworkError
 import com.utrobin.luna.ui.contract.FeedContract
 import com.utrobin.luna.ui.presenter.FeedPresenter
@@ -58,7 +59,7 @@ class FeedFragment : Fragment(), FeedContract.View {
         }
     }
 
-    override fun dataLoaded(newItems: List<FeedItem>, append: Boolean) {
+    override fun dataLoaded(newItems: List<MasterBase>, append: Boolean) {
         setState(State.CONTENT)
         binding.mainContainerSwipeToRefresh.isRefreshing = false
         isDataLoading = false
@@ -76,7 +77,9 @@ class FeedFragment : Fragment(), FeedContract.View {
 
     private fun initializeAdapter() {
         feedAdapter = FeedAdapter(ArrayList())
-        feedAdapter.viewClickSubject.subscribe { presenter.onItemClicked(it) }
+        feedAdapter.viewClickSubject.subscribe {
+            (activity as MainActivity).openMasterScreen(it.first, it.second)
+        }
         requestDataUpdate()
         adapterInitialized = true
     }
@@ -90,7 +93,7 @@ class FeedFragment : Fragment(), FeedContract.View {
         val recyclerView = binding.feedRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = feedAdapter
-        onScrollListener = object : EndlessRecyclerOnScrollListener<FeedItem>(
+        onScrollListener = object : EndlessRecyclerOnScrollListener<MasterBase, ViewPager>(
                 adapter = feedAdapter,
                 linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager) {
             override fun onLoadMore(currentPage: Int): Boolean {
@@ -105,9 +108,6 @@ class FeedFragment : Fragment(), FeedContract.View {
         recyclerView.addOnScrollListener(onScrollListener)
     }
 
-    override fun navigateMasterScreen(item: FeedItem) {
-        (activity as MainActivity).openMasterScreen(item.userId)
-    }
 
     override fun onDestroy() {
         super.onDestroy()
@@ -140,7 +140,7 @@ class FeedFragment : Fragment(), FeedContract.View {
         }
     }
 
-    private lateinit var onScrollListener: EndlessRecyclerOnScrollListener<FeedItem>
+    private lateinit var onScrollListener: EndlessRecyclerOnScrollListener<MasterBase, ViewPager>
 
     @VisibleForTesting
     fun getFeedItems() = feedAdapter.items

@@ -1,14 +1,19 @@
 package com.utrobin.luna.ui.view
 
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.annotation.VisibleForTesting
 import android.support.design.widget.BottomNavigationView
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.app.Fragment
+import android.support.v4.view.ViewCompat
+import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.utrobin.luna.R
 import com.utrobin.luna.databinding.ActivityMainBinding
+import com.utrobin.luna.model.MasterBase
 
 
 class MainActivity : AppCompatActivity() {
@@ -23,11 +28,6 @@ class MainActivity : AppCompatActivity() {
 
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener {
-        if (currentFragment is MasterFragment) {
-            supportFragmentManager.popBackStack()
-            currentFragment = previousFragment
-            previousFragment = null
-        }
         when (it.itemId) {
             R.id.feed -> {
                 if (currentFragment != feedFragment) {
@@ -86,8 +86,21 @@ class MainActivity : AppCompatActivity() {
         currentFragment = to
     }
 
-    fun openMasterScreen(id: Long) {
-        showFragment(MasterFragment.getInstance(id), true)
+    fun openMasterScreen(item: MasterBase, sharedView: ViewPager) {
+        val intent = Intent(this, MasterActivity::class.java)
+        intent.apply {
+            putExtra(MasterActivity.MASTER_BASE, item)
+            putExtra(MasterActivity.TRANSITION_NAME, ViewCompat.getTransitionName(sharedView))
+            putExtra(MasterActivity.CURRENT_PHOTO, sharedView.currentItem)
+        }
+
+        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                this,
+                sharedView,
+                ViewCompat.getTransitionName(sharedView)
+        )
+
+        startActivity(intent, options.toBundle())
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -106,6 +119,6 @@ class MainActivity : AppCompatActivity() {
     fun getFeedItems() = feedFragment.getFeedItems()
 
     companion object {
-        private val FRAGMENT_TAG = "FRAGMENT_TAG"
+        private const val FRAGMENT_TAG = "FRAGMENT_TAG"
     }
 }
