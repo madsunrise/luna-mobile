@@ -187,7 +187,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/master_see_all_reviews_margin_top"
-                            android:textColor="@color/colorAccent" />
+                            android:textColor="@color/colorPrimary" />
                     </LinearLayout>
 
                     <!-- block with right padding -->
@@ -328,7 +328,7 @@
                 app:layout_constraintTop_toBottomOf="@id/appointment_price" />
 
             <!-- Yes, it's strange -->
-            <View
+            <android.support.v4.widget.Space
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/master_make_an_appointment_master_description_margin_bottom"
                 app:layout_constraintTop_toBottomOf="@id/appointment_master_description" />

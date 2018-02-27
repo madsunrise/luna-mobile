@@ -53,7 +53,7 @@
         android:layout_marginTop="@dimen/master_suitable_master_about_margin_top"
         android:fontFamily="sans-serif-medium"
         android:text="@string/about_master"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintRight_toRightOf="@id/price"
         app:layout_constraintTop_toTopOf="@id/role" />
 
