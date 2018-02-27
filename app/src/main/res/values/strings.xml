@@ -29,4 +29,5 @@
     <string name="visit_options">Параметры посещения</string>
     <string name="about_master">О мастере</string>
     <string name="make_an_appointment">Записаться</string>
+    <string name="search_for_masters_and_saloons">Поиск мастеров и салонов</string>
 </resources>

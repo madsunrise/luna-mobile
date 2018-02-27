@@ -7,5 +7,17 @@
     <dimen name="feed_space_between_signs">15dp</dimen>
     <dimen name="feed_image_button_padding">10dp</dimen>
     <dimen name="feed_icon_drawable_padding">7dp</dimen>
-    <dimen name="feed_action_bar_height">100dp</dimen>
+    <dimen name="feed_search_field_horizontal_margin">8dp</dimen>
+    <dimen name="feed_search_field_margin_top">8dp</dimen>
+    <dimen name="feed_search_field_padding_start">16dp</dimen>
+    <dimen name="feed_search_field_drawable_padding">24dp</dimen>
+    <dimen name="feed_search_field_height">48dp</dimen>
+    <dimen name="feed_search_radius">2dp</dimen>
+    <dimen name="feed_action_bar_filter_button_height">40dp</dimen>
+    <dimen name="feed_action_bar_space_between_filter_buttons">8dp</dimen>
+    <dimen name="feed_action_bar_filter_buttons_margin_top">14dp</dimen>
+    <dimen name="feed_action_bar_filter_buttons_margin_bottom">20dp</dimen>
+    <dimen name="feed_action_bar_filter_buttons_edge_margin">16dp</dimen>
+    <dimen name="feed_action_bar_filter_buttons_horizontal_padding">12dp</dimen>
+    <dimen name="feed_action_bar_filter_buttons_radius">2dp</dimen>
 </resources>
