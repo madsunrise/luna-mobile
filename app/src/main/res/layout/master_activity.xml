@@ -3,30 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/background_light"
-        android:orientation="vertical">
+        android:background="@android:color/background_light">
 
         <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            android:fitsSystemWindows="true"
-            android:minHeight="?attr/actionBarSize"
+            app:layout_constraintTop_toTopOf="parent"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-        </android.support.v7.widget.Toolbar>
 
         <ScrollView
             android:id="@+id/main_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/make_an_appointment_container"
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -281,73 +279,74 @@
                         android:layout_marginStart="@dimen/activity_horizontal_margin"
                         android:fontFamily="sans-serif-medium" />
                 </LinearLayout>
-
-                <!-- Make an appointment block -->
-                <android.support.constraint.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/master_space_between_suitable_masters_and_appointment">
-
-                    <View
-                        android:id="@+id/appointment_divider"
-                        style="@style/Divider"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/appointment_price"
-                        style="@style/Body2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/master_make_an_appointment_price_margin_start"
-                        android:layout_marginTop="@dimen/master_make_an_appointment_price_margin_top"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/appointment_divider" />
-
-
-                    <TextView
-                        android:id="@+id/appointment_duration"
-                        style="@style/Caption"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/master_make_an_appointment_duration_margin_start"
-                        android:drawablePadding="@dimen/master_make_an_appointment_duration_drawable_padding"
-                        android:drawableStart="@drawable/ic_time"
-                        android:fontFamily="sans-serif-medium"
-                        app:layout_constraintLeft_toRightOf="@id/appointment_price"
-                        app:layout_constraintTop_toTopOf="@id/appointment_price" />
-
-                    <TextView
-                        android:id="@+id/appointment_master_description"
-                        style="@style/Body1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/master_make_an_appointment_master_description_margin_top"
-                        app:layout_constraintLeft_toLeftOf="@id/appointment_price"
-                        app:layout_constraintTop_toBottomOf="@id/appointment_price" />
-
-                    <!-- Yes, it's strange -->
-                    <View
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/master_make_an_appointment_master_description_margin_bottom"
-                        app:layout_constraintTop_toBottomOf="@id/appointment_master_description" />
-
-                    <Button
-                        android:id="@+id/make_an_appointment_btn"
-                        style="@style/Base.Widget.AppCompat.Button.Colored"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/master_make_an_appointment_button_margin_end"
-                        android:paddingBottom="@dimen/master_make_an_appointment_button_vertical_padding"
-                        android:paddingEnd="@dimen/master_make_an_appointment_button_horizontal_padding"
-                        android:paddingStart="@dimen/master_make_an_appointment_button_horizontal_padding"
-                        android:paddingTop="@dimen/master_make_an_appointment_button_vertical_padding"
-                        android:text="@string/make_an_appointment"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </android.support.constraint.ConstraintLayout>
             </LinearLayout>
         </ScrollView>
-    </LinearLayout>
+
+        <!-- Make an appointment block -->
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/make_an_appointment_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/master_space_between_suitable_masters_and_appointment"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <View
+                android:id="@+id/appointment_divider"
+                style="@style/Divider"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/appointment_price"
+                style="@style/Body2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/master_make_an_appointment_price_margin_start"
+                android:layout_marginTop="@dimen/master_make_an_appointment_price_margin_top"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/appointment_divider" />
+
+            <TextView
+                android:id="@+id/appointment_duration"
+                style="@style/Caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/master_make_an_appointment_duration_margin_start"
+                android:drawablePadding="@dimen/master_make_an_appointment_duration_drawable_padding"
+                android:drawableStart="@drawable/ic_time"
+                android:fontFamily="sans-serif-medium"
+                app:layout_constraintLeft_toRightOf="@id/appointment_price"
+                app:layout_constraintTop_toTopOf="@id/appointment_price" />
+
+            <TextView
+                android:id="@+id/appointment_master_description"
+                style="@style/Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/master_make_an_appointment_master_description_margin_top"
+                app:layout_constraintLeft_toLeftOf="@id/appointment_price"
+                app:layout_constraintTop_toBottomOf="@id/appointment_price" />
+
+            <!-- Yes, it's strange -->
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/master_make_an_appointment_master_description_margin_bottom"
+                app:layout_constraintTop_toBottomOf="@id/appointment_master_description" />
+
+            <Button
+                android:id="@+id/make_an_appointment_btn"
+                style="@style/Base.Widget.AppCompat.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/master_make_an_appointment_button_margin_end"
+                android:paddingBottom="@dimen/master_make_an_appointment_button_vertical_padding"
+                android:paddingEnd="@dimen/master_make_an_appointment_button_horizontal_padding"
+                android:paddingStart="@dimen/master_make_an_appointment_button_horizontal_padding"
+                android:paddingTop="@dimen/master_make_an_appointment_button_vertical_padding"
+                android:text="@string/make_an_appointment"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
 </layout>
