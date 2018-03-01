@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval">
-
-    <solid
-        android:color="#388e3c"/>
-
+    <solid android:color="#388e3c" />
     <size
-        android:width="10dp"
-        android:height="10dp"/>
+        android:width="@dimen/feed_item_address_metro_circle_size"
+        android:height="@dimen/feed_item_address_metro_circle_size" />
 </shape>

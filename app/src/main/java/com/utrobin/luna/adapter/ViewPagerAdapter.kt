@@ -24,8 +24,7 @@ import java.util.*
 
 internal class ViewPagerAdapter(
         context: Context,
-        private val photos: List<Photo>,
-        private val showGradient: Boolean = false) : PagerAdapter() {
+        private val photos: List<Photo>) : PagerAdapter() {
     private val layoutInflater =
             context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
@@ -47,10 +46,6 @@ internal class ViewPagerAdapter(
         container.addView(itemView)
 
         imageView.setOnClickListener { imageClickSubject.onNext(true) }
-
-        if (showGradient) {
-            itemView.findViewById<View>(R.id.gradient).visibility = View.VISIBLE
-        }
 
         return itemView
     }
@@ -74,12 +69,15 @@ internal class ViewPagerAdapter(
                         } else {
                             Html.fromHtml("&#8226;")
                         }
-                textView.setTextSize(COMPLEX_UNIT_SP, dotsContainer.context.resources.getDimension(R.dimen.image_slider_dots_size))
 
                 val color = if (i != currentPage) {
-                    ContextCompat.getColor(dotsContainer.context, R.color.view_pager_inactive_dot)
+                    textView.setTextSize(COMPLEX_UNIT_SP, dotsContainer.context.resources.getDimension(
+                            R.dimen.feed_image_slider_inactive_dot_size))
+                    ContextCompat.getColor(dotsContainer.context, R.color.viewPagerInactiveDot)
                 } else {
-                    ContextCompat.getColor(dotsContainer.context, R.color.view_pager_active_dot)
+                    textView.setTextSize(COMPLEX_UNIT_SP, dotsContainer.context.resources.getDimension(
+                            R.dimen.feed_image_slider_active_dot_size))
+                    ContextCompat.getColor(dotsContainer.context, R.color.viewPagerActiveDot)
                 }
                 textView.setTextColor(color)
 

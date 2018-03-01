@@ -10,12 +10,5 @@
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         tools:ignore="contentDescription" />
-
-    <View
-        android:id="@+id/gradient"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@drawable/trending_gradient_shape" />
 </FrameLayout>
 

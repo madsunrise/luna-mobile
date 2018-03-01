@@ -51,7 +51,7 @@
                 android:gravity="center_vertical"
                 android:paddingStart="@dimen/feed_search_field_padding_start"
                 android:text="@string/search_for_masters_and_saloons"
-                android:textColor="@color/feed_search_name_text_color"
+                android:textColor="@color/feedSearchNameTextColor"
                 tools:ignore="RtlSymmetry" />
 
 

@@ -8,15 +8,15 @@
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
 
-    <color name="background_color">#F2F2F2</color>
-    
+    <color name="backgroundColor">#F2F2F2</color>
+
     <color name="textColorPrimary">#212121</color>
     <color name="textColorSecondary">#6A6A6A</color>
 
     <!-- view pager dots -->
-    <color name="view_pager_active_dot">@color/black</color>
-    <color name="view_pager_inactive_dot">@color/colorSecondary</color>
+    <color name="viewPagerActiveDot">@color/colorSupport</color>
+    <color name="viewPagerInactiveDot">#80DAE0E6</color>    <!-- 50% opacity -->
 
-    <color name="feed_search_field_background_color">#FAFAFA</color>
-    <color name="feed_search_name_text_color">#60000000</color>
+    <color name="feedSearchFieldBackgroundColor">#FAFAFA</color>
+    <color name="feedSearchNameTextColor">#60000000</color>
 </resources>
