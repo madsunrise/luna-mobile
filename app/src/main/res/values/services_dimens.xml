@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="services_price_note_margin_top">40dp</dimen>
+    <dimen name="services_header_margin_bottom">10dp</dimen>
+    <dimen name="services_price_note_margin_top">30dp</dimen>
+    <dimen name="services_block_with_radio_buttons_margin_top">20dp</dimen>
+    <dimen name="services_block_with_radio_buttons_margin_bottom">20dp</dimen>
+    <dimen name="services_block_with_radio_buttons_radio_group_margin_top">18dp</dimen>
+    <dimen name="services_block_with_radio_buttons_space_between_radio_buttons">8dp</dimen>
+    <dimen name="services_block_with_counter_margin_top">20dp</dimen>
+    <dimen name="services_block_with_counter_margin_bottom">20dp</dimen>
+    <dimen name="services_block_with_counter_counter_layout_margin_top">16dp</dimen>
+    <dimen name="services_block_with_counter_counter_margin_top">12dp</dimen>
+    <dimen name="services_block_with_counter_counter_width">84dp</dimen>
+    <dimen name="services_additional_services_margin_top">40dp</dimen>
 </resources>

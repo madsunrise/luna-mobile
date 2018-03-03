@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/services_block_with_counter_counter_layout_margin_top">
+
+    <TextView
+        android:id="@+id/property"
+        style="@style/Body1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textColorSecondary"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/less_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/services_block_with_counter_counter_margin_top"
+        android:src="@drawable/ic_less"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/property"
+        tools:ignore="contentDescription" />
+
+    <TextView
+        android:id="@+id/counter"
+        style="@style/Body2"
+        android:layout_width="@dimen/services_block_with_counter_counter_width"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        app:layout_constraintBottom_toBottomOf="@id/less_btn"
+        app:layout_constraintLeft_toRightOf="@id/less_btn"
+        app:layout_constraintTop_toTopOf="@id/less_btn" />
+
+    <ImageView
+        android:id="@+id/more_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_more"
+        app:layout_constraintLeft_toRightOf="@id/counter"
+        app:layout_constraintTop_toTopOf="@id/less_btn"
+        tools:ignore="contentDescription" />
+
+    <TextView
+        android:id="@+id/price"
+        style="@style/Body1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textColorSecondary"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/counter" />
+
+</android.support.constraint.ConstraintLayout>

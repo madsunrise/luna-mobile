@@ -8,12 +8,11 @@ import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.utrobin.luna.R
@@ -109,6 +108,8 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
         binding.appointmentPrice.text = "2500 \u20BD"
         binding.appointmentDuration.text = "1ч 20м"
         binding.appointmentMasterDescription.text = "Алия Агиповна, мастер-стилист"
+
+        constructServices()
     }
 
     private fun drawStars() {
@@ -396,5 +397,119 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
 
     private enum class State {
         CONTENT, ERROR, LOADING
+    }
+
+
+    private fun constructServices() {
+
+        // Маникюр
+        val manicureLayout = LayoutInflater
+                .from(this)
+                .inflate(R.layout.service_block_with_radio_buttons, binding.servicesContent, false)
+
+        manicureLayout.findViewById<TextView>(R.id.title).text = "Маникюр"
+
+        val radioGroup = manicureLayout.findViewById<LinearLayout>(R.id.radio_buttons_container)
+
+        val params = RadioGroup.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
+        params.setMargins(0, 0, 0, resources.getDimension(R.dimen.services_block_with_radio_buttons_space_between_radio_buttons).toInt())
+
+        val manicureOption1 = LayoutInflater.from(this)
+                .inflate(R.layout.radio_button_with_price, radioGroup, false)
+        val radioButtonManicure1 = manicureOption1.findViewById<RadioButton>(R.id.radio_button)
+        radioButtonManicure1.text = "Обрезной/классический"
+        manicureOption1.findViewById<TextView>(R.id.price).text = "1100-1500 \u20BD"
+        manicureOption1.layoutParams = params
+        radioGroup.addView(manicureOption1)
+
+        val manicureOption2 = LayoutInflater.from(this)
+                .inflate(R.layout.radio_button_with_price, radioGroup, false)
+        manicureOption2.findViewById<RadioButton>(R.id.radio_button).text = "Аппаратный"
+        manicureOption2.findViewById<TextView>(R.id.price).text = "1200-1800 \u20BD"
+        manicureOption2.layoutParams = params
+        radioGroup.addView(manicureOption2)
+
+        val manicureOption3 = LayoutInflater.from(this)
+                .inflate(R.layout.radio_button_with_price, radioGroup, false)
+        manicureOption3.findViewById<RadioButton>(R.id.radio_button).text = "Комбинированный"
+        manicureOption3.findViewById<TextView>(R.id.price).text = "1500-2000 \u20BD"
+        manicureOption3.layoutParams = params
+        radioGroup.addView(manicureOption3)
+
+        val manicureOption4 = LayoutInflater.from(this)
+                .inflate(R.layout.radio_button_with_price, radioGroup, false)
+        manicureOption4.findViewById<RadioButton>(R.id.radio_button).text = "Европейский"
+        manicureOption4.findViewById<TextView>(R.id.price).text = "1500-2000 \u20BD"
+        radioGroup.addView(manicureOption4)
+
+        binding.servicesContent.addView(manicureLayout)
+
+
+        // Покрытие
+        val coverLayout = LayoutInflater
+                .from(this)
+                .inflate(R.layout.service_block_with_radio_buttons, binding.servicesContent, false)
+
+        coverLayout.findViewById<TextView>(R.id.title).text = "Покрытие"
+
+        val coverRadioGroup = coverLayout.findViewById<LinearLayout>(R.id.radio_buttons_container)
+
+        val coverOption1 = LayoutInflater.from(this)
+                .inflate(R.layout.radio_button_with_price, coverRadioGroup, false)
+        coverOption1.findViewById<RadioButton>(R.id.radio_button).text = "Шеллак"
+        coverOption1.findViewById<TextView>(R.id.price).text = "800-1300 \u20BD"
+        coverOption1.layoutParams = params
+        coverRadioGroup.addView(coverOption1)
+
+        val coverOption2 = LayoutInflater.from(this)
+                .inflate(R.layout.radio_button_with_price, coverRadioGroup, false)
+        coverOption2.findViewById<RadioButton>(R.id.radio_button).text = "Лак"
+        coverOption2.findViewById<TextView>(R.id.price).text = "1200-1500 \u20BD"
+        coverOption2.layoutParams = params
+        coverRadioGroup.addView(coverOption2)
+
+        val coverOption3 = LayoutInflater.from(this)
+                .inflate(R.layout.radio_button_with_price, coverRadioGroup, false)
+        coverOption3.findViewById<RadioButton>(R.id.radio_button).text = "Френч"
+        coverOption3.findViewById<TextView>(R.id.price).text = "1500-1800 \u20BD"
+        coverRadioGroup.addView(coverOption3)
+
+        binding.servicesContent.addView(coverLayout)
+
+
+        // Design
+        val designLayout = LayoutInflater
+                .from(this)
+                .inflate(R.layout.service_block_with_counters, binding.servicesContent, false)
+
+        designLayout.findViewById<TextView>(R.id.title).text = "Дизайн ногтя"
+
+        val designContainer = designLayout.findViewById<LinearLayout>(R.id.container)
+
+        val simple = LayoutInflater
+                .from(this)
+                .inflate(R.layout.service_block_with_counter, designContainer, false)
+        simple.findViewById<TextView>(R.id.property).text = "Простой"
+        simple.findViewById<TextView>(R.id.counter).text = "4 ногтя"
+        simple.findViewById<TextView>(R.id.price).text = "600-800 \u20BD"
+        designContainer.addView(simple)
+
+        val complex = LayoutInflater
+                .from(this)
+                .inflate(R.layout.service_block_with_counter, designContainer, false)
+        complex.findViewById<TextView>(R.id.property).text = "Сложный"
+        complex.findViewById<TextView>(R.id.counter).text = "нет"
+        complex.findViewById<TextView>(R.id.price).text = "0 \u20BD"
+        designContainer.addView(complex)
+
+        val ultraComplex = LayoutInflater
+                .from(this)
+                .inflate(R.layout.service_block_with_counter, designContainer, false)
+        ultraComplex.findViewById<TextView>(R.id.property).text = "Ультра-сложный"
+        ultraComplex.findViewById<TextView>(R.id.counter).text = "нет"
+        ultraComplex.findViewById<TextView>(R.id.price).text = "0 \u20BD"
+        designContainer.addView(ultraComplex)
+
+        binding.servicesContent.addView(designLayout)
     }
 }

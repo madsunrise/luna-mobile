@@ -358,8 +358,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/background_light"
-            android:paddingEnd="@dimen/activity_horizontal_margin"
-            android:paddingStart="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent">
@@ -369,6 +367,8 @@
                 style="@style/Body2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:paddingBottom="@dimen/services_header_margin_bottom"
                 android:text="@string/services"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -377,24 +377,43 @@
                 android:id="@+id/close_services_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_close_black_24dp"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="@id/services_headline"
                 tools:ignore="contentDescription" />
 
-            <TextView
-                android:id="@+id/price_note"
-                style="@style/Body1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/services_price_note_margin_top"
-                android:text="@string/price_depends_on_master_qualification"
-                android:textColor="@color/textColorSecondary"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/services_headline" />
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                app:layout_constraintTop_toBottomOf="@id/services_headline">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingEnd="@dimen/activity_horizontal_margin"
+                    android:paddingStart="@dimen/activity_horizontal_margin">
 
+                    <TextView
+                        android:id="@+id/price_note"
+                        style="@style/Body1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/services_price_note_margin_top"
+                        android:text="@string/price_depends_on_master_qualification"
+                        android:textColor="@color/textColorSecondary" />
+
+                    <!-- Dynamic content -->
+                    <LinearLayout
+                        android:id="@+id/services_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" />
+                </LinearLayout>
+            </ScrollView>
         </android.support.constraint.ConstraintLayout>
     </android.support.constraint.ConstraintLayout>
 </layout>
