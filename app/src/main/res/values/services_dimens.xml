@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="services_price_note_margin_top">40dp</dimen>
+</resources>

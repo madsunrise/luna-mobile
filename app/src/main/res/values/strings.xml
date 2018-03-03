@@ -29,4 +29,7 @@
     <string name="visit_options">Параметры посещения</string>
     <string name="about_master">О мастере</string>
     <string name="make_an_appointment">Записаться</string>
+    <string name="search_for_masters_and_saloons">Поиск мастеров и салонов</string>
+    <string name="services">Услуги</string>
+    <string name="price_depends_on_master_qualification">Стоимость зависит от квалификации мастера (мастер-стилист, ведущий стилист, арт-директор)</string>
 </resources>

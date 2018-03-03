@@ -7,7 +7,10 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.MenuItem
+import android.view.View
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -62,7 +65,11 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
             binding.pager.transitionName = intent.extras.getString(TRANSITION_NAME)
             binding.pager.currentItem = intent.extras.getInt(CURRENT_PHOTO)
         }
-        supportStartPostponedEnterTransition();
+        supportStartPostponedEnterTransition()
+
+
+        binding.buttonWhat.setOnClickListener { showServicesBlock(true) }
+        binding.closeServicesBtn.setOnClickListener { showServicesBlock(false) }
     }
 
     override fun dataLoaded(master: MasterExtended) {
@@ -348,6 +355,27 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
 //                }
 //            }
 //        }
+    }
+
+    override fun onBackPressed() {
+        if (binding.servicesBlock.visibility == View.VISIBLE) {
+            showServicesBlock(false)
+            return
+        }
+        super.onBackPressed()
+    }
+
+
+    private fun showServicesBlock(show: Boolean) {
+        val animation: Animation
+        if (show) {
+            animation = AnimationUtils.loadAnimation(this, R.anim.bottom_up)
+            binding.servicesBlock.visibility = View.VISIBLE
+        } else {
+            animation = AnimationUtils.loadAnimation(this, R.anim.bottom_down)
+            binding.servicesBlock.visibility = View.GONE
+        }
+        binding.servicesBlock.startAnimation(animation)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
