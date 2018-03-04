@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
@@ -22,7 +23,7 @@ import com.utrobin.luna.model.MasterBase
  * Created by ivan on 31.10.2017.
  */
 
-class FeedAdapter(items: List<MasterBase>) : FooterLoaderAdapter<MasterBase, ViewPager>(ArrayList(items)) {
+class FeedAdapter(items: List<MasterBase>, private val screenWidthInPx: Int) : FooterLoaderAdapter<MasterBase, ViewPager>(ArrayList(items)) {
 
     override fun getYourItemViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
         val itemView = LayoutInflater.from(parent.context)
@@ -43,6 +44,8 @@ class FeedAdapter(items: List<MasterBase>) : FooterLoaderAdapter<MasterBase, Vie
         }
 
         ViewCompat.setTransitionName(holder.viewPager, getTransitionName(item))
+        holder.viewPager.layoutParams.height = screenWidthInPx * 9 / 16
+
 
         holder.name.text = item.name
         holder.address.text = item.address.description
@@ -56,23 +59,36 @@ class FeedAdapter(items: List<MasterBase>) : FooterLoaderAdapter<MasterBase, Vie
         holder.signsContainer.removeAllViews()
         if (item.signs.isNotEmpty()) {
             for (sign in item.signs) {
-                val image = ImageView(context)
-                val params = LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
-                params.setMargins(0, 0, context.resources.getDimension(R.dimen.feed_space_between_signs).toInt(), 0)
-                image.layoutParams = params
-
                 val drawable = when (sign.name) {
-                    "accuracy" -> ContextCompat.getDrawable(context, R.drawable.ic_fast_circle)
-                    "politeness" -> ContextCompat.getDrawable(context, R.drawable.ic_neatly_circle)
-                    "varnish resistance" -> ContextCompat.getDrawable(context, R.drawable.ic_pallet_circle)
-                    "painting" -> ContextCompat.getDrawable(context, R.drawable.ic_painting_circle)
+                    "accuracy" -> ContextCompat.getDrawable(context, R.drawable.ic_fast)
+                    "politeness" -> ContextCompat.getDrawable(context, R.drawable.ic_neatly)
+                    "varnish resistance" -> ContextCompat.getDrawable(context, R.drawable.ic_pallet)
+                    "painting" -> ContextCompat.getDrawable(context, R.drawable.ic_painting)
                     else -> null
-                }
+                } ?: continue
 
-                drawable?.let {
-                    image.setImageDrawable(it)
-                    holder.signsContainer.addView(image)
-                }
+                val container = RelativeLayout(context)
+                val icon = ImageView(context)
+                val background = ImageView(context)
+
+                val params = RelativeLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
+                params.setMargins(0, 0, context.resources.getDimension(R.dimen.feed_space_between_signs).toInt(), 0)
+                container.layoutParams = params
+
+
+                val iconParams = RelativeLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
+                iconParams.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE)
+                icon.layoutParams = iconParams
+
+
+                icon.setImageDrawable(drawable)
+                icon.setColorFilter(ContextCompat.getColor(context, R.color.white))
+                background.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.sign_circle))
+
+                container.addView(background)
+                container.addView(icon)
+
+                holder.signsContainer.addView(container)
             }
         }
 
