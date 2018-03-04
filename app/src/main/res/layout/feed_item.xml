@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view"
@@ -91,12 +92,14 @@
             card_view:layout_constraintTop_toTopOf="@id/initial_cost" />
 
         <!-- Image slider dots -->
-        <LinearLayout
-            android:id="@+id/dots_container"
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tab_layout"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
+            android:layout_height="@dimen/feed_tab_layout_height"
+            app:tabBackground="@drawable/tab_selector"
+            app:tabGravity="center"
+            app:tabIndicatorHeight="0dp"
+            app:tabMaxWidth="@dimen/feed_tab_layout_space_between_dots"
             card_view:layout_constraintLeft_toLeftOf="parent"
             card_view:layout_constraintRight_toRightOf="parent"
             card_view:layout_constraintTop_toBottomOf="@id/image_slider" />
@@ -112,7 +115,7 @@
             android:drawableStart="@drawable/ic_star_black_24dp"
             android:gravity="center_vertical"
             card_view:layout_constraintLeft_toLeftOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@id/dots_container" />
+            card_view:layout_constraintTop_toBottomOf="@id/tab_layout" />
 
         <!-- Comments -->
         <TextView

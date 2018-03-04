@@ -14,8 +14,8 @@
     <color name="textColorSecondary">#6A6A6A</color>
 
     <!-- view pager dots -->
-    <color name="viewPagerActiveDot">@color/colorSupport</color>
-    <color name="viewPagerInactiveDot">#80DAE0E6</color>    <!-- 50% opacity -->
+    <color name="viewPagerActiveDot">@color/colorPrimary</color>
+    <color name="viewPagerInactiveDot">#802196f3</color>    <!-- 50% opacity -->
 
     <color name="feedSearchFieldBackgroundColor">#FAFAFA</color>
     <color name="feedSearchNameTextColor">#60000000</color>

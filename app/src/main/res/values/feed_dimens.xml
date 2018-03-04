@@ -30,8 +30,10 @@
     <dimen name="feed_signs_container_margin_end">16dp</dimen>
     <dimen name="feed_sign_size">32dp</dimen>
     <dimen name="feed_space_between_signs">5dp</dimen>
-    <dimen name="feed_image_slider_inactive_dot_size">4sp</dimen>
-    <dimen name="feed_image_slider_active_dot_size">5sp</dimen>
+    <dimen name="feed_tab_layout_height">25dp</dimen>
+    <dimen name="feed_tab_layout_inactive_dot_size">2dp</dimen>
+    <dimen name="feed_tab_layout_active_dot_size">3dp</dimen>
+    <dimen name="feed_tab_layout_space_between_dots">10dp</dimen>
     <dimen name="feed_stars_drawable_padding">4dp</dimen>
     <dimen name="feed_stars_margin_start">16dp</dimen>
     <dimen name="feed_divider_margin_top">13dp</dimen>

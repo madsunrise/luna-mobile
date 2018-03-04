@@ -1,5 +1,6 @@
 package com.utrobin.luna.adapter
 
+import android.support.design.widget.TabLayout
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewCompat
 import android.support.v4.view.ViewPager
@@ -8,15 +9,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.utrobin.luna.R
-import com.utrobin.luna.adapter.ViewPagerAdapter.Companion.addBottomDots
 import com.utrobin.luna.model.MasterBase
 
 /**
@@ -96,15 +92,7 @@ class FeedAdapter(items: List<MasterBase>, private val screenWidthInPx: Int) : F
 
         // Photos slider
         holder.viewPager.adapter = adapter
-        val totalPages = item.photos.size
-        addBottomDots(holder.dotsContainer, 0, totalPages)
-        holder.viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrollStateChanged(state: Int) {}
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
-            override fun onPageSelected(pagePosition: Int) {
-                addBottomDots(holder.dotsContainer, pagePosition, totalPages)
-            }
-        })
+        holder.tabLayout.setupWithViewPager(holder.viewPager)
 
         val ratingsCount = 21
         holder.stars.text = context.resources.getQuantityString(R.plurals.ratings_count, ratingsCount, item.stars.toString(), ratingsCount)
@@ -118,7 +106,7 @@ class FeedAdapter(items: List<MasterBase>, private val screenWidthInPx: Int) : F
         val avatar: ImageView = view.findViewById(R.id.avatar)
         val moreOptions: View = view.findViewById(R.id.more_options)
         val viewPager: ViewPager = view.findViewById(R.id.image_slider)
-        val dotsContainer: LinearLayout = view.findViewById(R.id.dots_container)
+        val tabLayout: TabLayout = view.findViewById(R.id.tab_layout)
         val signsContainer: LinearLayout = view.findViewById(R.id.signs_container)
         val initialCost: TextView = view.findViewById(R.id.initial_cost)
         val stars: TextView = view.findViewById(R.id.stars)
