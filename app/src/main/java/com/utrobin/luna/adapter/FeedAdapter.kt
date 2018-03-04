@@ -1,5 +1,8 @@
 package com.utrobin.luna.adapter
 
+import android.graphics.Color
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.support.design.widget.TabLayout
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewCompat
@@ -46,6 +49,11 @@ class FeedAdapter(items: List<MasterBase>, private val screenWidthInPx: Int) : F
         holder.name.text = item.name
         holder.address.text = item.address.description
 
+        if (item.address.metro.isNotEmpty()) {
+            holder.address.compoundDrawables[0].colorFilter = PorterDuffColorFilter(
+                    Color.parseColor('#' + item.address.metro[0].color), PorterDuff.Mode.MULTIPLY
+            )
+        }
         // Avatar
         item.avatar.path.takeIf { it.isNotBlank() }
                 ?.let { Glide.with(context).load(it).apply(RequestOptions.circleCropTransform()).into(holder.avatar) }

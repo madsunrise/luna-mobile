@@ -1,7 +1,0 @@
-query Address($id: ID!) {
-    address(id: $id) {
-        id
-        lat
-        lon
-    }
-}

@@ -3,17 +3,13 @@ package com.utrobin.luna.ui.presenter
 import com.apollographql.apollo.rx2.Rx2Apollo
 import com.utrobin.luna.App
 import com.utrobin.luna.FeedQuery
-import com.utrobin.luna.model.Address
-import com.utrobin.luna.model.MasterBase
-import com.utrobin.luna.model.Photo
-import com.utrobin.luna.model.Sign
+import com.utrobin.luna.model.*
 import com.utrobin.luna.network.GraphQLService
 import com.utrobin.luna.network.NetworkError
 import com.utrobin.luna.ui.contract.FeedContract
 import com.utrobin.luna.utils.LogUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import java.util.*
 import javax.inject.Inject
 
 /**
@@ -64,7 +60,7 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
         for (queryItem in queryList) {
             val id = queryItem.id().toLong()
             val name = queryItem.name()
-            val avatar = Photo(queryItem.avatar())
+            val avatar = Photo(queryItem.avatar()!!)
             val stars = queryItem.stars() / 10
 
             val photos = ArrayList<Photo>()
@@ -77,10 +73,25 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
                 signs.add(Sign(it))
             }
 
+            val addressMetro = ArrayList<AddressMetro>()
+
+            queryItem.address().stations()
+                    .forEach {
+                        addressMetro.add(
+                                AddressMetro(
+                                        it.color(),
+                                        it.distance().toFloat(),
+                                        it.line(),
+                                        it.name()
+                                )
+                        )
+                    }
+
             val address = Address(
                     queryItem.address().description(),
                     queryItem.address().lat(),
-                    queryItem.address().lon()
+                    queryItem.address().lon(),
+                    addressMetro
             )
 
             data.add(

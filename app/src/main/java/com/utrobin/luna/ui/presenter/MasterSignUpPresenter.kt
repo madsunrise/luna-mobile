@@ -35,8 +35,8 @@ class MasterSignUpPresenter : BasePresenter<MasterSignUpContract.View>(), Master
                 .name(view?.getName()!!)
                 .email(view?.getEmail()!!)
                 .password(view?.getPassword()!!)
-                .photo_id("10")
-                .address_id("2")
+                .lat("")
+                .lon("")
                 .build()
 
 

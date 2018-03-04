@@ -6,6 +6,12 @@ query Feed($limit: Int!, $offset: Int!) {
             lat
             lon
             description
+            stations {
+                color
+                distance
+                line
+                name
+            }
         }
         avatar {
             path

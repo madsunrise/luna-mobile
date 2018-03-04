@@ -3,15 +3,15 @@ mutation CreateMaster(
         $email: String!,
         $password: String!,
         $name: String!,
-        $photo_id: ID!,
-        $address_id: ID!
+        $lat: String!,
+        $lon: String!
     ) { createMaster(
         username: $username,
         email: $email,
         password: $password,
         name: $name,
-        photo_id: $photo_id,
-        address_id: $address_id
+        lat: $lat,
+        lon: $lon
     ) {
         id
     }
