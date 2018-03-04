@@ -6,6 +6,7 @@ import android.support.annotation.VisibleForTesting
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
 import android.support.v7.widget.LinearLayoutManager
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -76,7 +77,9 @@ class FeedFragment : Fragment(), FeedContract.View {
     }
 
     private fun initializeAdapter() {
-        feedAdapter = FeedAdapter(ArrayList())
+        val displayMetrics = DisplayMetrics()
+        activity!!.windowManager.defaultDisplay.getMetrics(displayMetrics)  // screen width in px
+        feedAdapter = FeedAdapter(ArrayList(), displayMetrics.widthPixels)
         feedAdapter.viewClickSubject.subscribe {
             (activity as MainActivity).openMasterScreen(it.first, it.second)
         }

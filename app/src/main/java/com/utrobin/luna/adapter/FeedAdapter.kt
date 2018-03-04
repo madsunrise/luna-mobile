@@ -1,6 +1,6 @@
 package com.utrobin.luna.adapter
 
-import android.net.Uri
+import android.support.design.widget.TabLayout
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewCompat
 import android.support.v4.view.ViewPager
@@ -8,22 +8,18 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+import android.widget.*
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.utrobin.luna.R
-import com.utrobin.luna.adapter.ViewPagerAdapter.Companion.addBottomDots
 import com.utrobin.luna.model.MasterBase
-import com.utrobin.luna.utils.svg.SvgModule
 
 /**
  * Created by ivan on 31.10.2017.
  */
 
-class FeedAdapter(items: List<MasterBase>) : FooterLoaderAdapter<MasterBase, ViewPager>(ArrayList(items)) {
+class FeedAdapter(items: List<MasterBase>, private val screenWidthInPx: Int) : FooterLoaderAdapter<MasterBase, ViewPager>(ArrayList(items)) {
 
     override fun getYourItemViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
         val itemView = LayoutInflater.from(parent.context)
@@ -35,7 +31,7 @@ class FeedAdapter(items: List<MasterBase>) : FooterLoaderAdapter<MasterBase, Vie
         val item = items[position]
         val context = (holder as ItemViewHolder).itemView.context
 
-        val adapter = ViewPagerAdapter(context, item.photos, true)
+        val adapter = ViewPagerAdapter(context, item.photos)
         adapter.imageClickSubject.subscribe { viewClickSubject.onNext(Pair(item, holder.viewPager)) } // A bit strange decision
         holder.itemView.setOnClickListener { viewClickSubject.onNext(Pair(item, holder.viewPager)) }
 
@@ -44,6 +40,8 @@ class FeedAdapter(items: List<MasterBase>) : FooterLoaderAdapter<MasterBase, Vie
         }
 
         ViewCompat.setTransitionName(holder.viewPager, getTransitionName(item))
+        holder.viewPager.layoutParams.height = screenWidthInPx * 9 / 16
+
 
         holder.name.text = item.name
         holder.address.text = item.address.description
@@ -56,31 +54,45 @@ class FeedAdapter(items: List<MasterBase>) : FooterLoaderAdapter<MasterBase, Vie
         // Signs
         holder.signsContainer.removeAllViews()
         if (item.signs.isNotEmpty()) {
-            val requestBuilder = SvgModule.getGlideSvgRequestBuilder(context)
             for (sign in item.signs) {
-                val image = ImageView(context)
-                val signSize = context.resources.getDimension(R.dimen.feed_signs_size).toInt()
-                val params = LinearLayout.LayoutParams(signSize, signSize)
+                val drawable = when (sign.name) {
+                    "accuracy" -> ContextCompat.getDrawable(context, R.drawable.ic_fast)
+                    "politeness" -> ContextCompat.getDrawable(context, R.drawable.ic_neatly)
+                    "varnish resistance" -> ContextCompat.getDrawable(context, R.drawable.ic_pallet)
+                    "painting" -> ContextCompat.getDrawable(context, R.drawable.ic_painting)
+                    else -> null
+                } ?: continue
+
+                val container = RelativeLayout(context)
+                val icon = ImageView(context)
+                val background = ImageView(context)
+
+                val params = RelativeLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
                 params.setMargins(0, 0, context.resources.getDimension(R.dimen.feed_space_between_signs).toInt(), 0)
-                image.layoutParams = params
-                holder.signsContainer.addView(image)
-                requestBuilder.load(Uri.parse(sign.icon)).into(image);
+                container.layoutParams = params
+
+
+                val iconParams = RelativeLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
+                iconParams.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE)
+                icon.layoutParams = iconParams
+
+
+                icon.setImageDrawable(drawable)
+                icon.setColorFilter(ContextCompat.getColor(context, R.color.white))
+                background.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.sign_circle))
+
+                container.addView(background)
+                container.addView(icon)
+
+                holder.signsContainer.addView(container)
             }
         }
 
-        holder.initialCost.text = "1800 - 3500 \u20BD"
+        holder.initialCost.text = "2500 - 3500 \u20BD"
 
         // Photos slider
         holder.viewPager.adapter = adapter
-        val totalPages = item.photos.size
-        addBottomDots(holder.dotsContainer, 0, totalPages)
-        holder.viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrollStateChanged(state: Int) {}
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
-            override fun onPageSelected(pagePosition: Int) {
-                addBottomDots(holder.dotsContainer, pagePosition, totalPages)
-            }
-        })
+        holder.tabLayout.setupWithViewPager(holder.viewPager)
 
         val ratingsCount = 21
         holder.stars.text = context.resources.getQuantityString(R.plurals.ratings_count, ratingsCount, item.stars.toString(), ratingsCount)
@@ -93,8 +105,8 @@ class FeedAdapter(items: List<MasterBase>) : FooterLoaderAdapter<MasterBase, Vie
         val address: TextView = view.findViewById(R.id.address)
         val avatar: ImageView = view.findViewById(R.id.avatar)
         val moreOptions: View = view.findViewById(R.id.more_options)
-        val viewPager: ViewPager = view.findViewById(R.id.pager)
-        val dotsContainer: LinearLayout = view.findViewById(R.id.dots_container)
+        val viewPager: ViewPager = view.findViewById(R.id.image_slider)
+        val tabLayout: TabLayout = view.findViewById(R.id.tab_layout)
         val signsContainer: LinearLayout = view.findViewById(R.id.signs_container)
         val initialCost: TextView = view.findViewById(R.id.initial_cost)
         val stars: TextView = view.findViewById(R.id.stars)

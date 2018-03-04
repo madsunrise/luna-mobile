@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#2196f3</color>
-    <color name="colorSecondary">#6A6A6A</color>
-    <color name="colorSecondaryDark">#3F3F3F</color>
+    <color name="colorSecondary">#757575</color>
+    <color name="colorSecondaryDark">#424242</color>
     <color name="colorSupport">#DAE0E6</color>
 
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
 
-    <color name="background_color">#F2F2F2</color>
-    
+    <color name="backgroundColor">#F2F2F2</color>
+
     <color name="textColorPrimary">#212121</color>
     <color name="textColorSecondary">#6A6A6A</color>
 
     <!-- view pager dots -->
-    <color name="view_pager_active_dot">@color/black</color>
-    <color name="view_pager_inactive_dot">@color/colorSecondary</color>
+    <color name="viewPagerActiveDot">@color/colorPrimary</color>
+    <color name="viewPagerInactiveDot">#802196f3</color>    <!-- 50% opacity -->
 
-    <color name="feed_search_field_background_color">#FAFAFA</color>
-    <color name="feed_search_name_text_color">#60000000</color>
+    <color name="feedSearchFieldBackgroundColor">#FAFAFA</color>
+    <color name="feedSearchNameTextColor">#60000000</color>
+    <color name="feedItemPriceContainerBackground">#B3FFFFFF</color>
+    <color name="feedItemSignContainerBackground">#B32196F3</color>
 </resources>

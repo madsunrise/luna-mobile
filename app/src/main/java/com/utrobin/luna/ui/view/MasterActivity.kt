@@ -56,13 +56,13 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
 //            presenter.loadData(base)
 //        }
 
-        binding.pager.adapter = ViewPagerAdapter(this, base.photos)
+        binding.imageSlider.adapter = ViewPagerAdapter(this, base.photos)
 
 
         supportPostponeEnterTransition()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            binding.pager.transitionName = intent.extras.getString(TRANSITION_NAME)
-            binding.pager.currentItem = intent.extras.getInt(CURRENT_PHOTO)
+            binding.imageSlider.transitionName = intent.extras.getString(TRANSITION_NAME)
+            binding.imageSlider.currentItem = intent.extras.getInt(CURRENT_PHOTO)
         }
         supportStartPostponedEnterTransition()
 
@@ -154,7 +154,7 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
         sign1.layoutParams = params
 
         sign1.findViewById<TextView>(R.id.main_part).setCompoundDrawablesWithIntrinsicBounds(
-                ContextCompat.getDrawable(this, R.drawable.ic_cute_rocket_launching),
+                ContextCompat.getDrawable(this, R.drawable.ic_fast),
                 null,
                 null,
                 null)
@@ -202,11 +202,11 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
         sign4.layoutParams = params
 
         sign4.findViewById<TextView>(R.id.main_part).setCompoundDrawablesWithIntrinsicBounds(
-                ContextCompat.getDrawable(this, R.drawable.ic_neatly),
+                ContextCompat.getDrawable(this, R.drawable.ic_painting),
                 null,
                 null,
                 null)
-        sign4.findViewById<TextView>(R.id.main_part).text = "Красивые девушки"
+        sign4.findViewById<TextView>(R.id.main_part).text = "Кисточка"
         sign4.findViewById<TextView>(R.id.secondary_part).text = " | 107"
         if (System.currentTimeMillis() % 2 == 0L) {
             binding.signsContainer.addView(sign4)

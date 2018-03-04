@@ -1,156 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <!-- header -->
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/header"
+        <!-- avatar -->
+        <ImageView
+            android:id="@+id/avatar"
+            android:layout_width="@dimen/feed_item_avatar_size"
+            android:layout_height="@dimen/feed_item_avatar_size"
+            android:layout_marginStart="@dimen/feed_item_avatar_margin_start"
+            android:layout_marginTop="@dimen/feed_item_avatar_margin_top"
+            card_view:layout_constraintLeft_toLeftOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent"
+            tools:ignore="contentDescription" />
+
+        <TextView
+            android:id="@+id/name"
+            style="@style/Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/feed_item_name_margin_start"
+            card_view:layout_constraintLeft_toRightOf="@id/avatar"
+            card_view:layout_constraintTop_toTopOf="@id/avatar" />
+
+        <TextView
+            android:id="@+id/address"
+            style="@style/Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/feed_item_address_metro_circle_padding"
+            android:drawableStart="@drawable/metro_circle"
+            android:textColor="?android:textColorSecondary"
+            card_view:layout_constraintBottom_toBottomOf="@id/avatar"
+            card_view:layout_constraintLeft_toLeftOf="@id/name" />
+
+        <ImageButton
+            android:id="@+id/more_options"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/feed_item_options_button_margin_end"
+            android:layout_marginTop="@dimen/feed_item_options_button_margin_top"
+            android:background="?android:selectableItemBackground"
+            app:srcCompat="@drawable/ic_more_vert_black_24dp"
+            card_view:layout_constraintRight_toRightOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent"
+            tools:ignore="contentDescription" />
+
+
+        <!-- Photos -->
+        <android.support.v4.view.ViewPager
+            android:id="@+id/image_slider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="@dimen/feed_image_slider_margin_top"
+            card_view:layout_constraintTop_toBottomOf="@id/avatar" />
 
-            <!-- avatar -->
-            <ImageView
-                android:id="@+id/avatar"
-                android:layout_width="@dimen/feed_item_avatar_size"
-                android:layout_height="@dimen/feed_item_avatar_size"
-                android:layout_marginStart="8dp"
-                card_view:layout_constraintLeft_toLeftOf="parent"
-                tools:ignore="contentDescription" />
+        <!-- Price -->
+        <TextView
+            android:id="@+id/initial_cost"
+            style="@style/Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/feed_price_container_margin_start"
+            android:layout_marginTop="@dimen/feed_price_container_margin_top"
+            android:background="@drawable/feed_item_price_background"
+            android:paddingBottom="@dimen/feed_price_container_padding_vertical"
+            android:paddingEnd="@dimen/feed_price_container_padding_horizontal"
+            android:paddingStart="@dimen/feed_price_container_padding_horizontal"
+            android:paddingTop="@dimen/feed_price_container_padding_vertical"
+            android:textColor="?android:textColorSecondary"
+            card_view:layout_constraintLeft_toLeftOf="parent"
+            card_view:layout_constraintTop_toTopOf="@id/image_slider" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:orientation="vertical"
-                card_view:layout_constraintLeft_toRightOf="@id/avatar">
-
-                <TextView
-                    android:id="@+id/name"
-                    style="@style/Subhead"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:id="@+id/address"
-                    style="@style/Body1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:drawablePadding="4dp"
-                    android:drawableStart="@drawable/metro_circle"
-                    android:textColor="?android:textColorSecondary" />
-
-            </LinearLayout>
-
-            <ImageButton
-                android:id="@+id/more_options"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="?android:selectableItemBackground"
-                android:padding="@dimen/feed_image_button_padding"
-                android:src="@drawable/ic_more_vert_black_24dp"
-                card_view:layout_constraintRight_toRightOf="parent"
-                tools:ignore="contentDescription" />
-
-        </android.support.constraint.ConstraintLayout>
-
-        <!-- Image slider with footer -->
+        <!-- Signs -->
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/signs_container"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginEnd="@dimen/feed_signs_container_margin_end"
+            android:orientation="horizontal"
+            card_view:layout_constraintRight_toRightOf="parent"
+            card_view:layout_constraintTop_toTopOf="@id/initial_cost" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/image_slider_height">
+        <!-- Image slider dots -->
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/feed_tab_layout_height"
+            app:tabBackground="@drawable/tab_selector"
+            app:tabGravity="center"
+            app:tabIndicatorHeight="0dp"
+            app:tabMaxWidth="@dimen/feed_tab_layout_space_between_dots"
+            card_view:layout_constraintLeft_toLeftOf="parent"
+            card_view:layout_constraintRight_toRightOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@id/image_slider" />
 
-                <!-- Photos -->
-                <android.support.v4.view.ViewPager
-                    android:id="@+id/pager"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+        <!-- Stars -->
+        <TextView
+            android:id="@+id/stars"
+            style="@style/Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/feed_stars_margin_start"
+            android:drawablePadding="@dimen/feed_stars_drawable_padding"
+            android:drawableStart="@drawable/ic_star_black_24dp"
+            android:gravity="center_vertical"
+            card_view:layout_constraintLeft_toLeftOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@id/tab_layout" />
 
-                <!-- Signs -->
-                <LinearLayout
-                    android:id="@+id/signs_container"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/feed_signs_container_height"
-                    android:layout_alignParentEnd="true"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/feed_signs_container_padding" />
-
-                <TextView
-                    android:id="@+id/initial_cost"
-                    style="@style/Title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginStart="20dp"
-                    android:textColor="#e6ffffff" />
-
-            </RelativeLayout>
-
-
-            <!-- Footer -->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/image_slider_bottom_bar_height"
-                android:layout_marginTop="@dimen/image_slider_bottom_bar_margin_top"
-                android:paddingLeft="@dimen/image_slider_bottom_bar_horizontal_padding"
-                android:paddingRight="@dimen/image_slider_bottom_bar_horizontal_padding">
-
-                <!-- Stars -->
-                <TextView
-                    android:id="@+id/stars"
-                    style="@style/Subhead"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:drawablePadding="@dimen/feed_icon_drawable_padding"
-                    android:drawableStart="@drawable/ic_star_border_black_24dp"
-                    android:gravity="center_vertical" />
-
-
-                <!-- Image slider dots -->
-                <LinearLayout
-                    android:id="@+id/dots_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:gravity="center"
-                    android:orientation="horizontal" />
-
-
-                <!-- Comments -->
-                <TextView
-                    android:id="@+id/comments"
-                    style="@style/Subhead"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerInParent="true"
-                    android:drawableEnd="@drawable/ic_mode_comment_black_24dp"
-                    android:drawablePadding="@dimen/feed_icon_drawable_padding"
-                    tools:ignore="contentDescription" />
-            </RelativeLayout>
-        </LinearLayout>
+        <!-- Comments -->
+        <TextView
+            android:id="@+id/comments"
+            style="@style/Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/feed_comments_margin_end"
+            android:drawableEnd="@drawable/ic_comment_24dp"
+            android:drawablePadding="@dimen/feed_comments_drawable_padding"
+            android:gravity="center_vertical"
+            card_view:layout_constraintBottom_toBottomOf="@id/stars"
+            card_view:layout_constraintRight_toRightOf="parent"
+            card_view:layout_constraintTop_toTopOf="@id/stars" />
 
         <View
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/Divider" />
-    </LinearLayout>
+            style="@style/Divider"
+            android:layout_marginTop="@dimen/feed_divider_margin_top"
+            card_view:layout_constraintTop_toBottomOf="@id/stars" />
+    </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>
