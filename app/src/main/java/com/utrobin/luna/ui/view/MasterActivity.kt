@@ -1,9 +1,12 @@
 package com.utrobin.luna.ui.view
 
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Build
 import android.os.Bundle
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.content.ContextCompat
+import android.support.v4.view.ViewCompat
 import android.support.v7.app.AppCompatActivity
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
@@ -61,7 +64,11 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
         windowManager.defaultDisplay.getMetrics(displayMetrics)
         binding.imageSlider.layoutParams.height = displayMetrics.widthPixels * 9 / 16
 
-        binding.imageSlider.adapter = ViewPagerAdapter(this, base.photos)
+        val adapter = ViewPagerAdapter(this, base.photos)
+        binding.imageSlider.adapter = adapter
+        adapter.imageClickSubject.subscribe {
+            openImageViewer()
+        }
 
 
         supportPostponeEnterTransition()
@@ -516,5 +523,22 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
         designContainer.addView(ultraComplex)
 
         binding.servicesContent.addView(designLayout)
+    }
+
+    private fun openImageViewer() {
+        val intent = Intent(this, ImageViewer::class.java)
+        intent.apply {
+            putExtra(TRANSITION_NAME, ViewCompat.getTransitionName(binding.imageSlider))
+            putExtra(CURRENT_PHOTO, binding.imageSlider.currentItem)
+            putParcelableArrayListExtra(ImageViewer.PHOTO_LIST_EXTRA, ArrayList(master.base.photos))
+        }
+
+        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                this,
+                binding.imageSlider,
+                ViewCompat.getTransitionName(binding.imageSlider)
+        )
+
+        startActivity(intent, options.toBundle())
     }
 }

@@ -23,6 +23,12 @@
         <activity
             android:name=".ui.view.MasterActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.view.ImageViewer"
+            android:screenOrientation="portrait"
+            android:theme="@style/ImageViewerTheme" />
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="a48052f878c1c61b460afd3fd298f9883cbc5f60" />
