@@ -53,6 +53,11 @@ class FeedAdapter(items: List<MasterBase>, private val screenWidthInPx: Int) : F
             holder.address.compoundDrawables[0].colorFilter = PorterDuffColorFilter(
                     Color.parseColor('#' + item.address.metro[0].color), PorterDuff.Mode.MULTIPLY
             )
+        } else {
+            holder.address.compoundDrawables[0].colorFilter = PorterDuffColorFilter(
+                    ContextCompat.getColor(context, R.color.white),
+                    PorterDuff.Mode.MULTIPLY
+            )
         }
         // Avatar
         item.avatar.path.takeIf { it.isNotBlank() }
