@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -55,6 +56,10 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
 //            setState(State.LOADING)
 //            presenter.loadData(base)
 //        }
+
+        val displayMetrics = DisplayMetrics()
+        windowManager.defaultDisplay.getMetrics(displayMetrics)
+        binding.imageSlider.layoutParams.height = displayMetrics.widthPixels * 9 / 16
 
         binding.imageSlider.adapter = ViewPagerAdapter(this, base.photos)
 

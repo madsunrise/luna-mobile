@@ -34,7 +34,8 @@
                 <!-- Photos -->
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/master_image_slider_height">
+                    android:layout_height="wrap_content"
+                    android:id="@+id/image_slider_container">
 
                     <android.support.v4.view.ViewPager
                         android:id="@+id/image_slider"
