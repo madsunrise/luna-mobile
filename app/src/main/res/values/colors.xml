@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#2196f3</color>
-    <color name="colorSecondary">#6A6A6A</color>
-    <color name="colorSecondaryDark">#3F3F3F</color>
+    <color name="colorSecondary">#757575</color>
+    <color name="colorSecondaryDark">#424242</color>
     <color name="colorSupport">#DAE0E6</color>
 
     <color name="white">#FFFFFF</color>
@@ -19,4 +19,6 @@
 
     <color name="feedSearchFieldBackgroundColor">#FAFAFA</color>
     <color name="feedSearchNameTextColor">#60000000</color>
+    <color name="feedItemPriceContainerBackground">#B3FFFFFF</color>
+    <color name="feedItemSignContainerBackground">#B32196F3</color>
 </resources>

@@ -50,7 +50,7 @@
             android:layout_marginEnd="@dimen/feed_item_options_button_margin_end"
             android:layout_marginTop="@dimen/feed_item_options_button_margin_top"
             android:background="?android:selectableItemBackground"
-            android:src="@drawable/ic_more_vert_black_24dp"
+            app:srcCompat="@drawable/ic_more_vert_black_24dp"
             card_view:layout_constraintRight_toRightOf="parent"
             card_view:layout_constraintTop_toTopOf="parent"
             tools:ignore="contentDescription" />
