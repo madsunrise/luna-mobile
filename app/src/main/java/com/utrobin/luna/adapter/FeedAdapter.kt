@@ -47,13 +47,17 @@ class FeedAdapter(items: List<MasterBase>, private val screenWidthInPx: Int) : F
 
 
         holder.name.text = item.name
-        holder.address.text = item.address.description
 
         if (item.address.metro.isNotEmpty()) {
+            holder.address.text = context.getString(
+                    R.string.metro_with_address_template, item.address.metro[0].name,
+                    item.address.description
+            )
             holder.address.compoundDrawables[0].colorFilter = PorterDuffColorFilter(
                     Color.parseColor('#' + item.address.metro[0].color), PorterDuff.Mode.MULTIPLY
             )
         } else {
+            holder.address.text = item.address.description
             holder.address.compoundDrawables[0].colorFilter = PorterDuffColorFilter(
                     ContextCompat.getColor(context, R.color.white),
                     PorterDuff.Mode.MULTIPLY
