@@ -63,6 +63,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    style="@style/Caption"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/feed_action_bar_filter_button_height"
                     android:layout_marginEnd="@dimen/feed_action_bar_space_between_filter_buttons"
@@ -70,18 +71,22 @@
                     android:layout_weight="1"
                     android:background="@drawable/feed_filter_buttons_background"
                     android:gravity="center"
-                    android:text="Дата и время" />
+                    android:text="Дата и время"
+                    android:textColor="@color/textColorSecondary" />
 
                 <TextView
+                    style="@style/Caption"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/feed_action_bar_filter_button_height"
                     android:layout_weight="1"
                     android:background="@drawable/feed_filter_buttons_background"
                     android:gravity="center"
-                    android:text="Район, метро" />
+                    android:text="Район, метро"
+                    android:textColor="@color/textColorSecondary" />
 
 
                 <TextView
+                    style="@style/Caption"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/feed_action_bar_filter_button_height"
                     android:layout_marginEnd="@dimen/feed_action_bar_filter_buttons_edge_margin"
@@ -93,7 +98,8 @@
                     android:gravity="center"
                     android:paddingEnd="@dimen/feed_action_bar_filter_buttons_horizontal_padding"
                     android:paddingStart="@dimen/feed_action_bar_filter_buttons_horizontal_padding"
-                    android:text="Фильтры" />
+                    android:text="Фильтры"
+                    android:textColor="@color/textColorSecondary" />
             </LinearLayout>
         </android.support.design.widget.AppBarLayout>
     </android.support.constraint.ConstraintLayout>
