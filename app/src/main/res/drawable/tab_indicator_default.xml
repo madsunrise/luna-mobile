@@ -6,7 +6,7 @@
             android:shape="ring"
             android:thickness="@dimen/feed_tab_layout_inactive_dot_size"
             android:useLevel="false">
-            <solid android:color="@color/viewPagerInactiveDot" />
+            <solid android:color="@color/colorPrimaryOpacity50" />
         </shape>
     </item>
 </layer-list>

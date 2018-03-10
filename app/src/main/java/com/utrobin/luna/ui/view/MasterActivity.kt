@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewCompat
+import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
@@ -81,6 +82,21 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
 
         binding.buttonWhat.setOnClickListener { showServicesBlock(true) }
         binding.closeServicesBtn.setOnClickListener { showServicesBlock(false) }
+
+        val totalPhotos = base.photos.size
+        binding.imageSlider.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrollStateChanged(state: Int) {
+
+            }
+
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+                binding.photosCounter.text = getString(R.string.master_photos_counter_template, position + 1, totalPhotos)
+            }
+
+            override fun onPageSelected(position: Int) {
+
+            }
+        })
     }
 
     override fun dataLoaded(master: MasterExtended) {

@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="master_photos_counter_radius">16dp</dimen>
+    <dimen name="master_photos_counter_margin">16dp</dimen>
+    <dimen name="master_photos_counter_padding_vertical">8dp</dimen>
+    <dimen name="master_photos_counter_padding_horizontal">12dp</dimen>
+    <dimen name="master_photos_counter_drawable_padding">8dp</dimen>
     <dimen name="master_title_margin_top">22dp</dimen>
     <dimen name="master_rating_margin_top">14dp</dimen>
     <dimen name="master_space_between_stars">2dp</dimen>

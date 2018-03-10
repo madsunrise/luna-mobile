@@ -32,16 +32,35 @@
                 android:orientation="vertical">
 
                 <!-- Photos -->
-                <RelativeLayout
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/image_slider_container"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/image_slider_container">
+                    android:layout_height="wrap_content">
 
                     <android.support.v4.view.ViewPager
                         android:id="@+id/image_slider"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-                </RelativeLayout>
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/photos_counter"
+                        style="@style/Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/master_photos_counter_margin"
+                        android:layout_marginEnd="@dimen/master_photos_counter_margin"
+                        android:background="@drawable/master_photo_counter_background"
+                        android:drawableEnd="@drawable/ic_collections_white_18dp"
+                        android:drawablePadding="@dimen/master_photos_counter_drawable_padding"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="@dimen/master_photos_counter_padding_vertical"
+                        android:paddingEnd="@dimen/master_photos_counter_padding_horizontal"
+                        android:paddingStart="@dimen/master_photos_counter_padding_horizontal"
+                        android:paddingTop="@dimen/master_photos_counter_padding_vertical"
+                        android:textColor="@color/white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+                </android.support.constraint.ConstraintLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"

@@ -5,6 +5,9 @@
     <color name="colorSecondaryDark">#424242</color>
     <color name="colorSupport">#DAE0E6</color>
 
+    <color name="colorPrimaryOpacity50">#802196f3</color>
+    <color name="colorPrimaryOpacity70">#B32196F3</color>
+
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
 
@@ -15,10 +18,8 @@
 
     <!-- view pager dots -->
     <color name="viewPagerActiveDot">@color/colorPrimary</color>
-    <color name="viewPagerInactiveDot">#802196f3</color>    <!-- 50% opacity -->
 
     <color name="feedSearchFieldBackgroundColor">#FAFAFA</color>
     <color name="feedSearchNameTextColor">#60000000</color>
     <color name="feedItemPriceContainerBackground">#B3FFFFFF</color>
-    <color name="feedItemSignContainerBackground">#B32196F3</color>
 </resources>
