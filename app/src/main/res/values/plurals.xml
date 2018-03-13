@@ -13,4 +13,11 @@
         <item quantity="many">Вам подходит %d мастеров</item>
         <item quantity="other">Вам подходит %d мастеров</item>
     </plurals>
+
+    <plurals name="nails">
+        <item quantity="one">%d ноготь</item>
+        <item quantity="few">%d ногтя</item>
+        <item quantity="many">%d ногтей</item>
+        <item quantity="other">%d ногтей</item>
+    </plurals>
 </resources>

@@ -18,11 +18,7 @@ import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.RadioButton
-import android.widget.RadioGroup
-import android.widget.TextView
+import android.widget.*
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.utrobin.luna.R
@@ -513,29 +509,92 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
 
         val designContainer = designLayout.findViewById<LinearLayout>(R.id.container)
 
+        var simpleCounter = 4
+        var complexCounter = 0
+
         val simple = LayoutInflater
                 .from(this)
                 .inflate(R.layout.service_block_with_counter, designContainer, false)
-        simple.findViewById<TextView>(R.id.property).text = "Простой"
-        simple.findViewById<TextView>(R.id.counter).text = "4 ногтя"
-        simple.findViewById<TextView>(R.id.price).text = "600-800 \u20BD"
+        val counterTV = simple.findViewById<TextView>(R.id.counter)
+
+        simple.findViewById<TextView>(R.id.property).text = "Простой рисунок"
+
+        val low = 600
+        val high = 800
+        simple.findViewById<TextView>(R.id.price).text = "${low * simpleCounter}-${high * simpleCounter} \u20BD"
+
+        counterTV.text = resources.getQuantityString(
+                R.plurals.nails, simpleCounter, simpleCounter)
+
+        simple.findViewById<ImageView>(R.id.less_btn).setOnClickListener {
+            if (simpleCounter == 0) {
+                return@setOnClickListener
+            }
+            simpleCounter--
+            if (simpleCounter == 0) {
+                counterTV.text = "нет"
+                simple.findViewById<TextView>(R.id.price).text = "0 \u20BD"
+            } else {
+                counterTV.text = resources.getQuantityString(
+                        R.plurals.nails, simpleCounter, simpleCounter)
+                simple.findViewById<TextView>(R.id.price).text = "${low * simpleCounter}-${high * simpleCounter} \u20BD"
+            }
+        }
+
+        simple.findViewById<ImageView>(R.id.more_btn).setOnClickListener {
+            if (simpleCounter == 10 - complexCounter) {
+                return@setOnClickListener
+            }
+            simpleCounter++
+            counterTV.text = resources.getQuantityString(
+                    R.plurals.nails, simpleCounter, simpleCounter)
+            simple.findViewById<TextView>(R.id.price).text = "${low * simpleCounter}-${high * simpleCounter} \u20BD"
+        }
+
         designContainer.addView(simple)
+
 
         val complex = LayoutInflater
                 .from(this)
                 .inflate(R.layout.service_block_with_counter, designContainer, false)
-        complex.findViewById<TextView>(R.id.property).text = "Сложный"
+
+        val complexCounterTV = complex.findViewById<TextView>(R.id.counter)
+
+        val complexPrice = 1000
+
+        complex.findViewById<TextView>(R.id.property).text = "Сложный рисунок"
         complex.findViewById<TextView>(R.id.counter).text = "нет"
         complex.findViewById<TextView>(R.id.price).text = "0 \u20BD"
-        designContainer.addView(complex)
 
-        val ultraComplex = LayoutInflater
-                .from(this)
-                .inflate(R.layout.service_block_with_counter, designContainer, false)
-        ultraComplex.findViewById<TextView>(R.id.property).text = "Ультра-сложный"
-        ultraComplex.findViewById<TextView>(R.id.counter).text = "нет"
-        ultraComplex.findViewById<TextView>(R.id.price).text = "0 \u20BD"
-        designContainer.addView(ultraComplex)
+        complex.findViewById<ImageView>(R.id.less_btn).setOnClickListener {
+            if (complexCounter == 0) {
+                return@setOnClickListener
+            }
+            complexCounter--
+            if (complexCounter == 0) {
+                complexCounterTV.text = "нет"
+                complex.findViewById<TextView>(R.id.price).text = "0 \u20BD"
+            } else {
+                complexCounterTV.text = resources.getQuantityString(
+                        R.plurals.nails, complexCounter, complexCounter)
+                complex.findViewById<TextView>(R.id.price).text = "${complexPrice * complexCounter} \u20BD"
+            }
+        }
+
+        complex.findViewById<ImageView>(R.id.more_btn).setOnClickListener {
+            if (complexCounter == 10 - simpleCounter) {
+                return@setOnClickListener
+            }
+            complexCounter++
+            complexCounterTV.text = resources.getQuantityString(
+                    R.plurals.nails, complexCounter, complexCounter)
+            complex.findViewById<TextView>(R.id.price).text = "${complexPrice * complexCounter} \u20BD"
+        }
+
+        complexCounterTV.text = resources.getQuantityString(
+                R.plurals.nails, complexCounter, complexCounter)
+
+        designContainer.addView(complex)
 
         binding.servicesContent.addView(designLayout)
     }
