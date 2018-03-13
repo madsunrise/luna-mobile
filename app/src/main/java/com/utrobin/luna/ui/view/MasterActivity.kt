@@ -1,5 +1,6 @@
 package com.utrobin.luna.ui.view
 
+import android.content.Context
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Build
@@ -17,7 +18,11 @@ import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.*
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.RadioButton
+import android.widget.RadioGroup
+import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.utrobin.luna.R
@@ -442,33 +447,30 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
         val params = RadioGroup.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
         params.setMargins(0, 0, 0, resources.getDimension(R.dimen.services_block_with_radio_buttons_space_between_radio_buttons).toInt())
 
-        val manicureOption1 = LayoutInflater.from(this)
-                .inflate(R.layout.radio_button_with_price, radioGroup, false)
-        val radioButtonManicure1 = manicureOption1.findViewById<RadioButton>(R.id.radio_button)
-        radioButtonManicure1.text = "Обрезной/классический"
-        manicureOption1.findViewById<TextView>(R.id.price).text = "1100-1500 \u20BD"
-        manicureOption1.layoutParams = params
-        radioGroup.addView(manicureOption1)
 
-        val manicureOption2 = LayoutInflater.from(this)
-                .inflate(R.layout.radio_button_with_price, radioGroup, false)
-        manicureOption2.findViewById<RadioButton>(R.id.radio_button).text = "Аппаратный"
-        manicureOption2.findViewById<TextView>(R.id.price).text = "1200-1800 \u20BD"
-        manicureOption2.layoutParams = params
-        radioGroup.addView(manicureOption2)
+        val manicureOption1 = CustomRadioButton(this);
+        manicureOption1.setButtonText("Обрезной/классический")
+        manicureOption1.setPrice("1100-1500 \u20BD")
+        manicureOption1.setLayoutParams(params)
+        radioGroup.addView(manicureOption1.view)
 
-        val manicureOption3 = LayoutInflater.from(this)
-                .inflate(R.layout.radio_button_with_price, radioGroup, false)
-        manicureOption3.findViewById<RadioButton>(R.id.radio_button).text = "Комбинированный"
-        manicureOption3.findViewById<TextView>(R.id.price).text = "1500-2000 \u20BD"
-        manicureOption3.layoutParams = params
-        radioGroup.addView(manicureOption3)
+        val manicureOption2 = CustomRadioButton(this);
+        manicureOption2.setButtonText("Аппаратный")
+        manicureOption2.setPrice("1200-1800 \u20BD")
+        manicureOption2.setLayoutParams(params)
+        radioGroup.addView(manicureOption2.view)
 
-        val manicureOption4 = LayoutInflater.from(this)
-                .inflate(R.layout.radio_button_with_price, radioGroup, false)
-        manicureOption4.findViewById<RadioButton>(R.id.radio_button).text = "Европейский"
-        manicureOption4.findViewById<TextView>(R.id.price).text = "1500-2000 \u20BD"
-        radioGroup.addView(manicureOption4)
+        val manicureOption3 = CustomRadioButton(this);
+        manicureOption3.setButtonText("Комбинированный")
+        manicureOption3.setPrice("1500-2000 \u20BD")
+        manicureOption3.setLayoutParams(params)
+        radioGroup.addView(manicureOption3.view)
+
+        // Last one hasn't params
+        val manicureOption4 = CustomRadioButton(this);
+        manicureOption4.setButtonText("Европейский")
+        manicureOption4.setPrice("1500-2000 \u20BD")
+        radioGroup.addView(manicureOption4.view)
 
         binding.servicesContent.addView(manicureLayout)
 
@@ -482,25 +484,22 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
 
         val coverRadioGroup = coverLayout.findViewById<LinearLayout>(R.id.radio_buttons_container)
 
-        val coverOption1 = LayoutInflater.from(this)
-                .inflate(R.layout.radio_button_with_price, coverRadioGroup, false)
-        coverOption1.findViewById<RadioButton>(R.id.radio_button).text = "Шеллак"
-        coverOption1.findViewById<TextView>(R.id.price).text = "800-1300 \u20BD"
-        coverOption1.layoutParams = params
-        coverRadioGroup.addView(coverOption1)
+        val coverOption1 = CustomRadioButton(this);
+        coverOption1.setButtonText("Шеллак")
+        coverOption1.setPrice("800-1300 \u20BD")
+        coverOption1.setLayoutParams(params)
+        coverRadioGroup.addView(coverOption1.view)
 
-        val coverOption2 = LayoutInflater.from(this)
-                .inflate(R.layout.radio_button_with_price, coverRadioGroup, false)
-        coverOption2.findViewById<RadioButton>(R.id.radio_button).text = "Лак"
-        coverOption2.findViewById<TextView>(R.id.price).text = "1200-1500 \u20BD"
-        coverOption2.layoutParams = params
-        coverRadioGroup.addView(coverOption2)
+        val coverOption2 = CustomRadioButton(this);
+        coverOption2.setButtonText("Лак")
+        coverOption2.setPrice("1200-1500 \u20BD")
+        coverOption2.setLayoutParams(params)
+        coverRadioGroup.addView(coverOption2.view)
 
-        val coverOption3 = LayoutInflater.from(this)
-                .inflate(R.layout.radio_button_with_price, coverRadioGroup, false)
-        coverOption3.findViewById<RadioButton>(R.id.radio_button).text = "Френч"
-        coverOption3.findViewById<TextView>(R.id.price).text = "1500-1800 \u20BD"
-        coverRadioGroup.addView(coverOption3)
+        val coverOption3 = CustomRadioButton(this);
+        coverOption3.setButtonText("Френч")
+        coverOption3.setPrice("1500-1800 \u20BD")
+        coverRadioGroup.addView(coverOption3.view)
 
         binding.servicesContent.addView(coverLayout)
 
@@ -556,5 +555,50 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
         )
 
         startActivity(intent, options.toBundle())
+    }
+
+
+    private class CustomRadioButton(context: Context) : View.OnClickListener {
+
+        private val text: TextView
+        private val radioButton: RadioButton
+        val view: View = View.inflate(context, R.layout.radio_button_with_price, null)
+
+        init {
+            text = view.findViewById(R.id.price) as TextView
+            radioButton = view.findViewById(R.id.radio_button) as RadioButton
+            radioButton.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View) {
+
+            val nextState = radioButton.isChecked
+
+            val parent = view.parent as LinearLayout
+            val size = parent.childCount
+
+            for (i in 0 until size) {
+                (parent.getChildAt(i).findViewById(R.id.radio_button) as RadioButton).isChecked = false
+            }
+
+            radioButton.isChecked = nextState
+        }
+
+
+        fun setButtonText(text: String) {
+            radioButton.text = text
+        }
+
+        fun setPrice(price: String) {
+            text.text = price
+        }
+
+        fun setChecked(isChecked: Boolean) {
+            radioButton.isChecked = isChecked
+        }
+
+        fun setLayoutParams(params: LinearLayout.LayoutParams) {
+            view.layoutParams = params
+        }
     }
 }
