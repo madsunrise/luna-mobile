@@ -1,106 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/coordinatorLayout"
+    <include
+        android:id="@+id/errorContainer"
+        layout="@layout/error_container" />
+
+    <include
+        android:id="@+id/progressContainer"
+        layout="@layout/progress_container" />
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/mainContainerSwipeToRefresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appBar">
 
-        <include
-            android:id="@+id/errorContainer"
-            layout="@layout/error_container" />
-
-        <include
-            android:id="@+id/progressContainer"
-            layout="@layout/progress_container" />
-
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/mainContainerSwipeToRefresh"
+        <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/feedRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/appBar">
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 
-            <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/feedRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-        </android.support.v4.widget.SwipeRefreshLayout>
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
 
-        <android.support.design.widget.AppBarLayout
-            android:id="@+id/appBar"
+        <TextView
+            style="@style/Body1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/feed_search_field_height"
+            android:layout_marginEnd="@dimen/feed_search_field_horizontal_margin"
+            android:layout_marginStart="@dimen/feed_search_field_horizontal_margin"
+            android:layout_marginTop="@dimen/feed_search_field_margin_top"
+            android:background="@drawable/search_field_background"
+            android:drawablePadding="@dimen/feed_search_field_drawable_padding"
+            android:drawableStart="@drawable/ic_search_black_24dp"
+            android:elevation="4dp"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/feed_search_field_padding_start"
+            android:text="@string/search_for_masters_and_saloons"
+            android:textColor="@color/feedSearchNameTextColor"
+            tools:ignore="RtlSymmetry" />
+
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white">
+            android:layout_marginBottom="@dimen/feed_action_bar_filter_buttons_margin_bottom"
+            android:layout_marginTop="@dimen/feed_action_bar_filter_buttons_margin_top"
+            android:orientation="horizontal">
 
             <TextView
-                style="@style/Body1"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/feed_search_field_height"
-                android:layout_marginEnd="@dimen/feed_search_field_horizontal_margin"
-                android:layout_marginStart="@dimen/feed_search_field_horizontal_margin"
-                android:layout_marginTop="@dimen/feed_search_field_margin_top"
-                android:background="@drawable/search_field_background"
-                android:drawablePadding="@dimen/feed_search_field_drawable_padding"
-                android:drawableStart="@drawable/ic_search_black_24dp"
-                android:elevation="4dp"
-                android:gravity="center_vertical"
-                android:paddingStart="@dimen/feed_search_field_padding_start"
-                android:text="@string/search_for_masters_and_saloons"
-                android:textColor="@color/feedSearchNameTextColor"
-                tools:ignore="RtlSymmetry" />
+                style="@style/Caption"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/feed_action_bar_filter_button_height"
+                android:layout_marginEnd="@dimen/feed_action_bar_space_between_filter_buttons"
+                android:layout_marginStart="@dimen/feed_action_bar_filter_buttons_edge_margin"
+                android:layout_weight="1"
+                android:background="@drawable/feed_filter_buttons_background"
+                android:gravity="center"
+                android:text="Дата и время"
+                android:textColor="@color/textColorSecondary" />
+
+            <TextView
+                style="@style/Caption"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/feed_action_bar_filter_button_height"
+                android:layout_weight="1"
+                android:background="@drawable/feed_filter_buttons_background"
+                android:gravity="center"
+                android:text="Район, метро"
+                android:textColor="@color/textColorSecondary" />
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/feed_action_bar_filter_buttons_margin_bottom"
-                android:layout_marginTop="@dimen/feed_action_bar_filter_buttons_margin_top"
-                android:orientation="horizontal">
-
-                <TextView
-                    style="@style/Caption"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/feed_action_bar_filter_button_height"
-                    android:layout_marginEnd="@dimen/feed_action_bar_space_between_filter_buttons"
-                    android:layout_marginStart="@dimen/feed_action_bar_filter_buttons_edge_margin"
-                    android:layout_weight="1"
-                    android:background="@drawable/feed_filter_buttons_background"
-                    android:gravity="center"
-                    android:text="Дата и время"
-                    android:textColor="@color/textColorSecondary" />
-
-                <TextView
-                    style="@style/Caption"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/feed_action_bar_filter_button_height"
-                    android:layout_weight="1"
-                    android:background="@drawable/feed_filter_buttons_background"
-                    android:gravity="center"
-                    android:text="Район, метро"
-                    android:textColor="@color/textColorSecondary" />
-
-
-                <TextView
-                    style="@style/Caption"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/feed_action_bar_filter_button_height"
-                    android:layout_marginEnd="@dimen/feed_action_bar_filter_buttons_edge_margin"
-                    android:layout_marginStart="@dimen/feed_action_bar_space_between_filter_buttons"
-                    android:layout_weight="1"
-                    android:background="@drawable/feed_filter_buttons_background"
-                    android:drawableEnd="@drawable/favorite_copy_3"
-                    android:drawableTint="@color/colorSecondary"
-                    android:gravity="center"
-                    android:paddingEnd="@dimen/feed_action_bar_filter_buttons_horizontal_padding"
-                    android:paddingStart="@dimen/feed_action_bar_filter_buttons_horizontal_padding"
-                    android:text="Фильтры"
-                    android:textColor="@color/textColorSecondary" />
-            </LinearLayout>
-        </android.support.design.widget.AppBarLayout>
-    </android.support.constraint.ConstraintLayout>
-</layout>
+            <TextView
+                style="@style/Caption"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/feed_action_bar_filter_button_height"
+                android:layout_marginEnd="@dimen/feed_action_bar_filter_buttons_edge_margin"
+                android:layout_marginStart="@dimen/feed_action_bar_space_between_filter_buttons"
+                android:layout_weight="1"
+                android:background="@drawable/feed_filter_buttons_background"
+                android:drawableEnd="@drawable/favorite_copy_3"
+                android:drawableTint="@color/colorSecondary"
+                android:gravity="center"
+                android:paddingEnd="@dimen/feed_action_bar_filter_buttons_horizontal_padding"
+                android:paddingStart="@dimen/feed_action_bar_filter_buttons_horizontal_padding"
+                android:text="Фильтры"
+                android:textColor="@color/textColorSecondary" />
+        </LinearLayout>
+    </android.support.design.widget.AppBarLayout>
+</android.support.constraint.ConstraintLayout>

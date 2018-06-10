@@ -1,439 +1,436 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light">
 
-    <android.support.constraint.ConstraintLayout
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/background_light">
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-        <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/toolbar"
+
+    <ScrollView
+        android:id="@+id/mainContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/makeAnAppointmentContainer"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:layout_constraintTop_toTopOf="parent"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
+            <!-- Photos -->
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/imageSliderContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <ScrollView
-            android:id="@+id/mainContainer"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@id/makeAnAppointmentContainer"
-            app:layout_constraintTop_toBottomOf="@id/toolbar">
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/imageSlider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/photosCounter"
+                    style="@style/Body2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/master_photos_counter_margin"
+                    android:layout_marginEnd="@dimen/master_photos_counter_margin"
+                    android:background="@drawable/master_photo_counter_background"
+                    android:drawableEnd="@drawable/ic_collections_white_18dp"
+                    android:drawablePadding="@dimen/master_photos_counter_drawable_padding"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="@dimen/master_photos_counter_padding_vertical"
+                    android:paddingEnd="@dimen/master_photos_counter_padding_horizontal"
+                    android:paddingStart="@dimen/master_photos_counter_padding_horizontal"
+                    android:paddingTop="@dimen/master_photos_counter_padding_vertical"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+            </android.support.constraint.ConstraintLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                tools:ignore="RtlSymmetry">
 
-                <!-- Photos -->
-                <android.support.constraint.ConstraintLayout
-                    android:id="@+id/imageSliderContainer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <android.support.v4.view.ViewPager
-                        android:id="@+id/imageSlider"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/photosCounter"
-                        style="@style/Body2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/master_photos_counter_margin"
-                        android:layout_marginEnd="@dimen/master_photos_counter_margin"
-                        android:background="@drawable/master_photo_counter_background"
-                        android:drawableEnd="@drawable/ic_collections_white_18dp"
-                        android:drawablePadding="@dimen/master_photos_counter_drawable_padding"
-                        android:gravity="center_vertical"
-                        android:paddingBottom="@dimen/master_photos_counter_padding_vertical"
-                        android:paddingEnd="@dimen/master_photos_counter_padding_horizontal"
-                        android:paddingStart="@dimen/master_photos_counter_padding_horizontal"
-                        android:paddingTop="@dimen/master_photos_counter_padding_vertical"
-                        android:textColor="@color/white"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent" />
-                </android.support.constraint.ConstraintLayout>
-
+                <!-- block with right padding -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingStart="@dimen/activity_horizontal_margin"
-                    tools:ignore="RtlSymmetry">
+                    android:paddingEnd="@dimen/activity_horizontal_margin">
 
-                    <!-- block with right padding -->
+                    <!-- Main info block -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingEnd="@dimen/activity_horizontal_margin">
+                        android:layout_marginTop="@dimen/master_title_margin_top"
+                        android:orientation="vertical">
 
-                        <!-- Main info block -->
+                        <TextView
+                            android:id="@+id/title"
+                            style="@style/Title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold" />
+
+                        <!-- rating -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/master_title_margin_top"
-                            android:orientation="vertical">
+                            android:layout_marginTop="@dimen/master_rating_margin_top"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
 
-                            <TextView
-                                android:id="@+id/title"
-                                style="@style/Title"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textStyle="bold" />
-
-                            <!-- rating -->
                             <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/master_rating_margin_top"
-                                android:gravity="center_vertical"
-                                android:orientation="horizontal">
-
-                                <LinearLayout
-                                    android:id="@+id/starsContainer"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal" />
-
-                                <TextView
-                                    android:id="@+id/ratingMainPart"
-                                    style="@style/Body2"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="@dimen/master_space_between_stars_and_text" />
-
-                                <TextView
-                                    android:id="@+id/ratingSecondaryPart"
-                                    style="@style/Body1"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content" />
-                            </LinearLayout>
-
-                            <!-- description -->
-                            <TextView
-                                android:id="@+id/masterDescription"
-                                style="@style/Body1"
+                                android:id="@+id/starsContainer"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/master_description_margin_top" />
-
-                        </LinearLayout>
-
-                        <View
-                            style="@style/Divider"
-                            android:layout_marginBottom="@dimen/master_space_between_divider_and_metro"
-                            android:layout_marginTop="@dimen/master_space_between_description_and_divider" />
-
-                        <!-- Address block -->
-                        <android.support.constraint.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                                android:orientation="horizontal" />
 
                             <TextView
-                                android:id="@+id/addressMetro"
+                                android:id="@+id/ratingMainPart"
                                 style="@style/Body2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                app:layout_constraintLeft_toLeftOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                android:layout_marginStart="@dimen/master_space_between_stars_and_text" />
 
                             <TextView
-                                android:id="@+id/addressDescription"
+                                android:id="@+id/ratingSecondaryPart"
                                 style="@style/Body1"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/master_address_description_margin_top"
-                                app:layout_constraintLeft_toLeftOf="parent"
-                                app:layout_constraintTop_toBottomOf="@id/addressMetro" />
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
 
-                            <ImageView
-                                android:layout_width="@dimen/master_icon_map_size"
-                                android:layout_height="@dimen/master_icon_map_size"
-                                android:src="@drawable/map"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintRight_toRightOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                tools:ignore="contentDescription" />
-                        </android.support.constraint.ConstraintLayout>
+                        <!-- description -->
+                        <TextView
+                            android:id="@+id/masterDescription"
+                            style="@style/Body1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/master_description_margin_top" />
 
-                        <View
-                            style="@style/Divider"
-                            android:layout_marginBottom="@dimen/master_space_between_divider_and_signs"
-                            android:layout_marginTop="@dimen/master_space_between_address_and_divider" />
                     </LinearLayout>
 
-                    <!-- Signs and reviews -->
+                    <View
+                        style="@style/Divider"
+                        android:layout_marginBottom="@dimen/master_space_between_divider_and_metro"
+                        android:layout_marginTop="@dimen/master_space_between_description_and_divider" />
+
+                    <!-- Address block -->
+                    <android.support.constraint.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/addressMetro"
+                            style="@style/Body2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/addressDescription"
+                            style="@style/Body1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/master_address_description_margin_top"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/addressMetro" />
+
+                        <ImageView
+                            android:layout_width="@dimen/master_icon_map_size"
+                            android:layout_height="@dimen/master_icon_map_size"
+                            android:src="@drawable/map"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:ignore="contentDescription" />
+                    </android.support.constraint.ConstraintLayout>
+
+                    <View
+                        style="@style/Divider"
+                        android:layout_marginBottom="@dimen/master_space_between_divider_and_signs"
+                        android:layout_marginTop="@dimen/master_space_between_address_and_divider" />
+                </LinearLayout>
+
+                <!-- Signs and reviews -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:id="@+id/signsContainer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/master_signs_container_margin_bottom"
+                            android:orientation="horizontal" />
+                    </HorizontalScrollView>
+
+                    <HorizontalScrollView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/master_space_between_signs_and_reviews">
+
+                        <LinearLayout
+                            android:id="@+id/reviewsContainer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal" />
+                    </HorizontalScrollView>
+
+                    <TextView
+                        android:id="@+id/seeAllReviews"
+                        style="@style/Body1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/master_see_all_reviews_margin_top"
+                        android:textColor="@color/colorPrimary" />
+                </LinearLayout>
+
+                <!-- block with right padding -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingEnd="@dimen/activity_horizontal_margin">
+
+                    <View
+                        style="@style/Divider"
+                        android:layout_marginBottom="@dimen/master_space_between_divider_and_visit_options"
+                        android:layout_marginTop="@dimen/master_space_between_see_all_reviews_and_divider" />
+
+                    <!-- Filters -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <HorizontalScrollView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <LinearLayout
-                                android:id="@+id/signsContainer"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="@dimen/master_signs_container_margin_bottom"
-                                android:orientation="horizontal" />
-                        </HorizontalScrollView>
-
-                        <HorizontalScrollView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/master_space_between_signs_and_reviews">
-
-                            <LinearLayout
-                                android:id="@+id/reviewsContainer"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal" />
-                        </HorizontalScrollView>
-
                         <TextView
-                            android:id="@+id/seeAllReviews"
-                            style="@style/Body1"
+                            style="@style/Subhead"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/master_see_all_reviews_margin_top"
-                            android:textColor="@color/colorPrimary" />
-                    </LinearLayout>
+                            android:fontFamily="sans-serif-medium"
+                            android:text="@string/visit_options" />
 
-                    <!-- block with right padding -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingEnd="@dimen/activity_horizontal_margin">
-
-                        <View
-                            style="@style/Divider"
-                            android:layout_marginBottom="@dimen/master_space_between_divider_and_visit_options"
-                            android:layout_marginTop="@dimen/master_space_between_see_all_reviews_and_divider" />
-
-                        <!-- Filters -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:layout_marginTop="@dimen/master_filter_buttons_margin_top"
+                            android:orientation="horizontal">
 
-                            <TextView
-                                style="@style/Subhead"
-                                android:layout_width="wrap_content"
+                            <Button
+                                android:id="@+id/buttonWhen"
+                                style="@style/Base.Widget.AppCompat.Button.Colored"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:fontFamily="sans-serif-medium"
-                                android:text="@string/visit_options" />
+                                android:textAppearance="@style/Caption"
+                                android:textColor="@color/white" />
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
+                            <Button
+                                android:id="@+id/buttonWhere"
+                                style="@style/Base.Widget.AppCompat.Button.Colored"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/master_filter_buttons_margin_top"
-                                android:orientation="horizontal">
+                                android:layout_weight="1"
+                                android:fontFamily="sans-serif-medium"
+                                android:textAppearance="@style/Caption"
+                                android:textColor="@color/white" />
 
-                                <Button
-                                    android:id="@+id/buttonWhen"
-                                    style="@style/Base.Widget.AppCompat.Button.Colored"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:fontFamily="sans-serif-medium"
-                                    android:textAppearance="@style/Caption"
-                                    android:textColor="@color/white" />
-
-                                <Button
-                                    android:id="@+id/buttonWhere"
-                                    style="@style/Base.Widget.AppCompat.Button.Colored"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:fontFamily="sans-serif-medium"
-                                    android:textAppearance="@style/Caption"
-                                    android:textColor="@color/white" />
-
-                                <!-- TODO Support compatibility -->
-                                <Button
-                                    android:id="@+id/buttonWhat"
-                                    style="@style/Base.Widget.AppCompat.Button.Colored"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:drawableEnd="@drawable/favorite_copy_3"
-                                    android:drawableTint="@color/white"
-                                    android:fontFamily="sans-serif-medium"
-                                    android:textAppearance="@style/Caption"
-                                    android:textColor="@color/white" />
-                            </LinearLayout>
+                            <!-- TODO Support compatibility -->
+                            <Button
+                                android:id="@+id/buttonWhat"
+                                style="@style/Base.Widget.AppCompat.Button.Colored"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:drawableEnd="@drawable/favorite_copy_3"
+                                android:drawableTint="@color/white"
+                                android:fontFamily="sans-serif-medium"
+                                android:textAppearance="@style/Caption"
+                                android:textColor="@color/white" />
                         </LinearLayout>
-
-                        <View
-                            style="@style/Divider"
-                            android:layout_marginBottom="@dimen/master_space_divider_and_suitable_masters"
-                            android:layout_marginTop="@dimen/master_space_between_filter_buttons_and_divider" />
                     </LinearLayout>
-                </LinearLayout>
 
-                <!-- Suitable masters -->
-                <LinearLayout
-                    android:id="@+id/suitableMastersContainer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/mastersSuitableForYou"
-                        style="@style/Subhead"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/master_suitable_master_title_margin_bottom"
-                        android:layout_marginStart="@dimen/activity_horizontal_margin"
-                        android:fontFamily="sans-serif-medium" />
+                    <View
+                        style="@style/Divider"
+                        android:layout_marginBottom="@dimen/master_space_divider_and_suitable_masters"
+                        android:layout_marginTop="@dimen/master_space_between_filter_buttons_and_divider" />
                 </LinearLayout>
             </LinearLayout>
-        </ScrollView>
 
-        <!-- Make an appointment block -->
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/makeAnAppointmentContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/master_space_between_suitable_masters_and_appointment"
-            app:layout_constraintBottom_toBottomOf="parent">
-
-            <View
-                android:id="@+id/appointmentDivider"
-                style="@style/Divider"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/appointmentPrice"
-                style="@style/Body2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/master_make_an_appointment_price_margin_start"
-                android:layout_marginTop="@dimen/master_make_an_appointment_price_margin_top"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/appointmentDivider" />
-
-            <TextView
-                android:id="@+id/appointmentDuration"
-                style="@style/Caption"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/master_make_an_appointment_duration_margin_start"
-                android:drawablePadding="@dimen/master_make_an_appointment_duration_drawable_padding"
-                android:drawableStart="@drawable/ic_time"
-                android:fontFamily="sans-serif-medium"
-                app:layout_constraintLeft_toRightOf="@id/appointmentPrice"
-                app:layout_constraintTop_toTopOf="@id/appointmentPrice" />
-
-            <TextView
-                android:id="@+id/appointmentMasterDescription"
-                style="@style/Body1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/master_make_an_appointment_master_description_margin_top"
-                app:layout_constraintLeft_toLeftOf="@id/appointmentPrice"
-                app:layout_constraintTop_toBottomOf="@id/appointmentPrice" />
-
-            <!-- Yes, it's strange -->
-            <android.support.v4.widget.Space
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/master_make_an_appointment_master_description_margin_bottom"
-                app:layout_constraintTop_toBottomOf="@id/appointmentMasterDescription" />
-
-            <Button
-                android:id="@+id/makeAnAppointmentBtn"
-                style="@style/Base.Widget.AppCompat.Button.Colored"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/master_make_an_appointment_button_margin_end"
-                android:paddingBottom="@dimen/master_make_an_appointment_button_vertical_padding"
-                android:paddingEnd="@dimen/master_make_an_appointment_button_horizontal_padding"
-                android:paddingStart="@dimen/master_make_an_appointment_button_horizontal_padding"
-                android:paddingTop="@dimen/master_make_an_appointment_button_vertical_padding"
-                android:text="@string/make_an_appointment"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </android.support.constraint.ConstraintLayout>
-
-
-        <!-- Services  block -->
-        <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/servicesBlock"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/background_light"
-            android:paddingTop="@dimen/activity_vertical_margin"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent">
-
-            <TextView
-                android:id="@+id/servicesHeadline"
-                style="@style/Body2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:paddingBottom="@dimen/services_header_margin_bottom"
-                android:text="@string/services"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageButton
-                android:id="@+id/closeServicesBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_close_black_24dp"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@id/servicesHeadline"
-                tools:ignore="contentDescription" />
-
-            <ScrollView
+            <!-- Suitable masters -->
+            <LinearLayout
+                android:id="@+id/suitableMastersContainer"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:paddingBottom="@dimen/activity_vertical_margin"
-                app:layout_constraintTop_toBottomOf="@id/servicesHeadline">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
+                <TextView
+                    android:id="@+id/mastersSuitableForYou"
+                    style="@style/Subhead"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/master_suitable_master_title_margin_bottom"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:fontFamily="sans-serif-medium" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Make an appointment block -->
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/makeAnAppointmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/master_space_between_suitable_masters_and_appointment"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <View
+            android:id="@+id/appointmentDivider"
+            style="@style/Divider"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/appointmentPrice"
+            style="@style/Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/master_make_an_appointment_price_margin_start"
+            android:layout_marginTop="@dimen/master_make_an_appointment_price_margin_top"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/appointmentDivider" />
+
+        <TextView
+            android:id="@+id/appointmentDuration"
+            style="@style/Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/master_make_an_appointment_duration_margin_start"
+            android:drawablePadding="@dimen/master_make_an_appointment_duration_drawable_padding"
+            android:drawableStart="@drawable/ic_time"
+            android:fontFamily="sans-serif-medium"
+            app:layout_constraintLeft_toRightOf="@id/appointmentPrice"
+            app:layout_constraintTop_toTopOf="@id/appointmentPrice" />
+
+        <TextView
+            android:id="@+id/appointmentMasterDescription"
+            style="@style/Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/master_make_an_appointment_master_description_margin_top"
+            app:layout_constraintLeft_toLeftOf="@id/appointmentPrice"
+            app:layout_constraintTop_toBottomOf="@id/appointmentPrice" />
+
+        <!-- Yes, it's strange -->
+        <android.support.v4.widget.Space
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/master_make_an_appointment_master_description_margin_bottom"
+            app:layout_constraintTop_toBottomOf="@id/appointmentMasterDescription" />
+
+        <Button
+            android:id="@+id/makeAnAppointmentBtn"
+            style="@style/Base.Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/master_make_an_appointment_button_margin_end"
+            android:paddingBottom="@dimen/master_make_an_appointment_button_vertical_padding"
+            android:paddingEnd="@dimen/master_make_an_appointment_button_horizontal_padding"
+            android:paddingStart="@dimen/master_make_an_appointment_button_horizontal_padding"
+            android:paddingTop="@dimen/master_make_an_appointment_button_vertical_padding"
+            android:text="@string/make_an_appointment"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
+
+    <!-- Services  block -->
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/servicesBlock"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/background_light"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/servicesHeadline"
+            style="@style/Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:paddingBottom="@dimen/services_header_margin_bottom"
+            android:text="@string/services"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/closeServicesBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_close_black_24dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/servicesHeadline"
+            tools:ignore="contentDescription" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            app:layout_constraintTop_toBottomOf="@id/servicesHeadline">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:paddingStart="@dimen/activity_horizontal_margin">
+
+                <TextView
+                    android:id="@+id/priceNote"
+                    style="@style/Body1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/services_price_note_margin_top"
+                    android:text="@string/price_depends_on_master_qualification"
+                    android:textColor="@color/textColorSecondary" />
+
+                <!-- Dynamic content -->
                 <LinearLayout
+                    android:id="@+id/servicesContent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingEnd="@dimen/activity_horizontal_margin"
-                    android:paddingStart="@dimen/activity_horizontal_margin">
-
-                    <TextView
-                        android:id="@+id/priceNote"
-                        style="@style/Body1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/services_price_note_margin_top"
-                        android:text="@string/price_depends_on_master_qualification"
-                        android:textColor="@color/textColorSecondary" />
-
-                    <!-- Dynamic content -->
-                    <LinearLayout
-                        android:id="@+id/servicesContent"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical" />
-                </LinearLayout>
-            </ScrollView>
-        </android.support.constraint.ConstraintLayout>
+                    android:orientation="vertical" />
+            </LinearLayout>
+        </ScrollView>
     </android.support.constraint.ConstraintLayout>
-</layout>
+</android.support.constraint.ConstraintLayout>
