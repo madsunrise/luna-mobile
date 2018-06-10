@@ -1,6 +1,5 @@
 package com.utrobin.luna.ui.view
 
-import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.annotation.VisibleForTesting
 import android.support.v4.app.Fragment
@@ -12,13 +11,13 @@ import android.view.View
 import android.view.ViewGroup
 import com.utrobin.luna.R
 import com.utrobin.luna.adapter.FeedAdapter
-import com.utrobin.luna.databinding.FeedFragmentBinding
 import com.utrobin.luna.model.MasterBase
 import com.utrobin.luna.network.NetworkError
 import com.utrobin.luna.ui.contract.FeedContract
 import com.utrobin.luna.ui.presenter.FeedPresenter
 import com.utrobin.luna.ui.utils.EndlessRecyclerOnScrollListener
 import kotlinx.android.synthetic.main.error_container.view.*
+import kotlinx.android.synthetic.main.feed_fragment.*
 
 /**
  * Created by ivan on 01.11.2017.
@@ -30,8 +29,6 @@ class FeedFragment : Fragment(), FeedContract.View {
     private var adapterInitialized = false
     private var isDataLoading = false
 
-    lateinit var binding: FeedFragmentBinding
-
     private val presenter = FeedPresenter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,8 +37,7 @@ class FeedFragment : Fragment(), FeedContract.View {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.feed_fragment, container, false)!!
-        return binding.root
+        return inflater.inflate(R.layout.feed_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -51,18 +47,18 @@ class FeedFragment : Fragment(), FeedContract.View {
             initializeAdapter()
         }
         setUpRecyclerView()
-        binding.mainContainerSwipeToRefresh.setOnRefreshListener {
+        mainContainerSwipeToRefresh.setOnRefreshListener {
             requestDataUpdate()
         }
 
-        binding.errorContainer!!.repeat_btn.setOnClickListener {
+        errorContainer.repeatBtn.setOnClickListener {
             requestDataUpdate()
         }
     }
 
     override fun dataLoaded(newItems: List<MasterBase>, append: Boolean) {
         setState(State.CONTENT)
-        binding.mainContainerSwipeToRefresh.isRefreshing = false
+        mainContainerSwipeToRefresh.isRefreshing = false
         isDataLoading = false
         if (append) {
             feedAdapter.addItems(newItems)
@@ -93,12 +89,11 @@ class FeedFragment : Fragment(), FeedContract.View {
     }
 
     private fun setUpRecyclerView() {
-        val recyclerView = binding.feedRecyclerView
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = feedAdapter
+        feedRecyclerView.layoutManager = LinearLayoutManager(context)
+        feedRecyclerView.adapter = feedAdapter
         onScrollListener = object : EndlessRecyclerOnScrollListener<MasterBase, ViewPager>(
                 adapter = feedAdapter,
-                linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager) {
+                linearLayoutManager = feedRecyclerView.layoutManager as LinearLayoutManager) {
             override fun onLoadMore(currentPage: Int): Boolean {
                 if (isDataLoading) {
                     return false
@@ -108,7 +103,7 @@ class FeedFragment : Fragment(), FeedContract.View {
                 return true
             }
         }
-        recyclerView.addOnScrollListener(onScrollListener)
+        feedRecyclerView.addOnScrollListener(onScrollListener)
     }
 
 
@@ -120,25 +115,19 @@ class FeedFragment : Fragment(), FeedContract.View {
     private fun setState(state: State) {
         when (state) {
             State.CONTENT -> {
-                with(binding) {
-                    mainContainerSwipeToRefresh.visibility = View.VISIBLE
-                    errorContainer!!.visibility = View.GONE
-                    progressContainer!!.visibility = View.GONE
-                }
+                mainContainerSwipeToRefresh.visibility = View.VISIBLE
+                errorContainer.visibility = View.GONE
+                progressContainer.visibility = View.GONE
             }
             State.ERROR -> {
-                with(binding) {
-                    mainContainerSwipeToRefresh.visibility = View.GONE
-                    errorContainer!!.visibility = View.VISIBLE
-                    progressContainer!!.visibility = View.GONE
-                }
+                mainContainerSwipeToRefresh.visibility = View.GONE
+                errorContainer.visibility = View.VISIBLE
+                progressContainer.visibility = View.GONE
             }
             State.LOADING -> {
-                with(binding) {
-                    mainContainerSwipeToRefresh.visibility = View.GONE
-                    errorContainer!!.visibility = View.GONE
-                    progressContainer!!.visibility = View.VISIBLE
-                }
+                mainContainerSwipeToRefresh.visibility = View.GONE
+                errorContainer.visibility = View.GONE
+                progressContainer.visibility = View.VISIBLE
             }
         }
     }

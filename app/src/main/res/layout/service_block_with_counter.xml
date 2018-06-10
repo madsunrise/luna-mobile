@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/less_btn"
+        android:id="@+id/lessBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/services_block_with_counter_counter_margin_top"
@@ -31,17 +31,17 @@
         android:layout_width="@dimen/services_block_with_counter_counter_width"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        app:layout_constraintBottom_toBottomOf="@id/less_btn"
-        app:layout_constraintLeft_toRightOf="@id/less_btn"
-        app:layout_constraintTop_toTopOf="@id/less_btn" />
+        app:layout_constraintBottom_toBottomOf="@id/lessBtn"
+        app:layout_constraintLeft_toRightOf="@id/lessBtn"
+        app:layout_constraintTop_toTopOf="@id/lessBtn" />
 
     <ImageView
-        android:id="@+id/more_btn"
+        android:id="@+id/moreBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_more"
         app:layout_constraintLeft_toRightOf="@id/counter"
-        app:layout_constraintTop_toTopOf="@id/less_btn"
+        app:layout_constraintTop_toTopOf="@id/lessBtn"
         tools:ignore="contentDescription" />
 
     <TextView

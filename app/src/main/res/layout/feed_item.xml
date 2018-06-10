@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/card_view"
+    android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -45,7 +45,7 @@
             tools:ignore="RtlHardcoded" />
 
         <ImageButton
-            android:id="@+id/more_options"
+            android:id="@+id/moreOptions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/feed_item_options_button_margin_end"
@@ -59,7 +59,7 @@
 
         <!-- Photos -->
         <android.support.v4.view.ViewPager
-            android:id="@+id/image_slider"
+            android:id="@+id/imageSlider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/feed_image_slider_margin_top"
@@ -67,7 +67,7 @@
 
         <!-- Price -->
         <TextView
-            android:id="@+id/initial_cost"
+            android:id="@+id/initialCost"
             style="@style/Body2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -80,21 +80,21 @@
             android:paddingTop="@dimen/feed_price_container_padding_vertical"
             android:textColor="?android:textColorSecondary"
             card_view:layout_constraintLeft_toLeftOf="parent"
-            card_view:layout_constraintTop_toTopOf="@id/image_slider" />
+            card_view:layout_constraintTop_toTopOf="@id/imageSlider" />
 
         <!-- Signs -->
         <LinearLayout
-            android:id="@+id/signs_container"
+            android:id="@+id/signsContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/feed_signs_container_margin_end"
             android:orientation="horizontal"
             card_view:layout_constraintRight_toRightOf="parent"
-            card_view:layout_constraintTop_toTopOf="@id/initial_cost" />
+            card_view:layout_constraintTop_toTopOf="@id/initialCost" />
 
         <!-- Image slider dots -->
         <android.support.design.widget.TabLayout
-            android:id="@+id/tab_layout"
+            android:id="@+id/tabLayout"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/feed_tab_layout_height"
             app:tabBackground="@drawable/tab_selector"
@@ -103,7 +103,7 @@
             app:tabMaxWidth="@dimen/feed_tab_layout_space_between_dots"
             card_view:layout_constraintLeft_toLeftOf="parent"
             card_view:layout_constraintRight_toRightOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@id/image_slider" />
+            card_view:layout_constraintTop_toBottomOf="@id/imageSlider" />
 
         <!-- Stars -->
         <TextView
@@ -116,7 +116,7 @@
             android:drawableStart="@drawable/ic_star_black_24dp"
             android:gravity="center_vertical"
             card_view:layout_constraintLeft_toLeftOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@id/tab_layout" />
+            card_view:layout_constraintTop_toBottomOf="@id/tabLayout" />
 
         <!-- Comments -->
         <TextView

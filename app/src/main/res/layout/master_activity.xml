@@ -20,10 +20,10 @@
 
 
         <ScrollView
-            android:id="@+id/main_container"
+            android:id="@+id/mainContainer"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@id/make_an_appointment_container"
+            app:layout_constraintBottom_toTopOf="@id/makeAnAppointmentContainer"
             app:layout_constraintTop_toBottomOf="@id/toolbar">
 
             <LinearLayout
@@ -33,17 +33,17 @@
 
                 <!-- Photos -->
                 <android.support.constraint.ConstraintLayout
-                    android:id="@+id/image_slider_container"
+                    android:id="@+id/imageSliderContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <android.support.v4.view.ViewPager
-                        android:id="@+id/image_slider"
+                        android:id="@+id/imageSlider"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
                     <TextView
-                        android:id="@+id/photos_counter"
+                        android:id="@+id/photosCounter"
                         style="@style/Body2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -99,20 +99,20 @@
                                 android:orientation="horizontal">
 
                                 <LinearLayout
-                                    android:id="@+id/stars_container"
+                                    android:id="@+id/starsContainer"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal" />
 
                                 <TextView
-                                    android:id="@+id/rating_main_part"
+                                    android:id="@+id/ratingMainPart"
                                     style="@style/Body2"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="@dimen/master_space_between_stars_and_text" />
 
                                 <TextView
-                                    android:id="@+id/rating_secondary_part"
+                                    android:id="@+id/ratingSecondaryPart"
                                     style="@style/Body1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content" />
@@ -120,7 +120,7 @@
 
                             <!-- description -->
                             <TextView
-                                android:id="@+id/master_description"
+                                android:id="@+id/masterDescription"
                                 style="@style/Body1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -139,7 +139,7 @@
                             android:layout_height="wrap_content">
 
                             <TextView
-                                android:id="@+id/address_metro"
+                                android:id="@+id/addressMetro"
                                 style="@style/Body2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -147,13 +147,13 @@
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
-                                android:id="@+id/address_description"
+                                android:id="@+id/addressDescription"
                                 style="@style/Body1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/master_address_description_margin_top"
                                 app:layout_constraintLeft_toLeftOf="parent"
-                                app:layout_constraintTop_toBottomOf="@id/address_metro" />
+                                app:layout_constraintTop_toBottomOf="@id/addressMetro" />
 
                             <ImageView
                                 android:layout_width="@dimen/master_icon_map_size"
@@ -182,7 +182,7 @@
                             android:layout_height="wrap_content">
 
                             <LinearLayout
-                                android:id="@+id/signs_container"
+                                android:id="@+id/signsContainer"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="@dimen/master_signs_container_margin_bottom"
@@ -195,14 +195,14 @@
                             android:layout_marginTop="@dimen/master_space_between_signs_and_reviews">
 
                             <LinearLayout
-                                android:id="@+id/reviews_container"
+                                android:id="@+id/reviewsContainer"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal" />
                         </HorizontalScrollView>
 
                         <TextView
-                            android:id="@+id/see_all_n_reviews"
+                            android:id="@+id/seeAllReviews"
                             style="@style/Body1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -242,7 +242,7 @@
                                 android:orientation="horizontal">
 
                                 <Button
-                                    android:id="@+id/button_when"
+                                    android:id="@+id/buttonWhen"
                                     style="@style/Base.Widget.AppCompat.Button.Colored"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
@@ -252,7 +252,7 @@
                                     android:textColor="@color/white" />
 
                                 <Button
-                                    android:id="@+id/button_where"
+                                    android:id="@+id/buttonWhere"
                                     style="@style/Base.Widget.AppCompat.Button.Colored"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
@@ -263,7 +263,7 @@
 
                                 <!-- TODO Support compatibility -->
                                 <Button
-                                    android:id="@+id/button_what"
+                                    android:id="@+id/buttonWhat"
                                     style="@style/Base.Widget.AppCompat.Button.Colored"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
@@ -285,13 +285,13 @@
 
                 <!-- Suitable masters -->
                 <LinearLayout
-                    android:id="@+id/suitable_masters_container"
+                    android:id="@+id/suitableMastersContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/n_masters_suitable_for_you"
+                        android:id="@+id/mastersSuitableForYou"
                         style="@style/Subhead"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -304,30 +304,30 @@
 
         <!-- Make an appointment block -->
         <android.support.constraint.ConstraintLayout
-            android:id="@+id/make_an_appointment_container"
+            android:id="@+id/makeAnAppointmentContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/master_space_between_suitable_masters_and_appointment"
             app:layout_constraintBottom_toBottomOf="parent">
 
             <View
-                android:id="@+id/appointment_divider"
+                android:id="@+id/appointmentDivider"
                 style="@style/Divider"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/appointment_price"
+                android:id="@+id/appointmentPrice"
                 style="@style/Body2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/master_make_an_appointment_price_margin_start"
                 android:layout_marginTop="@dimen/master_make_an_appointment_price_margin_top"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/appointment_divider" />
+                app:layout_constraintTop_toBottomOf="@id/appointmentDivider" />
 
             <TextView
-                android:id="@+id/appointment_duration"
+                android:id="@+id/appointmentDuration"
                 style="@style/Caption"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -335,26 +335,26 @@
                 android:drawablePadding="@dimen/master_make_an_appointment_duration_drawable_padding"
                 android:drawableStart="@drawable/ic_time"
                 android:fontFamily="sans-serif-medium"
-                app:layout_constraintLeft_toRightOf="@id/appointment_price"
-                app:layout_constraintTop_toTopOf="@id/appointment_price" />
+                app:layout_constraintLeft_toRightOf="@id/appointmentPrice"
+                app:layout_constraintTop_toTopOf="@id/appointmentPrice" />
 
             <TextView
-                android:id="@+id/appointment_master_description"
+                android:id="@+id/appointmentMasterDescription"
                 style="@style/Body1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/master_make_an_appointment_master_description_margin_top"
-                app:layout_constraintLeft_toLeftOf="@id/appointment_price"
-                app:layout_constraintTop_toBottomOf="@id/appointment_price" />
+                app:layout_constraintLeft_toLeftOf="@id/appointmentPrice"
+                app:layout_constraintTop_toBottomOf="@id/appointmentPrice" />
 
             <!-- Yes, it's strange -->
             <android.support.v4.widget.Space
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/master_make_an_appointment_master_description_margin_bottom"
-                app:layout_constraintTop_toBottomOf="@id/appointment_master_description" />
+                app:layout_constraintTop_toBottomOf="@id/appointmentMasterDescription" />
 
             <Button
-                android:id="@+id/make_an_appointment_btn"
+                android:id="@+id/makeAnAppointmentBtn"
                 style="@style/Base.Widget.AppCompat.Button.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -374,7 +374,7 @@
         <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/services_block"
+            android:id="@+id/servicesBlock"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/background_light"
@@ -383,7 +383,7 @@
             app:layout_constraintBottom_toBottomOf="parent">
 
             <TextView
-                android:id="@+id/services_headline"
+                android:id="@+id/servicesHeadline"
                 style="@style/Body2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -394,21 +394,21 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
-                android:id="@+id/close_services_btn"
+                android:id="@+id/closeServicesBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_close_black_24dp"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@id/services_headline"
+                app:layout_constraintTop_toTopOf="@id/servicesHeadline"
                 tools:ignore="contentDescription" />
 
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:paddingBottom="@dimen/activity_vertical_margin"
-                app:layout_constraintTop_toBottomOf="@id/services_headline">
+                app:layout_constraintTop_toBottomOf="@id/servicesHeadline">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -418,7 +418,7 @@
                     android:paddingStart="@dimen/activity_horizontal_margin">
 
                     <TextView
-                        android:id="@+id/price_note"
+                        android:id="@+id/priceNote"
                         style="@style/Body1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -428,7 +428,7 @@
 
                     <!-- Dynamic content -->
                     <LinearLayout
-                        android:id="@+id/services_content"
+                        android:id="@+id/servicesContent"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical" />

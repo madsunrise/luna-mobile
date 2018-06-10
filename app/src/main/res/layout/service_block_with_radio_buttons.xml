@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/radio_buttons_container"
+        android:id="@+id/radioButtonsContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/services_block_with_radio_buttons_radio_group_margin_top"

@@ -79,7 +79,7 @@ abstract class FooterLoaderAdapter<T, V>(internal val items: ArrayList<T>) : Rec
     }
 
     class LoaderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val progressBar: ProgressBar = view.findViewById(R.id.progress_bar)
+        val progressBar: ProgressBar = view.findViewById(R.id.progressBar)
     }
 
     abstract fun getYourItemId(position: Int): Long

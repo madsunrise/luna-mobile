@@ -4,35 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/coordinator_layout"
+        android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <include
-            android:id="@+id/error_container"
+            android:id="@+id/errorContainer"
             layout="@layout/error_container" />
 
         <include
-            android:id="@+id/progress_container"
+            android:id="@+id/progressContainer"
             layout="@layout/progress_container" />
 
         <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/main_container_swipe_to_refresh"
+            android:id="@+id/mainContainerSwipeToRefresh"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/app_bar">
+            app:layout_constraintTop_toBottomOf="@id/appBar">
 
             <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/feed_recycler_view"
+                android:id="@+id/feedRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior" />
         </android.support.v4.widget.SwipeRefreshLayout>
 
         <android.support.design.widget.AppBarLayout
-            android:id="@+id/app_bar"
+            android:id="@+id/appBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white">

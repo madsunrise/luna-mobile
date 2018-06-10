@@ -1,7 +1,6 @@
 package com.utrobin.luna.ui.view
 
 import android.content.Intent
-import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.annotation.VisibleForTesting
 import android.support.design.widget.BottomNavigationView
@@ -12,13 +11,11 @@ import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.utrobin.luna.R
-import com.utrobin.luna.databinding.ActivityMainBinding
 import com.utrobin.luna.model.MasterBase
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
-    lateinit var binding: ActivityMainBinding
-
     private val feedFragment = FeedFragment.getInstance()
     private val mapFragment = MapFragment.getInstance()
     private val accountFragment = CommonSignUpFragment.getInstance()
@@ -53,9 +50,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)!!
+        setContentView(R.layout.activity_main)
 
-        binding.bottomNavigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
+        bottomNavigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
 
         savedInstanceState?.let {
             currentFragment = supportFragmentManager.getFragment(savedInstanceState, FRAGMENT_TAG)

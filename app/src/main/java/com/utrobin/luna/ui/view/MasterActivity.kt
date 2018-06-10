@@ -2,7 +2,6 @@ package com.utrobin.luna.ui.view
 
 import android.content.Context
 import android.content.Intent
-import android.databinding.DataBindingUtil
 import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.ActivityOptionsCompat
@@ -23,12 +22,12 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.utrobin.luna.R
 import com.utrobin.luna.adapter.ViewPagerAdapter
-import com.utrobin.luna.databinding.MasterActivityBinding
 import com.utrobin.luna.model.MasterBase
 import com.utrobin.luna.model.MasterExtended
 import com.utrobin.luna.network.NetworkError
 import com.utrobin.luna.ui.contract.MasterContract
 import com.utrobin.luna.ui.presenter.MasterPresenter
+import kotlinx.android.synthetic.main.master_activity.*
 
 
 /**
@@ -37,17 +36,15 @@ import com.utrobin.luna.ui.presenter.MasterPresenter
 class MasterActivity : AppCompatActivity(), MasterContract.View {
     private lateinit var master: MasterExtended
 
-    lateinit var binding: MasterActivityBinding
-
     private val presenter = MasterPresenter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.master_activity)
+        setContentView(R.layout.master_activity)
 
         presenter.attachView(this)
 
-        setSupportActionBar(binding.toolbar)
+        setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
@@ -57,17 +54,17 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
         setState(State.LOADING)
 
         presenter.loadData(base)
-//        binding.errorContainer!!.repeat_btn.setOnClickListener {
+//        errorContainer!!.repeat_btn.setOnClickListener {
 //            setState(State.LOADING)
 //            presenter.loadData(base)
 //        }
 
         val displayMetrics = DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(displayMetrics)
-        binding.imageSlider.layoutParams.height = displayMetrics.widthPixels * 9 / 16
+        imageSlider.layoutParams.height = displayMetrics.widthPixels * 9 / 16
 
         val adapter = ViewPagerAdapter(this, base.photos)
-        binding.imageSlider.adapter = adapter
+        imageSlider.adapter = adapter
         adapter.imageClickSubject.subscribe {
             openImageViewer()
         }
@@ -75,23 +72,23 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
 
         supportPostponeEnterTransition()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            binding.imageSlider.transitionName = intent.extras.getString(TRANSITION_NAME)
-            binding.imageSlider.currentItem = intent.extras.getInt(CURRENT_PHOTO)
+            imageSlider.transitionName = intent.extras.getString(TRANSITION_NAME)
+            imageSlider.currentItem = intent.extras.getInt(CURRENT_PHOTO)
         }
         supportStartPostponedEnterTransition()
 
 
-        binding.buttonWhat.setOnClickListener { showServicesBlock(true) }
-        binding.closeServicesBtn.setOnClickListener { showServicesBlock(false) }
+        buttonWhat.setOnClickListener { showServicesBlock(true) }
+        closeServicesBtn.setOnClickListener { showServicesBlock(false) }
 
         val totalPhotos = base.photos.size
-        binding.imageSlider.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+        imageSlider.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
 
             }
 
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-                binding.photosCounter.text = getString(R.string.master_photos_counter_template, position + 1, totalPhotos)
+                photosCounter.text = getString(R.string.master_photos_counter_template, position + 1, totalPhotos)
             }
 
             override fun onPageSelected(position: Int) {
@@ -112,31 +109,31 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
     }
 
     private fun fillViews() {
-        binding.title.text = master.base.name
+        title = master.base.name
 
         drawStars()
-//        binding.ratingMainPart.text = resources.getQuantityString(R.plurals.ratings_count,
+//        ratingMainPart.text = resources.getQuantityString(R.plurals.ratings_count,
 //                reviewsCount, master.base.stars.toString(), reviewsCount)
-        binding.ratingMainPart.text = master.base.stars.toString()
-        binding.ratingSecondaryPart.text = " | 124 оценки"
+        ratingMainPart.text = master.base.stars.toString()
+        ratingSecondaryPart.text = " | 124 оценки"
 
-        binding.masterDescription.text = "Мы легко впишемся в ваш график, а все наши услуги" +
+        masterDescription.text = "Мы легко впишемся в ваш график, а все наши услуги" +
                 " не займут у вас много времени."
 
-        binding.addressMetro.text = "Улица 1905 года"
-        binding.addressDescription.text = master.base.address.description
+        addressMetro.text = "Улица 1905 года"
+        addressDescription.text = master.base.address.description
 
         fillSigns()
         fillReviews()
         fillSuitableMasters()
 
-        binding.buttonWhen.text = "20 янв, 19:15"
-        binding.buttonWhere.text = "Пресненский"
-        binding.buttonWhat.text = "3 услуги"
+        buttonWhen.text = "20 янв, 19:15"
+        buttonWhere.text = "Пресненский"
+        buttonWhat.text = "3 услуги"
 
-        binding.appointmentPrice.text = "2500 \u20BD"
-        binding.appointmentDuration.text = "1ч 20м"
-        binding.appointmentMasterDescription.text = "Алия Агиповна, мастер-стилист"
+        appointmentPrice.text = "2500 \u20BD"
+        appointmentDuration.text = "1ч 20м"
+        appointmentMasterDescription.text = "Алия Агиповна, мастер-стилист"
 
         constructServices()
     }
@@ -152,22 +149,22 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
             val fullStar = ImageView(this)
             fullStar.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_star_black_24dp))
             fullStar.layoutParams = params
-            binding.starsContainer.addView(fullStar)
+            starsContainer.addView(fullStar)
         }
 
         if (halfStarPresented) {
             val halfStar = ImageView(this)
             halfStar.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_star_half_black_24dp))
             halfStar.layoutParams = params
-            binding.starsContainer.addView(halfStar)
+            starsContainer.addView(halfStar)
         }
 
 
-        for (i in 4 downTo binding.starsContainer.childCount) {
+        for (i in 4 downTo starsContainer.childCount) {
             val emptyStar = ImageView(this)
             emptyStar.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_star_border_black_24dp))
             emptyStar.layoutParams = params
-            binding.starsContainer.addView(emptyStar)
+            starsContainer.addView(emptyStar)
         }
     }
 
@@ -179,71 +176,71 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
 
         val sign1 = LayoutInflater
                 .from(this)
-                .inflate(R.layout.master_sign, binding.signsContainer, false)
+                .inflate(R.layout.master_sign, signsContainer, false)
         sign1.layoutParams = params
 
-        sign1.findViewById<TextView>(R.id.main_part).setCompoundDrawablesWithIntrinsicBounds(
+        sign1.findViewById<TextView>(R.id.mainPart).setCompoundDrawablesWithIntrinsicBounds(
                 ContextCompat.getDrawable(this, R.drawable.ic_fast),
                 null,
                 null,
                 null)
-        sign1.findViewById<TextView>(R.id.main_part).text = "Быстро"
-        sign1.findViewById<TextView>(R.id.secondary_part).text = " | 15"
+        sign1.findViewById<TextView>(R.id.mainPart).text = "Быстро"
+        sign1.findViewById<TextView>(R.id.secondaryPart).text = " | 15"
 
-        binding.signsContainer.addView(sign1)
+        signsContainer.addView(sign1)
 
 
         val sign2 = LayoutInflater
                 .from(this)
-                .inflate(R.layout.master_sign, binding.signsContainer, false)
+                .inflate(R.layout.master_sign, signsContainer, false)
         sign2.layoutParams = params
 
-        sign2.findViewById<TextView>(R.id.main_part).setCompoundDrawablesWithIntrinsicBounds(
+        sign2.findViewById<TextView>(R.id.mainPart).setCompoundDrawablesWithIntrinsicBounds(
                 ContextCompat.getDrawable(this, R.drawable.ic_neatly),
                 null,
                 null,
                 null)
-        sign2.findViewById<TextView>(R.id.main_part).text = "Аккуратно"
-        sign2.findViewById<TextView>(R.id.secondary_part).text = " | 25"
+        sign2.findViewById<TextView>(R.id.mainPart).text = "Аккуратно"
+        sign2.findViewById<TextView>(R.id.secondaryPart).text = " | 25"
 
-        binding.signsContainer.addView(sign2)
+        signsContainer.addView(sign2)
 
 
         val sign3 = LayoutInflater
                 .from(this)
-                .inflate(R.layout.master_sign, binding.signsContainer, false)
+                .inflate(R.layout.master_sign, signsContainer, false)
         sign3.layoutParams = params
 
-        sign3.findViewById<TextView>(R.id.main_part).setCompoundDrawablesWithIntrinsicBounds(
+        sign3.findViewById<TextView>(R.id.mainPart).setCompoundDrawablesWithIntrinsicBounds(
                 ContextCompat.getDrawable(this, R.drawable.ic_pallet),
                 null,
                 null,
                 null)
-        sign3.findViewById<TextView>(R.id.main_part).text = "Большой выбор"
-        sign3.findViewById<TextView>(R.id.secondary_part).text = " | 9"
+        sign3.findViewById<TextView>(R.id.mainPart).text = "Большой выбор"
+        sign3.findViewById<TextView>(R.id.secondaryPart).text = " | 9"
 
-        binding.signsContainer.addView(sign3)
+        signsContainer.addView(sign3)
 
 
         val sign4 = LayoutInflater
                 .from(this)
-                .inflate(R.layout.master_sign, binding.signsContainer, false)
+                .inflate(R.layout.master_sign, signsContainer, false)
         sign4.layoutParams = params
 
-        sign4.findViewById<TextView>(R.id.main_part).setCompoundDrawablesWithIntrinsicBounds(
+        sign4.findViewById<TextView>(R.id.mainPart).setCompoundDrawablesWithIntrinsicBounds(
                 ContextCompat.getDrawable(this, R.drawable.ic_painting),
                 null,
                 null,
                 null)
-        sign4.findViewById<TextView>(R.id.main_part).text = "Кисточка"
-        sign4.findViewById<TextView>(R.id.secondary_part).text = " | 107"
+        sign4.findViewById<TextView>(R.id.mainPart).text = "Кисточка"
+        sign4.findViewById<TextView>(R.id.secondaryPart).text = " | 107"
         if (System.currentTimeMillis() % 2 == 0L) {
-            binding.signsContainer.addView(sign4)
+            signsContainer.addView(sign4)
         }
     }
 
     private fun fillReviews() {
-        binding.seeAllNReviews.text = "Посмотреть все 34 отзыва"
+        seeAllReviews.text = "Посмотреть все 34 отзыва"
 
         val params = LinearLayout.LayoutParams(
                 resources.getDimension(R.dimen.master_review_width).toInt(),
@@ -278,23 +275,23 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
         for (i in 0 until reviewsCount) {
             val review = LayoutInflater
                     .from(this)
-                    .inflate(R.layout.master_review, binding.reviewsContainer, false)
+                    .inflate(R.layout.master_review, reviewsContainer, false)
 
             if (i != reviewsCount - 1) {
                 review.layoutParams = params    // Don't apply it to last element
             }
 
-            binding.reviewsContainer.addView(review)
+            reviewsContainer.addView(review)
 
-            review.findViewById<TextView>(R.id.review_author).text = names[i]
-            review.findViewById<TextView>(R.id.review_date).text = dates[i]
-            review.findViewById<TextView>(R.id.review_text).text = texts[i]
+            review.findViewById<TextView>(R.id.reviewAuthor).text = names[i]
+            review.findViewById<TextView>(R.id.reviewDate).text = dates[i]
+            review.findViewById<TextView>(R.id.reviewText).text = texts[i]
         }
     }
 
     private fun fillSuitableMasters() {
         val mastersCount = 3
-        binding.nMastersSuitableForYou.text = resources.getQuantityString(
+        mastersSuitableForYou.text = resources.getQuantityString(
                 R.plurals.n_masters_suitable_for_you, mastersCount, mastersCount)
 
 
@@ -305,7 +302,7 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
 
         val master1 = LayoutInflater
                 .from(this)
-                .inflate(R.layout.suitable_master, binding.suitableMastersContainer, false)
+                .inflate(R.layout.suitable_master, suitableMastersContainer, false)
         Glide.with(this)
                 .load("http://www.garmoniazhizni.com/wp-content/uploads/2015/04/odinokaya-prichiny.jpg")
                 .apply(RequestOptions.circleCropTransform())
@@ -315,14 +312,14 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
         master1.findViewById<TextView>(R.id.price).text = "2500 \u20BD"
         var ratingsCount = 124
         var rating = 4.7 //item.stars.toString()
-        master1.findViewById<TextView>(R.id.rating_main_part).text = "4.7"
-        master1.findViewById<TextView>(R.id.rating_secondary_part).text = " | 124 оценки"
-        binding.suitableMastersContainer.addView(master1)
+        master1.findViewById<TextView>(R.id.ratingMainPart).text = "4.7"
+        master1.findViewById<TextView>(R.id.ratingSecondaryPart).text = " | 124 оценки"
+        suitableMastersContainer.addView(master1)
 
 
         val master2 = LayoutInflater
                 .from(this)
-                .inflate(R.layout.suitable_master, binding.suitableMastersContainer, false)
+                .inflate(R.layout.suitable_master, suitableMastersContainer, false)
         Glide.with(this)
                 .load("https://wallpaperlayer.com/img/2015/9/miranda-kerr-8591-8917-hd-wallpapers.jpg")
                 .apply(RequestOptions.circleCropTransform())
@@ -332,14 +329,14 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
         master2.findViewById<TextView>(R.id.price).text = "2800 \u20BD"
         ratingsCount = 155
         rating = 4.8 //item.stars.toString()
-        master2.findViewById<TextView>(R.id.rating_main_part).text = "4.8"
-        master2.findViewById<TextView>(R.id.rating_secondary_part).text = " | 155 оценок"
-        binding.suitableMastersContainer.addView(master2)
+        master2.findViewById<TextView>(R.id.ratingMainPart).text = "4.8"
+        master2.findViewById<TextView>(R.id.ratingSecondaryPart).text = " | 155 оценок"
+        suitableMastersContainer.addView(master2)
 
 
         val master3 = LayoutInflater
                 .from(this)
-                .inflate(R.layout.suitable_master, binding.suitableMastersContainer, false)
+                .inflate(R.layout.suitable_master, suitableMastersContainer, false)
         Glide.with(this)
                 .load("http://download.loveradio.ru/pub/380448.jpg")
                 .apply(RequestOptions.circleCropTransform())
@@ -349,9 +346,9 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
         master3.findViewById<TextView>(R.id.price).text = "3500 \u20BD"
         ratingsCount = 107
         rating = 4.5 //item.stars.toString()
-        master3.findViewById<TextView>(R.id.rating_main_part).text = "4.5"
-        master3.findViewById<TextView>(R.id.rating_secondary_part).text = " | 107 оценок"
-        binding.suitableMastersContainer.addView(master3)
+        master3.findViewById<TextView>(R.id.ratingMainPart).text = "4.5"
+        master3.findViewById<TextView>(R.id.ratingSecondaryPart).text = " | 107 оценок"
+        suitableMastersContainer.addView(master3)
     }
 
 
@@ -364,21 +361,21 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
     private fun setState(state: State) {
 //        when (state) {
 //            State.CONTENT -> {
-//                with(binding) {
+//                with( {
 //                    downloadableContent.visibility = View.VISIBLE
 //                    errorContainer.visibility = View.GONE
 //                    progressBar.visibility = View.GONE
 //                }
 //            }
 //            State.ERROR -> {
-//                with(binding) {
+//                with( {
 //                    downloadableContent.visibility = View.GONE
 //                    errorContainer.visibility = View.VISIBLE
 //                    progressBar.visibility = View.GONE
 //                }
 //            }
 //            State.LOADING -> {
-//                with(binding) {
+//                with( {
 //                    downloadableContent.visibility = View.GONE
 //                    errorContainer.visibility = View.GONE
 //                    progressBar.visibility = View.VISIBLE
@@ -388,7 +385,7 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
     }
 
     override fun onBackPressed() {
-        if (binding.servicesBlock.visibility == View.VISIBLE) {
+        if (servicesBlock.visibility == View.VISIBLE) {
             showServicesBlock(false)
             return
         }
@@ -400,12 +397,12 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
         val animation: Animation
         if (show) {
             animation = AnimationUtils.loadAnimation(this, R.anim.bottom_up)
-            binding.servicesBlock.visibility = View.VISIBLE
+            servicesBlock.visibility = View.VISIBLE
         } else {
             animation = AnimationUtils.loadAnimation(this, R.anim.bottom_down)
-            binding.servicesBlock.visibility = View.GONE
+            servicesBlock.visibility = View.GONE
         }
-        binding.servicesBlock.startAnimation(animation)
+        servicesBlock.startAnimation(animation)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -434,11 +431,11 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
         // Маникюр
         val manicureLayout = LayoutInflater
                 .from(this)
-                .inflate(R.layout.service_block_with_radio_buttons, binding.servicesContent, false)
+                .inflate(R.layout.service_block_with_radio_buttons, servicesContent, false)
 
         manicureLayout.findViewById<TextView>(R.id.title).text = "Маникюр"
 
-        val radioGroup = manicureLayout.findViewById<LinearLayout>(R.id.radio_buttons_container)
+        val radioGroup = manicureLayout.findViewById<LinearLayout>(R.id.radioButtonsContainer)
 
         val params = RadioGroup.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
         params.setMargins(0, 0, 0, resources.getDimension(R.dimen.services_block_with_radio_buttons_space_between_radio_buttons).toInt())
@@ -468,17 +465,17 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
         manicureOption4.setPrice("1500-2000 \u20BD")
         radioGroup.addView(manicureOption4.view)
 
-        binding.servicesContent.addView(manicureLayout)
+        servicesContent.addView(manicureLayout)
 
 
         // Покрытие
         val coverLayout = LayoutInflater
                 .from(this)
-                .inflate(R.layout.service_block_with_radio_buttons, binding.servicesContent, false)
+                .inflate(R.layout.service_block_with_radio_buttons, servicesContent, false)
 
         coverLayout.findViewById<TextView>(R.id.title).text = "Покрытие"
 
-        val coverRadioGroup = coverLayout.findViewById<LinearLayout>(R.id.radio_buttons_container)
+        val coverRadioGroup = coverLayout.findViewById<LinearLayout>(R.id.radioButtonsContainer)
 
         val coverOption1 = CustomRadioButton(this);
         coverOption1.setButtonText("Шеллак")
@@ -497,13 +494,13 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
         coverOption3.setPrice("1500-1800 \u20BD")
         coverRadioGroup.addView(coverOption3.view)
 
-        binding.servicesContent.addView(coverLayout)
+        servicesContent.addView(coverLayout)
 
 
         // Design
         val designLayout = LayoutInflater
                 .from(this)
-                .inflate(R.layout.service_block_with_counters, binding.servicesContent, false)
+                .inflate(R.layout.service_block_with_counters, servicesContent, false)
 
         designLayout.findViewById<TextView>(R.id.title).text = "Дизайн ногтя"
 
@@ -526,7 +523,7 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
         counterTV.text = resources.getQuantityString(
                 R.plurals.nails, simpleCounter, simpleCounter)
 
-        simple.findViewById<ImageView>(R.id.less_btn).setOnClickListener {
+        simple.findViewById<ImageView>(R.id.lessBtn).setOnClickListener {
             if (simpleCounter == 0) {
                 return@setOnClickListener
             }
@@ -541,7 +538,7 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
             }
         }
 
-        simple.findViewById<ImageView>(R.id.more_btn).setOnClickListener {
+        simple.findViewById<ImageView>(R.id.moreBtn).setOnClickListener {
             if (simpleCounter == 10 - complexCounter) {
                 return@setOnClickListener
             }
@@ -566,7 +563,7 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
         complex.findViewById<TextView>(R.id.counter).text = "нет"
         complex.findViewById<TextView>(R.id.price).text = "0 \u20BD"
 
-        complex.findViewById<ImageView>(R.id.less_btn).setOnClickListener {
+        complex.findViewById<ImageView>(R.id.lessBtn).setOnClickListener {
             if (complexCounter == 0) {
                 return@setOnClickListener
             }
@@ -581,7 +578,7 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
             }
         }
 
-        complex.findViewById<ImageView>(R.id.more_btn).setOnClickListener {
+        complex.findViewById<ImageView>(R.id.moreBtn).setOnClickListener {
             if (complexCounter == 10 - simpleCounter) {
                 return@setOnClickListener
             }
@@ -596,21 +593,21 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
 
         designContainer.addView(complex)
 
-        binding.servicesContent.addView(designLayout)
+        servicesContent.addView(designLayout)
     }
 
     private fun openImageViewer() {
         val intent = Intent(this, ImageViewer::class.java)
         intent.apply {
-            putExtra(TRANSITION_NAME, ViewCompat.getTransitionName(binding.imageSlider))
-            putExtra(CURRENT_PHOTO, binding.imageSlider.currentItem)
+            putExtra(TRANSITION_NAME, ViewCompat.getTransitionName(imageSlider))
+            putExtra(CURRENT_PHOTO, imageSlider.currentItem)
             putParcelableArrayListExtra(ImageViewer.PHOTO_LIST_EXTRA, ArrayList(master.base.photos))
         }
 
         val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
                 this,
-                binding.imageSlider,
-                ViewCompat.getTransitionName(binding.imageSlider)
+                imageSlider,
+                ViewCompat.getTransitionName(imageSlider)
         )
 
         startActivity(intent, options.toBundle())
@@ -625,7 +622,7 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
 
         init {
             text = view.findViewById(R.id.price) as TextView
-            radioButton = view.findViewById(R.id.radio_button) as RadioButton
+            radioButton = view.findViewById(R.id.radioButton) as RadioButton
             radioButton.setOnClickListener(this)
         }
 
@@ -637,7 +634,7 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
             val size = parent.childCount
 
             for (i in 0 until size) {
-                (parent.getChildAt(i).findViewById(R.id.radio_button) as RadioButton).isChecked = false
+                (parent.getChildAt(i).findViewById(R.id.radioButton) as RadioButton).isChecked = false
             }
 
             radioButton.isChecked = nextState
