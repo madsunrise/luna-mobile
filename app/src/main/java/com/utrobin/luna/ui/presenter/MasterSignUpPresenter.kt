@@ -1,14 +1,8 @@
 package com.utrobin.luna.ui.presenter
 
-import com.apollographql.apollo.rx2.Rx2Apollo
 import com.utrobin.luna.App
-import com.utrobin.luna.CreateMasterMutation
 import com.utrobin.luna.network.GraphQLService
-import com.utrobin.luna.network.NetworkError
 import com.utrobin.luna.ui.contract.MasterSignUpContract
-import com.utrobin.luna.utils.LogUtils
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 /**
@@ -29,32 +23,32 @@ class MasterSignUpPresenter : BasePresenter<MasterSignUpContract.View>(), Master
             return
         }
 
-        val mutation = CreateMasterMutation
-                .builder()
-                .username(view?.getUsername()!!)
-                .name(view?.getName()!!)
-                .email(view?.getEmail()!!)
-                .password(view?.getPassword()!!)
-                .lat("")
-                .lon("")
-                .build()
-
-
-        val apolloCall = graphQLService.apolloClient.mutate(mutation)
-        Rx2Apollo.from(apolloCall)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe { view?.showProgressBar(true) }
-                .doOnTerminate { view?.showProgressBar(false) }
-                .subscribe(
-                        {
-                            view?.signUpFinished()
-                        },
-                        {
-                            LogUtils.logException(FeedPresenter::class.java, it)
-                            view?.signUpFailed(NetworkError.UNKNOWN)
-                        }
-                )
+//        val mutation = CreateMasterMutation
+//                .builder()
+//                .username(view?.getUsername()!!)
+//                .name(view?.getName()!!)
+//                .email(view?.getEmail()!!)
+//                .password(view?.getPassword()!!)
+//                .lat("")
+//                .lon("")
+//                .build()
+//
+//
+//        val apolloCall = graphQLService.apolloClient.mutate(mutation)
+//        Rx2Apollo.from(apolloCall)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .doOnSubscribe { view?.showProgressBar(true) }
+//                .doOnTerminate { view?.showProgressBar(false) }
+//                .subscribe(
+//                        {
+//                            view?.signUpFinished()
+//                        },
+//                        {
+//                            LogUtils.logException(FeedPresenter::class.java, it)
+//                            view?.signUpFailed(NetworkError.UNKNOWN)
+//                        }
+//                )
     }
 
     override fun isLoginCorrect(login: String): Boolean {

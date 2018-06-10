@@ -1,16 +1,18 @@
-query Feed($limit: Int!, $offset: Int!) {
-    feed(limit: $limit, offset: $offset) {
+query Feed($limit: Limit!) {
+    feed(limit: $limit) {
         id
         name
         address {
+            id
             lat
             lon
             description
-            stations {
+            metros {
+                id
+                station
+                line
                 color
                 distance
-                line
-                name
             }
         }
         avatar {
@@ -29,11 +31,17 @@ query Feed($limit: Int!, $offset: Int!) {
             }
         }
         stars
+        ratesCount
+        commentsCount
+        services {
+            id
+            description
+        }
         signs {
             id
             name
-            description
             icon
+            description
         }
     }
 }

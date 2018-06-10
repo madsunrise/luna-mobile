@@ -6,6 +6,7 @@ import com.utrobin.luna.FeedQuery
 import com.utrobin.luna.model.*
 import com.utrobin.luna.network.GraphQLService
 import com.utrobin.luna.network.NetworkError
+import com.utrobin.luna.type.Limit
 import com.utrobin.luna.ui.contract.FeedContract
 import com.utrobin.luna.utils.LogUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -33,8 +34,11 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
     override fun loadMore(page: Int) {
         val query = FeedQuery
                 .builder()
-                .limit(RECORDS_LIMIT)
-                .offset((page - 1) * RECORDS_LIMIT)
+                .limit(Limit.builder()
+                        .limit(RECORDS_LIMIT)
+                        .offset((page - 1) * RECORDS_LIMIT)
+                        .build()
+                )
                 .build()
 
         val apolloCall = graphQLService.apolloClient.query(query)
@@ -60,8 +64,8 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
         for (queryItem in queryList) {
             val id = queryItem.id().toLong()
             val name = queryItem.name()
-            val avatar = Photo(queryItem.avatar()!!)
-            val stars = queryItem.stars() / 10
+            val avatar = queryItem.avatar()?.let { Photo(it) }
+            val stars = queryItem.stars() / 10.0
 
             val photos = ArrayList<Photo>()
             queryItem.photos().forEach {
@@ -75,24 +79,27 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
 
             val addressMetro = ArrayList<AddressMetro>()
 
-            queryItem.address().stations()
-                    .forEach {
+            queryItem.address()?.metros()
+                    ?.forEach {
                         addressMetro.add(
                                 AddressMetro(
-                                        it.color(),
-                                        it.distance().toFloat(),
+                                        it.station(),
                                         it.line(),
-                                        it.name()
+                                        it.color(),
+                                        it.distance().toFloat()
                                 )
                         )
                     }
 
-            val address = Address(
-                    queryItem.address().description(),
-                    queryItem.address().lat(),
-                    queryItem.address().lon(),
-                    addressMetro
-            )
+            val address = queryItem.address()?.let {
+                Address(
+                        it.description(),
+                        it.lat(),
+                        it.lon(),
+                        addressMetro
+                )
+            }
+
 
             data.add(
                     MasterBase(

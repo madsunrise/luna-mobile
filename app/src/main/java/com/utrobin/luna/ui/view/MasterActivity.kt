@@ -121,7 +121,7 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
                 " не займут у вас много времени."
 
         addressMetro.text = "Улица 1905 года"
-        addressDescription.text = master.base.address.description
+        addressDescription.text = master.base.address?.description
 
         fillSigns()
         fillReviews()

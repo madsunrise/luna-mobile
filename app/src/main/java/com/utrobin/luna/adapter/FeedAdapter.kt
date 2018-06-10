@@ -48,23 +48,25 @@ class FeedAdapter(items: List<MasterBase>, private val screenWidthInPx: Int) : F
 
         holder.name.text = item.name
 
-        if (item.address.metro.isNotEmpty()) {
+        if (item.address?.metro?.isNotEmpty() == true) {
             holder.address.text = context.getString(
-                    R.string.metro_with_address_template, item.address.metro[0].name,
+                    R.string.metro_with_address_template, item.address.metro[0].station,
                     item.address.description
             )
             holder.address.compoundDrawables[0].colorFilter = PorterDuffColorFilter(
                     Color.parseColor('#' + item.address.metro[0].color), PorterDuff.Mode.MULTIPLY
             )
         } else {
-            holder.address.text = item.address.description
-            holder.address.compoundDrawables[0].colorFilter = PorterDuffColorFilter(
-                    ContextCompat.getColor(context, R.color.white),
-                    PorterDuff.Mode.MULTIPLY
-            )
+            item.address?.let {
+                holder.address.text = it.description
+                holder.address.compoundDrawables[0].colorFilter = PorterDuffColorFilter(
+                        ContextCompat.getColor(context, R.color.white),
+                        PorterDuff.Mode.MULTIPLY
+                )
+            }
         }
         // Avatar
-        item.avatar.path.takeIf { it.isNotBlank() }
+        item.avatar?.path.takeIf { it?.isNotBlank() == true }
                 ?.let { Glide.with(context).load(it).apply(RequestOptions.circleCropTransform()).into(holder.avatar) }
                 ?: holder.avatar.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.no_avatar))
 

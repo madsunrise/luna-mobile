@@ -7,22 +7,22 @@ import android.os.Parcelable
  * Created by ivan on 04.03.2018.
  */
 
-data class AddressMetro(val color: String, val distance: Float, val line: String, val name: String) : Parcelable {
+data class AddressMetro(val station: String, val line: String, val color: String, val distance: Float) : Parcelable {
 
     override fun writeToParcel(parcel: Parcel, i: Int) {
+        parcel.writeString(station)
+        parcel.writeString(line)
         parcel.writeString(color)
         parcel.writeFloat(distance)
-        parcel.writeString(line)
-        parcel.writeString(name)
     }
 
     override fun describeContents() = 0
 
     constructor(parcel: Parcel) : this(
             parcel.readString(),
-            parcel.readFloat(),
             parcel.readString(),
-            parcel.readString()
+            parcel.readString(),
+            parcel.readFloat()
     )
 
     companion object {
