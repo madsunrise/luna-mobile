@@ -7,12 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.utrobin.luna.R
 import com.utrobin.luna.utils.MapControllerWrapper
-import kotlinx.android.synthetic.main.map_fragment.*
-
-
-/**
- * Created by ivan on 04.11.2017.
- */
 
 class MapFragment : Fragment() {
 

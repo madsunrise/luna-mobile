@@ -27,12 +27,7 @@ import com.utrobin.luna.model.MasterExtended
 import com.utrobin.luna.network.NetworkError
 import com.utrobin.luna.ui.contract.MasterContract
 import com.utrobin.luna.ui.presenter.MasterPresenter
-import kotlinx.android.synthetic.main.master_activity.*
 
-
-/**
- * Created by ivan on 01.11.2017.
- */
 class MasterActivity : AppCompatActivity(), MasterContract.View {
     private lateinit var master: MasterExtended
 

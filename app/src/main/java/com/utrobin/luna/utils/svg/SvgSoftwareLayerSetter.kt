@@ -8,14 +8,6 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.ImageViewTarget
 import com.bumptech.glide.request.target.Target
 
-
-/**
- * Created by ivan on 02.01.2018.
- *
- * Listener which updates the [ImageView] to be software rendered, because
- * [SVG][com.caverock.androidsvg.SVG]/[Picture][android.graphics.Picture] can't render on
- * a hardware backed [Canvas][android.graphics.Canvas].
- */
 class SvgSoftwareLayerSetter : RequestListener<PictureDrawable> {
 
     override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<PictureDrawable>, isFirstResource: Boolean): Boolean {

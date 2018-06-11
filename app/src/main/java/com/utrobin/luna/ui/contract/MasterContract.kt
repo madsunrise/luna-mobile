@@ -4,10 +4,6 @@ import com.utrobin.luna.model.MasterBase
 import com.utrobin.luna.model.MasterExtended
 import com.utrobin.luna.network.NetworkError
 
-/**
- * Created by ivan on 04.11.2017.
- */
-
 interface MasterContract {
 
     interface View : MvpView {

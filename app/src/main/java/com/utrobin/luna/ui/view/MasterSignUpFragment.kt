@@ -10,12 +10,6 @@ import com.utrobin.luna.R
 import com.utrobin.luna.network.NetworkError
 import com.utrobin.luna.ui.contract.MasterSignUpContract
 import com.utrobin.luna.ui.presenter.MasterSignUpPresenter
-import kotlinx.android.synthetic.main.master_sign_up_fragment.*
-
-/**
- * Created by ivan on 08.02.2018.
- */
-
 
 class MasterSignUpFragment : Fragment(), MasterSignUpContract.View {
     private val presenter = MasterSignUpPresenter()

@@ -5,10 +5,6 @@ import com.utrobin.luna.network.GraphQLService
 import com.utrobin.luna.ui.contract.ClientSignUpContract
 import javax.inject.Inject
 
-/**
- * Created by ivan on 08.02.2018.
- */
-
 class ClientSignUpPresenter : BasePresenter<ClientSignUpContract.View>(), ClientSignUpContract.Presenter {
 
     @Inject

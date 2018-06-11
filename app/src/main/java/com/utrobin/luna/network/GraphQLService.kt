@@ -4,10 +4,6 @@ import com.apollographql.apollo.ApolloClient
 import com.utrobin.luna.network.NetworkModule.Companion.BASE_URL
 import okhttp3.OkHttpClient
 
-/**
- * Created by ivan on 31.10.2017.
- */
-
 class GraphQLService {
     val apolloClient: ApolloClient
 

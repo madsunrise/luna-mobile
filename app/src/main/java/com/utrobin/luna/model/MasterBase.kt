@@ -3,9 +3,6 @@ package com.utrobin.luna.model
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
-/**
- * Created by ivan on 29.10.2017.
- */
 @Parcelize
 data class MasterBase(
         val id: Long,

@@ -2,10 +2,6 @@ package com.utrobin.luna.ui.contract
 
 import com.utrobin.luna.network.NetworkError
 
-/**
- * Created by ivan on 08.02.2018.
- */
-
 interface ClientSignUpContract {
     interface View : MvpView {
         fun validateFields(): Boolean

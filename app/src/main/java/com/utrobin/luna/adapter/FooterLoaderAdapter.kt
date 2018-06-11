@@ -8,12 +8,6 @@ import android.widget.ProgressBar
 import com.utrobin.luna.R
 import io.reactivex.subjects.PublishSubject
 
-
-/**
- * Created by ivan on 29.10.2017.
- */
-
-
 abstract class FooterLoaderAdapter<T, V>(internal val items: ArrayList<T>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     val viewClickSubject: PublishSubject<Pair<T, V>> = PublishSubject.create<Pair<T, V>>()

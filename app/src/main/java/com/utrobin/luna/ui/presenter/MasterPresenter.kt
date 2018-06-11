@@ -13,10 +13,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-/**
- * Created by ivan on 04.11.2017.
- */
-
 class MasterPresenter : BasePresenter<MasterContract.View>(), MasterContract.Presenter {
 
     @Inject

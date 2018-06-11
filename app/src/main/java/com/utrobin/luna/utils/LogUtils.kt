@@ -3,10 +3,6 @@ package com.utrobin.luna.utils
 import android.util.Log
 import com.crashlytics.android.Crashlytics
 
-/**
- * Created by ivan on 19.11.2017.
- */
-
 object LogUtils {
     @JvmStatic
     fun log(source: Class<out Any>, msg: String) {

@@ -12,10 +12,6 @@ import com.utrobin.luna.R
 import com.utrobin.luna.model.Photo
 import io.reactivex.subjects.PublishSubject
 
-/**
- * Created by ivan on 03.01.2018.
- */
-
 internal class ViewPagerAdapter(
         context: Context,
         private val photos: List<Photo>) : PagerAdapter() {

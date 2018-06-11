@@ -16,12 +16,6 @@ import com.utrobin.luna.network.NetworkError
 import com.utrobin.luna.ui.contract.FeedContract
 import com.utrobin.luna.ui.presenter.FeedPresenter
 import com.utrobin.luna.ui.utils.EndlessRecyclerOnScrollListener
-import kotlinx.android.synthetic.main.error_container.view.*
-import kotlinx.android.synthetic.main.feed_fragment.*
-
-/**
- * Created by ivan on 01.11.2017.
- */
 
 class FeedFragment : Fragment(), FeedContract.View {
 

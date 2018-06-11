@@ -6,11 +6,6 @@ import com.crashlytics.android.core.CrashlyticsCore
 import com.squareup.leakcanary.LeakCanary
 import io.fabric.sdk.android.Fabric
 
-
-/**
- * Created by ivan on 31.10.2017.
- */
-
 class App : Application() {
 
     override fun onCreate() {

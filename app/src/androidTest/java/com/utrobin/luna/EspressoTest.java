@@ -26,10 +26,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.core.AllOf.allOf;
 
-/**
- * Created by ivan on 12.11.2017.
- */
-
 @RunWith(AndroidJUnit4.class)
 public class EspressoTest {
 
@@ -41,16 +37,16 @@ public class EspressoTest {
         Thread.sleep(1000);
 
         // проверяем что список виден
-        Espresso.onView(ViewMatchers.withId(R.id.feed_recycler_view))
+        Espresso.onView(ViewMatchers.withId(R.id.feedRecyclerView))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
 
         List<MasterBase> masters = activityRule.getActivity().getFeedItems();
 
         // проходимся по списку
         for (int i = 0; i < 50; ++i) {
-            onView(withId(R.id.feed_recycler_view)).perform(RecyclerViewActions.scrollToPosition(i));
+            onView(withId(R.id.feedRecyclerView)).perform(RecyclerViewActions.scrollToPosition(i));
 
-            onView(withId(R.id.feed_recycler_view)).perform(
+            onView(withId(R.id.feedRecyclerView)).perform(
                     RecyclerViewActions.actionOnItemAtPosition(i, click()));
 
             onView(allOf(instanceOf(TextView.class), withParent(withId(R.id.toolbar))))

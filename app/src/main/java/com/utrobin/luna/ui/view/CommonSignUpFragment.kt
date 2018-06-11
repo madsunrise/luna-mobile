@@ -8,11 +8,6 @@ import android.view.ViewGroup
 import com.utrobin.luna.R
 import com.utrobin.luna.ui.contract.CommonSignUpContact
 import com.utrobin.luna.ui.presenter.CommonSignUpPresenter
-import kotlinx.android.synthetic.main.common_sign_up_fragment.*
-
-/**
- * Created by ivan on 05.11.2017.
- */
 
 class CommonSignUpFragment : Fragment(), CommonSignUpContact.View {
     private val presenter = CommonSignUpPresenter()

@@ -9,11 +9,6 @@ import com.utrobin.luna.adapter.ViewPagerAdapter
 import com.utrobin.luna.model.Photo
 import com.utrobin.luna.ui.view.MasterActivity.Companion.CURRENT_PHOTO
 import com.utrobin.luna.ui.view.MasterActivity.Companion.TRANSITION_NAME
-import kotlinx.android.synthetic.main.image_viewer.*
-
-/**
- * Created by ivan on 04.03.2018.
- */
 
 class ImageViewer : AppCompatActivity() {
 

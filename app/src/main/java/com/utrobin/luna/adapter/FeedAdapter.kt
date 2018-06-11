@@ -18,10 +18,6 @@ import com.bumptech.glide.request.RequestOptions
 import com.utrobin.luna.R
 import com.utrobin.luna.model.MasterBase
 
-/**
- * Created by ivan on 31.10.2017.
- */
-
 class FeedAdapter(items: List<MasterBase>, private val screenWidthInPx: Int) : FooterLoaderAdapter<MasterBase, ViewPager>(ArrayList(items)) {
 
     override fun getYourItemViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {

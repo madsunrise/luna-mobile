@@ -13,10 +13,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-/**
- * Created by ivan on 04.11.2017.
- */
-
 class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter {
 
     @Inject

@@ -4,10 +4,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import com.utrobin.luna.adapter.FooterLoaderAdapter
 
-/**
- * Created by ivan on 31.10.2017.
- */
-
 abstract class EndlessRecyclerOnScrollListener<T, V>(
         private val adapter: FooterLoaderAdapter<T, V>,
         private val linearLayoutManager: LinearLayoutManager) : RecyclerView.OnScrollListener() {

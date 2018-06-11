@@ -11,10 +11,6 @@ import ru.yandex.yandexmapkit.utils.GeoPoint;
 import ru.yandex.yandexmapkit.utils.Point;
 import ru.yandex.yandexmapkit.utils.ScreenPoint;
 
-/**
- * Created by ivan on 02.11.2017.
- */
-
 public class MapControllerWrapper {
     private final MapController mc;
 
