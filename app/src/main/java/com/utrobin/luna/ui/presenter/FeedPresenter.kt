@@ -1,6 +1,5 @@
 package com.utrobin.luna.ui.presenter
 
-import com.apollographql.apollo.rx2.Rx2Apollo
 import com.utrobin.luna.App
 import com.utrobin.luna.FeedQuery
 import com.utrobin.luna.model.*
@@ -9,8 +8,9 @@ import com.utrobin.luna.network.NetworkError
 import com.utrobin.luna.type.Limit
 import com.utrobin.luna.ui.contract.FeedContract
 import com.utrobin.luna.utils.LogUtils
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.experimental.launch
 import javax.inject.Inject
 
 class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter {
@@ -38,24 +38,21 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
                 .build()
 
         val apolloCall = graphQLService.apolloClient.query(query)
-        Rx2Apollo.from(apolloCall)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.computation())
-                .map { parseFeed(it.data()!!.feed()) }
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        {
-                            view?.dataLoaded(newItems = it, append = page != 1)
-                        },
-                        {
-                            LogUtils.logException(FeedPresenter::class.java, it)
-                            view?.dataLoadingFailed(NetworkError.UNKNOWN)
-                        }
-                )
+
+        launch(UI) {
+            try {
+                val response = graphQLService.execute(apolloCall)
+                val parsed = parseFeed(response.feed())
+                view?.dataLoaded(newItems = parsed.await(), append = page != 1)
+            } catch (e: Exception) {
+                LogUtils.logException(FeedPresenter::class.java, e)
+                view?.dataLoadingFailed(NetworkError.UNKNOWN)
+            }
+        }
     }
 
 
-    private fun parseFeed(queryList: List<FeedQuery.Feed>): List<FeedItem> {
+    private fun parseFeed(queryList: List<FeedQuery.Feed>) = async {
         val data = ArrayList<FeedItem>()
         for (queryItem in queryList) {
             val id = queryItem.id().toLong()
@@ -118,7 +115,7 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
                     )
             )
         }
-        return data
+        return@async data
     }
 
 

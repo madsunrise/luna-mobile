@@ -1,6 +1,5 @@
 package com.utrobin.luna.ui.presenter
 
-import com.apollographql.apollo.rx2.Rx2Apollo
 import com.utrobin.luna.App
 import com.utrobin.luna.MasterQuery
 import com.utrobin.luna.model.*
@@ -8,8 +7,9 @@ import com.utrobin.luna.network.GraphQLService
 import com.utrobin.luna.network.NetworkError
 import com.utrobin.luna.ui.contract.MasterContract
 import com.utrobin.luna.utils.LogUtils
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.experimental.launch
 import javax.inject.Inject
 
 class MasterPresenter : BasePresenter<MasterContract.View>(), MasterContract.Presenter {
@@ -29,24 +29,20 @@ class MasterPresenter : BasePresenter<MasterContract.View>(), MasterContract.Pre
 
         val apolloCall = graphQLService.apolloClient.query(query)
 
-        Rx2Apollo.from(apolloCall)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.computation())
-                .map { parseData(master, it.data()!!.master()!!) }
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        {
-                            view?.dataLoaded(it)
-                        },
-                        {
-                            LogUtils.logException(FeedPresenter::class.java, it)
-                            view?.dataLoadingFailed(NetworkError.UNKNOWN)
-                        }
-                )
+        launch(UI) {
+            try {
+                val response = graphQLService.execute(apolloCall)
+                view?.dataLoaded(parseData(master, response.master()!!).await())
+            } catch (e: Exception) {
+                LogUtils.logException(FeedPresenter::class.java, e)
+                view?.dataLoadingFailed(NetworkError.UNKNOWN)
+            }
+
+        }
     }
 
-    private fun parseData(base: FeedItem, data: MasterQuery.Master): Master {
-        return Master(
+    private fun parseData(base: FeedItem, data: MasterQuery.Master) = async {
+        return@async Master(
                 id = base.id,
                 name = base.name,
                 avatar = base.avatar,
@@ -62,11 +58,10 @@ class MasterPresenter : BasePresenter<MasterContract.View>(), MasterContract.Pre
                 schedules = ArrayList(data.schedules().map { Schedule(it) }),
                 seances = ArrayList(data.seances().map { Seance(it) }),
                 lastReviews = ArrayList(data.lastReviews().map { Review(it) })
-
         )
     }
 
     override fun destroy() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 }
