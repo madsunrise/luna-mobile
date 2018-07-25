@@ -11,20 +11,24 @@ data class Photo(
         val path: String,
         val tags: ArrayList<Tag>) : Parcelable {
 
-    constructor(photo: FeedQuery.Photo) : this(photo.id().toLong(), photo.path(), ArrayList()) {
-        photo.tags().forEach {
+    constructor(photo: FeedQuery.Photo) : this(
+            id = photo.fragments().photoInfo().id().toLong(),
+            path = photo.fragments().photoInfo().path(),
+            tags = ArrayList()) {
+        photo.fragments().photoInfo().tags().forEach {
             tags.add(Tag(it))
         }
     }
 
-    constructor(photo: FeedQuery.Photo1) : this(photo.id().toLong(), photo.path(), ArrayList()) {
-        photo.tags().forEach {
+    constructor(photo: FeedQuery.Photo1) : this(photo.fragments().photoInfo().id().toLong(), photo.fragments().photoInfo().path(), ArrayList()) {
+        photo.fragments().photoInfo().tags().forEach {
             tags.add(Tag(it))
         }
     }
 
-    constructor(photo: FeedQuery.Avatar) : this(photo.id().toLong(), photo.path(), ArrayList()) {
-        photo.tags().forEach {
+    constructor(photo: FeedQuery.Avatar) : this(photo.fragments().photoInfo().id().toLong(),
+            photo.fragments().photoInfo().path(), ArrayList()) {
+        photo.fragments().photoInfo().tags().forEach {
             tags.add(Tag(it))
         }
     }
