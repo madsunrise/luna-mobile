@@ -11,11 +11,13 @@ import android.view.View
 import android.view.ViewGroup
 import com.utrobin.luna.R
 import com.utrobin.luna.adapter.FeedAdapter
-import com.utrobin.luna.model.MasterBase
+import com.utrobin.luna.model.FeedItem
 import com.utrobin.luna.network.NetworkError
 import com.utrobin.luna.ui.contract.FeedContract
 import com.utrobin.luna.ui.presenter.FeedPresenter
 import com.utrobin.luna.ui.utils.EndlessRecyclerOnScrollListener
+import kotlinx.android.synthetic.main.error_container.view.*
+import kotlinx.android.synthetic.main.feed_fragment.*
 
 class FeedFragment : Fragment(), FeedContract.View {
 
@@ -23,10 +25,11 @@ class FeedFragment : Fragment(), FeedContract.View {
     private var adapterInitialized = false
     private var isDataLoading = false
 
-    private val presenter = FeedPresenter()
+    private lateinit var presenter: FeedPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        presenter = FeedPresenter()
         presenter.attachView(this)
     }
 
@@ -50,7 +53,7 @@ class FeedFragment : Fragment(), FeedContract.View {
         }
     }
 
-    override fun dataLoaded(newItems: List<MasterBase>, append: Boolean) {
+    override fun dataLoaded(newItems: List<FeedItem>, append: Boolean) {
         setState(State.CONTENT)
         mainContainerSwipeToRefresh.isRefreshing = false
         isDataLoading = false
@@ -85,7 +88,7 @@ class FeedFragment : Fragment(), FeedContract.View {
     private fun setUpRecyclerView() {
         feedRecyclerView.layoutManager = LinearLayoutManager(context)
         feedRecyclerView.adapter = feedAdapter
-        onScrollListener = object : EndlessRecyclerOnScrollListener<MasterBase, ViewPager>(
+        onScrollListener = object : EndlessRecyclerOnScrollListener<FeedItem, ViewPager>(
                 adapter = feedAdapter,
                 linearLayoutManager = feedRecyclerView.layoutManager as LinearLayoutManager) {
             override fun onLoadMore(currentPage: Int): Boolean {
@@ -104,6 +107,7 @@ class FeedFragment : Fragment(), FeedContract.View {
     override fun onDestroy() {
         super.onDestroy()
         presenter.detachView()
+        presenter.destroy()
     }
 
     private fun setState(state: State) {
@@ -126,7 +130,7 @@ class FeedFragment : Fragment(), FeedContract.View {
         }
     }
 
-    private lateinit var onScrollListener: EndlessRecyclerOnScrollListener<MasterBase, ViewPager>
+    private lateinit var onScrollListener: EndlessRecyclerOnScrollListener<FeedItem, ViewPager>
 
     @VisibleForTesting
     fun getFeedItems() = feedAdapter.items

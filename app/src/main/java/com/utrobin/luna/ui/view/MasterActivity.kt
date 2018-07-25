@@ -22,14 +22,15 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.utrobin.luna.R
 import com.utrobin.luna.adapter.ViewPagerAdapter
-import com.utrobin.luna.model.MasterBase
-import com.utrobin.luna.model.MasterExtended
+import com.utrobin.luna.model.FeedItem
+import com.utrobin.luna.model.Master
 import com.utrobin.luna.network.NetworkError
 import com.utrobin.luna.ui.contract.MasterContract
 import com.utrobin.luna.ui.presenter.MasterPresenter
+import kotlinx.android.synthetic.main.master_activity.*
 
 class MasterActivity : AppCompatActivity(), MasterContract.View {
-    private lateinit var master: MasterExtended
+    private lateinit var master: Master
 
     private val presenter = MasterPresenter()
 
@@ -43,7 +44,7 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        val base = intent.extras.getParcelable<MasterBase>(MASTER_BASE)
+        val base = intent.extras.getParcelable<FeedItem>(MASTER_BASE)
         title = base.name
 
         setState(State.LOADING)
@@ -92,10 +93,9 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
         })
     }
 
-    override fun dataLoaded(master: MasterExtended) {
+    override fun dataLoaded(master: Master) {
         setState(State.CONTENT)
         this.master = master
-
         fillViews()
     }
 
@@ -104,19 +104,19 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
     }
 
     private fun fillViews() {
-        title = master.base.name
+        master.name?.let { title = it }
 
         drawStars()
 //        ratingMainPart.text = resources.getQuantityString(R.plurals.ratings_count,
 //                reviewsCount, master.base.stars.toString(), reviewsCount)
-        ratingMainPart.text = master.base.stars.toString()
+        ratingMainPart.text = master.stars.toString()
         ratingSecondaryPart.text = " | 124 оценки"
 
         masterDescription.text = "Мы легко впишемся в ваш график, а все наши услуги" +
                 " не займут у вас много времени."
 
         addressMetro.text = "Улица 1905 года"
-        addressDescription.text = master.base.address?.description
+        addressDescription.text = master.address?.description
 
         fillSigns()
         fillReviews()
@@ -134,8 +134,8 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
     }
 
     private fun drawStars() {
-        val fullStarsCount = master.base.stars.toInt()
-        val halfStarPresented = master.base.stars - fullStarsCount >= 0.5
+        val fullStarsCount = master.stars.toInt()
+        val halfStarPresented = master.stars - fullStarsCount >= 0.5
 
         val params = LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
         params.setMargins(0, 0, resources.getDimension(R.dimen.master_space_between_stars).toInt(), 0)
@@ -596,7 +596,7 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
         intent.apply {
             putExtra(TRANSITION_NAME, ViewCompat.getTransitionName(imageSlider))
             putExtra(CURRENT_PHOTO, imageSlider.currentItem)
-            putParcelableArrayListExtra(ImageViewer.PHOTO_LIST_EXTRA, ArrayList(master.base.photos))
+            putParcelableArrayListExtra(ImageViewer.PHOTO_LIST_EXTRA, ArrayList(master.photos))
         }
 
         val options = ActivityOptionsCompat.makeSceneTransitionAnimation(

@@ -16,9 +16,9 @@ import android.widget.*
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.utrobin.luna.R
-import com.utrobin.luna.model.MasterBase
+import com.utrobin.luna.model.FeedItem
 
-class FeedAdapter(items: List<MasterBase>, private val screenWidthInPx: Int) : FooterLoaderAdapter<MasterBase, ViewPager>(ArrayList(items)) {
+class FeedAdapter(items: List<FeedItem>, private val screenWidthInPx: Int) : FooterLoaderAdapter<FeedItem, ViewPager>(ArrayList(items)) {
 
     override fun getYourItemViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
         val itemView = LayoutInflater.from(parent.context)
@@ -131,6 +131,6 @@ class FeedAdapter(items: List<MasterBase>, private val screenWidthInPx: Int) : F
     override fun getYourItemId(position: Int) = items[position].hashCode().toLong()
 
     companion object {
-        fun getTransitionName(item: MasterBase) = item.name + item.id
+        fun getTransitionName(item: FeedItem) = item.name + item.id
     }
 }

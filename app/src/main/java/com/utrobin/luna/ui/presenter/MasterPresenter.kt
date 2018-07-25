@@ -3,8 +3,7 @@ package com.utrobin.luna.ui.presenter
 import com.apollographql.apollo.rx2.Rx2Apollo
 import com.utrobin.luna.App
 import com.utrobin.luna.MasterQuery
-import com.utrobin.luna.model.MasterBase
-import com.utrobin.luna.model.MasterExtended
+import com.utrobin.luna.model.*
 import com.utrobin.luna.network.GraphQLService
 import com.utrobin.luna.network.NetworkError
 import com.utrobin.luna.ui.contract.MasterContract
@@ -22,7 +21,7 @@ class MasterPresenter : BasePresenter<MasterContract.View>(), MasterContract.Pre
         App.component.injectMasterPresenter(this)
     }
 
-    override fun loadData(master: MasterBase) {
+    override fun loadData(master: FeedItem) {
         val query = MasterQuery
                 .builder()
                 .id(master.id.toString())
@@ -33,7 +32,7 @@ class MasterPresenter : BasePresenter<MasterContract.View>(), MasterContract.Pre
         Rx2Apollo.from(apolloCall)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.computation())
-                .map { parseData(master, it.data()!!) }
+                .map { parseData(master, it.data()!!.master()!!) }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         {
@@ -46,9 +45,24 @@ class MasterPresenter : BasePresenter<MasterContract.View>(), MasterContract.Pre
                 )
     }
 
-    private fun parseData(base: MasterBase, data: MasterQuery.Data): MasterExtended {
-        return MasterExtended(
-                base = base
+    private fun parseData(base: FeedItem, data: MasterQuery.Master): Master {
+        return Master(
+                id = base.id,
+                name = base.name,
+                avatar = base.avatar,
+                address = base.address,
+                stars = base.stars,
+                signs = base.signs,
+                photos = base.photos,
+                ratesCount = base.ratesCount,
+                commentsCount = base.commentsCount,
+                user = User(data.user()),
+                salon = data.salon()?.let { Salon(it) },
+                services = ArrayList(data.services().map { Service(it) }),
+                schedules = ArrayList(data.schedules().map { Schedule(it) }),
+                seances = ArrayList(data.seances().map { Seance(it) }),
+                lastReviews = ArrayList(data.lastReviews().map { Review(it) })
+
         )
     }
 

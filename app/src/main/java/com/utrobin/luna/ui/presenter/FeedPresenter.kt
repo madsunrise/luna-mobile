@@ -55,8 +55,8 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
     }
 
 
-    private fun parseFeed(queryList: List<FeedQuery.Feed>): List<MasterBase> {
-        val data = ArrayList<MasterBase>()
+    private fun parseFeed(queryList: List<FeedQuery.Feed>): List<FeedItem> {
+        val data = ArrayList<FeedItem>()
         for (queryItem in queryList) {
             val id = queryItem.id().toLong()
             val name = queryItem.name()
@@ -79,6 +79,7 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
                     ?.forEach {
                         addressMetro.add(
                                 AddressMetro(
+                                        it.id().toLong(),
                                         it.station(),
                                         it.line(),
                                         it.color(),
@@ -96,16 +97,24 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
                 )
             }
 
+            val type = when (queryItem.__typename()) {
+                "Salon" -> FeedItem.Companion.Type.SALON
+                "Master" -> FeedItem.Companion.Type.MASTER
+                else -> throw IllegalArgumentException("Unsupported item type!")
+            }
 
             data.add(
-                    MasterBase(
+                    FeedItem(
                             id = id,
+                            type = type,
                             name = name,
                             address = address,
                             avatar = avatar,
                             stars = stars,
                             signs = signs,
-                            photos = photos
+                            photos = photos,
+                            ratesCount = queryItem.ratesCount(),
+                            commentsCount = queryItem.commentsCount()
                     )
             )
         }
@@ -114,7 +123,7 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
 
 
     override fun destroy() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     companion object {

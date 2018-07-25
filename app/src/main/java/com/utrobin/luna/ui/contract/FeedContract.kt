@@ -1,12 +1,12 @@
 package com.utrobin.luna.ui.contract
 
-import com.utrobin.luna.model.MasterBase
+import com.utrobin.luna.model.FeedItem
 import com.utrobin.luna.network.NetworkError
 
 interface FeedContract {
 
     interface View : MvpView {
-        fun dataLoaded(newItems: List<MasterBase>, append: Boolean)
+        fun dataLoaded(newItems: List<FeedItem>, append: Boolean)
         fun dataLoadingFailed(reason: NetworkError)
     }
 

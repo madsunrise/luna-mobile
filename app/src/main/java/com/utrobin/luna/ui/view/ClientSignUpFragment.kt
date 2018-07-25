@@ -10,6 +10,7 @@ import com.utrobin.luna.R
 import com.utrobin.luna.network.NetworkError
 import com.utrobin.luna.ui.contract.ClientSignUpContract
 import com.utrobin.luna.ui.presenter.ClientSignUpPresenter
+import kotlinx.android.synthetic.main.client_sign_up_fragment.*
 
 class ClientSignUpFragment : Fragment(), ClientSignUpContract.View {
 

@@ -1,5 +1,321 @@
 query Master($id: ID!) {
     master(id: $id) {
-        id   # Здесь services по идее нужны
+        user {
+            id
+            email
+            role
+            ctime
+        }
+        salon {
+            id
+            name
+            avatar {
+                id
+                path
+                tags {
+                    id
+                    name
+                }
+            }
+            address {
+                id
+                lat
+                lon
+                description
+                metros {
+                    id
+                    station
+                    line
+                    color
+                    distance
+                }
+            }
+            masters {
+                id
+                name
+                address {
+                    id
+                    lat
+                    lon
+                    description
+                    metros {
+                        id
+                        station
+                        line
+                        color
+                        distance
+                    }
+                }
+                avatar {
+                    id
+                    path
+                    tags {
+                        id
+                        name
+                    }
+                }
+                photos {
+                    id
+                    path
+                    tags {
+                        id
+                        name
+                    }
+                }
+                stars
+                ratesCount
+                commentsCount
+                services {
+                    id
+                    description
+                }
+                signs {
+                    id
+                    name
+                    icon
+                    description
+                }
+                user {
+                    id
+                    email
+                    role
+                    ctime
+                }
+                stars
+                ratesCount
+                commentsCount
+                services {
+                    id
+                    type {
+                        id
+                        name
+                        parent {
+                            id
+                            name
+                        }
+                    }
+                    description
+                    price
+                    duration
+                    materials {
+                        id
+                        firm
+                        description
+                    }
+                    photos {
+                        id
+                        path
+                        tags {
+                            id
+                            name
+                        }
+                    }
+                    ctime
+                }
+                signs {
+                    id
+                    name
+                    icon
+                    description
+                }
+                services {
+                    id
+                    type {
+                        id
+                        name
+                        parent {
+                            id
+                            name
+                        }
+                    }
+                    description
+                    price
+                    duration
+                    materials {
+                        id
+                        firm
+                        description
+                    }
+                    photos {
+                        id
+                        path
+                        tags {
+                            id
+                            name
+                        }
+                    }
+                    ctime
+                }
+                schedules {
+                    id
+                    startTime
+                    endTime
+                }
+                seances {
+                    id
+                    startTime
+                    endTime
+                }
+                lastReviews {
+                    id
+                    client {
+                        id
+                        name
+                        avatar {
+                            id
+                            path
+                        }
+                        user {
+                            id
+                            email
+                            role
+                            ctime
+                        }
+                    }
+                    seance {
+                        id
+                        startTime
+                        endTime
+                    }
+                    stars
+                    message
+                    date
+                }
+            }
+            stars
+            ratesCount
+            commentsCount
+            photos {
+                id
+                path
+                tags {
+                    id
+                    name
+                }
+            }
+            services {
+                id
+                type {
+                    id
+                    name
+                    parent {
+                        id
+                        name
+                    }
+                }
+                description
+                price
+                duration
+                materials {
+                    id
+                    firm
+                    description
+                }
+                photos {
+                    id
+                    path
+                    tags {
+                        id
+                        name
+                    }
+                }
+                ctime
+            }
+            signs {
+                id
+                name
+                icon
+                description
+            }
+            signs_total
+            lastReviews {
+                id
+                client {
+                    id
+                    name
+                    avatar {
+                        id
+                        path
+                    }
+                    user {
+                        id
+                        email
+                        role
+                        ctime
+                    }
+                }
+                seance {
+                    id
+                    startTime
+                    endTime
+                }
+                stars
+                message
+                date
+            }
+        }
+        services {
+            id
+            type {
+                id
+                name
+                parent {
+                    id
+                    name
+                }
+            }
+            description
+            price
+            duration
+            materials {
+                id
+                firm
+                description
+            }
+            photos {
+                id
+                path
+                tags {
+                    id
+                    name
+                }
+            }
+            ctime
+        }
+        schedules {
+            id
+            startTime
+            endTime
+        }
+        seances {
+            id
+            startTime
+            endTime
+        }
+        lastReviews {
+            id
+            client {
+                id
+                name
+                avatar {
+                    id
+                    path
+                }
+                user {
+                    id
+                    email
+                    role
+                    ctime
+                }
+            }
+            seance {
+                id
+                startTime
+                endTime
+            }
+            stars
+            message
+            date
+        }
     }
 }

@@ -11,7 +11,7 @@ import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.utrobin.luna.R
-import com.utrobin.luna.model.MasterBase
+import com.utrobin.luna.model.FeedItem
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity() {
         currentFragment = to
     }
 
-    fun openMasterScreen(item: MasterBase, sharedView: ViewPager) {
+    fun openMasterScreen(item: FeedItem, sharedView: ViewPager) {
         val intent = Intent(this, MasterActivity::class.java)
         intent.apply {
             putExtra(MasterActivity.MASTER_BASE, item)

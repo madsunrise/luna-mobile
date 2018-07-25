@@ -8,7 +8,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.widget.TextView;
 
-import com.utrobin.luna.model.MasterBase;
+import com.utrobin.luna.model.FeedItem;
 import com.utrobin.luna.ui.view.MainActivity;
 
 import org.junit.Rule;
@@ -40,7 +40,7 @@ public class EspressoTest {
         Espresso.onView(ViewMatchers.withId(R.id.feedRecyclerView))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
 
-        List<MasterBase> masters = activityRule.getActivity().getFeedItems();
+        List<FeedItem> masters = activityRule.getActivity().getFeedItems();
 
         // проходимся по списку
         for (int i = 0; i < 50; ++i) {

@@ -16,6 +16,7 @@ query Feed($limit: Limit!) {
             }
         }
         avatar {
+            id
             path
             tags {
                 id
@@ -35,7 +36,31 @@ query Feed($limit: Limit!) {
         commentsCount
         services {
             id
+            type {
+                id
+                name
+                parent {
+                    id
+                    name
+                }
+            }
             description
+            price
+            duration
+            materials {
+                id
+                firm
+                description
+            }
+            photos {
+                id
+                path
+                tags {
+                    id
+                    name
+                }
+            }
+            ctime
         }
         signs {
             id
