@@ -18,6 +18,91 @@ fragment fullFeedItem on FeedItem {
     }
 }
 
+
+fragment fullMaster on Master {
+    ...fullFeedItem
+    ...additionalMaster
+}
+
+fragment additionalMaster on Master {
+    user {
+        ...userWithoutPassword
+    }
+    salon {
+        id
+        name
+        avatar {
+            ...fullPhoto
+        }
+        address {
+            ...fullAddress
+        }
+        masters {
+            id
+            name
+            address {
+                ...fullAddress
+            }
+            avatar {
+                ...fullPhoto
+            }
+            photos {
+                ...fullPhoto
+            }
+            signs {
+                ...fullSign
+            }
+            user {
+                ...userWithoutPassword
+            }
+            stars
+            ratesCount
+            commentsCount
+            services {
+                ...fullService
+            }
+            schedules {
+                ...fullSchedule
+            }
+            seances {
+                ...fullSeance
+            }
+            lastReviews {
+                ...fullReview
+            }
+        }
+        stars
+        ratesCount
+        commentsCount
+        photos {
+            ...fullPhoto
+        }
+        services {
+            ...fullService
+        }
+        signs {
+            ...fullSign
+        }
+        signs_total
+        lastReviews {
+            ...fullReview
+        }
+    }
+    services {
+        ...fullService
+    }
+    schedules {
+        ...fullSchedule
+    }
+    seances {
+        ...fullSeance
+    }
+    lastReviews {
+        ...fullReview
+    }
+}
+
+
 fragment fullAddress on Address {
     id
     lat

@@ -1,7 +1,7 @@
 package com.utrobin.luna.model
 
 import android.os.Parcelable
-import com.utrobin.luna.MasterQuery
+import com.utrobin.luna.fragment.AdditionalMaster
 import kotlinx.android.parcel.Parcelize
 import java.math.BigDecimal
 import java.util.*
@@ -22,7 +22,7 @@ data class Service(
         val ctime: Date
 ) : Parcelable {
 
-    constructor(service: MasterQuery.Service) : this(
+    constructor(service: AdditionalMaster.Service) : this(
             id = service.fragments().fullService().id().toLong(),
             type = ServiceType(service.fragments().fullService().type()),
             description = service.fragments().fullService().description(),
@@ -33,7 +33,7 @@ data class Service(
             ctime = Date(service.fragments().fullService().ctime().toLong())
     )
 
-    constructor(service: MasterQuery.Service1) : this(
+    constructor(service: AdditionalMaster.Service1) : this(
             id = service.fragments().fullService().id().toLong(),
             type = ServiceType(service.fragments().fullService().type()),
             description = service.fragments().fullService().description(),
@@ -44,7 +44,7 @@ data class Service(
             ctime = Date(service.fragments().fullService().ctime().toLong())
     )
 
-    constructor(service: MasterQuery.Service2) : this(
+    constructor(service: AdditionalMaster.Service2) : this(
             id = service.fragments().fullService().id().toLong(),
             type = ServiceType(service.fragments().fullService().type()),
             description = service.fragments().fullService().description(),

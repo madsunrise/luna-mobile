@@ -1,7 +1,7 @@
 package com.utrobin.luna.model
 
 import android.os.Parcelable
-import com.utrobin.luna.MasterQuery
+import com.utrobin.luna.fragment.AdditionalMaster
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 
@@ -16,13 +16,13 @@ data class Schedule(
         val endTime: Date
 ) : Parcelable {
 
-    constructor(schedule: MasterQuery.Schedule) : this(
+    constructor(schedule: AdditionalMaster.Schedule) : this(
             id = schedule.fragments().fullSchedule().id().toLong(),
             startTime = Date(schedule.fragments().fullSchedule().startTime().toLong()),
             endTime = Date(schedule.fragments().fullSchedule().endTime().toLong())
     )
 
-    constructor(schedule: MasterQuery.Schedule1) : this(
+    constructor(schedule: AdditionalMaster.Schedule1) : this(
             id = schedule.fragments().fullSchedule().id().toLong(),
             startTime = Date(schedule.fragments().fullSchedule().startTime().toLong()),
             endTime = Date(schedule.fragments().fullSchedule().endTime().toLong())

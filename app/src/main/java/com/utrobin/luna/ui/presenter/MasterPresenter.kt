@@ -52,12 +52,12 @@ class MasterPresenter : BasePresenter<MasterContract.View>(), MasterContract.Pre
                 photos = base.photos,
                 ratesCount = base.ratesCount,
                 commentsCount = base.commentsCount,
-                user = User(data.user()),
-                salon = data.salon()?.let { Salon(it) },
-                services = ArrayList(data.services().map { Service(it) }),
-                schedules = ArrayList(data.schedules().map { Schedule(it) }),
-                seances = ArrayList(data.seances().map { Seance(it) }),
-                lastReviews = ArrayList(data.lastReviews().map { Review(it) })
+                user = User(data.fragments().additionalMaster().user()),
+                salon = data.fragments().additionalMaster().salon()?.let { Salon(it) },
+                services = ArrayList(data.fragments().additionalMaster().services().map { Service(it) }),
+                schedules = ArrayList(data.fragments().additionalMaster().schedules().map { Schedule(it) }),
+                seances = ArrayList(data.fragments().additionalMaster().seances().map { Seance(it) }),
+                lastReviews = ArrayList(data.fragments().additionalMaster().lastReviews().map { Review(it) })
         )
     }
 

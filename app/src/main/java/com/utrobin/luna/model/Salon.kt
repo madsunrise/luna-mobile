@@ -1,6 +1,6 @@
 package com.utrobin.luna.model
 
-import com.utrobin.luna.MasterQuery
+import com.utrobin.luna.fragment.AdditionalMaster
 
 class Salon(
         id: Long,
@@ -18,7 +18,7 @@ class Salon(
         val lastReviews: ArrayList<Review>
 ) : FeedItem(id, Companion.Type.SALON, name, avatar,
         address, stars, signs, photos, ratesCount, commentsCount) {
-    constructor(salon: MasterQuery.Salon) : this(
+    constructor(salon: AdditionalMaster.Salon) : this(
             id = salon.id().toLong(),
             name = salon.name(),
             avatar = Photo(salon.avatar()),

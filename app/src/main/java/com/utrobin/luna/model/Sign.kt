@@ -1,7 +1,7 @@
 package com.utrobin.luna.model
 
 import android.os.Parcelable
-import com.utrobin.luna.MasterQuery
+import com.utrobin.luna.fragment.AdditionalMaster
 import com.utrobin.luna.fragment.FullFeedItem
 import kotlinx.android.parcel.Parcelize
 
@@ -15,14 +15,14 @@ data class Sign(val id: Long, val name: String, val description: String, val ico
             icon = sign.fragments().fullSign().icon()
     )
 
-    constructor(sign: MasterQuery.Sign) : this(
+    constructor(sign: AdditionalMaster.Sign) : this(
             id = sign.fragments().fullSign().id().toLong(),
             name = sign.fragments().fullSign().name(),
             description = sign.fragments().fullSign().description(),
             icon = sign.fragments().fullSign().icon()
     )
 
-    constructor(sign: MasterQuery.Sign1) : this(
+    constructor(sign: AdditionalMaster.Sign1) : this(
             id = sign.fragments().fullSign().id().toLong(),
             name = sign.fragments().fullSign().name(),
             description = sign.fragments().fullSign().description(),

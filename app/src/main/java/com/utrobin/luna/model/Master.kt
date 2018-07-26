@@ -1,6 +1,6 @@
 package com.utrobin.luna.model
 
-import com.utrobin.luna.MasterQuery
+import com.utrobin.luna.fragment.AdditionalMaster
 import java.util.*
 
 
@@ -23,10 +23,10 @@ class Master(
 ) : FeedItem(id, Companion.Type.MASTER, name, avatar,
         address, stars, signs, photos, ratesCount, commentsCount) {
 
-    constructor(master: MasterQuery.Master1) : this(null, master)
+    constructor(master: AdditionalMaster.Master) : this(null, master)
 
     // Конструктор для мастера, который вызывается при создании САЛОНА
-    constructor(salon: Salon?, master: MasterQuery.Master1) : this(
+    constructor(salon: Salon?, master: AdditionalMaster.Master) : this(
             id = master.id().toLong(),
             name = master.name(),
             avatar = master.avatar()?.let { Photo(it) },

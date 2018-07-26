@@ -1,7 +1,7 @@
 package com.utrobin.luna.model
 
 import android.os.Parcelable
-import com.utrobin.luna.MasterQuery
+import com.utrobin.luna.fragment.AdditionalMaster
 import com.utrobin.luna.fragment.BaseClient
 import kotlinx.android.parcel.Parcelize
 import java.util.*
@@ -15,7 +15,7 @@ data class User(
         val ctime: Date
 ) : Parcelable {
 
-    constructor(user: MasterQuery.User) : this(
+    constructor(user: AdditionalMaster.User) : this(
             id = user.fragments().userWithoutPassword().id().toLong(),
             email = user.fragments().userWithoutPassword().email(),
             password = null,
@@ -23,7 +23,7 @@ data class User(
             ctime = Date(user.fragments().userWithoutPassword().ctime().toLong())
     )
 
-    constructor(user: MasterQuery.User1) : this(
+    constructor(user: AdditionalMaster.User1) : this(
             id = user.fragments().userWithoutPassword().id().toLong(),
             email = user.fragments().userWithoutPassword().email(),
             password = null,

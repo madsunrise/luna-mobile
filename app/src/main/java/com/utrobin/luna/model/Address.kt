@@ -1,7 +1,7 @@
 package com.utrobin.luna.model
 
 import android.os.Parcelable
-import com.utrobin.luna.MasterQuery
+import com.utrobin.luna.fragment.AdditionalMaster
 import com.utrobin.luna.fragment.FullFeedItem
 import kotlinx.android.parcel.Parcelize
 
@@ -24,7 +24,7 @@ data class Address(
         })
     }
 
-    constructor(address: MasterQuery.Address) : this(
+    constructor(address: AdditionalMaster.Address) : this(
             address.fragments().fullAddress().description(),
             address.fragments().fullAddress().lat(),
             address.fragments().fullAddress().lon(),
@@ -35,7 +35,7 @@ data class Address(
         })
     }
 
-    constructor(address: MasterQuery.Address1) : this(
+    constructor(address: AdditionalMaster.Address1) : this(
             address.fragments().fullAddress().description(),
             address.fragments().fullAddress().lat(),
             address.fragments().fullAddress().lon(),
