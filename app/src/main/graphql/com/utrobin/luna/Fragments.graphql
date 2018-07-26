@@ -35,6 +35,17 @@ fragment userWithoutPassword on User {
     ctime
 }
 
+fragment baseClient on Client {
+    id
+    name
+    avatar {
+        ...fullPhoto
+    }
+    user {
+        ...userWithoutPassword
+    }
+}
+
 fragment fullService on Service {
     id
     type {

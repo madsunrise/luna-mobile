@@ -45,14 +45,7 @@ query Master($id: ID!) {
                 lastReviews {
                     id
                     client {
-                        id
-                        name
-                        avatar {
-                            ...fullPhoto
-                        }
-                        user {
-                            ...userWithoutPassword
-                        }
+                        ...baseClient
                     }
                     seance {
                         ...fullSeance
@@ -78,14 +71,7 @@ query Master($id: ID!) {
             lastReviews {
                 id
                 client {
-                    id
-                    name
-                    avatar {
-                        ...fullPhoto
-                    }
-                    user {
-                        ...userWithoutPassword
-                    }
+                    ...baseClient
                 }
                 seance {
                     ...fullSeance
@@ -107,14 +93,7 @@ query Master($id: ID!) {
         lastReviews {
             id
             client {
-                id
-                name
-                avatar {
-                    ...fullPhoto
-                }
-                user {
-                    ...userWithoutPassword
-                }
+                ...baseClient
             }
             seance {
                 ...fullSeance

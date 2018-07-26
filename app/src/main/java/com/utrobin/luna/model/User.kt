@@ -2,6 +2,7 @@ package com.utrobin.luna.model
 
 import android.os.Parcelable
 import com.utrobin.luna.MasterQuery
+import com.utrobin.luna.fragment.BaseClient
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 
@@ -30,23 +31,7 @@ data class User(
             ctime = Date(user.fragments().userWithoutPassword().ctime().toLong())
     )
 
-    constructor(user: MasterQuery.User2) : this(
-            id = user.fragments().userWithoutPassword().id().toLong(),
-            email = user.fragments().userWithoutPassword().email(),
-            password = null,
-            role = user.fragments().userWithoutPassword().role(),
-            ctime = Date(user.fragments().userWithoutPassword().ctime().toLong())
-    )
-
-    constructor(user: MasterQuery.User3) : this(
-            id = user.fragments().userWithoutPassword().id().toLong(),
-            email = user.fragments().userWithoutPassword().email(),
-            password = null,
-            role = user.fragments().userWithoutPassword().role(),
-            ctime = Date(user.fragments().userWithoutPassword().ctime().toLong())
-    )
-
-    constructor(user: MasterQuery.User4) : this(
+    constructor(user: BaseClient.User) : this(
             id = user.fragments().userWithoutPassword().id().toLong(),
             email = user.fragments().userWithoutPassword().email(),
             password = null,

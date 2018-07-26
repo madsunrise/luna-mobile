@@ -3,6 +3,7 @@ package com.utrobin.luna.model
 import android.os.Parcelable
 import com.utrobin.luna.FeedQuery
 import com.utrobin.luna.MasterQuery
+import com.utrobin.luna.fragment.BaseClient
 import com.utrobin.luna.fragment.FullService
 import kotlinx.android.parcel.Parcelize
 
@@ -42,27 +43,6 @@ data class Photo(
         }
     }
 
-    constructor(photo: MasterQuery.Avatar2) : this(photo.fragments().fullPhoto().id().toLong(),
-            photo.fragments().fullPhoto().path(), ArrayList()) {
-        photo.fragments().fullPhoto().tags().forEach {
-            tags.add(Tag(it))
-        }
-    }
-
-    constructor(photo: MasterQuery.Avatar3) : this(photo.fragments().fullPhoto().id().toLong(),
-            photo.fragments().fullPhoto().path(), ArrayList()) {
-        photo.fragments().fullPhoto().tags().forEach {
-            tags.add(Tag(it))
-        }
-    }
-
-    constructor(photo: MasterQuery.Avatar4) : this(photo.fragments().fullPhoto().id().toLong(),
-            photo.fragments().fullPhoto().path(), ArrayList()) {
-        photo.fragments().fullPhoto().tags().forEach {
-            tags.add(Tag(it))
-        }
-    }
-
     constructor(photo: MasterQuery.Photo) : this(photo.fragments().fullPhoto().id().toLong(),
             photo.fragments().fullPhoto().path(), ArrayList()) {
         photo.fragments().fullPhoto().tags().forEach {
@@ -78,6 +58,13 @@ data class Photo(
     }
 
     constructor(photo: FullService.Photo) : this(photo.fragments().fullPhoto().id().toLong(),
+            photo.fragments().fullPhoto().path(), ArrayList()) {
+        photo.fragments().fullPhoto().tags().forEach {
+            tags.add(Tag(it))
+        }
+    }
+
+    constructor(photo: BaseClient.Avatar) : this(photo.fragments().fullPhoto().id().toLong(),
             photo.fragments().fullPhoto().path(), ArrayList()) {
         photo.fragments().fullPhoto().tags().forEach {
             tags.add(Tag(it))

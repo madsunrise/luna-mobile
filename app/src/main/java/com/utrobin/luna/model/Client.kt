@@ -14,26 +14,26 @@ data class Client(
 ) : Parcelable {
 
     constructor(client: MasterQuery.Client) : this(
-            id = client.id().toLong(),
-            name = client.name(),
-            user = User(client.user()),
-            avatar = client.avatar()?.let { Photo(it) },
+            id = client.fragments().baseClient().id().toLong(),
+            name = client.fragments().baseClient().name(),
+            user = User(client.fragments().baseClient().user()),
+            avatar = client.fragments().baseClient().avatar()?.let { Photo(it) },
             favorites = ArrayList<Master>() // TODO пока не грузим это
     )
 
     constructor(client: MasterQuery.Client1) : this(
-            id = client.id().toLong(),
-            name = client.name(),
-            user = User(client.user()),
-            avatar = client.avatar()?.let { Photo(it) },
+            id = client.fragments().baseClient().id().toLong(),
+            name = client.fragments().baseClient().name(),
+            user = User(client.fragments().baseClient().user()),
+            avatar = client.fragments().baseClient().avatar()?.let { Photo(it) },
             favorites = ArrayList<Master>() // TODO пока не грузим это
     )
 
     constructor(client: MasterQuery.Client2) : this(
-            id = client.id().toLong(),
-            name = client.name(),
-            user = User(client.user()),
-            avatar = client.avatar()?.let { Photo(it) },
+            id = client.fragments().baseClient().id().toLong(),
+            name = client.fragments().baseClient().name(),
+            user = User(client.fragments().baseClient().user()),
+            avatar = client.fragments().baseClient().avatar()?.let { Photo(it) },
             favorites = ArrayList<Master>() // TODO пока не грузим это
     )
 }
