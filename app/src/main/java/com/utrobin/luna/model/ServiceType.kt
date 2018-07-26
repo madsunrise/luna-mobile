@@ -1,7 +1,7 @@
 package com.utrobin.luna.model
 
 import android.os.Parcelable
-import com.utrobin.luna.MasterQuery
+import com.utrobin.luna.fragment.FullService
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
@@ -11,39 +11,15 @@ data class ServiceType(
         val parent: ServiceType?
 ) : Parcelable {
 
-    constructor(type: MasterQuery.Parent) : this(
-            type.id().toLong(),
-            type.name(),
-            null
+    constructor(type: FullService.Type) : this(
+            id = type.id().toLong(),
+            name = type.name(),
+            parent = type.parent()?.let { ServiceType(it) }
     )
 
-    constructor(type: MasterQuery.Parent1) : this(
-            type.id().toLong(),
-            type.name(),
-            null
-    )
-
-    constructor(type: MasterQuery.Parent2) : this(
-            type.id().toLong(),
-            type.name(),
-            null
-    )
-
-    constructor(type: MasterQuery.Type) : this(
-            type.id().toLong(),
-            type.name(),
-            type.parent()?.let { ServiceType(it) }
-    )
-
-    constructor(type: MasterQuery.Type1) : this(
-            type.id().toLong(),
-            type.name(),
-            type.parent()?.let { ServiceType(it) }
-    )
-
-    constructor(type: MasterQuery.Type2) : this(
-            type.id().toLong(),
-            type.name(),
-            type.parent()?.let { ServiceType(it) }
+    constructor(type: FullService.Parent) : this(
+            id = type.id().toLong(),
+            name = type.name(),
+            parent = null
     )
 }

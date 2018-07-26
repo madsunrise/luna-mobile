@@ -1,7 +1,7 @@
 package com.utrobin.luna.model
 
 import android.os.Parcelable
-import com.utrobin.luna.MasterQuery
+import com.utrobin.luna.fragment.FullService
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
@@ -11,21 +11,9 @@ data class Material(
         val description: String
 ) : Parcelable {
 
-    constructor(material: MasterQuery.Material) : this(
-            material.id().toLong(),
-            material.firm(),
-            material.description()
-    )
-
-    constructor(material: MasterQuery.Material1) : this(
-            material.id().toLong(),
-            material.firm(),
-            material.description()
-    )
-
-    constructor(material: MasterQuery.Material2) : this(
-            material.id().toLong(),
-            material.firm(),
-            material.description()
+    constructor(material: FullService.Material) : this(
+            id = material.id().toLong(),
+            firm = material.firm(),
+            description = material.description()
     )
 }

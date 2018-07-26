@@ -23,35 +23,35 @@ data class Service(
 ) : Parcelable {
 
     constructor(service: MasterQuery.Service) : this(
-            id = service.id().toLong(),
-            type = ServiceType(service.type()),
-            description = service.description(),
-            price = service.price() as BigDecimal,
-            duration = service.duration(),
-            materials = ArrayList<Material>().apply { addAll(service.materials().map { Material(it) }) },
-            photos = ArrayList<Photo>().apply { addAll(service.photos().map { Photo(it) }) },
-            ctime = Date(service.ctime().toLong())
+            id = service.fragments().fullService().id().toLong(),
+            type = ServiceType(service.fragments().fullService().type()),
+            description = service.fragments().fullService().description(),
+            price = service.fragments().fullService().price() as BigDecimal,
+            duration = service.fragments().fullService().duration(),
+            materials = ArrayList<Material>().apply { addAll(service.fragments().fullService().materials().map { Material(it) }) },
+            photos = ArrayList<Photo>().apply { addAll(service.fragments().fullService().photos().map { Photo(it) }) },
+            ctime = Date(service.fragments().fullService().ctime().toLong())
     )
 
     constructor(service: MasterQuery.Service1) : this(
-            id = service.id().toLong(),
-            type = ServiceType(service.type()),
-            description = service.description(),
-            price = service.price() as BigDecimal,
-            duration = service.duration(),
-            materials = ArrayList<Material>().apply { addAll(service.materials().map { Material(it) }) },
-            photos = ArrayList<Photo>().apply { addAll(service.photos().map { Photo(it) }) },
-            ctime = Date(service.ctime().toLong())
+            id = service.fragments().fullService().id().toLong(),
+            type = ServiceType(service.fragments().fullService().type()),
+            description = service.fragments().fullService().description(),
+            price = service.fragments().fullService().price() as BigDecimal,
+            duration = service.fragments().fullService().duration(),
+            materials = ArrayList<Material>().apply { addAll(service.fragments().fullService().materials().map { Material(it) }) },
+            photos = ArrayList<Photo>().apply { addAll(service.fragments().fullService().photos().map { Photo(it) }) },
+            ctime = Date(service.fragments().fullService().ctime().toLong())
     )
 
     constructor(service: MasterQuery.Service2) : this(
-            id = service.id().toLong(),
-            type = ServiceType(service.type()),
-            description = service.description(),
-            price = service.price() as BigDecimal,
-            duration = service.duration(),
-            materials = ArrayList<Material>().apply { addAll(service.materials().map { Material(it) }) },
-            photos = ArrayList<Photo>().apply { addAll(service.photos().map { Photo(it) }) },
-            ctime = Date(service.ctime().toLong())
+            id = service.fragments().fullService().id().toLong(),
+            type = ServiceType(service.fragments().fullService().type()),
+            description = service.fragments().fullService().description(),
+            price = service.fragments().fullService().price() as BigDecimal,
+            duration = service.fragments().fullService().duration(),
+            materials = ArrayList<Material>().apply { addAll(service.fragments().fullService().materials().map { Material(it) }) },
+            photos = ArrayList<Photo>().apply { addAll(service.fragments().fullService().photos().map { Photo(it) }) },
+            ctime = Date(service.fragments().fullService().ctime().toLong())
     )
 }

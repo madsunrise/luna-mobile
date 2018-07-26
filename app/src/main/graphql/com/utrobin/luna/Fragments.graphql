@@ -34,3 +34,27 @@ fragment userWithoutPassword on User {
     role
     ctime
 }
+
+fragment fullService on Service {
+    id
+    type {
+        id
+        name
+        parent {
+            id
+            name
+        }
+    }
+    description
+    price
+    duration
+    materials {
+        id
+        firm
+        description
+    }
+    photos {
+        ...fullPhoto
+    }
+    ctime
+}

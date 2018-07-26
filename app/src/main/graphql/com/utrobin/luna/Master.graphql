@@ -34,27 +34,7 @@ query Master($id: ID!) {
                 ratesCount
                 commentsCount
                 services {
-                    id
-                    type {
-                        id
-                        name
-                        parent {
-                            id
-                            name
-                        }
-                    }
-                    description
-                    price
-                    duration
-                    materials {
-                        id
-                        firm
-                        description
-                    }
-                    photos {
-                        ...fullPhoto
-                    }
-                    ctime
+                    ...fullService
                 }
                 schedules {
                     id
@@ -95,27 +75,7 @@ query Master($id: ID!) {
                 ...fullPhoto
             }
             services {
-                id
-                type {
-                    id
-                    name
-                    parent {
-                        id
-                        name
-                    }
-                }
-                description
-                price
-                duration
-                materials {
-                    id
-                    firm
-                    description
-                }
-                photos {
-                    ...fullPhoto
-                }
-                ctime
+                ...fullService
             }
             signs {
                 ...fullSign
@@ -144,27 +104,7 @@ query Master($id: ID!) {
             }
         }
         services {
-            id
-            type {
-                id
-                name
-                parent {
-                    id
-                    name
-                }
-            }
-            description
-            price
-            duration
-            materials {
-                id
-                firm
-                description
-            }
-            photos {
-                ...fullPhoto
-            }
-            ctime
+            ...fullService
         }
         schedules {
             id
