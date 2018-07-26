@@ -1,0 +1,8 @@
+fragment allFields on Photo {
+    id
+    path
+    tags {
+        id
+        name
+    }
+}

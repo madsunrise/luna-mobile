@@ -1,12 +1,3 @@
-fragment photoInfo on Photo {
-    id
-    path
-    tags {
-        id
-        name
-    }
-}
-
 query Feed($limit: Limit!) {
     feed(limit: $limit) {
         id
@@ -25,10 +16,10 @@ query Feed($limit: Limit!) {
             }
         }
         avatar {
-            ...photoInfo
+            ...allFields
         }
         photos {
-            ...photoInfo
+            ...allFields
         }
         stars
         ratesCount
@@ -52,7 +43,7 @@ query Feed($limit: Limit!) {
                 description
             }
             photos {
-                ...photoInfo
+                ...allFields
             }
             ctime
         }
