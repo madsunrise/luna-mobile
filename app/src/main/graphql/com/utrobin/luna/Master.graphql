@@ -42,9 +42,7 @@ query Master($id: ID!) {
                     endTime
                 }
                 seances {
-                    id
-                    startTime
-                    endTime
+                    ...fullSeance
                 }
                 lastReviews {
                     id
@@ -59,9 +57,7 @@ query Master($id: ID!) {
                         }
                     }
                     seance {
-                        id
-                        startTime
-                        endTime
+                        ...fullSeance
                     }
                     stars
                     message
@@ -94,9 +90,7 @@ query Master($id: ID!) {
                     }
                 }
                 seance {
-                    id
-                    startTime
-                    endTime
+                    ...fullSeance
                 }
                 stars
                 message
@@ -112,9 +106,7 @@ query Master($id: ID!) {
             endTime
         }
         seances {
-            id
-            startTime
-            endTime
+            ...fullSeance
         }
         lastReviews {
             id
@@ -129,9 +121,7 @@ query Master($id: ID!) {
                 }
             }
             seance {
-                id
-                startTime
-                endTime
+                ...fullSeance
             }
             stars
             message

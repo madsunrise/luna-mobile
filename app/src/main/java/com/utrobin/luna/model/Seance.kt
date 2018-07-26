@@ -16,32 +16,32 @@ data class Seance(
 ) : Parcelable {
 
     constructor(seance: MasterQuery.Seance) : this(
-            id = seance.id().toLong(),
-            startTime = Date(seance.startTime().toLong()),
-            endTime = Date(seance.endTime().toLong())
+            id = seance.fragments().fullSeance().id().toLong(),
+            startTime = Date(seance.fragments().fullSeance().startTime().toLong()),
+            endTime = Date(seance.fragments().fullSeance().endTime().toLong())
     )
 
     constructor(seance: MasterQuery.Seance1) : this(
-            id = seance.id().toLong(),
-            startTime = Date(seance.startTime().toLong()),
-            endTime = Date(seance.endTime().toLong())
+            id = seance.fragments().fullSeance().id().toLong(),
+            startTime = Date(seance.fragments().fullSeance().startTime().toLong()),
+            endTime = Date(seance.fragments().fullSeance().endTime().toLong())
     )
 
     constructor(seance: MasterQuery.Seance2) : this(
-            id = seance.id().toLong(),
-            startTime = Date(seance.startTime().toLong()),
-            endTime = Date(seance.endTime().toLong())
+            id = seance.fragments().fullSeance().id().toLong(),
+            startTime = Date(seance.fragments().fullSeance().startTime().toLong()),
+            endTime = Date(seance.fragments().fullSeance().endTime().toLong())
     )
 
     constructor(seance: MasterQuery.Seance3) : this(
-            id = seance.id().toLong(),
-            startTime = Date(seance.startTime().toLong()),
-            endTime = Date(seance.endTime().toLong())
+            id = seance.fragments().fullSeance().id().toLong(),
+            startTime = Date(seance.fragments().fullSeance().startTime().toLong()),
+            endTime = Date(seance.fragments().fullSeance().endTime().toLong())
     )
 
     constructor(seance: MasterQuery.Seance4) : this(
-            id = seance.id().toLong(),
-            startTime = Date(seance.startTime().toLong()),
-            endTime = Date(seance.endTime().toLong())
+            id = seance.fragments().fullSeance().id().toLong(),
+            startTime = Date(seance.fragments().fullSeance().startTime().toLong()),
+            endTime = Date(seance.fragments().fullSeance().endTime().toLong())
     )
 }

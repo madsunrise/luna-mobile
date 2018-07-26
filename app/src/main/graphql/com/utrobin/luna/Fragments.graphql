@@ -58,3 +58,9 @@ fragment fullService on Service {
     }
     ctime
 }
+
+fragment fullSeance on Seance {
+    id
+    startTime
+    endTime
+}
