@@ -1,10 +1,7 @@
 query Master($id: ID!) {
     master(id: $id) {
         user {
-            id
-            email
-            role
-            ctime
+            ...userWithoutPassword
         }
         salon {
             id
@@ -31,10 +28,7 @@ query Master($id: ID!) {
                     ...fullSign
                 }
                 user {
-                    id
-                    email
-                    role
-                    ctime
+                    ...userWithoutPassword
                 }
                 stars
                 ratesCount
@@ -81,10 +75,7 @@ query Master($id: ID!) {
                             ...fullPhoto
                         }
                         user {
-                            id
-                            email
-                            role
-                            ctime
+                            ...userWithoutPassword
                         }
                     }
                     seance {
@@ -139,10 +130,7 @@ query Master($id: ID!) {
                         ...fullPhoto
                     }
                     user {
-                        id
-                        email
-                        role
-                        ctime
+                        ...userWithoutPassword
                     }
                 }
                 seance {
@@ -197,10 +185,7 @@ query Master($id: ID!) {
                     ...fullPhoto
                 }
                 user {
-                    id
-                    email
-                    role
-                    ctime
+                    ...userWithoutPassword
                 }
             }
             seance {

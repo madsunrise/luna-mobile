@@ -27,3 +27,10 @@ fragment fullSign on Sign {
     icon
     description
 }
+
+fragment userWithoutPassword on User {
+    id
+    email
+    role
+    ctime
+}
