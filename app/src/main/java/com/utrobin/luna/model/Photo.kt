@@ -12,94 +12,94 @@ data class Photo(
         val tags: ArrayList<Tag>) : Parcelable {
 
     constructor(photo: FeedQuery.Photo) : this(
-            id = photo.fragments().allFields().id().toLong(),
-            path = photo.fragments().allFields().path(),
+            id = photo.fragments().fullPhoto().id().toLong(),
+            path = photo.fragments().fullPhoto().path(),
             tags = ArrayList()) {
-        photo.fragments().allFields().tags().forEach {
+        photo.fragments().fullPhoto().tags().forEach {
             tags.add(Tag(it))
         }
     }
 
-    constructor(photo: FeedQuery.Photo1) : this(photo.fragments().allFields().id().toLong(),
-            photo.fragments().allFields().path(), ArrayList()) {
-        photo.fragments().allFields().tags().forEach {
+    constructor(photo: FeedQuery.Photo1) : this(photo.fragments().fullPhoto().id().toLong(),
+            photo.fragments().fullPhoto().path(), ArrayList()) {
+        photo.fragments().fullPhoto().tags().forEach {
             tags.add(Tag(it))
         }
     }
 
-    constructor(photo: FeedQuery.Avatar) : this(photo.fragments().allFields().id().toLong(),
-            photo.fragments().allFields().path(), ArrayList()) {
-        photo.fragments().allFields().tags().forEach {
+    constructor(photo: FeedQuery.Avatar) : this(photo.fragments().fullPhoto().id().toLong(),
+            photo.fragments().fullPhoto().path(), ArrayList()) {
+        photo.fragments().fullPhoto().tags().forEach {
             tags.add(Tag(it))
         }
     }
 
-    constructor(photo: MasterQuery.Avatar) : this(photo.fragments().allFields().id().toLong(),
-            photo.fragments().allFields().path(), ArrayList()) {
-        photo.fragments().allFields().tags().forEach {
+    constructor(photo: MasterQuery.Avatar) : this(photo.fragments().fullPhoto().id().toLong(),
+            photo.fragments().fullPhoto().path(), ArrayList()) {
+        photo.fragments().fullPhoto().tags().forEach {
             tags.add(Tag(it))
         }
     }
 
-    constructor(photo: MasterQuery.Avatar1) : this(photo.fragments().allFields().id().toLong(),
-            photo.fragments().allFields().path(), ArrayList()) {
-        photo.fragments().allFields().tags().forEach {
+    constructor(photo: MasterQuery.Avatar1) : this(photo.fragments().fullPhoto().id().toLong(),
+            photo.fragments().fullPhoto().path(), ArrayList()) {
+        photo.fragments().fullPhoto().tags().forEach {
             tags.add(Tag(it))
         }
     }
 
-    constructor(photo: MasterQuery.Avatar2) : this(photo.fragments().allFields().id().toLong(),
-            photo.fragments().allFields().path(), ArrayList()) {
-        photo.fragments().allFields().tags().forEach {
+    constructor(photo: MasterQuery.Avatar2) : this(photo.fragments().fullPhoto().id().toLong(),
+            photo.fragments().fullPhoto().path(), ArrayList()) {
+        photo.fragments().fullPhoto().tags().forEach {
             tags.add(Tag(it))
         }
     }
 
-    constructor(photo: MasterQuery.Avatar3) : this(photo.fragments().allFields().id().toLong(),
-            photo.fragments().allFields().path(), ArrayList()) {
-        photo.fragments().allFields().tags().forEach {
+    constructor(photo: MasterQuery.Avatar3) : this(photo.fragments().fullPhoto().id().toLong(),
+            photo.fragments().fullPhoto().path(), ArrayList()) {
+        photo.fragments().fullPhoto().tags().forEach {
             tags.add(Tag(it))
         }
     }
 
-    constructor(photo: MasterQuery.Avatar4) : this(photo.fragments().allFields().id().toLong(),
-            photo.fragments().allFields().path(), ArrayList()) {
-        photo.fragments().allFields().tags().forEach {
+    constructor(photo: MasterQuery.Avatar4) : this(photo.fragments().fullPhoto().id().toLong(),
+            photo.fragments().fullPhoto().path(), ArrayList()) {
+        photo.fragments().fullPhoto().tags().forEach {
             tags.add(Tag(it))
         }
     }
 
-    constructor(photo: MasterQuery.Photo) : this(photo.fragments().allFields().id().toLong(),
-            photo.fragments().allFields().path(), ArrayList()) {
-        photo.fragments().allFields().tags().forEach {
+    constructor(photo: MasterQuery.Photo) : this(photo.fragments().fullPhoto().id().toLong(),
+            photo.fragments().fullPhoto().path(), ArrayList()) {
+        photo.fragments().fullPhoto().tags().forEach {
             tags.add(Tag(it))
         }
     }
 
-    constructor(photo: MasterQuery.Photo1) : this(photo.fragments().allFields().id().toLong(),
-            photo.fragments().allFields().path(), ArrayList()) {
-        photo.fragments().allFields().tags().forEach {
+    constructor(photo: MasterQuery.Photo1) : this(photo.fragments().fullPhoto().id().toLong(),
+            photo.fragments().fullPhoto().path(), ArrayList()) {
+        photo.fragments().fullPhoto().tags().forEach {
             tags.add(Tag(it))
         }
     }
 
-    constructor(photo: MasterQuery.Photo2) : this(photo.fragments().allFields().id().toLong(),
-            photo.fragments().allFields().path(), ArrayList()) {
-        photo.fragments().allFields().tags().forEach {
+    constructor(photo: MasterQuery.Photo2) : this(photo.fragments().fullPhoto().id().toLong(),
+            photo.fragments().fullPhoto().path(), ArrayList()) {
+        photo.fragments().fullPhoto().tags().forEach {
             tags.add(Tag(it))
         }
     }
 
-    constructor(photo: MasterQuery.Photo3) : this(photo.fragments().allFields().id().toLong(),
-            photo.fragments().allFields().path(), ArrayList()) {
-        photo.fragments().allFields().tags().forEach {
+    constructor(photo: MasterQuery.Photo3) : this(photo.fragments().fullPhoto().id().toLong(),
+            photo.fragments().fullPhoto().path(), ArrayList()) {
+        photo.fragments().fullPhoto().tags().forEach {
             tags.add(Tag(it))
         }
     }
 
-    constructor(photo: MasterQuery.Photo4) : this(photo.fragments().allFields().id().toLong(),
-            photo.fragments().allFields().path(), ArrayList()) {
-        photo.fragments().allFields().tags().forEach {
+    constructor(photo: MasterQuery.Photo4) : this(photo.fragments().fullPhoto().id().toLong(),
+            photo.fragments().fullPhoto().path(), ArrayList()) {
+        photo.fragments().fullPhoto().tags().forEach {
             tags.add(Tag(it))
         }
     }

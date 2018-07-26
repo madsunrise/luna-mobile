@@ -10,42 +10,22 @@ query Master($id: ID!) {
             id
             name
             avatar {
-                ...allFields
+                ...fullPhoto
             }
             address {
-                id
-                lat
-                lon
-                description
-                metros {
-                    id
-                    station
-                    line
-                    color
-                    distance
-                }
+                ...fullAddress
             }
             masters {
                 id
                 name
                 address {
-                    id
-                    lat
-                    lon
-                    description
-                    metros {
-                        id
-                        station
-                        line
-                        color
-                        distance
-                    }
+                    ...fullAddress
                 }
                 avatar {
-                    ...allFields
+                    ...fullPhoto
                 }
                 photos {
-                    ...allFields
+                    ...fullPhoto
                 }
                 signs {
                     id
@@ -81,7 +61,7 @@ query Master($id: ID!) {
                         description
                     }
                     photos {
-                        ...allFields
+                        ...fullPhoto
                     }
                     ctime
                 }
@@ -101,7 +81,7 @@ query Master($id: ID!) {
                         id
                         name
                         avatar {
-                            ...allFields
+                            ...fullPhoto
                         }
                         user {
                             id
@@ -124,7 +104,7 @@ query Master($id: ID!) {
             ratesCount
             commentsCount
             photos {
-                ...allFields
+                ...fullPhoto
             }
             services {
                 id
@@ -145,7 +125,7 @@ query Master($id: ID!) {
                     description
                 }
                 photos {
-                    ...allFields
+                    ...fullPhoto
                 }
                 ctime
             }
@@ -162,7 +142,7 @@ query Master($id: ID!) {
                     id
                     name
                     avatar {
-                        ...allFields
+                        ...fullPhoto
                     }
                     user {
                         id
@@ -200,7 +180,7 @@ query Master($id: ID!) {
                 description
             }
             photos {
-                ...allFields
+                ...fullPhoto
             }
             ctime
         }
@@ -220,7 +200,7 @@ query Master($id: ID!) {
                 id
                 name
                 avatar {
-                    ...allFields
+                    ...fullPhoto
                 }
                 user {
                     id

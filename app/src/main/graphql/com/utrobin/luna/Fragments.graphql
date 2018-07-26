@@ -1,4 +1,18 @@
-fragment allFields on Photo {
+fragment fullAddress on Address {
+    id
+    lat
+    lon
+    description
+    metros {
+        id
+        station
+        line
+        color
+        distance
+    }
+}
+
+fragment fullPhoto on Photo {
     id
     path
     tags {

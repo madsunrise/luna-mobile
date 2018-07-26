@@ -13,34 +13,34 @@ data class Address(
         val metro: ArrayList<AddressMetro> = ArrayList()
 ) : Parcelable {
     constructor(address: FeedQuery.Address) : this(
-            address.description(),
-            address.lat(),
-            address.lon(),
+            address.fragments().fullAddress().description(),
+            address.fragments().fullAddress().lat(),
+            address.fragments().fullAddress().lon(),
             ArrayList()
     ) {
-        this.metro.addAll(address.metros().map {
+        this.metro.addAll(address.fragments().fullAddress().metros().map {
             AddressMetro(it)
         })
     }
 
     constructor(address: MasterQuery.Address) : this(
-            address.description(),
-            address.lat(),
-            address.lon(),
+            address.fragments().fullAddress().description(),
+            address.fragments().fullAddress().lat(),
+            address.fragments().fullAddress().lon(),
             ArrayList()
     ) {
-        this.metro.addAll(address.metros().map {
+        this.metro.addAll(address.fragments().fullAddress().metros().map {
             AddressMetro(it)
         })
     }
 
     constructor(address: MasterQuery.Address1) : this(
-            address.description(),
-            address.lat(),
-            address.lon(),
+            address.fragments().fullAddress().description(),
+            address.fragments().fullAddress().lat(),
+            address.fragments().fullAddress().lon(),
             ArrayList()
     ) {
-        this.metro.addAll(address.metros().map {
+        this.metro.addAll(address.fragments().fullAddress().metros().map {
             AddressMetro(it)
         })
     }

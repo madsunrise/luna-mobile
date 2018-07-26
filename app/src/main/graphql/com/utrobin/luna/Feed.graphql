@@ -3,23 +3,13 @@ query Feed($limit: Limit!) {
         id
         name
         address {
-            id
-            lat
-            lon
-            description
-            metros {
-                id
-                station
-                line
-                color
-                distance
-            }
+            ...fullAddress
         }
         avatar {
-            ...allFields
+            ...fullPhoto
         }
         photos {
-            ...allFields
+            ...fullPhoto
         }
         stars
         ratesCount
@@ -43,7 +33,7 @@ query Feed($limit: Limit!) {
                 description
             }
             photos {
-                ...allFields
+                ...fullPhoto
             }
             ctime
         }

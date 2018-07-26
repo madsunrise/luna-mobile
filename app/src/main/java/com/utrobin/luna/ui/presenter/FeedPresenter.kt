@@ -70,23 +70,21 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
                 signs.add(Sign(it))
             }
 
-            val addressMetro = ArrayList<AddressMetro>()
 
-            queryItem.address()?.metros()
-                    ?.forEach {
-                        addressMetro.add(
-                                AddressMetro(
-                                        it.id().toLong(),
-                                        it.station(),
-                                        it.line(),
-                                        it.color(),
-                                        it.distance().toFloat()
-                                )
-                        )
-                    }
-
-            val address = queryItem.address()?.let {
-                Address(
+            val address = queryItem.address()?.fragments()?.fullAddress()?.let {
+                val addressMetro = ArrayList<AddressMetro>()
+                it.metros().forEach {
+                    addressMetro.add(
+                            AddressMetro(
+                                    it.id().toLong(),
+                                    it.station(),
+                                    it.line(),
+                                    it.color(),
+                                    it.distance().toFloat()
+                            )
+                    )
+                }
+                return@let Address(
                         it.description(),
                         it.lat(),
                         it.lon(),
