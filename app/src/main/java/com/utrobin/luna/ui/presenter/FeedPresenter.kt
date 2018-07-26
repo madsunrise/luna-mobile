@@ -55,23 +55,24 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
     private fun parseFeed(queryList: List<FeedQuery.Feed>) = async {
         val data = ArrayList<FeedItem>()
         for (queryItem in queryList) {
-            val id = queryItem.id().toLong()
-            val name = queryItem.name()
-            val avatar = queryItem.avatar()?.let { Photo(it) }
-            val stars = queryItem.stars() / 10.0
+            val item = queryItem.fragments().fullFeedItem()
+            val id = item.id().toLong()
+            val name = item.name()
+            val avatar = item.avatar()?.let { Photo(it) }
+            val stars = item.stars() / 10.0
 
             val photos = ArrayList<Photo>()
-            queryItem.photos().forEach {
+            item.photos().forEach {
                 photos.add(Photo(it))
             }
 
             val signs = ArrayList<Sign>()
-            queryItem.signs().forEach {
+            item.signs().forEach {
                 signs.add(Sign(it))
             }
 
 
-            val address = queryItem.address()?.fragments()?.fullAddress()?.let {
+            val address = item.address()?.fragments()?.fullAddress()?.let {
                 val addressMetro = ArrayList<AddressMetro>()
                 it.metros().forEach {
                     addressMetro.add(
@@ -92,7 +93,7 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
                 )
             }
 
-            val type = when (queryItem.__typename()) {
+            val type = when (item.__typename()) {
                 "Salon" -> FeedItem.Companion.Type.SALON
                 "Master" -> FeedItem.Companion.Type.MASTER
                 else -> throw IllegalArgumentException("Unsupported item type!")
@@ -108,8 +109,8 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
                             stars = stars,
                             signs = signs,
                             photos = photos,
-                            ratesCount = queryItem.ratesCount(),
-                            commentsCount = queryItem.commentsCount()
+                            ratesCount = item.ratesCount(),
+                            commentsCount = item.commentsCount()
                     )
             )
         }

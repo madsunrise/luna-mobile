@@ -1,9 +1,9 @@
 package com.utrobin.luna.model
 
 import android.os.Parcelable
-import com.utrobin.luna.FeedQuery
 import com.utrobin.luna.MasterQuery
 import com.utrobin.luna.fragment.BaseClient
+import com.utrobin.luna.fragment.FullFeedItem
 import com.utrobin.luna.fragment.FullService
 import kotlinx.android.parcel.Parcelize
 
@@ -13,7 +13,7 @@ data class Photo(
         val path: String,
         val tags: ArrayList<Tag>) : Parcelable {
 
-    constructor(photo: FeedQuery.Photo) : this(
+    constructor(photo: FullFeedItem.Photo) : this(
             id = photo.fragments().fullPhoto().id().toLong(),
             path = photo.fragments().fullPhoto().path(),
             tags = ArrayList()) {
@@ -22,8 +22,10 @@ data class Photo(
         }
     }
 
-    constructor(photo: FeedQuery.Avatar) : this(photo.fragments().fullPhoto().id().toLong(),
-            photo.fragments().fullPhoto().path(), ArrayList()) {
+    constructor(photo: FullFeedItem.Avatar) : this(
+            id = photo.fragments().fullPhoto().id().toLong(),
+            path = photo.fragments().fullPhoto().path(),
+            tags = ArrayList()) {
         photo.fragments().fullPhoto().tags().forEach {
             tags.add(Tag(it))
         }

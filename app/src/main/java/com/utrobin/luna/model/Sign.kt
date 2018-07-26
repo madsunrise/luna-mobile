@@ -1,14 +1,14 @@
 package com.utrobin.luna.model
 
 import android.os.Parcelable
-import com.utrobin.luna.FeedQuery
 import com.utrobin.luna.MasterQuery
+import com.utrobin.luna.fragment.FullFeedItem
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Sign(val id: Long, val name: String, val description: String, val icon: String) : Parcelable {
 
-    constructor(sign: FeedQuery.Sign) : this(
+    constructor(sign: FullFeedItem.Sign) : this(
             id = sign.fragments().fullSign().id().toLong(),
             name = sign.fragments().fullSign().name(),
             description = sign.fragments().fullSign().description(),

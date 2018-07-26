@@ -1,3 +1,23 @@
+fragment fullFeedItem on FeedItem {
+    id
+    name
+    address {
+        ...fullAddress
+    }
+    avatar {
+        ...fullPhoto
+    }
+    photos {
+        ...fullPhoto
+    }
+    stars
+    ratesCount
+    commentsCount
+    signs {
+        ...fullSign
+    }
+}
+
 fragment fullAddress on Address {
     id
     lat

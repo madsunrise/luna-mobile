@@ -1,21 +1,5 @@
 query Feed($limit: Limit!) {
     feed(limit: $limit) {
-        id
-        name
-        address {
-            ...fullAddress
-        }
-        avatar {
-            ...fullPhoto
-        }
-        photos {
-            ...fullPhoto
-        }
-        stars
-        ratesCount
-        commentsCount
-        signs {
-            ...fullSign
-        }
+        ...fullFeedItem
     }
 }
