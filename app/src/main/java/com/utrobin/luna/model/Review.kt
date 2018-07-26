@@ -19,29 +19,29 @@ data class Review(
 ) : Parcelable {
 
     constructor(review: MasterQuery.LastReview) : this(
-            id = review.id().toLong(),
-            client = Client(review.client()),
-            seance = Seance(review.seance()),
-            stars = review.stars() / 10.0,
-            message = review.message(),
-            date = Date(review.date().toLong())
+            id = review.fragments().fullReview().id().toLong(),
+            client = Client(review.fragments().fullReview().client()),
+            seance = Seance(review.fragments().fullReview().seance()),
+            stars = review.fragments().fullReview().stars() / 10.0,
+            message = review.fragments().fullReview().message(),
+            date = Date(review.fragments().fullReview().date().toLong())
     )
 
     constructor(review: MasterQuery.LastReview1) : this(
-            id = review.id().toLong(),
-            client = Client(review.client()),
-            seance = Seance(review.seance()),
-            stars = review.stars() / 10.0,
-            message = review.message(),
-            date = Date(review.date().toLong())
+            id = review.fragments().fullReview().id().toLong(),
+            client = Client(review.fragments().fullReview().client()),
+            seance = Seance(review.fragments().fullReview().seance()),
+            stars = review.fragments().fullReview().stars() / 10.0,
+            message = review.fragments().fullReview().message(),
+            date = Date(review.fragments().fullReview().date().toLong())
     )
 
     constructor(review: MasterQuery.LastReview2) : this(
-            id = review.id().toLong(),
-            client = Client(review.client()),
-            seance = Seance(review.seance()),
-            stars = review.stars() / 10.0,
-            message = review.message(),
-            date = Date(review.date().toLong())
+            id = review.fragments().fullReview().id().toLong(),
+            client = Client(review.fragments().fullReview().client()),
+            seance = Seance(review.fragments().fullReview().seance()),
+            stars = review.fragments().fullReview().stars() / 10.0,
+            message = review.fragments().fullReview().message(),
+            date = Date(review.fragments().fullReview().date().toLong())
     )
 }

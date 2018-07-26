@@ -81,3 +81,16 @@ fragment fullSchedule on Schedule {
     startTime
     endTime
 }
+
+fragment fullReview on Review {
+    id
+    client {
+        ...baseClient
+    }
+    seance {
+        ...fullSeance
+    }
+    stars
+    message
+    date
+}

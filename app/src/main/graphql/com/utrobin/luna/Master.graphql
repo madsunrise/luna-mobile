@@ -43,16 +43,7 @@ query Master($id: ID!) {
                     ...fullSeance
                 }
                 lastReviews {
-                    id
-                    client {
-                        ...baseClient
-                    }
-                    seance {
-                        ...fullSeance
-                    }
-                    stars
-                    message
-                    date
+                    ...fullReview
                 }
             }
             stars
@@ -69,16 +60,7 @@ query Master($id: ID!) {
             }
             signs_total
             lastReviews {
-                id
-                client {
-                    ...baseClient
-                }
-                seance {
-                    ...fullSeance
-                }
-                stars
-                message
-                date
+                ...fullReview
             }
         }
         services {
@@ -91,16 +73,7 @@ query Master($id: ID!) {
             ...fullSeance
         }
         lastReviews {
-            id
-            client {
-                ...baseClient
-            }
-            seance {
-                ...fullSeance
-            }
-            stars
-            message
-            date
+            ...fullReview
         }
     }
 }
