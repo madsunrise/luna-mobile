@@ -17,14 +17,14 @@ data class Schedule(
 ) : Parcelable {
 
     constructor(schedule: MasterQuery.Schedule) : this(
-            id = schedule.id().toLong(),
-            startTime = Date(schedule.startTime().toLong()),
-            endTime = Date(schedule.endTime().toLong())
+            id = schedule.fragments().fullSchedule().id().toLong(),
+            startTime = Date(schedule.fragments().fullSchedule().startTime().toLong()),
+            endTime = Date(schedule.fragments().fullSchedule().endTime().toLong())
     )
 
     constructor(schedule: MasterQuery.Schedule1) : this(
-            id = schedule.id().toLong(),
-            startTime = Date(schedule.startTime().toLong()),
-            endTime = Date(schedule.endTime().toLong())
+            id = schedule.fragments().fullSchedule().id().toLong(),
+            startTime = Date(schedule.fragments().fullSchedule().startTime().toLong()),
+            endTime = Date(schedule.fragments().fullSchedule().endTime().toLong())
     )
 }

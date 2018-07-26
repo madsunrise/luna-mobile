@@ -64,3 +64,9 @@ fragment fullSeance on Seance {
     startTime
     endTime
 }
+
+fragment fullSchedule on Schedule {
+    id
+    startTime
+    endTime
+}

@@ -37,9 +37,7 @@ query Master($id: ID!) {
                     ...fullService
                 }
                 schedules {
-                    id
-                    startTime
-                    endTime
+                    ...fullSchedule
                 }
                 seances {
                     ...fullSeance
@@ -101,9 +99,7 @@ query Master($id: ID!) {
             ...fullService
         }
         schedules {
-            id
-            startTime
-            endTime
+            ...fullSchedule
         }
         seances {
             ...fullSeance
