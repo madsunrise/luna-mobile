@@ -20,3 +20,10 @@ fragment fullPhoto on Photo {
         name
     }
 }
+
+fragment fullSign on Sign {
+    id
+    name
+    icon
+    description
+}

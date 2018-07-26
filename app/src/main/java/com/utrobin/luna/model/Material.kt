@@ -1,7 +1,6 @@
 package com.utrobin.luna.model
 
 import android.os.Parcelable
-import com.utrobin.luna.FeedQuery
 import com.utrobin.luna.MasterQuery
 import kotlinx.android.parcel.Parcelize
 
@@ -11,12 +10,6 @@ data class Material(
         val firm: String,
         val description: String
 ) : Parcelable {
-
-    constructor(material: FeedQuery.Material) : this(
-            material.id().toLong(),
-            material.firm(),
-            material.description()
-    )
 
     constructor(material: MasterQuery.Material) : this(
             material.id().toLong(),

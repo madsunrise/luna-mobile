@@ -28,10 +28,7 @@ query Master($id: ID!) {
                     ...fullPhoto
                 }
                 signs {
-                    id
-                    name
-                    icon
-                    description
+                    ...fullSign
                 }
                 user {
                     id
@@ -130,10 +127,7 @@ query Master($id: ID!) {
                 ctime
             }
             signs {
-                id
-                name
-                icon
-                description
+                ...fullSign
             }
             signs_total
             lastReviews {

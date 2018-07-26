@@ -14,34 +14,8 @@ query Feed($limit: Limit!) {
         stars
         ratesCount
         commentsCount
-        services {
-            id
-            type {
-                id
-                name
-                parent {
-                    id
-                    name
-                }
-            }
-            description
-            price
-            duration
-            materials {
-                id
-                firm
-                description
-            }
-            photos {
-                ...fullPhoto
-            }
-            ctime
-        }
         signs {
-            id
-            name
-            icon
-            description
+            ...fullSign
         }
     }
 }

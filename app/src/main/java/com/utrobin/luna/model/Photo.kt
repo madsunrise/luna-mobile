@@ -20,13 +20,6 @@ data class Photo(
         }
     }
 
-    constructor(photo: FeedQuery.Photo1) : this(photo.fragments().fullPhoto().id().toLong(),
-            photo.fragments().fullPhoto().path(), ArrayList()) {
-        photo.fragments().fullPhoto().tags().forEach {
-            tags.add(Tag(it))
-        }
-    }
-
     constructor(photo: FeedQuery.Avatar) : this(photo.fragments().fullPhoto().id().toLong(),
             photo.fragments().fullPhoto().path(), ArrayList()) {
         photo.fragments().fullPhoto().tags().forEach {
