@@ -29,7 +29,7 @@ class Salon(
             ratesCount = salon.ratesCount(),
             commentsCount = salon.commentsCount(),
             masters = ArrayList(),
-            signsTotal = salon.signs_total().toInt(),
+            signsTotal = salon.signsTotal().toInt(),
             services = ArrayList(),
             lastReviews = ArrayList()
     ) {

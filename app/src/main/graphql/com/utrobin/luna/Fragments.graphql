@@ -83,7 +83,7 @@ fragment additionalMaster on Master {
         signs {
             ...fullSign
         }
-        signs_total
+        signsTotal
         lastReviews {
             ...fullReview
         }
