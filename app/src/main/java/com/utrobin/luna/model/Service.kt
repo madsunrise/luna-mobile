@@ -2,6 +2,7 @@ package com.utrobin.luna.model
 
 import android.os.Parcelable
 import com.utrobin.luna.fragment.AdditionalMaster
+import com.utrobin.luna.utils.Utils.dateFormatter
 import kotlinx.android.parcel.Parcelize
 import java.math.BigDecimal
 import java.util.*
@@ -30,7 +31,7 @@ data class Service(
             duration = service.fragments().fullService().duration(),
             materials = ArrayList<Material>().apply { addAll(service.fragments().fullService().materials().map { Material(it) }) },
             photos = ArrayList<Photo>().apply { addAll(service.fragments().fullService().photos().map { Photo(it) }) },
-            ctime = Date(service.fragments().fullService().ctime().toLong())
+            ctime = dateFormatter.parse(service.fragments().fullService().ctime())
     )
 
     constructor(service: AdditionalMaster.Service1) : this(
@@ -41,7 +42,7 @@ data class Service(
             duration = service.fragments().fullService().duration(),
             materials = ArrayList<Material>().apply { addAll(service.fragments().fullService().materials().map { Material(it) }) },
             photos = ArrayList<Photo>().apply { addAll(service.fragments().fullService().photos().map { Photo(it) }) },
-            ctime = Date(service.fragments().fullService().ctime().toLong())
+            ctime = dateFormatter.parse(service.fragments().fullService().ctime())
     )
 
     constructor(service: AdditionalMaster.Service2) : this(
@@ -52,6 +53,6 @@ data class Service(
             duration = service.fragments().fullService().duration(),
             materials = ArrayList<Material>().apply { addAll(service.fragments().fullService().materials().map { Material(it) }) },
             photos = ArrayList<Photo>().apply { addAll(service.fragments().fullService().photos().map { Photo(it) }) },
-            ctime = Date(service.fragments().fullService().ctime().toLong())
+            ctime = dateFormatter.parse(service.fragments().fullService().ctime())
     )
 }

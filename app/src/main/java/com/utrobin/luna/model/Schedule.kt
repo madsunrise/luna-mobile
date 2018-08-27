@@ -2,6 +2,7 @@ package com.utrobin.luna.model
 
 import android.os.Parcelable
 import com.utrobin.luna.fragment.AdditionalMaster
+import com.utrobin.luna.utils.Utils.dateFormatter
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 
@@ -18,13 +19,13 @@ data class Schedule(
 
     constructor(schedule: AdditionalMaster.Schedule) : this(
             id = schedule.fragments().fullSchedule().id().toLong(),
-            startTime = Date(schedule.fragments().fullSchedule().startTime().toLong()),
-            endTime = Date(schedule.fragments().fullSchedule().endTime().toLong())
+            startTime = dateFormatter.parse(schedule.fragments().fullSchedule().startTime()),
+            endTime = dateFormatter.parse(schedule.fragments().fullSchedule().endTime())
     )
 
     constructor(schedule: AdditionalMaster.Schedule1) : this(
             id = schedule.fragments().fullSchedule().id().toLong(),
-            startTime = Date(schedule.fragments().fullSchedule().startTime().toLong()),
-            endTime = Date(schedule.fragments().fullSchedule().endTime().toLong())
+            startTime = dateFormatter.parse(schedule.fragments().fullSchedule().startTime()),
+            endTime = dateFormatter.parse(schedule.fragments().fullSchedule().endTime())
     )
 }

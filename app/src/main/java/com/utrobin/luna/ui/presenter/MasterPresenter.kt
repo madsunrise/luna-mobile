@@ -32,12 +32,11 @@ class MasterPresenter : BasePresenter<MasterContract.View>(), MasterContract.Pre
         launch(UI) {
             try {
                 val response = graphQLService.execute(apolloCall)
-                view?.dataLoaded(parseData(master, response.master()!!).await())
+                view?.onDataLoaded(parseData(master, response.master()!!).await())
             } catch (e: Exception) {
                 LogUtils.logException(FeedPresenter::class.java, e)
-                view?.dataLoadingFailed(NetworkError.UNKNOWN)
+                view?.onDataLoadingFailed(NetworkError.UNKNOWN)
             }
-
         }
     }
 

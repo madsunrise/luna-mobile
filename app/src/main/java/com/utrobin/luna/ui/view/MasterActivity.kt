@@ -93,13 +93,13 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
         })
     }
 
-    override fun dataLoaded(master: Master) {
+    override fun onDataLoaded(master: Master) {
         setState(State.CONTENT)
         this.master = master
         fillViews()
     }
 
-    override fun dataLoadingFailed(reason: NetworkError) {
+    override fun onDataLoadingFailed(reason: NetworkError) {
         setState(State.ERROR)
     }
 
@@ -109,8 +109,9 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
         drawStars()
 //        ratingMainPart.text = resources.getQuantityString(R.plurals.ratings_count,
 //                reviewsCount, master.base.stars.toString(), reviewsCount)
-        ratingMainPart.text = master.stars.toString()
-        ratingSecondaryPart.text = " | 124 оценки"
+
+        rating.text = resources.getQuantityString(R.plurals.ratings_count, master.ratesCount,
+                master.stars.toString(), master.ratesCount)
 
         masterDescription.text = "Мы легко впишемся в ваш график, а все наши услуги" +
                 " не займут у вас много времени."
@@ -305,10 +306,11 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
         master1.findViewById<TextView>(R.id.name).text = "Алия Агиповна"
         master1.findViewById<TextView>(R.id.role).text = "Мастер-стилист"
         master1.findViewById<TextView>(R.id.price).text = "2500 \u20BD"
-        var ratingsCount = 124
-        var rating = 4.7 //item.stars.toString()
-        master1.findViewById<TextView>(R.id.ratingMainPart).text = "4.7"
-        master1.findViewById<TextView>(R.id.ratingSecondaryPart).text = " | 124 оценки"
+
+        // TODO replace values
+        master1.findViewById<TextView>(R.id.rating).text = resources.getQuantityString(R.plurals.ratings_count, master.ratesCount,
+                master.stars.toString(), master.ratesCount)
+
         suitableMastersContainer.addView(master1)
 
 
@@ -322,10 +324,9 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
         master2.findViewById<TextView>(R.id.name).text = "Агафья Карамыслова"
         master2.findViewById<TextView>(R.id.role).text = "Ведущий стилист"
         master2.findViewById<TextView>(R.id.price).text = "2800 \u20BD"
-        ratingsCount = 155
-        rating = 4.8 //item.stars.toString()
-        master2.findViewById<TextView>(R.id.ratingMainPart).text = "4.8"
-        master2.findViewById<TextView>(R.id.ratingSecondaryPart).text = " | 155 оценок"
+
+//        master2.findViewById<TextView>(R.id.rating).text = "4.8"
+//        master2.findViewById<TextView>(R.id.ratingSecondaryPart).text = " | 155 оценок"
         suitableMastersContainer.addView(master2)
 
 
@@ -339,10 +340,10 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
         master3.findViewById<TextView>(R.id.name).text = "Пенсильвана Воздушная"
         master3.findViewById<TextView>(R.id.role).text = "Арт-директор"
         master3.findViewById<TextView>(R.id.price).text = "3500 \u20BD"
-        ratingsCount = 107
-        rating = 4.5 //item.stars.toString()
-        master3.findViewById<TextView>(R.id.ratingMainPart).text = "4.5"
-        master3.findViewById<TextView>(R.id.ratingSecondaryPart).text = " | 107 оценок"
+//        ratingsCount = 107
+//        rating = 4.5 //item.stars.toString()
+//        master3.findViewById<TextView>(R.id.ratingMainPart).text = "4.5"
+//        master3.findViewById<TextView>(R.id.ratingSecondaryPart).text = " | 107 оценок"
         suitableMastersContainer.addView(master3)
     }
 

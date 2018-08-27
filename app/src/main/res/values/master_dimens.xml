@@ -8,7 +8,6 @@
     <dimen name="master_title_margin_top">22dp</dimen>
     <dimen name="master_rating_margin_top">14dp</dimen>
     <dimen name="master_space_between_stars">2dp</dimen>
-    <dimen name="master_space_between_stars_and_text">12dp</dimen>
     <dimen name="master_description_margin_top">20dp</dimen>
     <dimen name="master_space_between_description_and_divider">20dp</dimen>
     <dimen name="master_space_between_divider_and_metro">12dp</dimen>

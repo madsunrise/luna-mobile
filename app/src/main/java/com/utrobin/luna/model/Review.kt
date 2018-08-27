@@ -2,6 +2,7 @@ package com.utrobin.luna.model
 
 import android.os.Parcelable
 import com.utrobin.luna.fragment.AdditionalMaster
+import com.utrobin.luna.utils.Utils.dateFormatter
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 
@@ -24,7 +25,7 @@ data class Review(
             seance = Seance(review.fragments().fullReview().seance()),
             stars = review.fragments().fullReview().stars() / 10.0,
             message = review.fragments().fullReview().message(),
-            date = Date(review.fragments().fullReview().date().toLong())
+            date = dateFormatter.parse(review.fragments().fullReview().date())
     )
 
     constructor(review: AdditionalMaster.LastReview1) : this(
@@ -33,7 +34,7 @@ data class Review(
             seance = Seance(review.fragments().fullReview().seance()),
             stars = review.fragments().fullReview().stars() / 10.0,
             message = review.fragments().fullReview().message(),
-            date = Date(review.fragments().fullReview().date().toLong())
+            date = dateFormatter.parse(review.fragments().fullReview().date())
     )
 
     constructor(review: AdditionalMaster.LastReview2) : this(
@@ -42,6 +43,6 @@ data class Review(
             seance = Seance(review.fragments().fullReview().seance()),
             stars = review.fragments().fullReview().stars() / 10.0,
             message = review.fragments().fullReview().message(),
-            date = Date(review.fragments().fullReview().date().toLong())
+            date = dateFormatter.parse(review.fragments().fullReview().date())
     )
 }

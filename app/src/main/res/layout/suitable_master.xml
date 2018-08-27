@@ -59,7 +59,7 @@
 
     <!-- Stars -->
     <TextView
-        android:id="@+id/ratingPrimaryPart"
+        android:id="@+id/rating"
         style="@style/Body2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -69,13 +69,4 @@
         android:gravity="center_vertical"
         app:layout_constraintLeft_toLeftOf="@id/name"
         app:layout_constraintTop_toBottomOf="@id/role" />
-
-    <TextView
-        android:id="@+id/ratingSecondaryPart"
-        style="@style/Body1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@id/ratingPrimaryPart"
-        app:layout_constraintLeft_toRightOf="@id/ratingPrimaryPart"
-        app:layout_constraintTop_toTopOf="@id/ratingPrimaryPart" />
 </android.support.constraint.ConstraintLayout>

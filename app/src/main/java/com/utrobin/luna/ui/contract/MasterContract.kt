@@ -7,8 +7,8 @@ import com.utrobin.luna.network.NetworkError
 interface MasterContract {
 
     interface View : MvpView {
-        fun dataLoaded(master: Master)
-        fun dataLoadingFailed(reason: NetworkError)
+        fun onDataLoaded(master: Master)
+        fun onDataLoadingFailed(reason: NetworkError)
     }
 
     interface Presenter : MvpPresenter<View> {

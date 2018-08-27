@@ -3,6 +3,7 @@ package com.utrobin.luna.model
 import android.os.Parcelable
 import com.utrobin.luna.fragment.AdditionalMaster
 import com.utrobin.luna.fragment.BaseClient
+import com.utrobin.luna.utils.Utils.dateFormatter
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 
@@ -20,7 +21,7 @@ data class User(
             email = user.fragments().userWithoutPassword().email(),
             password = null,
             role = user.fragments().userWithoutPassword().role(),
-            ctime = Date(user.fragments().userWithoutPassword().ctime().toLong())
+            ctime = dateFormatter.parse(user.fragments().userWithoutPassword().ctime())
     )
 
     constructor(user: AdditionalMaster.User1) : this(
@@ -28,7 +29,7 @@ data class User(
             email = user.fragments().userWithoutPassword().email(),
             password = null,
             role = user.fragments().userWithoutPassword().role(),
-            ctime = Date(user.fragments().userWithoutPassword().ctime().toLong())
+            ctime = dateFormatter.parse(user.fragments().userWithoutPassword().ctime())
     )
 
     constructor(user: BaseClient.User) : this(
@@ -36,6 +37,6 @@ data class User(
             email = user.fragments().userWithoutPassword().email(),
             password = null,
             role = user.fragments().userWithoutPassword().role(),
-            ctime = Date(user.fragments().userWithoutPassword().ctime().toLong())
+            ctime = dateFormatter.parse(user.fragments().userWithoutPassword().ctime())
     )
 }
