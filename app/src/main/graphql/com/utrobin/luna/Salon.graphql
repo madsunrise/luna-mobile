@@ -1,0 +1,5 @@
+query Salon($id: ID!, $service_types: [ID!]) {
+    salon(id: $id, service_types: $service_types) {
+        ...additionalSalon
+    }
+}

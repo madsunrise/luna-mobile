@@ -45,16 +45,16 @@
                     style="@style/Body2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/master_photos_counter_margin"
-                    android:layout_marginEnd="@dimen/master_photos_counter_margin"
+                    android:layout_marginBottom="@dimen/salon_activity_photos_counter_margin"
+                    android:layout_marginEnd="@dimen/salon_activity_photos_counter_margin"
                     android:background="@drawable/photo_counter_background"
                     android:drawableEnd="@drawable/ic_collections_white_18dp"
-                    android:drawablePadding="@dimen/master_photos_counter_drawable_padding"
+                    android:drawablePadding="@dimen/salon_activity_photos_counter_drawable_padding"
                     android:gravity="center_vertical"
-                    android:paddingBottom="@dimen/master_photos_counter_padding_vertical"
-                    android:paddingEnd="@dimen/master_photos_counter_padding_horizontal"
-                    android:paddingStart="@dimen/master_photos_counter_padding_horizontal"
-                    android:paddingTop="@dimen/master_photos_counter_padding_vertical"
+                    android:paddingBottom="@dimen/salon_activity_photos_counter_padding_vertical"
+                    android:paddingEnd="@dimen/salon_activity_photos_counter_padding_horizontal"
+                    android:paddingStart="@dimen/salon_activity_photos_counter_padding_horizontal"
+                    android:paddingTop="@dimen/salon_activity_photos_counter_padding_vertical"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
@@ -78,7 +78,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/master_title_margin_top"
+                        android:layout_marginTop="@dimen/salon_activity_title_margin_top"
                         android:orientation="vertical">
 
                         <TextView
@@ -92,7 +92,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/master_rating_margin_top"
+                            android:layout_marginTop="@dimen/salon_activity_rating_margin_top"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
 
@@ -112,18 +112,18 @@
 
                         <!-- description -->
                         <TextView
-                            android:id="@+id/masterDescription"
+                            android:id="@+id/salonDescription"
                             style="@style/Body1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/master_description_margin_top" />
+                            android:layout_marginTop="@dimen/salon_activity_description_margin_top" />
 
                     </LinearLayout>
 
                     <View
                         style="@style/Divider"
-                        android:layout_marginBottom="@dimen/master_space_between_divider_and_metro"
-                        android:layout_marginTop="@dimen/master_space_between_description_and_divider" />
+                        android:layout_marginBottom="@dimen/salon_activity_space_between_divider_and_metro"
+                        android:layout_marginTop="@dimen/salon_activity_space_between_description_and_divider" />
 
                     <!-- Address block -->
                     <android.support.constraint.ConstraintLayout
@@ -143,13 +143,13 @@
                             style="@style/Body1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/master_address_description_margin_top"
+                            android:layout_marginTop="@dimen/salon_activity_address_description_margin_top"
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/addressMetro" />
 
                         <ImageView
-                            android:layout_width="@dimen/master_icon_map_size"
-                            android:layout_height="@dimen/master_icon_map_size"
+                            android:layout_width="@dimen/salon_activity_icon_map_size"
+                            android:layout_height="@dimen/salon_activity_icon_map_size"
                             android:src="@drawable/map"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintRight_toRightOf="parent"
@@ -159,8 +159,8 @@
 
                     <View
                         style="@style/Divider"
-                        android:layout_marginBottom="@dimen/master_space_between_divider_and_signs"
-                        android:layout_marginTop="@dimen/master_space_between_address_and_divider" />
+                        android:layout_marginBottom="@dimen/salon_activity_space_between_divider_and_signs"
+                        android:layout_marginTop="@dimen/salon_activity_space_between_address_and_divider" />
                 </LinearLayout>
 
                 <!-- Signs and reviews -->
@@ -177,14 +177,14 @@
                             android:id="@+id/signsContainer"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/master_signs_container_margin_bottom"
+                            android:layout_marginBottom="@dimen/salon_activity_signs_container_margin_bottom"
                             android:orientation="horizontal" />
                     </HorizontalScrollView>
 
                     <HorizontalScrollView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/master_space_between_signs_and_reviews">
+                        android:layout_marginTop="@dimen/salon_activity_space_between_signs_and_reviews">
 
                         <LinearLayout
                             android:id="@+id/reviewsContainer"
@@ -198,7 +198,7 @@
                         style="@style/Body1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/master_see_all_reviews_margin_top"
+                        android:layout_marginTop="@dimen/salon_activity_see_all_reviews_margin_top"
                         android:textColor="@color/colorPrimary" />
                 </LinearLayout>
 
@@ -211,8 +211,8 @@
 
                     <View
                         style="@style/Divider"
-                        android:layout_marginBottom="@dimen/master_space_between_divider_and_visit_options"
-                        android:layout_marginTop="@dimen/master_space_between_see_all_reviews_and_divider" />
+                        android:layout_marginBottom="@dimen/salon_activity_space_between_divider_and_visit_options"
+                        android:layout_marginTop="@dimen/salon_activity_space_between_see_all_reviews_and_divider" />
 
                     <!-- Filters -->
                     <LinearLayout
@@ -230,7 +230,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/master_filter_buttons_margin_top"
+                            android:layout_marginTop="@dimen/salon_activity_filter_buttons_margin_top"
                             android:orientation="horizontal">
 
                             <Button
@@ -270,8 +270,8 @@
 
                     <View
                         style="@style/Divider"
-                        android:layout_marginBottom="@dimen/master_space_divider_and_suitable_masters"
-                        android:layout_marginTop="@dimen/master_space_between_filter_buttons_and_divider" />
+                        android:layout_marginBottom="@dimen/salon_activity_space_divider_and_suitable_masters"
+                        android:layout_marginTop="@dimen/salon_activity_space_between_filter_buttons_and_divider" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -287,7 +287,7 @@
                     style="@style/Subhead"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/master_suitable_master_title_margin_bottom"
+                    android:layout_marginBottom="@dimen/salon_activity_suitable_master_title_margin_bottom"
                     android:layout_marginStart="@dimen/activity_horizontal_margin"
                     android:fontFamily="sans-serif-medium" />
             </LinearLayout>
@@ -299,7 +299,7 @@
         android:id="@+id/makeAnAppointmentContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/master_space_between_suitable_masters_and_appointment"
+        android:layout_marginTop="@dimen/salon_activity_space_between_suitable_masters_and_appointment"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <View
@@ -313,8 +313,8 @@
             style="@style/Body2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/master_make_an_appointment_price_margin_start"
-            android:layout_marginTop="@dimen/master_make_an_appointment_price_margin_top"
+            android:layout_marginStart="@dimen/salon_activity_make_an_appointment_price_margin_start"
+            android:layout_marginTop="@dimen/salon_activity_make_an_appointment_price_margin_top"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/appointmentDivider" />
 
@@ -323,8 +323,8 @@
             style="@style/Caption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/master_make_an_appointment_duration_margin_start"
-            android:drawablePadding="@dimen/master_make_an_appointment_duration_drawable_padding"
+            android:layout_marginStart="@dimen/salon_activity_make_an_appointment_duration_margin_start"
+            android:drawablePadding="@dimen/salon_activity_make_an_appointment_duration_drawable_padding"
             android:drawableStart="@drawable/ic_time"
             android:fontFamily="sans-serif-medium"
             app:layout_constraintLeft_toRightOf="@id/appointmentPrice"
@@ -335,14 +335,14 @@
             style="@style/Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/master_make_an_appointment_master_description_margin_top"
+            android:layout_marginTop="@dimen/salon_activity_make_an_appointment_master_description_margin_top"
             app:layout_constraintLeft_toLeftOf="@id/appointmentPrice"
             app:layout_constraintTop_toBottomOf="@id/appointmentPrice" />
 
         <!-- Yes, it's strange -->
         <android.support.v4.widget.Space
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/master_make_an_appointment_master_description_margin_bottom"
+            android:layout_height="@dimen/salon_activity_make_an_appointment_master_description_margin_bottom"
             app:layout_constraintTop_toBottomOf="@id/appointmentMasterDescription" />
 
         <Button
@@ -350,11 +350,11 @@
             style="@style/Base.Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/master_make_an_appointment_button_margin_end"
-            android:paddingBottom="@dimen/master_make_an_appointment_button_vertical_padding"
-            android:paddingEnd="@dimen/master_make_an_appointment_button_horizontal_padding"
-            android:paddingStart="@dimen/master_make_an_appointment_button_horizontal_padding"
-            android:paddingTop="@dimen/master_make_an_appointment_button_vertical_padding"
+            android:layout_marginEnd="@dimen/salon_activity_make_an_appointment_button_margin_end"
+            android:paddingBottom="@dimen/salon_activity_make_an_appointment_button_vertical_padding"
+            android:paddingEnd="@dimen/salon_activity_make_an_appointment_button_horizontal_padding"
+            android:paddingStart="@dimen/salon_activity_make_an_appointment_button_horizontal_padding"
+            android:paddingTop="@dimen/salon_activity_make_an_appointment_button_vertical_padding"
             android:text="@string/make_an_appointment"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"

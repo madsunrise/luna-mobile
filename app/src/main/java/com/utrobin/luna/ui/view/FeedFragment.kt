@@ -9,7 +9,6 @@ import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.utrobin.luna.R
 import com.utrobin.luna.adapter.FeedAdapter
 import com.utrobin.luna.model.FeedItem
@@ -75,11 +74,7 @@ class FeedFragment : Fragment(), FeedContract.View {
         activity!!.windowManager.defaultDisplay.getMetrics(displayMetrics)  // screen width in px
         feedAdapter = FeedAdapter(ArrayList(), displayMetrics.widthPixels)
         feedAdapter.viewClickSubject.subscribe {
-            if (it.first.type == FeedItem.Companion.Type.SALON) {
-                Toast.makeText(context, "Salons are not supported yet", Toast.LENGTH_SHORT).show()
-            } else {
-                (activity as MainActivity).openMasterScreen(it.first, it.second)
-            }
+            (activity as MainActivity).openMasterOrSalonScreen(it.first, it.second)
         }
         requestDataUpdate()
         adapterInitialized = true

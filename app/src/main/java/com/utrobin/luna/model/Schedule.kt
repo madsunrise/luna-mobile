@@ -22,10 +22,4 @@ data class Schedule(
             startTime = dateFormatter.parse(schedule.fragments().fullSchedule().startTime()),
             endTime = dateFormatter.parse(schedule.fragments().fullSchedule().endTime())
     )
-
-    constructor(schedule: AdditionalMaster.Schedule1) : this(
-            id = schedule.fragments().fullSchedule().id().toLong(),
-            startTime = dateFormatter.parse(schedule.fragments().fullSchedule().startTime()),
-            endTime = dateFormatter.parse(schedule.fragments().fullSchedule().endTime())
-    )
 }

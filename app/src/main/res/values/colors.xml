@@ -22,4 +22,6 @@
     <color name="feedSearchFieldBackgroundColor">#FAFAFA</color>
     <color name="feedSearchNameTextColor">#60000000</color>
     <color name="feedItemPriceContainerBackground">#B3FFFFFF</color>
+
+    <color name="photoCounterColor">#33212121</color>
 </resources>

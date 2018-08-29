@@ -1,30 +1,34 @@
 package com.utrobin.luna.ui.presenter
 
 import com.utrobin.luna.App
-import com.utrobin.luna.MasterQuery
-import com.utrobin.luna.model.*
+import com.utrobin.luna.SalonQuery
+import com.utrobin.luna.model.FeedItem
+import com.utrobin.luna.model.Master
+import com.utrobin.luna.model.Review
+import com.utrobin.luna.model.Salon
 import com.utrobin.luna.network.GraphQLService
 import com.utrobin.luna.network.NetworkError
-import com.utrobin.luna.ui.contract.MasterContract
+import com.utrobin.luna.ui.contract.SalonContract
 import com.utrobin.luna.utils.LogUtils
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
 import javax.inject.Inject
 
-class MasterPresenter : BasePresenter<MasterContract.View>(), MasterContract.Presenter {
+class SalonPresenter : BasePresenter<SalonContract.View>(), SalonContract.Presenter {
 
     @Inject
     lateinit var graphQLService: GraphQLService
 
     init {
-        App.component.injectMasterPresenter(this)
+        App.component.injectSalonPresenter(this)
     }
 
-    override fun loadData(master: FeedItem) {
-        val query = MasterQuery
+    override fun loadData(salon: FeedItem) {
+        val query = SalonQuery
                 .builder()
-                .id(master.id.toString())
+                .id(salon.id.toString())
+                .service_types(null)
                 .build()
 
         val apolloCall = graphQLService.apolloClient.query(query)
@@ -32,7 +36,7 @@ class MasterPresenter : BasePresenter<MasterContract.View>(), MasterContract.Pre
         launch(UI) {
             try {
                 val response = graphQLService.execute(apolloCall)
-                view?.onDataLoaded(parseData(master, response.master()!!).await())
+                view?.onDataLoaded(parseData(salon, response.salon()!!).await())
             } catch (e: Exception) {
                 LogUtils.logException(FeedPresenter::class.java, e)
                 view?.onDataLoadingFailed(NetworkError.UNKNOWN)
@@ -40,8 +44,8 @@ class MasterPresenter : BasePresenter<MasterContract.View>(), MasterContract.Pre
         }
     }
 
-    private fun parseData(base: FeedItem, data: MasterQuery.Master) = async {
-        return@async Master(
+    private fun parseData(base: FeedItem, data: SalonQuery.Salon) = async {
+        val salon = Salon(
                 id = base.id,
                 name = base.name,
                 avatar = base.avatar,
@@ -52,12 +56,12 @@ class MasterPresenter : BasePresenter<MasterContract.View>(), MasterContract.Pre
                 ratesCount = base.ratesCount,
                 commentsCount = base.commentsCount,
                 services = base.services,
-                user = User(data.fragments().additionalMaster().user()),
-                salon = null, // TODO will be salon here? It's name or what?
-                schedules = ArrayList(data.fragments().additionalMaster().schedules().map { Schedule(it) }),
-                seances = ArrayList(data.fragments().additionalMaster().seances().map { Seance(it) }),
-                lastReviews = ArrayList(data.fragments().additionalMaster().lastReviews().map { Review(it) })
+                masters = ArrayList(),
+                lastReviews = ArrayList(data.fragments().additionalSalon().lastReviews().map { Review(it) })
         )
+
+        salon.masters.addAll(data.fragments().additionalSalon().masters().map { Master(salon, it) })
+        return@async salon
     }
 
     override fun destroy() {

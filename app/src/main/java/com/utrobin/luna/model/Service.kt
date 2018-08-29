@@ -1,7 +1,8 @@
 package com.utrobin.luna.model
 
 import android.os.Parcelable
-import com.utrobin.luna.fragment.AdditionalMaster
+import com.utrobin.luna.fragment.FullFeedItem
+import com.utrobin.luna.fragment.MasterInsideSalon
 import com.utrobin.luna.utils.Utils.dateFormatter
 import kotlinx.android.parcel.Parcelize
 import java.math.BigDecimal
@@ -23,7 +24,7 @@ data class Service(
         val ctime: Date
 ) : Parcelable {
 
-    constructor(service: AdditionalMaster.Service) : this(
+    constructor(service: MasterInsideSalon.Service) : this(
             id = service.fragments().fullService().id().toLong(),
             type = ServiceType(service.fragments().fullService().type()),
             description = service.fragments().fullService().description(),
@@ -34,18 +35,7 @@ data class Service(
             ctime = dateFormatter.parse(service.fragments().fullService().ctime())
     )
 
-    constructor(service: AdditionalMaster.Service1) : this(
-            id = service.fragments().fullService().id().toLong(),
-            type = ServiceType(service.fragments().fullService().type()),
-            description = service.fragments().fullService().description(),
-            price = service.fragments().fullService().price() as BigDecimal,
-            duration = service.fragments().fullService().duration(),
-            materials = ArrayList<Material>().apply { addAll(service.fragments().fullService().materials().map { Material(it) }) },
-            photos = ArrayList<Photo>().apply { addAll(service.fragments().fullService().photos().map { Photo(it) }) },
-            ctime = dateFormatter.parse(service.fragments().fullService().ctime())
-    )
-
-    constructor(service: AdditionalMaster.Service2) : this(
+    constructor(service: FullFeedItem.Service) : this(
             id = service.fragments().fullService().id().toLong(),
             type = ServiceType(service.fragments().fullService().type()),
             description = service.fragments().fullService().description(),

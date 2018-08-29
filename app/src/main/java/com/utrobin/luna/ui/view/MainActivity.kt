@@ -83,12 +83,35 @@ class MainActivity : AppCompatActivity() {
         currentFragment = to
     }
 
-    fun openMasterScreen(item: FeedItem, sharedView: ViewPager) {
-        val intent = Intent(this, MasterActivity::class.java)
-        intent.apply {
+    fun openMasterOrSalonScreen(item: FeedItem, sharedView: ViewPager) {
+        if (item.type == FeedItem.Companion.Type.SALON) {
+            openSalonActivity(item, sharedView);
+        } else if (item.type == FeedItem.Companion.Type.MASTER) {
+            openMasterActivity(item, sharedView)
+        }
+    }
+
+    private fun openMasterActivity(item: FeedItem, sharedView: ViewPager) {
+        val intent = Intent(this, MasterActivity::class.java).apply {
             putExtra(MasterActivity.MASTER_BASE, item)
             putExtra(MasterActivity.TRANSITION_NAME, ViewCompat.getTransitionName(sharedView))
             putExtra(MasterActivity.CURRENT_PHOTO, sharedView.currentItem)
+        }
+
+        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                this,
+                sharedView,
+                ViewCompat.getTransitionName(sharedView)
+        )
+
+        startActivity(intent, options.toBundle())
+    }
+
+    private fun openSalonActivity(item: FeedItem, sharedView: ViewPager) {
+        val intent = Intent(this, SalonActivity::class.java).apply {
+            putExtra(SalonActivity.SALON_BASE, item)
+            putExtra(SalonActivity.TRANSITION_NAME, ViewCompat.getTransitionName(sharedView))
+            putExtra(SalonActivity.CURRENT_PHOTO, sharedView.currentItem)
         }
 
         val options = ActivityOptionsCompat.makeSceneTransitionAnimation(

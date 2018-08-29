@@ -72,9 +72,9 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
             }
 
 
-            val address = item.address()?.fragments()?.fullAddress()?.let {
+            val address = item.address()?.fragments()?.fullAddress()?.let { address ->
                 val addressMetro = ArrayList<AddressMetro>()
-                it.metros().forEach {
+                address.metros().forEach {
                     addressMetro.add(
                             AddressMetro(
                                     it.id().toLong(),
@@ -86,9 +86,9 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
                     )
                 }
                 return@let Address(
-                        it.description(),
-                        it.lat(),
-                        it.lon(),
+                        address.description(),
+                        address.lat(),
+                        address.lon(),
                         addressMetro
                 )
             }
@@ -110,7 +110,8 @@ class FeedPresenter : BasePresenter<FeedContract.View>(), FeedContract.Presenter
                             signs = signs,
                             photos = photos,
                             ratesCount = item.ratesCount(),
-                            commentsCount = item.commentsCount()
+                            commentsCount = item.commentsCount(),
+                            services = ArrayList(item.services().map { Service(it) })
                     )
             )
         }

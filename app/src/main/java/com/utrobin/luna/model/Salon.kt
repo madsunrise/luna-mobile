@@ -1,7 +1,5 @@
 package com.utrobin.luna.model
 
-import com.utrobin.luna.fragment.AdditionalMaster
-
 class Salon(
         id: Long,
         name: String?,
@@ -12,31 +10,8 @@ class Salon(
         photos: ArrayList<Photo>,
         ratesCount: Int,
         commentsCount: Int,
+        services: ArrayList<Service>,
         val masters: ArrayList<Master>,
-        val signsTotal: Int,
-        val services: ArrayList<Service>,
         val lastReviews: ArrayList<Review>
 ) : FeedItem(id, Companion.Type.SALON, name, avatar,
-        address, stars, signs, photos, ratesCount, commentsCount) {
-    constructor(salon: AdditionalMaster.Salon) : this(
-            id = salon.id().toLong(),
-            name = salon.name(),
-            avatar = Photo(salon.avatar()),
-            address = salon.address()?.let { Address(it) },
-            stars = salon.stars() / 10.0,
-            signs = ArrayList(),
-            photos = ArrayList(),
-            ratesCount = salon.ratesCount(),
-            commentsCount = salon.commentsCount(),
-            masters = ArrayList(),
-            signsTotal = salon.signsTotal().toInt(),
-            services = ArrayList(),
-            lastReviews = ArrayList()
-    ) {
-        signs.addAll(salon.signs().map { Sign(it) })
-        photos.addAll(salon.photos().map { Photo(it) })
-        masters.addAll(salon.masters().map { Master(it) })
-        services.addAll(salon.services().map { Service(it) })
-        lastReviews.addAll(salon.lastReviews().map { Review(it) })
-    }
-}
+        address, stars, signs, photos, ratesCount, commentsCount, services)

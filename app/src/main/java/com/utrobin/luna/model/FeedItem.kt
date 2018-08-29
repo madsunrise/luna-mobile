@@ -14,7 +14,8 @@ open class FeedItem(
         val signs: ArrayList<Sign>,
         val photos: ArrayList<Photo>,
         val ratesCount: Int,
-        val commentsCount: Int
+        val commentsCount: Int,
+        val services: ArrayList<Service>
 ) : Parcelable {
     companion object {
         enum class Type { SALON, MASTER }

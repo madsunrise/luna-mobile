@@ -23,12 +23,6 @@ data class Seance(
             endTime = dateFormatter.parse(seance.fragments().fullSeance().endTime())
     )
 
-    constructor(seance: AdditionalMaster.Seance1) : this(
-            id = seance.fragments().fullSeance().id().toLong(),
-            startTime = dateFormatter.parse(seance.fragments().fullSeance().startTime()),
-            endTime = dateFormatter.parse(seance.fragments().fullSeance().endTime())
-    )
-
     constructor(seance: FullReview.Seance) : this(
             id = seance.fragments().fullSeance().id().toLong(),
             startTime = dateFormatter.parse(seance.fragments().fullSeance().startTime()),

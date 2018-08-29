@@ -24,14 +24,6 @@ data class User(
             ctime = dateFormatter.parse(user.fragments().userWithoutPassword().ctime())
     )
 
-    constructor(user: AdditionalMaster.User1) : this(
-            id = user.fragments().userWithoutPassword().id().toLong(),
-            email = user.fragments().userWithoutPassword().email(),
-            password = null,
-            role = user.fragments().userWithoutPassword().role(),
-            ctime = dateFormatter.parse(user.fragments().userWithoutPassword().ctime())
-    )
-
     constructor(user: BaseClient.User) : this(
             id = user.fragments().userWithoutPassword().id().toLong(),
             email = user.fragments().userWithoutPassword().email(),
