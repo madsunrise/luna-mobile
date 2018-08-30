@@ -1,5 +1,7 @@
 package com.utrobin.luna.ui.presenter
 
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.utrobin.luna.App
 import com.utrobin.luna.SalonQuery
 import com.utrobin.luna.model.FeedItem
@@ -45,6 +47,10 @@ class SalonPresenter : BasePresenter<SalonContract.View>(), SalonContract.Presen
     }
 
     private fun parseData(base: FeedItem, data: SalonQuery.Salon) = async {
+
+        val signsTotalStr = data.fragments().additionalSalon().signsTotal()
+        val signsTotal: Map<Long, Int> = Gson().fromJson(signsTotalStr, object : TypeToken<Map<Long, Int>>() {}.type)
+
         val salon = Salon(
                 id = base.id,
                 name = base.name,
@@ -56,6 +62,7 @@ class SalonPresenter : BasePresenter<SalonContract.View>(), SalonContract.Presen
                 ratesCount = base.ratesCount,
                 commentsCount = base.commentsCount,
                 services = base.services,
+                signsTotal = signsTotal,
                 masters = ArrayList(),
                 lastReviews = ArrayList(data.fragments().additionalSalon().lastReviews().map { Review(it) })
         )

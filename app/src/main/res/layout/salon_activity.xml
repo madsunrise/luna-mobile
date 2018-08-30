@@ -60,26 +60,26 @@
                     app:layout_constraintEnd_toEndOf="parent" />
             </android.support.constraint.ConstraintLayout>
 
+
+            <!-- block with paddings -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingStart="@dimen/activity_horizontal_margin"
-                tools:ignore="RtlSymmetry">
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:paddingStart="@dimen/activity_horizontal_margin">
 
-                <!-- block with right padding -->
+
+                <!-- Main info block -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingEnd="@dimen/activity_horizontal_margin">
+                    android:layout_marginTop="@dimen/salon_activity_title_margin_top"
+                    android:orientation="vertical">
 
-                    <!-- Main info block -->
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/salon_activity_title_margin_top"
-                        android:orientation="vertical">
+                        android:layout_height="match_parent">
 
                         <TextView
                             android:id="@+id/title"
@@ -88,191 +88,196 @@
                             android:layout_height="wrap_content"
                             android:textStyle="bold" />
 
-                        <!-- rating -->
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/salon_activity_rating_margin_top"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <LinearLayout
-                                android:id="@+id/starsContainer"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal" />
-
-                            <TextView
-                                android:id="@+id/rating"
-                                style="@style/Body2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" />
-
-                        </LinearLayout>
-
-                        <!-- description -->
                         <TextView
-                            android:id="@+id/salonDescription"
-                            style="@style/Body1"
+                            android:id="@+id/aboutSalon"
+                            style="@style/Caption"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/salon_activity_description_margin_top" />
+                            android:layout_alignBaseline="@id/title"
+                            android:layout_alignParentEnd="true"
+                            android:drawableEnd="@drawable/ic_keyboard_arrow_right_primary_color_24dp"
+                            android:gravity="center_vertical"
+                            android:text="@string/about_salon"
+                            android:textColor="@color/colorPrimary" />
+                    </RelativeLayout>
 
-                    </LinearLayout>
-
-                    <View
-                        style="@style/Divider"
-                        android:layout_marginBottom="@dimen/salon_activity_space_between_divider_and_metro"
-                        android:layout_marginTop="@dimen/salon_activity_space_between_description_and_divider" />
-
-                    <!-- Address block -->
-                    <android.support.constraint.ConstraintLayout
+                    <!-- Rating -->
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/salon_activity_rating_margin_top"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/starsContainer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal" />
 
                         <TextView
-                            android:id="@+id/addressMetro"
+                            android:id="@+id/ratesCount"
                             style="@style/Body2"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            android:layout_height="wrap_content" />
 
-                        <TextView
-                            android:id="@+id/addressDescription"
-                            style="@style/Body1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/salon_activity_address_description_margin_top"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/addressMetro" />
-
-                        <ImageView
-                            android:layout_width="@dimen/salon_activity_icon_map_size"
-                            android:layout_height="@dimen/salon_activity_icon_map_size"
-                            android:src="@drawable/map"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:ignore="contentDescription" />
-                    </android.support.constraint.ConstraintLayout>
-
-                    <View
-                        style="@style/Divider"
-                        android:layout_marginBottom="@dimen/salon_activity_space_between_divider_and_signs"
-                        android:layout_marginTop="@dimen/salon_activity_space_between_address_and_divider" />
+                    </LinearLayout>
                 </LinearLayout>
+            </LinearLayout>
 
-                <!-- Signs and reviews -->
+            <!-- Signs -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/salon_activity_space_between_scroll_line_and_divider"
+                android:layout_marginTop="@dimen/salon_activity_space_between_rating_ang_signs">
+
+                <LinearLayout
+                    android:id="@+id/signsContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/salon_activity_space_between_signs_and_scroll_line" />
+            </HorizontalScrollView>
+
+
+            <!-- block with paddings -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:paddingStart="@dimen/activity_horizontal_margin">
+
+
+                <View
+                    style="@style/Divider"
+                    android:layout_marginBottom="@dimen/salon_activity_space_between_divider_and_metro" />
+
+                <!-- Address block -->
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/addressContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/addressMetro"
+                        style="@style/Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/addressDescription"
+                        style="@style/Body1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/salon_activity_address_description_margin_top"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/addressMetro" />
+
+                    <ImageView
+                        android:layout_width="@dimen/salon_activity_icon_map_size"
+                        android:layout_height="@dimen/salon_activity_icon_map_size"
+                        android:src="@drawable/map"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="contentDescription" />
+                </android.support.constraint.ConstraintLayout>
+
+                <View
+                    style="@style/Divider"
+                    android:layout_marginBottom="@dimen/salon_activity_space_between_divider_and_reviews"
+                    android:layout_marginTop="@dimen/salon_activity_space_between_address_and_divider" />
+            </LinearLayout>
+
+            <!-- Reviews -->
+            <HorizontalScrollView
+                android:id="@+id/reviewsContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/reviewsContainerInternal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" />
+            </HorizontalScrollView>
+
+            <!-- block with paddings -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:paddingStart="@dimen/activity_horizontal_margin">
+
+                <TextView
+                    android:id="@+id/seeAllReviews"
+                    style="@style/Body1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/salon_activity_see_all_reviews_margin_top"
+                    android:textColor="@color/colorPrimary" />
+
+                <View
+                    style="@style/Divider"
+                    android:layout_marginBottom="@dimen/salon_activity_space_between_divider_and_visiting_label"
+                    android:layout_marginTop="@dimen/salon_activity_space_between_see_all_reviews_and_divider" />
+
+                <!-- Filters -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <HorizontalScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <LinearLayout
-                            android:id="@+id/signsContainer"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/salon_activity_signs_container_margin_bottom"
-                            android:orientation="horizontal" />
-                    </HorizontalScrollView>
-
-                    <HorizontalScrollView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/salon_activity_space_between_signs_and_reviews">
-
-                        <LinearLayout
-                            android:id="@+id/reviewsContainer"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal" />
-                    </HorizontalScrollView>
-
                     <TextView
-                        android:id="@+id/seeAllReviews"
-                        style="@style/Body1"
+                        style="@style/Caption"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/salon_activity_see_all_reviews_margin_top"
-                        android:textColor="@color/colorPrimary" />
-                </LinearLayout>
+                        android:fontFamily="sans-serif-medium"
+                        android:text="@string/salon_visiting" />
 
-                <!-- block with right padding -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingEnd="@dimen/activity_horizontal_margin">
-
-                    <View
-                        style="@style/Divider"
-                        android:layout_marginBottom="@dimen/salon_activity_space_between_divider_and_visit_options"
-                        android:layout_marginTop="@dimen/salon_activity_space_between_see_all_reviews_and_divider" />
-
-                    <!-- Filters -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:layout_marginTop="@dimen/salon_activity_filter_buttons_margin_top"
+                        android:orientation="horizontal">
 
-                        <TextView
-                            style="@style/Subhead"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                        <Button
+                            android:id="@+id/buttonWhen"
+                            style="@style/Base.Widget.AppCompat.Button.Colored"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/salon_activity_filter_buttons_height"
+                            android:layout_weight="1"
+                            android:background="@color/visitingButtonsColor"
                             android:fontFamily="sans-serif-medium"
-                            android:text="@string/visit_options" />
+                            android:textAppearance="@style/Caption"
+                            android:layout_marginEnd="@dimen/salon_activity_filter_buttons_space_between"
+                            android:textColor="@color/white" />
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/salon_activity_filter_buttons_margin_top"
-                            android:orientation="horizontal">
-
-                            <Button
-                                android:id="@+id/buttonWhen"
-                                style="@style/Base.Widget.AppCompat.Button.Colored"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:fontFamily="sans-serif-medium"
-                                android:textAppearance="@style/Caption"
-                                android:textColor="@color/white" />
-
-                            <Button
-                                android:id="@+id/buttonWhere"
-                                style="@style/Base.Widget.AppCompat.Button.Colored"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:fontFamily="sans-serif-medium"
-                                android:textAppearance="@style/Caption"
-                                android:textColor="@color/white" />
-
-                            <!-- TODO Support compatibility -->
-                            <Button
-                                android:id="@+id/buttonWhat"
-                                style="@style/Base.Widget.AppCompat.Button.Colored"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:drawableEnd="@drawable/favorite_copy_3"
-                                android:drawableTint="@color/white"
-                                android:fontFamily="sans-serif-medium"
-                                android:textAppearance="@style/Caption"
-                                android:textColor="@color/white" />
-                        </LinearLayout>
+                        <!-- TODO Support compatibility -->
+                        <Button
+                            android:id="@+id/buttonWhat"
+                            style="@style/Base.Widget.AppCompat.Button.Colored"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/salon_activity_filter_buttons_height"
+                            android:layout_weight="1"
+                            android:background="@color/visitingButtonsColor"
+                            android:drawableEnd="@drawable/favorite_copy_3"
+                            android:drawableTint="@color/white"
+                            android:fontFamily="sans-serif-medium"
+                            android:textAppearance="@style/Caption"
+                            android:textColor="@color/white" />
                     </LinearLayout>
-
-                    <View
-                        style="@style/Divider"
-                        android:layout_marginBottom="@dimen/salon_activity_space_divider_and_suitable_masters"
-                        android:layout_marginTop="@dimen/salon_activity_space_between_filter_buttons_and_divider" />
                 </LinearLayout>
+
+                <View
+                    style="@style/Divider"
+                    android:layout_marginBottom="@dimen/salon_activity_space_divider_and_suitable_masters"
+                    android:layout_marginTop="@dimen/salon_activity_space_between_filter_buttons_and_divider" />
             </LinearLayout>
 
             <!-- Suitable masters -->

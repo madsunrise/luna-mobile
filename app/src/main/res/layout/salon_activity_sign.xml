@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/signImage"
+        style="@style/Caption"
+        android:layout_width="@dimen/salon_activity_sign_image_size"
+        android:layout_height="@dimen/salon_activity_sign_image_size"
+        android:drawablePadding="@dimen/salon_activity_sign_image_horizontal_padding"
+        android:layout_gravity="center_horizontal"
+        tools:ignore="contentDescription" />
+
+    <TextView
+        android:id="@+id/signName"
+        style="@style/Caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/ratesCount"
+        style="@style/Caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal" />
+
+</LinearLayout>

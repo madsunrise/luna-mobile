@@ -1,13 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <plurals name="ratings_count">
+    <plurals name="rates_count">
+        <item quantity="one">%d оценка</item>
+        <item quantity="few">%d оценки</item>
+        <item quantity="many">%d оценок</item>
+        <item quantity="other">%d оценок</item>
+    </plurals>
+
+    <plurals name="rates_count_with_rating_value">
         <item quantity="one">%s | %d оценка</item>
         <item quantity="few">%s | %d оценки</item>
         <item quantity="many">%s | %d оценок</item>
         <item quantity="other">%s | %d оценок</item>
     </plurals>
 
+    <plurals name="review_date">
+        <item quantity="zero">Сегодня</item>
+        <item quantity="one">%d день назад</item>
+        <item quantity="few">%d дн. назад</item>
+        <item quantity="many">%d дн. назад</item>
+        <item quantity="other">%d дн. назад</item>
+    </plurals>
+
+    <plurals name="see_all_n_reviews">
+        <item quantity="one">Посмотреть все %d отзыв</item>
+        <item quantity="few">Посмотреть все %d отзыва</item>
+        <item quantity="many">Посмотреть все %d отзывов</item>
+        <item quantity="other">Посмотреть все %d отзывов</item>
+    </plurals>
+
     <plurals name="n_masters_suitable_for_you">
+        <item quantity="zero">Нет подходящих мастеров</item>
         <item quantity="one">Вам подходит %d мастер</item>
         <item quantity="few">Вам подходит %d мастера</item>
         <item quantity="many">Вам подходит %d мастеров</item>

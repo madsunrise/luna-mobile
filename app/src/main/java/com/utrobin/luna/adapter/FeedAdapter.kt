@@ -110,7 +110,7 @@ class FeedAdapter(items: List<FeedItem>, private val screenWidthInPx: Int) : Foo
         holder.tabLayout.setupWithViewPager(holder.viewPager)
 
         val ratingsCount = 21
-        holder.stars.text = context.resources.getQuantityString(R.plurals.ratings_count, ratingsCount, item.stars.toString(), ratingsCount)
+        holder.stars.text = context.resources.getQuantityString(R.plurals.rates_count_with_rating_value, ratingsCount, item.stars.toString(), ratingsCount)
         holder.comments.text = "12"
     }
 

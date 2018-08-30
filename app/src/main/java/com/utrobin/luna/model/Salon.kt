@@ -11,6 +11,7 @@ class Salon(
         ratesCount: Int,
         commentsCount: Int,
         services: ArrayList<Service>,
+        val signsTotal: Map<Long, Int>,
         val masters: ArrayList<Master>,
         val lastReviews: ArrayList<Review>
 ) : FeedItem(id, Companion.Type.SALON, name, avatar,

@@ -24,4 +24,7 @@
     <color name="feedItemPriceContainerBackground">#B3FFFFFF</color>
 
     <color name="photoCounterColor">#33212121</color>
+
+    <!-- salon activity -->
+    <color name="visitingButtonsColor">#6b8193</color>
 </resources>

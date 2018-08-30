@@ -110,7 +110,7 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
 //        ratingMainPart.text = resources.getQuantityString(R.plurals.ratings_count,
 //                reviewsCount, master.base.stars.toString(), reviewsCount)
 
-        rating.text = resources.getQuantityString(R.plurals.ratings_count, master.ratesCount,
+        rating.text = resources.getQuantityString(R.plurals.rates_count_with_rating_value, master.ratesCount,
                 master.stars.toString(), master.ratesCount)
 
         masterDescription.text = "Мы легко впишемся в ваш график, а все наши услуги" +
@@ -271,7 +271,7 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
         for (i in 0 until reviewsCount) {
             val review = LayoutInflater
                     .from(this)
-                    .inflate(R.layout.master_review, reviewsContainer, false)
+                    .inflate(R.layout.review, reviewsContainer, false)
 
             if (i != reviewsCount - 1) {
                 review.layoutParams = params    // Don't apply it to last element
@@ -308,7 +308,7 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
         master1.findViewById<TextView>(R.id.price).text = "2500 \u20BD"
 
         // TODO replace values
-        master1.findViewById<TextView>(R.id.rating).text = resources.getQuantityString(R.plurals.ratings_count, master.ratesCount,
+        master1.findViewById<TextView>(R.id.rating).text = resources.getQuantityString(R.plurals.rates_count_with_rating_value, master.ratesCount,
                 master.stars.toString(), master.ratesCount)
 
         suitableMastersContainer.addView(master1)

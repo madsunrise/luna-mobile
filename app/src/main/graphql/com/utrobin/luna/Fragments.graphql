@@ -28,6 +28,7 @@ fragment fullSalon on Salon {
 }
 
 fragment additionalSalon on Salon {
+    signsTotal
     masters {
         ...masterInsideSalon
     }

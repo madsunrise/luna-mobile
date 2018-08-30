@@ -8,17 +8,20 @@
     <dimen name="salon_activity_title_margin_top">22dp</dimen>
     <dimen name="salon_activity_rating_margin_top">14dp</dimen>
     <dimen name="salon_activity_space_between_stars">2dp</dimen>
-    <dimen name="salon_activity_description_margin_top">20dp</dimen>
-    <dimen name="salon_activity_space_between_description_and_divider">20dp</dimen>
+
+    <dimen name="salon_activity_space_between_rating_ang_signs">24dp</dimen>
+    <dimen name="salon_activity_sign_image_horizontal_padding">4dp</dimen>
+    <dimen name="salon_activity_sign_image_size">56dp</dimen>
+    <dimen name="salon_activity_space_between_signs">16dp</dimen>
+    <dimen name="salon_activity_space_between_signs_and_scroll_line">5dp</dimen>
+    <dimen name="salon_activity_space_between_scroll_line_and_divider">15dp</dimen>
+
     <dimen name="salon_activity_space_between_divider_and_metro">12dp</dimen>
     <dimen name="salon_activity_address_description_margin_top">1dp</dimen>
     <dimen name="salon_activity_icon_map_size">40dp</dimen>
     <dimen name="salon_activity_space_between_address_and_divider">11dp</dimen>
-    <dimen name="salon_activity_space_between_divider_and_signs">21dp</dimen>
-    <dimen name="salon_activity_signs_drawable_padding">8dp</dimen>
-    <dimen name="salon_activity_space_between_signs">16dp</dimen>
-    <dimen name="salon_activity_signs_container_margin_bottom">10dp</dimen>
-    <dimen name="salon_activity_space_between_signs_and_reviews">10dp</dimen>
+    <dimen name="salon_activity_space_between_divider_and_reviews">20dp</dimen>
+
     <dimen name="salon_activity_review_height">122dp</dimen>
     <dimen name="salon_activity_review_width">280dp</dimen>
     <dimen name="salon_activity_review_radius">8dp</dimen>
@@ -31,11 +34,14 @@
     <dimen name="salon_activity_space_between_reviews">8dp</dimen>
     <dimen name="salon_activity_see_all_reviews_margin_top">16dp</dimen>
     <dimen name="salon_activity_space_between_see_all_reviews_and_divider">20dp</dimen>
-    <dimen name="salon_activity_space_between_divider_and_visit_options">20dp</dimen>
-    <dimen name="salon_activity_filter_buttons_margin_top">16dp</dimen>
+    <dimen name="salon_activity_space_between_divider_and_visiting_label">20dp</dimen>
+    <dimen name="salon_activity_filter_buttons_height">36dp</dimen>
+    <dimen name="salon_activity_filter_buttons_space_between">8dp</dimen>
+    <dimen name="salon_activity_filter_buttons_margin_top">14dp</dimen>
     <dimen name="salon_activity_space_between_filter_buttons_and_divider">16dp</dimen>
     <dimen name="salon_activity_space_divider_and_suitable_masters">20dp</dimen>
-    <dimen name="salon_activity_suitable_master_title_margin_bottom">16dp</dimen>
+
+    <dimen name="salon_activity_suitable_master_title_margin_bottom">20dp</dimen>
     <dimen name="salon_activity_suitable_master_parent_padding_start">16dp</dimen>
     <dimen name="salon_activity_suitable_master_parent_padding_top">12dp</dimen>
     <dimen name="salon_activity_suitable_master_parent_padding_end">16dp</dimen>
@@ -45,9 +51,10 @@
     <dimen name="salon_activity_suitable_master_name_margin_start">12dp</dimen>
     <dimen name="salon_activity_suitable_master_space_between_name_and_role">0dp</dimen>
     <dimen name="salon_activity_suitable_master_rating_margin_top">8dp</dimen>
-    <dimen name="salon_activity_suitable_master_drawable_star_padding">4dp</dimen>
+    <dimen name="salon_activity_suitable_master_space_between_stars">2dp</dimen>
     <dimen name="salon_activity_suitable_master_about_margin_top">3dp</dimen>
     <dimen name="salon_activity_space_between_suitable_masters_and_appointment">20dp</dimen>
+
     <dimen name="salon_activity_make_an_appointment_price_margin_start">16dp</dimen>
     <dimen name="salon_activity_make_an_appointment_price_margin_top">18dp</dimen>
     <dimen name="salon_activity_make_an_appointment_master_description_margin_top">0dp</dimen>
