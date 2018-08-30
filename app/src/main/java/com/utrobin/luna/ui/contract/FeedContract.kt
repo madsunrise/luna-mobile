@@ -1,6 +1,6 @@
 package com.utrobin.luna.ui.contract
 
-import com.utrobin.luna.model.FeedItem
+import com.utrobin.luna.entity.FeedItem
 import com.utrobin.luna.network.NetworkError
 
 interface FeedContract {

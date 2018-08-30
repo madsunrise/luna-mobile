@@ -2,7 +2,7 @@ package com.utrobin.luna.ui.presenter
 
 import com.utrobin.luna.App
 import com.utrobin.luna.FeedQuery
-import com.utrobin.luna.model.*
+import com.utrobin.luna.entity.*
 import com.utrobin.luna.network.GraphQLService
 import com.utrobin.luna.network.NetworkError
 import com.utrobin.luna.type.Limit

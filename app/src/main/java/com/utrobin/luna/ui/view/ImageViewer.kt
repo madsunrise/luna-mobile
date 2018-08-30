@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.util.DisplayMetrics
 import com.utrobin.luna.R
 import com.utrobin.luna.adapter.ViewPagerAdapter
-import com.utrobin.luna.model.Photo
+import com.utrobin.luna.entity.Photo
 import com.utrobin.luna.ui.view.MasterActivity.Companion.CURRENT_PHOTO
 import com.utrobin.luna.ui.view.MasterActivity.Companion.TRANSITION_NAME
 import kotlinx.android.synthetic.main.image_viewer.*

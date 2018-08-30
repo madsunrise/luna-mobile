@@ -20,8 +20,8 @@ import com.crashlytics.android.answers.Answers
 import com.crashlytics.android.answers.CustomEvent
 import com.utrobin.luna.R
 import com.utrobin.luna.adapter.ViewPagerAdapter
-import com.utrobin.luna.model.FeedItem
-import com.utrobin.luna.model.Salon
+import com.utrobin.luna.entity.FeedItem
+import com.utrobin.luna.entity.Salon
 import com.utrobin.luna.network.NetworkError
 import com.utrobin.luna.ui.contract.SalonContract
 import com.utrobin.luna.ui.presenter.SalonPresenter
@@ -418,7 +418,7 @@ class SalonActivity : AppCompatActivity(), SalonContract.View {
 
             val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
             params.setMargins(0, 0, resources.getDimension(R.dimen.salon_activity_suitable_master_space_between_stars).toInt(), 0)
-            fillContainerWithStars(this, master.stars, starsContainer, params)
+            fillContainerWithStars(this, master.stars, masterView.findViewById<ViewGroup>(R.id.starsContainer), params)
             masterView.findViewById<TextView>(R.id.ratesCount).text = resources.getQuantityString(R.plurals.rates_count, master.ratesCount, master.ratesCount)
 
             suitableMastersContainer.addView(masterView)

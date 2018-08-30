@@ -1,4 +1,4 @@
-package com.utrobin.luna.model
+package com.utrobin.luna.entity
 
 class Salon(
         id: Long,

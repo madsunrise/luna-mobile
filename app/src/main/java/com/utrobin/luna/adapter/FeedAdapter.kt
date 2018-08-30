@@ -16,7 +16,7 @@ import android.widget.*
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.utrobin.luna.R
-import com.utrobin.luna.model.FeedItem
+import com.utrobin.luna.entity.FeedItem
 
 class FeedAdapter(items: List<FeedItem>, private val screenWidthInPx: Int) : FooterLoaderAdapter<FeedItem, ViewPager>(ArrayList(items)) {
 

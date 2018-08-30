@@ -11,7 +11,7 @@ import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.utrobin.luna.R
-import com.utrobin.luna.model.FeedItem
+import com.utrobin.luna.entity.FeedItem
 import kotlinx.android.synthetic.main.activity_main.*
 
 

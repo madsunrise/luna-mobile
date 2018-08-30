@@ -1,4 +1,4 @@
-package com.utrobin.luna.model
+package com.utrobin.luna.entity
 
 import android.os.Parcelable
 import com.utrobin.luna.fragment.AdditionalMaster

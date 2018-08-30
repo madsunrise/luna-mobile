@@ -1,4 +1,4 @@
-package com.utrobin.luna.model
+package com.utrobin.luna.entity
 
 import com.utrobin.luna.fragment.AdditionalSalon
 

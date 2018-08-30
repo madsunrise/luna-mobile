@@ -8,7 +8,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.widget.TextView;
 
-import com.utrobin.luna.model.FeedItem;
+import com.utrobin.luna.entity.FeedItem;
 import com.utrobin.luna.ui.view.MainActivity;
 
 import org.junit.Rule;

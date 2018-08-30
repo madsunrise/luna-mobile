@@ -9,7 +9,7 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.utrobin.luna.R
-import com.utrobin.luna.model.Photo
+import com.utrobin.luna.entity.Photo
 import io.reactivex.subjects.PublishSubject
 
 internal class ViewPagerAdapter(

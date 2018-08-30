@@ -22,8 +22,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.utrobin.luna.R
 import com.utrobin.luna.adapter.ViewPagerAdapter
-import com.utrobin.luna.model.FeedItem
-import com.utrobin.luna.model.Master
+import com.utrobin.luna.entity.FeedItem
+import com.utrobin.luna.entity.Master
 import com.utrobin.luna.network.NetworkError
 import com.utrobin.luna.ui.contract.MasterContract
 import com.utrobin.luna.ui.presenter.MasterPresenter

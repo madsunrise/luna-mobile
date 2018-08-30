@@ -11,7 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.utrobin.luna.R
 import com.utrobin.luna.adapter.FeedAdapter
-import com.utrobin.luna.model.FeedItem
+import com.utrobin.luna.entity.FeedItem
 import com.utrobin.luna.network.NetworkError
 import com.utrobin.luna.ui.contract.FeedContract
 import com.utrobin.luna.ui.presenter.FeedPresenter
