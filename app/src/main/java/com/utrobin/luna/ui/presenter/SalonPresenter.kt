@@ -1,20 +1,19 @@
 package com.utrobin.luna.ui.presenter
 
+import android.util.Log
+import com.crashlytics.android.Crashlytics
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.utrobin.luna.App
 import com.utrobin.luna.SalonQuery
-import com.utrobin.luna.model.FeedItem
-import com.utrobin.luna.model.Master
-import com.utrobin.luna.model.Review
-import com.utrobin.luna.model.Salon
+import com.utrobin.luna.entity.FeedItem
+import com.utrobin.luna.entity.Master
+import com.utrobin.luna.entity.Review
+import com.utrobin.luna.entity.Salon
+import com.utrobin.luna.model.ExecuteApolloCallJob
 import com.utrobin.luna.network.GraphQLService
 import com.utrobin.luna.network.NetworkError
 import com.utrobin.luna.ui.contract.SalonContract
-import com.utrobin.luna.utils.LogUtils
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.launch
 import javax.inject.Inject
 
 class SalonPresenter : BasePresenter<SalonContract.View>(), SalonContract.Presenter {
@@ -35,18 +34,19 @@ class SalonPresenter : BasePresenter<SalonContract.View>(), SalonContract.Presen
 
         val apolloCall = graphQLService.apolloClient.query(query)
 
-        launch(UI) {
-            try {
-                val response = graphQLService.execute(apolloCall)
-                view?.onDataLoaded(parseData(salon, response.salon()!!).await())
-            } catch (e: Exception) {
-                LogUtils.logException(FeedPresenter::class.java, e)
-                view?.onDataLoadingFailed(NetworkError.UNKNOWN)
-            }
-        }
+        ExecuteApolloCallJob<SalonQuery.Data>(graphQLService, apolloCall).execute(
+                {
+                    view?.onDataLoaded(parseData(salon, it.salon()!!))
+                },
+                {
+                    Log.e(TAG, "Error", it)
+                    Crashlytics.logException(it)
+                    view?.onDataLoadingFailed(NetworkError.UNKNOWN)
+                }
+        )
     }
 
-    private fun parseData(base: FeedItem, data: SalonQuery.Salon) = async {
+    private fun parseData(base: FeedItem, data: SalonQuery.Salon): Salon {
 
         val signsTotalStr = data.fragments().additionalSalon().signsTotal()
         val signsTotal: Map<Long, Int> = Gson().fromJson(signsTotalStr, object : TypeToken<Map<Long, Int>>() {}.type)
@@ -68,10 +68,14 @@ class SalonPresenter : BasePresenter<SalonContract.View>(), SalonContract.Presen
         )
 
         salon.masters.addAll(data.fragments().additionalSalon().masters().map { Master(salon, it) })
-        return@async salon
+        return salon
     }
 
     override fun destroy() {
 
+    }
+
+    companion object {
+        private val TAG = SalonPresenter::class.java.simpleName
     }
 }
