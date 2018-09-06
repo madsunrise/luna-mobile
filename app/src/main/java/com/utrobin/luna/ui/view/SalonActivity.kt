@@ -30,6 +30,7 @@ import kotlinx.android.synthetic.main.salon_activity.*
 import java.util.*
 import java.util.concurrent.TimeUnit
 
+
 class SalonActivity : AppCompatActivity(), SalonContract.View {
     private lateinit var salon: Salon
 
@@ -373,6 +374,7 @@ class SalonActivity : AppCompatActivity(), SalonContract.View {
         buttonWhen.text = "12 марта, 19:15"
         buttonWhat.text = "3 услуги"
         fillSuitableMasters()
+        fillMakeAnAppointmentStub()
     }
 
     private fun fillSuitableMasters() {
@@ -423,5 +425,11 @@ class SalonActivity : AppCompatActivity(), SalonContract.View {
 
             suitableMastersContainer.addView(masterView)
         }
+    }
+
+    private fun fillMakeAnAppointmentStub() {
+        appointmentPrice.text = "2500 \u20BD"
+        appointmentDuration.text = "1ч 20м"
+        appointmentMasterDescription.text = "Алия Агиповна, мастер-стилист"
     }
 }

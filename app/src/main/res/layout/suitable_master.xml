@@ -16,29 +16,40 @@
         android:id="@+id/avatar"
         android:layout_width="@dimen/master_suitable_master_avatar_size"
         android:layout_height="@dimen/master_suitable_master_avatar_size"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="contentDescription" />
 
     <TextView
         android:id="@+id/name"
         style="@style/Body2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        app:layout_constraintHorizontal_bias="0"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/master_suitable_master_name_margin_start"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:layout_marginEnd="@dimen/salon_activity_suitable_master_name_margin_end"
         android:fontFamily="sans-serif-medium"
-        app:layout_constraintLeft_toRightOf="@id/avatar"
-        app:layout_constraintTop_toTopOf="@id/avatar" />
+        app:layout_constraintEnd_toStartOf="@id/price"
+        app:layout_constraintStart_toEndOf="@id/avatar"
+        app:layout_constraintTop_toTopOf="@id/avatar"
+        app:layout_constraintWidth_default="wrap" />
 
     <TextView
         android:id="@+id/role"
         style="@style/Body1"
-        android:textColor="@color/textColorSecondary"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        app:layout_constraintHorizontal_bias="0"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/master_suitable_master_space_between_name_and_role"
-        app:layout_constraintLeft_toLeftOf="@id/name"
-        app:layout_constraintTop_toBottomOf="@id/name" />
+        android:layout_marginTop="@dimen/salon_activity_suitable_master_space_between_name_and_role"
+        android:ellipsize="end"
+        android:maxLines="1"
+        app:layout_constraintWidth_default="wrap"
+        android:textColor="@color/textColorSecondary"
+        app:layout_constraintStart_toStartOf="@id/name"
+        app:layout_constraintTop_toBottomOf="@id/name"
+        app:layout_constraintEnd_toStartOf="@id/about_master" />
 
     <TextView
         android:id="@+id/price"
@@ -46,8 +57,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-medium"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/name" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBaseline_toBaselineOf="@id/name" />
 
     <TextView
         style="@style/Caption"
@@ -58,9 +69,10 @@
         android:fontFamily="sans-serif-medium"
         android:gravity="center_vertical"
         android:text="@string/about_master"
+        android:id="@+id/about_master"
         android:textColor="@color/colorPrimary"
-        app:layout_constraintRight_toRightOf="@id/price"
-        app:layout_constraintTop_toTopOf="@id/role" />
+        app:layout_constraintEnd_toEndOf="@id/price"
+        app:layout_constraintBaseline_toBaselineOf="@id/role" />
 
 
     <!-- Rating -->
@@ -69,9 +81,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/master_suitable_master_rating_margin_top"
         android:gravity="center_vertical"
-        app:layout_constraintLeft_toLeftOf="@id/name"
-        app:layout_constraintTop_toBottomOf="@id/role"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="@id/name"
+        app:layout_constraintTop_toBottomOf="@id/role">
 
         <LinearLayout
             android:id="@+id/starsContainer"
@@ -82,9 +94,9 @@
         <TextView
             android:id="@+id/ratesCount"
             style="@style/Caption"
-            android:textColor="@color/textColorSecondary"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColorSecondary" />
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
