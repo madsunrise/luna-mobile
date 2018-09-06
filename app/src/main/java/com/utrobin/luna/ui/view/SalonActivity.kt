@@ -419,7 +419,7 @@ class SalonActivity : AppCompatActivity(), SalonContract.View {
             masterView.findViewById<TextView>(R.id.price).text = "2500 \u20BD"
 
             val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-            params.setMargins(0, 0, resources.getDimension(R.dimen.salon_activity_suitable_master_space_between_stars).toInt(), 0)
+            params.setMargins(0, 0, resources.getDimension(R.dimen.suitable_master_space_between_stars).toInt(), 0)
             fillContainerWithStars(this, master.stars, masterView.findViewById<ViewGroup>(R.id.starsContainer), params)
             masterView.findViewById<TextView>(R.id.ratesCount).text = resources.getQuantityString(R.plurals.rates_count, master.ratesCount, master.ratesCount)
 

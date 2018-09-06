@@ -34,20 +34,11 @@
     <dimen name="master_space_between_divider_and_visit_options">20dp</dimen>
     <dimen name="master_filter_buttons_margin_top">16dp</dimen>
     <dimen name="master_space_between_filter_buttons_and_divider">16dp</dimen>
+
+    <dimen name="master_suitable_master_title_margin_bottom">14dp</dimen>
     <dimen name="master_space_divider_and_suitable_masters">20dp</dimen>
-    <dimen name="master_suitable_master_title_margin_bottom">16dp</dimen>
-    <dimen name="master_suitable_master_parent_padding_start">16dp</dimen>
-    <dimen name="master_suitable_master_parent_padding_top">12dp</dimen>
-    <dimen name="master_suitable_master_parent_padding_end">16dp</dimen>
-    <dimen name="master_suitable_master_parent_padding_bottom">12dp</dimen>
-    <dimen name="master_suitable_master_avatar_size">40dp</dimen>
-    <dimen name="master_suitable_master_avatar_margin_start">16dp</dimen>
-    <dimen name="master_suitable_master_name_margin_start">12dp</dimen>
-    <dimen name="master_suitable_master_space_between_name_and_role">0dp</dimen>
-    <dimen name="master_suitable_master_rating_margin_top">8dp</dimen>
-    <dimen name="master_suitable_master_drawable_star_padding">4dp</dimen>
-    <dimen name="master_suitable_master_about_margin_top">3dp</dimen>
     <dimen name="master_space_between_suitable_masters_and_appointment">20dp</dimen>
+
     <dimen name="master_make_an_appointment_price_margin_start">16dp</dimen>
     <dimen name="master_make_an_appointment_price_margin_top">18dp</dimen>
     <dimen name="master_make_an_appointment_master_description_margin_top">0dp</dimen>

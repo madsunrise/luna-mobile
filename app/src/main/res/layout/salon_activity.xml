@@ -419,7 +419,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:srcCompat="@drawable/ic_close_black_24dp"
+            app:srcCompat="@drawable/ic_close_black_24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/servicesHeadline"
             tools:ignore="contentDescription" />

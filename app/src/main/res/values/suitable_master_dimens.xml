@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="suitable_master_title_margin_bottom">20dp</dimen>
+    <dimen name="suitable_master_parent_padding_start">16dp</dimen>
+    <dimen name="suitable_master_parent_padding_top">12dp</dimen>
+    <dimen name="suitable_master_parent_padding_end">16dp</dimen>
+    <dimen name="suitable_master_parent_padding_bottom">12dp</dimen>
+    <dimen name="suitable_master_avatar_size">40dp</dimen>
+    <dimen name="suitable_master_avatar_margin_start">16dp</dimen>
+    <dimen name="suitable_master_name_margin_start">12dp</dimen>
+    <dimen name="suitable_master_name_margin_end">12dp</dimen>
+    <dimen name="suitable_master_space_between_name_and_role">0dp</dimen>
+    <dimen name="suitable_master_rating_margin_top">8dp</dimen>
+    <dimen name="suitable_master_space_between_stars">2dp</dimen>
+    <dimen name="suitable_master_about_margin_top">3dp</dimen>
+</resources>
