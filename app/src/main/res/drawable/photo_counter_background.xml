@@ -2,5 +2,5 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
     <solid android:color="@color/photoCounterColor" />
-    <corners android:radius="@dimen/master_photos_counter_radius" />
+    <corners android:radius="@dimen/photo_counter_on_image_slider_radius" />
 </shape>

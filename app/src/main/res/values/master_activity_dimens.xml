@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="toolbar_padding_top">12dp</dimen>
+    <dimen name="toolbar_padding_start">0dp</dimen>
+    <dimen name="toolbar_padding_end">12dp</dimen>
+    <dimen name="toolbar_padding_bottom">20dp</dimen>
+
+    <dimen name="master_activity_avatar_margin_start">4dp</dimen>
+    <dimen name="master_activity_avatar_margin_top">4dp</dimen>
+    <dimen name="master_activity_avatar_size">40dp</dimen>
+    <dimen name="master_activity_space_between_avatar_and_name">12dp</dimen>
+    <dimen name="master_activity_space_between_role_and_rating">12dp</dimen>
+    <dimen name="master_activity_space_between_role_and_salon_name">4dp</dimen>
+    <dimen name="master_activity_space_between_stars">2dp</dimen>
+    <dimen name="master_activity_description_margin_top">20dp</dimen>
+    <dimen name="master_activity_space_between_description_and_divider">20dp</dimen>
+    <dimen name="master_activity_space_between_rating_ang_signs">24dp</dimen>
+
+    <dimen name="master_activity_space_between_divider_and_metro">12dp</dimen>
+    <dimen name="master_activity_address_description_margin_top">1dp</dimen>
+    <dimen name="master_activity_icon_map_size">40dp</dimen>
+    <dimen name="master_activity_space_between_divider_and_reviews">20dp</dimen>
+    <dimen name="master_activity_space_between_address_and_divider">11dp</dimen>
+
+    <dimen name="master_activity_space_between_divider_and_signs">21dp</dimen>
+    <dimen name="master_activity_signs_drawable_padding">8dp</dimen>
+    <dimen name="master_activity_space_between_signs">16dp</dimen>
+    <dimen name="master_activity_space_between_signs_and_scroll_line">5dp</dimen>
+    <dimen name="master_activity_space_between_scroll_line_and_divider">15dp</dimen>
+    <dimen name="master_activity_signs_container_margin_bottom">10dp</dimen>
+    <dimen name="master_activity_space_between_signs_and_reviews">10dp</dimen>
+
+    <dimen name="master_activity_see_all_reviews_margin_top">16dp</dimen>
+    <dimen name="master_activity_space_between_see_all_reviews_and_divider">20dp</dimen>
+    <dimen name="master_activity_space_between_divider_and_visiting_label">20dp</dimen>
+    <dimen name="master_activity_filter_buttons_margin_top">16dp</dimen>
+    <dimen name="master_activity_filter_buttons_height">36dp</dimen>
+    <dimen name="master_activity_filter_buttons_space_between">8dp</dimen>
+    <dimen name="master_activity_space_between_filter_buttons_and_divider">16dp</dimen>
+
+    <dimen name="master_activity_suitable_master_title_margin_bottom">14dp</dimen>
+    <dimen name="master_activity_space_divider_and_suitable_masters">20dp</dimen>
+    <dimen name="master_activity_space_between_suitable_masters_and_appointment">20dp</dimen>
+
+    <dimen name="master_activity_make_an_appointment_price_margin_start">16dp</dimen>
+    <dimen name="master_activity_make_an_appointment_price_margin_top">18dp</dimen>
+    <dimen name="master_activity_make_an_appointment_master_description_margin_top">0dp</dimen>
+    <dimen name="master_activity_make_an_appointment_master_description_margin_bottom">18dp</dimen>
+    <dimen name="master_activity_make_an_appointment_duration_margin_start">20dp</dimen>
+    <dimen name="master_activity_make_an_appointment_duration_drawable_padding">3dp</dimen>
+    <dimen name="master_activity_make_an_appointment_button_horizontal_padding">16dp</dimen>
+    <dimen name="master_activity_make_an_appointment_button_vertical_padding">10dp</dimen>
+    <dimen name="master_activity_make_an_appointment_button_margin_end">16dp</dimen>
+</resources>

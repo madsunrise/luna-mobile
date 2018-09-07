@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/master_review_width"
-    android:layout_height="@dimen/master_review_height"
+    android:layout_width="@dimen/review_dimen_review_width"
+    android:layout_height="@dimen/review_dimen_review_height"
     android:background="@drawable/review_shape"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/master_review_padding_bottom"
-    android:paddingEnd="@dimen/master_review_padding_end"
-    android:paddingStart="@dimen/master_review_padding_start"
-    android:paddingTop="@dimen/master_review_padding_top">
+    android:paddingBottom="@dimen/review_dimen_review_padding_bottom"
+    android:paddingEnd="@dimen/review_dimen_review_padding_end"
+    android:paddingStart="@dimen/review_dimen_review_padding_start"
+    android:paddingTop="@dimen/review_dimen_review_padding_top">
 
     <TextView
         android:id="@+id/reviewAuthor"
@@ -21,7 +21,7 @@
         android:textColor="@color/textColorSecondary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/master_review_date_margin_top"
+        android:layout_marginTop="@dimen/review_dimen_review_date_margin_top"
         android:fontFamily="sans-serif-medium" />
 
     <TextView
@@ -29,7 +29,7 @@
         style="@style/Body1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/master_review_text_margin_top"
+        android:layout_marginTop="@dimen/review_dimen_review_text_margin_top"
         android:ellipsize="end"
         android:maxLines="2" />
 

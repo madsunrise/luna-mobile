@@ -25,7 +25,7 @@ import com.utrobin.luna.entity.Salon
 import com.utrobin.luna.network.NetworkError
 import com.utrobin.luna.ui.contract.SalonContract
 import com.utrobin.luna.ui.presenter.SalonPresenter
-import com.utrobin.luna.utils.Utils.fillContainerWithStars
+import com.utrobin.luna.utils.Utils.fillContainerWithBigStars
 import kotlinx.android.synthetic.main.salon_activity.*
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -171,7 +171,7 @@ class SalonActivity : AppCompatActivity(), SalonContract.View {
         findViewById<TextView>(R.id.title).text = base.name ?: throw IllegalArgumentException("Salon's name is not presented")
         val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         params.setMargins(0, 0, resources.getDimension(R.dimen.salon_activity_space_between_stars).toInt(), 0)
-        fillContainerWithStars(this, base.stars, starsContainer, params)
+        fillContainerWithBigStars(this, base.stars, starsContainer, params)
         ratesCount.text = resources.getQuantityString(R.plurals.rates_count, base.ratesCount, base.ratesCount)
     }
 
@@ -413,14 +413,13 @@ class SalonActivity : AppCompatActivity(), SalonContract.View {
 
             val roles = arrayOf("Мастер-стилист", "Ведущий стилист", "Арт-директор")
 
-            // TODO too long name will overlap price
             masterView.findViewById<TextView>(R.id.name).text = master.name ?: throw IllegalArgumentException("Master's name is null")
             masterView.findViewById<TextView>(R.id.role).text = roles.get(Random().nextInt(3))
             masterView.findViewById<TextView>(R.id.price).text = "2500 \u20BD"
 
             val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
             params.setMargins(0, 0, resources.getDimension(R.dimen.suitable_master_space_between_stars).toInt(), 0)
-            fillContainerWithStars(this, master.stars, masterView.findViewById<ViewGroup>(R.id.starsContainer), params)
+            fillContainerWithBigStars(this, master.stars, masterView.findViewById<ViewGroup>(R.id.starsContainer), params)
             masterView.findViewById<TextView>(R.id.ratesCount).text = resources.getQuantityString(R.plurals.rates_count, master.ratesCount, master.ratesCount)
 
             suitableMastersContainer.addView(masterView)

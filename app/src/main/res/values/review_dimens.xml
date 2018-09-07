@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="review_dimen_review_height">122dp</dimen>
+    <dimen name="review_dimen_review_width">280dp</dimen>
+    <dimen name="review_dimen_review_radius">8dp</dimen>
+    <dimen name="review_dimen_review_padding_start">16dp</dimen>
+    <dimen name="review_dimen_review_padding_top">16dp</dimen>
+    <dimen name="review_dimen_review_padding_end">16dp</dimen>
+    <dimen name="review_dimen_review_padding_bottom">20dp</dimen>
+    <dimen name="review_dimen_review_date_margin_top">2dp</dimen>
+    <dimen name="review_dimen_review_text_margin_top">12dp</dimen>
+    <dimen name="review_dimen_space_between_reviews">8dp</dimen>
+</resources>

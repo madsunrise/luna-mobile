@@ -16,6 +16,9 @@
     <color name="textColorPrimary">#212121</color>
     <color name="textColorSecondary">#6A6A6A</color>
 
+    <!-- common elements -->
+    <color name="starsColor">#6b8193</color>
+
     <!-- view pager dots -->
     <color name="viewPagerActiveDot">@color/colorPrimary</color>
 
