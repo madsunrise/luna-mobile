@@ -15,7 +15,6 @@
     <dimen name="master_activity_space_between_stars">2dp</dimen>
     <dimen name="master_activity_description_margin_top">20dp</dimen>
     <dimen name="master_activity_space_between_description_and_divider">20dp</dimen>
-    <dimen name="master_activity_space_between_rating_ang_signs">24dp</dimen>
 
     <dimen name="master_activity_space_between_divider_and_metro">12dp</dimen>
     <dimen name="master_activity_address_description_margin_top">1dp</dimen>
@@ -23,9 +22,12 @@
     <dimen name="master_activity_space_between_divider_and_reviews">20dp</dimen>
     <dimen name="master_activity_space_between_address_and_divider">11dp</dimen>
 
-    <dimen name="master_activity_space_between_divider_and_signs">21dp</dimen>
+    <!-- signs -->
+    <dimen name="master_activity_space_between_image_slider_and_signs">24dp</dimen>
+    <dimen name="master_activity_sign_size">56dp</dimen>
     <dimen name="master_activity_signs_drawable_padding">8dp</dimen>
-    <dimen name="master_activity_space_between_signs">16dp</dimen>
+    <dimen name="master_activity_signs_text_width">64dp</dimen>
+    <dimen name="master_activity_space_between_signs">18dp</dimen>
     <dimen name="master_activity_space_between_signs_and_scroll_line">5dp</dimen>
     <dimen name="master_activity_space_between_scroll_line_and_divider">15dp</dimen>
     <dimen name="master_activity_signs_container_margin_bottom">10dp</dimen>

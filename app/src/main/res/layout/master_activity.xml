@@ -161,7 +161,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/master_activity_space_between_scroll_line_and_divider"
-                android:layout_marginTop="@dimen/master_activity_space_between_rating_ang_signs">
+                android:layout_marginTop="@dimen/master_activity_space_between_image_slider_and_signs">
 
                 <LinearLayout
                     android:id="@+id/signsContainer"

@@ -6,10 +6,13 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.util.DisplayMetrics
+import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.utrobin.luna.R
@@ -47,15 +50,10 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
 
         backButton.setOnClickListener { onBackPressed() }
 
-        val displayMetrics = DisplayMetrics()
-        windowManager.defaultDisplay.getMetrics(displayMetrics)
-        imageSlider.layoutParams.height = displayMetrics.widthPixels * 9 / 16
 
-        val adapter = ViewPagerAdapter(this, base.photos)
-        imageSlider.adapter = adapter
-        adapter.imageClickSubject.subscribe {
-            //openImageViewer()
-        }
+        setupImageSlider(base)
+        fillSigns(base)
+
 
 
         supportPostponeEnterTransition()
@@ -93,6 +91,79 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
 
     override fun onDataLoadingFailed(reason: NetworkError) {
         setState(State.ERROR)
+    }
+
+    private fun setupImageSlider(base: FeedItem) {
+        val displayMetrics = DisplayMetrics()
+        windowManager.defaultDisplay.getMetrics(displayMetrics)
+        imageSlider.layoutParams.height = displayMetrics.widthPixels * 9 / 16
+
+        val adapter = ViewPagerAdapter(this, base.photos)
+        imageSlider.adapter = adapter
+        adapter.imageClickSubject.subscribe {
+            //openImageViewer()
+        }
+    }
+
+    private fun fillSigns(base: FeedItem) {
+        if (base.signs.isEmpty()) {
+            signsContainer.visibility = View.GONE
+            return
+        }
+
+        for (i in 0 until base.signs.size) {
+            val sign = base.signs[i]
+            val signLayout = LayoutInflater
+                    .from(this)
+                    .inflate(R.layout.master_activity_sign, signsContainer, false)
+
+            if (i == 0) {
+                signLayout.layoutParams = LinearLayout.LayoutParams(
+                        ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
+                    setMargins(
+                            resources.getDimension(R.dimen.activity_horizontal_margin).toInt(),
+                            0,
+                            resources.getDimension(R.dimen.master_activity_space_between_signs).toInt(),
+                            0
+                    )
+                }
+            } else if (i == base.signs.size - 1) {
+                signLayout.layoutParams = LinearLayout.LayoutParams(
+                        ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
+                    setMargins(
+                            0,
+                            0,
+                            resources.getDimension(R.dimen.activity_horizontal_margin).toInt(),
+                            0
+                    )
+                }
+            } else {
+                signLayout.layoutParams = LinearLayout.LayoutParams(
+                        ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
+                ).apply {
+                    setMargins(
+                            0,
+                            0,
+                            resources.getDimension(R.dimen.master_activity_space_between_signs).toInt(),
+                            0
+                    )
+                }
+            }
+
+
+            val signImage = signLayout.findViewById<ImageView>(R.id.signImage)
+            //Glide.with(this).load(sign.icon).into(signImage)
+            Glide.with(this).load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4te_GlQCwLDgTjUGtSlcl3DJVPPtd7JqjkDWQqq3iC8v4uJEl0g").into(signImage)
+
+            signLayout.findViewById<TextView>(R.id.signName).text = sign.name
+
+            // TODO backend support
+            val signCount = 2
+            val ratesCountView = signLayout.findViewById<TextView>(R.id.ratesCount)
+            ratesCountView.text = resources.getQuantityString(R.plurals.rates_count, signCount, signCount)
+
+            signsContainer.addView(signLayout)
+        }
     }
 
     private fun fillViewsV2() {
@@ -156,77 +227,6 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
 //
 
     //
-//
-//    private fun fillSigns() {
-//        val params = LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
-//        params.setMargins(0, 0, resources.getDimension(R.dimen.master_space_between_signs).toInt(), 0)
-//
-//
-//        val sign1 = LayoutInflater
-//                .from(this)
-//                .inflate(R.layout.master_sign, signsContainer, false)
-//        sign1.layoutParams = params
-//
-//        sign1.findViewById<TextView>(R.id.mainPart).setCompoundDrawablesWithIntrinsicBounds(
-//                ContextCompat.getDrawable(this, R.drawable.ic_fast),
-//                null,
-//                null,
-//                null)
-//        sign1.findViewById<TextView>(R.id.mainPart).text = "Быстро"
-//        sign1.findViewById<TextView>(R.id.secondaryPart).text = " | 15"
-//
-//        signsContainer.addView(sign1)
-//
-//
-//        val sign2 = LayoutInflater
-//                .from(this)
-//                .inflate(R.layout.master_sign, signsContainer, false)
-//        sign2.layoutParams = params
-//
-//        sign2.findViewById<TextView>(R.id.mainPart).setCompoundDrawablesWithIntrinsicBounds(
-//                ContextCompat.getDrawable(this, R.drawable.ic_neatly),
-//                null,
-//                null,
-//                null)
-//        sign2.findViewById<TextView>(R.id.mainPart).text = "Аккуратно"
-//        sign2.findViewById<TextView>(R.id.secondaryPart).text = " | 25"
-//
-//        signsContainer.addView(sign2)
-//
-//
-//        val sign3 = LayoutInflater
-//                .from(this)
-//                .inflate(R.layout.master_sign, signsContainer, false)
-//        sign3.layoutParams = params
-//
-//        sign3.findViewById<TextView>(R.id.mainPart).setCompoundDrawablesWithIntrinsicBounds(
-//                ContextCompat.getDrawable(this, R.drawable.ic_pallet),
-//                null,
-//                null,
-//                null)
-//        sign3.findViewById<TextView>(R.id.mainPart).text = "Большой выбор"
-//        sign3.findViewById<TextView>(R.id.secondaryPart).text = " | 9"
-//
-//        signsContainer.addView(sign3)
-//
-//
-//        val sign4 = LayoutInflater
-//                .from(this)
-//                .inflate(R.layout.master_sign, signsContainer, false)
-//        sign4.layoutParams = params
-//
-//        sign4.findViewById<TextView>(R.id.mainPart).setCompoundDrawablesWithIntrinsicBounds(
-//                ContextCompat.getDrawable(this, R.drawable.ic_painting),
-//                null,
-//                null,
-//                null)
-//        sign4.findViewById<TextView>(R.id.mainPart).text = "Кисточка"
-//        sign4.findViewById<TextView>(R.id.secondaryPart).text = " | 107"
-//        if (System.currentTimeMillis() % 2 == 0L) {
-//            signsContainer.addView(sign4)
-//        }
-//    }
-//
 //    private fun fillReviews() {
 //        seeAllReviews.text = "Посмотреть все 34 отзыва"
 //

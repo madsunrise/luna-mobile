@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/signImage"
+        android:layout_width="@dimen/master_activity_sign_size"
+        android:layout_height="@dimen/master_activity_sign_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="contentDescription" />
+
+    <LinearLayout
+        android:layout_width="@dimen/master_activity_signs_text_width"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/master_activity_signs_drawable_padding"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@id/signImage"
+        app:layout_constraintStart_toEndOf="@id/signImage"
+        app:layout_constraintTop_toTopOf="@id/signImage">
+
+        <TextView
+            android:id="@+id/signName"
+            style="@style/Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium" />
+
+        <TextView
+            android:id="@+id/ratesCount"
+            style="@style/Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColorSecondary" />
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
