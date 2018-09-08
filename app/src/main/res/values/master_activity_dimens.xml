@@ -17,6 +17,7 @@
     <dimen name="master_activity_space_between_description_and_divider">20dp</dimen>
 
     <dimen name="master_activity_space_between_divider_and_metro">12dp</dimen>
+    <dimen name="master_activity_address_metro_circle_padding">4dp</dimen>
     <dimen name="master_activity_address_description_margin_top">1dp</dimen>
     <dimen name="master_activity_icon_map_size">40dp</dimen>
     <dimen name="master_activity_space_between_divider_and_reviews">20dp</dimen>

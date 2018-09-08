@@ -1,5 +1,8 @@
 package com.utrobin.luna.ui.view
 
+import android.graphics.Color
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.os.Build
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
@@ -15,6 +18,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.crashlytics.android.answers.Answers
+import com.crashlytics.android.answers.CustomEvent
 import com.utrobin.luna.R
 import com.utrobin.luna.adapter.ViewPagerAdapter
 import com.utrobin.luna.entity.FeedItem
@@ -53,6 +58,7 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
 
         setupImageSlider(base)
         fillSigns(base)
+        fillAddress(base)
 
 
 
@@ -164,6 +170,26 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
 
             signsContainer.addView(signLayout)
         }
+    }
+
+    private fun fillAddress(base: FeedItem) {
+        if (base.address == null) {
+            sendEvent("No address presented in master ${base.id}")
+            // TODO dividers hiding
+            addressContainer.visibility = View.GONE
+            return
+        }
+        if (base.address.metro.isEmpty()) {
+            sendEvent("No metro provided for master ${base.id}")
+            addressContainer.visibility = View.GONE
+            return
+        }
+
+        addressMetro.text = base.address.metro[0].station
+        addressMetro.compoundDrawables[0].colorFilter = PorterDuffColorFilter(
+                Color.parseColor('#' + base.address.metro[0].color), PorterDuff.Mode.MULTIPLY
+        )
+        addressDescription.text = base.address.description
     }
 
     private fun fillViewsV2() {
@@ -284,7 +310,7 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
 //
 //
 //        // Avatar
-////        item.avatar.path.takeIf { it.isNotBlank() }
+////        base.avatar.path.takeIf { it.isNotBlank() }
 ////                ?.let { Glide.with(this).load(it).apply(RequestOptions.circleCropTransform()).into(master1.findViewById<ImageView>(R.id.avatar)) }
 ////                ?: master1.findViewById<ImageView>(R.id.avatar).setImageDrawable(ContextCompat.getDrawable(context, R.drawable.no_avatar))
 //
@@ -645,4 +671,11 @@ class MasterActivity : AppCompatActivity(), MasterContract.View {
 //            view.layoutParams = params
 //        }
 //    }
+
+    private fun sendEvent(msg: String) {
+        Answers.getInstance().logCustom(
+                CustomEvent("Master Activity")
+                        .putCustomAttribute("msg", msg)
+        )
+    }
 }

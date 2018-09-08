@@ -198,11 +198,15 @@
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
                         android:maxLines="1"
+                        android:textStyle="bold"
+                        android:drawableLeft="@drawable/metro_circle"
+                        android:drawablePadding="@dimen/master_activity_address_metro_circle_padding"
                         app:layout_constraintEnd_toStartOf="@id/map_icon"
                         app:layout_constraintHorizontal_bias="0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintWidth_default="wrap" />
+                        app:layout_constraintWidth_default="wrap"
+                        tools:ignore="RtlHardcoded" />
 
                     <TextView
                         android:id="@+id/addressDescription"
@@ -211,6 +215,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/master_activity_address_description_margin_top"
                         android:maxLines="1"
+                        android:textColor="@color/textColorSecondary"
                         app:layout_constraintEnd_toStartOf="@id/map_icon"
                         app:layout_constraintHorizontal_bias="0"
                         app:layout_constraintStart_toStartOf="parent"

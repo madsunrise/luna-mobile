@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/metro_circle"
             android:drawablePadding="@dimen/feed_item_address_metro_circle_padding"
-            android:textColor="?android:textColorSecondary"
+            android:textColor="@color/textColorSecondary"
             card_view:layout_constraintBottom_toBottomOf="@id/avatar"
             card_view:layout_constraintLeft_toLeftOf="@id/name"
             tools:ignore="RtlHardcoded" />

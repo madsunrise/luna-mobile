@@ -1,5 +1,8 @@
 package com.utrobin.luna.ui.view
 
+import android.graphics.Color
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.os.Build
 import android.os.Bundle
 import android.support.v4.view.ViewPager
@@ -250,7 +253,9 @@ class SalonActivity : AppCompatActivity(), SalonContract.View {
         }
 
         addressMetro.text = base.address.metro[0].station
-        // TODO dot
+        addressMetro.compoundDrawables[0].colorFilter = PorterDuffColorFilter(
+                Color.parseColor('#' + base.address.metro[0].color), PorterDuff.Mode.MULTIPLY
+        )
         addressDescription.text = base.address.description
     }
 

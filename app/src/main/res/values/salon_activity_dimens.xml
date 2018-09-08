@@ -13,6 +13,7 @@
     <dimen name="salon_activity_space_between_scroll_line_and_divider">15dp</dimen>
 
     <dimen name="salon_activity_space_between_divider_and_metro">12dp</dimen>
+    <dimen name="salon_activity_address_metro_circle_padding">4dp</dimen>
     <dimen name="salon_activity_address_description_margin_top">1dp</dimen>
     <dimen name="salon_activity_icon_map_size">40dp</dimen>
     <dimen name="salon_activity_space_between_address_and_divider">11dp</dimen>
